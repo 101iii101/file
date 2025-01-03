@@ -1,0 +1,162 @@
+everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+local gui,GazerMain,GazerTitle,TextBax,chat,coreGay,cloneref
+
+
+
+everyClipboard([[
+SD Team stolled source script! pls share this script to your friends!:
+"https://discord.gg/Np6GkPUKGG"]])
+task.wait(0.1)
+print("Join in!")
+
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ChatBypassGUI"
+screenGui.Parent = playerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 350, 0, 200)
+frame.Position = UDim2.new(0.5, -175, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.BackgroundTransparency = 0.1
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 12)
+uiCorner.Parent = frame
+
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.Position = UDim2.new(0, 0, 0, 0)
+titleBar.BackgroundColor3 = Color3.fromRGB(0, 122, 255)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = frame
+
+local titleBarCorner = Instance.new("UICorner")
+titleBarCorner.CornerRadius = UDim.new(0, 12)
+titleBarCorner.Parent = titleBar
+
+local titleText = Instance.new("TextLabel")
+titleText.Size = UDim2.new(1, 0, 1, 0)
+titleText.Position = UDim2.new(0, 0, 0, 0)
+titleText.Text = "Chat Bypass GUI"
+titleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleText.TextSize = 16
+titleText.TextXAlignment = Enum.TextXAlignment.Center
+titleText.TextYAlignment = Enum.TextYAlignment.Center
+titleText.BackgroundTransparency = 1
+titleText.Font = Enum.Font.GothamBold
+titleText.Parent = titleBar
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 0)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255)  -- Changed to blue
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.Parent = titleBar
+
+local closeButtonCorner = Instance.new("UICorner")
+closeButtonCorner.CornerRadius = UDim.new(0, 6)
+closeButtonCorner.Parent = closeButton
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -70, 0, 0)
+minimizeButton.Text = "-"
+minimizeButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255)
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.Parent = titleBar
+
+local minimizeButtonCorner = Instance.new("UICorner")
+minimizeButtonCorner.CornerRadius = UDim.new(0, 6)
+minimizeButtonCorner.Parent = minimizeButton
+
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0, 300, 0, 40)
+textBox.Position = UDim2.new(0, 25, 0, 50)
+textBox.PlaceholderText = "Message to bypass"
+textBox.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+textBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+textBox.ClearTextOnFocus = true
+textBox.BorderSizePixel = 0
+textBox.TextSize = 14
+textBox.Font = Enum.Font.Gotham
+textBox.Parent = frame
+
+local textBoxCorner = Instance.new("UICorner")
+textBoxCorner.CornerRadius = UDim.new(0, 6)
+textBoxCorner.Parent = textBox
+
+local chatButton = Instance.new("TextButton")
+chatButton.Size = UDim2.new(0, 150, 0, 40)
+chatButton.Position = UDim2.new(0, 100, 0, 100)
+chatButton.Text = "Chat"
+chatButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+chatButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+chatButton.Font = Enum.Font.GothamBold
+chatButton.Parent = frame
+
+local chatButtonCorner = Instance.new("UICorner")
+chatButtonCorner.CornerRadius = UDim.new(0, 6)
+chatButtonCorner.Parent = chatButton
+
+local letters = {
+    ["a"] = "áº¡ÍŽ", ["b"] = "á¸…ÍŽ", ["c"] = "cÍŽ", ["d"] = "á¸ÍŽ", ["e"] = "áº¹ÍŽ",
+    ["f"] = "fÍŽ", ["g"] = "É¡ÍŽ", ["h"] = "á¸¥ÍŽ", ["i"] = "á»‹ÍŽ", ["j"] = "Ñ˜ÍŽ",
+    ["k"] = "á¸³ÍŽ", ["l"] = "á¸·ÍŽ", ["m"] = "á¹ƒÍŽ", ["n"] = "á¹‡ÍŽ", ["o"] = "á»ÍŽ",
+    ["p"] = "Ñ€ÍŽ", ["q"] = "qÍŽ", ["r"] = "á¹›ÍŽ", ["s"] = "á¹£ÍŽ", ["t"] = "á¹­ÍŽ",
+    ["u"] = "á»¥ÍŽ", ["v"] = "á¹¿ÍŽ", ["w"] = "áº‰ÍŽ", ["x"] = "áº‹ÍŽ", ["y"] = "á»µÍŽ",
+    ["z"] = "áº“ÍŽ", ["A"] = "áº ÍŽ", ["B"] = "á¸„ÍŽ", ["C"] = "CÍŽ", ["D"] = "á¸ŒÍŽ",
+    ["E"] = "áº¸ÍŽ", ["F"] = "FÍŽ", ["G"] = "É¢ÍŽ", ["H"] = "á¸ªÍŽ", ["I"] = "á»ŠÍŽ",
+    ["J"] = "ÐˆÍŽ", ["K"] = "á¸²ÍŽ", ["L"] = "á¸¶ÍŽ", ["M"] = "á¹‚ÍŽ", ["N"] = "á¹ˆÍŽ",
+    ["O"] = "á»ŒÍŽ", ["P"] = "Ð ÍŽ", ["Q"] = "QÍŽ", ["R"] = "á¹˜ÍŽ", ["S"] = "á¹¢ÍŽ",
+    ["T"] = "á¹ªÍŽ", ["U"] = "á»¤ÍŽ", ["V"] = "á¹¾ÍŽ", ["W"] = "áº†ÍŽ", ["X"] = "áºŒÍŽ",
+    ["Y"] = "á»¾ÍŽ", ["Z"] = "áº’ÍŽ"
+}
+
+local function convertToBypassAlphabet(text)
+    local convertedText = ""
+    for i = 1, #text do
+        local char = text:sub(i, i)
+        convertedText = convertedText .. (letters[char] or char)
+    end
+    return convertedText
+end
+
+closeButton.MouseButton1Click:Connect(function()
+    frame:Destroy()
+end)
+
+local isMinimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+    if isMinimized then
+        frame.Size = UDim2.new(0, 350, 0, 200)
+        textBox.Visible = true
+        chatButton.Visible = true
+    else
+        frame.Size = UDim2.new(0, 350, 0, 30)
+        textBox.Visible = false
+        chatButton.Visible = false
+    end
+    isMinimized = not isMinimized
+end)
+
+chatButton.MouseButton1Click:Connect(function()
+    local message = textBox.Text
+    if message ~= "" then
+        local convertedMessage = convertToBypassAlphabet(message)
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(convertedMessage, "All")
+        textBox.Text = ""
+    end
+end)
