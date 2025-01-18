@@ -1,0 +1,55 @@
+local Players = game:GetService("Players")
+
+local function createHighlight(target)
+    if not target:FindFirstChild("RainbowHighlight") then
+        local highlight = Instance.new("Highlight")
+        highlight.Name = "RainbowHighlight"
+        highlight.Parent = target
+        highlight.FillTransparency = 0.6
+        highlight.OutlineTransparency = 0.6
+        return highlight
+    end
+    return nil
+end
+
+local function applyRainbowEffect(highlight)
+    spawn(function()
+        while highlight and highlight.Parent do
+            for i = 0, 1, 0.01 do
+                if highlight and highlight.Parent then
+                    highlight.FillColor = Color3.fromHSV(i, 1, 1)
+                    highlight.OutlineColor = Color3.fromHSV(i, 1, 1)
+                end
+                wait(0.05)
+            end
+        end
+    end)
+end
+
+local function updateHighlights()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local highlight = createHighlight(player.Character)
+            if highlight then
+                applyRainbowEffect(highlight)
+            end
+        end
+    end
+end
+
+spawn(function()
+    while true do
+        updateHighlights()
+        wait(5)
+    end
+end)
+
+Players.PlayerAdded:Connect(function(newPlayer)
+    newPlayer.CharacterAdded:Connect(function(character)
+        wait(1)
+        local highlight = createHighlight(character)
+        if highlight then
+            applyRainbowEffect(highlight)
+        end
+    end)
+end)
