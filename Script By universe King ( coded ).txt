@@ -1,0 +1,98 @@
+-- Create a ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a Frame for the UI
+local uiFrame = Instance.new("Frame")
+uiFrame.Size = UDim2.new(0, 300, 0, 200)
+uiFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+uiFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+uiFrame.Parent = screenGui
+uiFrame.Active = true
+uiFrame.Draggable = true
+
+-- Create a Label for the prefix
+local prefixLabel = Instance.new("TextLabel")
+prefixLabel.Size = UDim2.new(1, 0, 0.2, 0)
+prefixLabel.Position = UDim2.new(0, 0, 0, 0)
+prefixLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+prefixLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+prefixLabel.Text = "By universe.king"
+prefixLabel.Parent = uiFrame
+
+local function applyRainbowEffect(frame)
+    spawn(function()
+        while true do
+            for i = 0, 255, 1 do
+                frame.BackgroundColor3 = Color3.fromHSV(i/255, 1, 1)
+                wait(0.01)
+            end
+        end
+    end)
+end
+
+applyRainbowEffect(uiFrame)
+
+-- Example function for a custom LUA code button
+local function createButton(text, position, onClick)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0.8, 0, 0.2, 0)
+    button.Position = position
+    button.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Text = text
+    button.Parent = uiFrame
+    button.MouseButton1Click:Connect(onClick)
+    return button
+end
+
+-- Example usage of creating buttons with custom LUA codes
+createButton("Speed 100", UDim2.new(0.1, 0, 0.3, 0), function()
+    print("Speed 100 Executed!")
+    --
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local humanoid = character:WaitForChild("Humanoid")
+
+humanoid.WalkSpeed = 100
+end)
+
+createButton("Rainbow Esp Fast", UDim2.new(0.1, 0, 0.55, 0), function()
+    print("Rainbow Esp Fast Executed!")
+    local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local function applyRainbowHighlight(character)
+    local highlight = Instance.new("Highlight")
+    highlight.Parent = character
+    highlight.Enabled = true
+
+    local function updateHighlightColor()
+        while character and highlight.Parent == character do
+            local hue = tick() % 1 / 1 -- Faster color change
+            local color = Color3.fromHSV(hue, 1, 1)
+            highlight.FillColor = color
+            RunService.RenderStepped:Wait()
+        end
+    end
+
+    spawn(updateHighlightColor)
+end
+
+local function onPlayerAdded(player)
+    local function onCharacterAdded(character)
+        applyRainbowHighlight(character)
+    end
+
+    player.CharacterAdded:Connect(onCharacterAdded)
+    if player.Character then
+        applyRainbowHighlight(player.Character)
+    end
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+for _, player in pairs(Players:GetPlayers()) do
+    onPlayerAdded(player)
+end
+end)
