@@ -1,0 +1,87 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local function createRainbowESP(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local head = character:WaitForChild("Head", 10)
+    if not head then return end
+
+    -- BillboardGui
+    local billboard = Instance.new("BillboardGui")
+    billboard.Adornee = head
+    billboard.Size = UDim2.new(4, 0, 1, 0) -- Medium size
+    billboard.StudsOffset = Vector3.new(0, 2.5, 0) -- Adjust above the head
+    billboard.AlwaysOnTop = true
+    billboard.Parent = head
+
+    -- TextLabel
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextScaled = true
+    textLabel.Text = player.Name
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.TextColor3 = Color3.new(1, 1, 1) -- Default white color
+    textLabel.Parent = billboard
+
+    -- Rainbow effect
+    spawn(function()
+        while player.Parent do
+            local hue = tick() % 1 -- Loops color over time
+            textLabel.TextColor3 = Color3.fromHSV(hue, 1, 1)
+            RunService.RenderStepped:Wait()
+        end
+        billboard:Destroy() -- Clean up when the player leaves
+    end)
+end
+
+-- Apply ESP to all players
+local function onPlayerAdded(player)
+    player.CharacterAdded:Connect(function()
+        createRainbowESP(player)
+    end)
+
+    if player.Character then
+        createRainbowESP(player)
+    end
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+for _, player in ipairs(Players:GetPlayers()) do
+    onPlayerAdded(player)
+end
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local function applyRainbowHighlight(character)
+    local highlight = Instance.new("Highlight")
+    highlight.Parent = character
+    highlight.Enabled = true
+
+    spawn(function()
+        while character and highlight.Parent == character do
+            local hue = tick() % 1 -- Looping rainbow effect
+            local color = Color3.fromHSV(hue, 1, 1)
+            highlight.FillColor = color
+            highlight.OutlineColor = color -- Optional: Set outline to match
+            RunService.RenderStepped:Wait()
+        end
+    end)
+end
+
+local function onPlayerAdded(player)
+    player.CharacterAdded:Connect(function(character)
+        applyRainbowHighlight(character)
+    end)
+
+    if player.Character then
+        applyRainbowHighlight(player.Character)
+    end
+end
+
+-- Connect to all players and new players
+Players.PlayerAdded:Connect(onPlayerAdded)
+for _, player in ipairs(Players:GetPlayers()) do
+    onPlayerAdded(player)
+end
