@@ -1,0 +1,53 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local RunService = game:GetService("RunService")
+local ContextActionService = game:GetService("ContextActionService")
+
+local lockedOn = false
+local targetPlayer = nil
+
+
+-- Function to toggle lock-on and acquire initial target
+local function toggleLockOn()
+    lockedOn = not lockedOn
+
+    if lockedOn then
+        -- Find the closest player to the screen center ONLY when activating lock-on
+        local closestPlayer = nil
+        local smallestScreenDistance = math.huge
+
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
+                local screenPos, onScreen = Camera:WorldToViewportPoint(player.Character.Head.Position)
+                if onScreen then
+                    local screenCenter = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+                    local distanceFromCenter = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
+                    if distanceFromCenter < smallestScreenDistance then
+                        smallestScreenDistance = distanceFromCenter
+                        closestPlayer = player
+                    end
+                end
+            end
+        end
+        targetPlayer = closestPlayer -- Store the initially targeted player
+
+    else
+        targetPlayer = nil -- Clear target when lock-on is deactivated
+    end
+
+    print("Lock-on: " .. tostring(lockedOn))
+end
+
+
+-- Bind the "B" key (unchanged)
+local lockOnAction = ContextActionService:BindAction("LockOn", toggleLockOn, false, Enum.KeyCode.B)
+
+-- Update camera every frame
+RunService.RenderStepped:Connect(function()
+    if lockedOn and targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("Head") then
+        Camera.CFrame = CFrame.new(Camera.CFrame.Position, targetPlayer.Character.Head.Position)
+    end
+end)
+
+print("Lock-on script loaded. Press 'B' to toggle.")
