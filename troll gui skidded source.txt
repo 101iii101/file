@@ -1,0 +1,728 @@
+print("bro got fucking skidded XD")
+
+wait(5) --real
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Cart Ride Into Rdite", "Ocean")
+
+--TABS
+local Cart = Window:NewTab("Carts")
+local Plr = Window:NewTab("Player")
+local Misc = Window:NewTab("Misc")
+local Setting = Window:NewTab("Info/Setting")
+
+--SECTIONS INSIDE TABS
+local CartMain = Cart:NewSection("Carts")
+local AutoCart = Cart:NewSection("Auto Cart")
+
+local PlrMod = Plr:NewSection("Modification")
+local PlrTP = Plr:NewSection("Teleports")
+
+local Random = Misc:NewSection("Random")
+
+local SettingGUI = Setting:NewSection("GUI")
+local SettingConfig = Setting:NewSection("Configuration")
+
+--CART TAB BEGINS
+CartMain:NewButton("Toggle All Carts", "Toggles activation on every cart that is spawned", function()
+	for i, v in pairs(game.workspace:GetDescendants()) do
+		if v.Name == "On" then
+			fireclickdetector(v.Click)
+		end
+	end
+end)
+
+CartMain:NewButton("Speed Up All Carts", "Speeds up every cart", function()
+	for i, v in pairs(game.workspace:GetDescendants()) do
+		if v.Name == "Up" then
+			fireclickdetector(v.Click)
+		end
+	end
+end)
+
+CartMain:NewButton("Slow Down All Carts", "Slows down every cart", function()
+	for i, v in pairs(game.workspace:GetDescendants()) do
+		if v.Name == "Down" then
+			fireclickdetector(v.Click)
+		end
+	end
+end)
+
+CartMain:NewButton("Turn On All Carts", "Turns On All Carts", function()
+	for i, v in pairs(workspace:GetDescendants()) do
+		if v.Name == "On" then
+			if v.BrickColor == BrickColor.new("Bright red") then
+				fireclickdetector(v.Click)
+			end
+		end
+	end
+end)
+
+CartMain:NewButton("Turn Off All Carts", "Turns On All Carts", function()
+	for i, v in pairs(workspace:GetDescendants()) do
+		if v.Name == "On" then
+			if v.BrickColor == BrickColor.new("Dark green") then
+				fireclickdetector(v.Click)
+			end
+		end
+	end
+end)
+
+CartMain:NewButton("Spawn All Cart", "Spawns Every Cart", function()
+	for i, v in pairs(game.workspace:GetDescendants()) do
+		if v.Name == "1Regen" or v.Name == "2Regen" or v.Name == "3Regen" or v.Name == "4Regen" then
+			fireclickdetector(v.Click)
+		end
+	end
+end)
+
+CartMain:NewToggle("Speed Up Aura", "Speeds every cart up near you", function(tog)
+	if tog == true then
+		_G.SpeedUpAura = true
+
+		while _G.SpeedUpAura == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Up" then
+					if v and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 15 then
+						fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+	else
+		_G.SpeedUpAura = false
+	end
+end)
+
+CartMain:NewToggle("Slow Down Aura", "Slows down every cart near you", function(tog)
+	if tog == true then
+		_G.SlowDownAura = true
+
+		while _G.SlowDownAura == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Down" then
+					if v and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 15 then
+						fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+	else
+		_G.SlowDownAura = false
+	end
+end)
+
+CartMain:NewToggle("Turn On Aura", "Turns on every cart near you", function(tog)
+	if tog == true then
+		_G.TurnOnAura = true
+
+		while _G.TurnOnAura == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "On" then
+					if v.BrickColor == BrickColor.new("Bright red") then
+						if v and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 15 then
+							fireclickdetector(v.Click)
+						end
+					end
+				end
+			end
+		end
+	else
+		_G.TurnOnAura = false
+	end
+end)
+
+CartMain:NewToggle("Turn Off Aura", "Turns on every cart near you", function(tog)
+	if tog == true then
+		_G.TurnOffAura = true
+
+		while _G.TurnOffAura == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "On" then
+					if v.BrickColor == BrickColor.new("Dark green") then
+						if v and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 15 then
+							fireclickdetector(v.Click)
+						end
+					end
+				end
+			end
+		end
+	else
+		_G.TurnOffAura = false
+	end
+end)
+
+CartMain:NewTextBox("Mess Up Player", "Can be shortened", function(txt)
+	local player = game.Players.LocalPlayer
+	local length = 200
+	for i, v in pairs(game.Players:GetChildren()) do
+		if (string.sub(string.lower(v.Name), 1, string.len(txt))) == string.lower(txt) then
+			txt = v.Name
+		end
+	end
+
+	local char = game.Players.LocalPlayer.Character
+	local pos = char.HumanoidRootPart.CFrame
+
+	while length ~= 0 do
+		wait(.1)
+		length = length - 1
+
+		for i, v in pairs(game.workspace:GetDescendants()) do
+			if v.Name == "Up" then
+				if v and (v.Position - workspace[txt].HumanoidRootPart.Position).Magnitude < 15 then
+					fireclickdetector(v.Click)
+				end
+			end
+
+			if v.Name == "On" then
+				if v.BrickColor == BrickColor.new("Bright red") then
+					if v and (v.Position - workspace[txt].HumanoidRootPart.Position).Magnitude < 15 then
+						fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+	end
+end)
+
+AutoCart:NewToggle("Auto Toggle", "Really Annoying!", function(tog)
+	if tog == true then
+		--ok changed my mind i using _G. now
+		_G.AutoToggle = true
+
+		while _G.AutoToggle == true do
+			wait(.3)
+			for i, v in pairs(workspace:GetDescendants()) do
+				if v.Name == "On" then
+					fireclickdetector(v.Click)
+				end
+			end
+		end
+
+	else
+		_G.AutoToggle = false --stops the loop
+	end
+end)
+
+AutoCart:NewToggle("Auto Turn On", "Turns on all carts", function(tog)
+	if tog == true then
+		_G.TurnOnLoop = true
+
+		while _G.TurnOnLoop == true do
+			wait(.1)
+			for i, v in pairs(workspace:GetDescendants()) do
+				if v.Name == "On" then
+					if v.BrickColor == BrickColor.new("Bright red") then
+						fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+
+	else
+		_G.TurnOnLoop = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Turn Off", "Turns off all carts", function(tog)
+	if tog == true then
+		_G.TurnOffLoop = true
+
+		while _G.TurnOffLoop == true do
+			wait(.1)
+			for i, v in pairs(workspace:GetDescendants()) do
+				if v.Name == "On" then
+					if v.BrickColor == BrickColor.new("Dark green") then
+						fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+
+	else
+		_G.TurnOffLoop = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Speed Up", "Speeds every cart up super fast", function(tog)
+	if tog == true then
+		_G.AutoSpeed = true
+
+		while _G.AutoSpeed == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Up" then
+					fireclickdetector(v.Click)
+				end
+			end
+		end
+	else
+		_G.AutoSpeed = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Slow Down", "Slows down every cart up super fast", function(tog)
+	if tog == true then
+		_G.AutoSlow = true
+
+		while _G.AutoSlow == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Down" then
+					fireclickdetector(v.Click)
+				end
+			end
+		end
+	else
+		_G.AutoSlow = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Fast Speed", "Speeds every cart up but to a non-death level", function(tog)
+	if tog == true then
+		_G.AutoFastSpeed = true
+
+		while _G.AutoFastSpeed == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Up" then
+				    if v.Parent:FindFirstChild("Configuration").Speed.Value <= tonumber(110) then
+					    fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+	else
+		_G.AutoFastSpeed = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Slow Speed", "Makes every cart go really slow", function(tog)
+	if tog == true then
+		_G.AutoSlowSpeed = true
+
+		while _G.AutoSlowSpeed == true do
+			wait(.1)
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "Down" then
+				    if v.Parent:FindFirstChild("Configuration").Speed.Value >= tonumber(30) then
+					    fireclickdetector(v.Click)
+					end
+				end
+			end
+		end
+	else
+		_G.AutoSlowSpeed = false
+	end
+end)
+
+AutoCart:NewToggle("Auto Spawn Cart", "Spawns every cart in automatically", function(tog)
+	if tog == true then
+		_G.AutoSpawn = true
+
+		while _G.AutoSpawn == true do
+			wait(1) -- so less fps drop
+			for i, v in pairs(game.workspace:GetDescendants()) do
+				if v.Name == "1Regen" or v.Name == "2Regen" or v.Name == "3Regen" or v.Name == "4Regen" then
+					fireclickdetector(v.Click)
+				end
+			end
+		end
+	else
+		_G.AutoSpawn = false
+	end
+end)
+
+--PLAYER TAB BEGINS
+PlrMod:NewButton("Teleport Tool", "Equip and aim your mouse then click to TP to that position", function()
+	mouse = game.Players.LocalPlayer:GetMouse()
+	tool = Instance.new("Tool")
+	tool.RequiresHandle = false
+	tool.Name = "TP Tool"
+	tool.Activated:connect(function()
+		local pos = mouse.Hit + Vector3.new(0, 2.5, 0)
+		pos = CFrame.new(pos.X, pos.Y, pos.Z)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+	end)
+	tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+PlrMod:NewButton("Infinite Zoom", "Gives infinite zoom", function()
+	game.Players.LocalPlayer.CameraMaxZoomDistance = math.huge
+end)
+
+PlrMod:NewToggle("Infinite Jump", "Lets you jump without cooldown", function(tog)
+	if tog then
+		_G.infinjump = true
+		local Player = game:GetService("Players").LocalPlayer
+		local Mouse = Player:GetMouse()
+		Mouse.KeyDown:connect(function(k)
+			if _G.infinjump then
+				if k:byte() == 32 then
+					Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+					Humanoid:ChangeState("Jumping")
+					wait(0.1)
+					Humanoid:ChangeState("Seated")
+				end
+			end
+		end)
+		local Player = game:GetService("Players").LocalPlayer
+		local Mouse = Player:GetMouse()
+	else
+		if _G.infinjump == true then
+			_G.infinjump = false
+		else
+			_G.infinjump = true
+		end
+	end
+end)
+
+PlrMod:NewButton("Get All Paths", "Gets all the paths", function()
+	local Hitter = game.Players.LocalPlayer.Character.HumanoidRootPart
+	for i, v in pairs(workspace:GetDescendants()) do
+		if v.Name == "Giver" then
+			firetouchinterest(Hitter, v, 0)
+			wait(.1)
+			firetouchinterest(Hitter, v, 1)
+		end
+	end
+end)
+
+PlrMod:NewButton("Invisible Fling", "Lets you fling people", function()
+	spawn(function()
+		local message = Instance.new("Message", workspace)
+		message.Text = "Press Z to enable and X to disable"
+		wait(3)
+		message:Destroy()
+	end)
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local groot = nil
+	mouse.KeyDown:connect(function(k)
+
+		if k == "z" then
+			spawn(function()
+				local message = Instance.new("Message", workspace)
+				message.Text = "Invis fling made by Diemiers#4209. Wait a bit for it to load"
+				wait(11)
+				message:Destroy()
+			end)
+
+			local ch = game.Players.LocalPlayer.Character
+			local prt = Instance.new("Model", workspace)
+			local z1 = Instance.new("Part", prt)
+			z1.Name = "Torso"
+			z1.CanCollide = false
+			z1.Anchored = true
+			local z2 = Instance.new("Part", prt)
+			z2.Name = "Head"
+			z2.Anchored = true
+			z2.CanCollide = false
+			local z3 = Instance.new("Humanoid", prt)
+			z3.Name = "Humanoid"
+			z1.Position = Vector3.new(0, 9999, 0)
+			z2.Position = Vector3.new(0, 9991, 0)
+			game.Players.LocalPlayer.Character = prt
+			wait(5)
+			game.Players.LocalPlayer.Character = ch
+			wait(6)
+
+
+			local plr = game.Players.LocalPlayer
+			mouse = plr:GetMouse()
+
+			local Hum = Instance.new("Humanoid")
+			Hum.Parent = game.Players.LocalPlayer.Character
+
+
+			local root = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+
+			for i, v in pairs(plr.Character:GetChildren()) do
+
+				if v ~= root and v.Name ~= "Humanoid" then
+
+					v:Destroy()
+
+				end
+
+
+			end
+
+			workspace.CurrentCamera.CameraSubject = root
+
+			local se = Instance.new("SelectionBox", root)
+			se.Adornee = root
+
+
+			game:GetService('RunService').Stepped:connect(function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = false
+			end)
+			game:GetService('RunService').RenderStepped:connect(function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = false
+			end)
+
+
+			power = 999999
+
+			power = power * 10
+
+			---
+			wait(.1)
+			local bambam = Instance.new("BodyThrust")
+			bambam.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+			bambam.Force = Vector3.new(power, 0, power)
+			bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position 
+
+
+
+
+
+			local plr = game.Players.LocalPlayer
+			local torso = root
+			local flying = true
+			local deb = true
+			local ctrl = {
+				f = 0,
+				b = 0,
+				l = 0,
+				r = 0
+			}
+			local lastctrl = {
+				f = 0,
+				b = 0,
+				l = 0,
+				r = 0
+			}
+			local maxspeed = 100
+			local speed = 50
+
+			groot = root
+
+			function Fly()
+				local bg = Instance.new("BodyGyro", torso)
+				bg.P = 9e4
+				bg.maxTorque = Vector3.new(0, 0, 0)
+				bg.cframe = torso.CFrame
+				local bv = Instance.new("BodyVelocity", torso)
+				bv.velocity = Vector3.new(0, 0, 0)
+				bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+				repeat
+					wait()
+
+					if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+						speed = speed + .2
+						if speed > maxspeed then
+							speed = maxspeed
+						end
+					elseif not(ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+						speed = speed - 1
+						if speed < 0 then
+							speed = 0
+						end
+					end
+					if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+						lastctrl = {
+							f = ctrl.f,
+							b = ctrl.b,
+							l = ctrl.l,
+							r = ctrl.r
+						}
+					elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+					else
+						bv.velocity = Vector3.new(0, 0.1, 0)
+					end
+
+				until not flying
+				ctrl = {
+					f = 0,
+					b = 0,
+					l = 0,
+					r = 0
+				}
+				lastctrl = {
+					f = 0,
+					b = 0,
+					l = 0,
+					r = 0
+				}
+				speed = 0
+				bg:Destroy()
+				bv:Destroy()
+
+			end
+			mouse.KeyDown:connect(function(key)
+				if key:lower() == "e" then
+					if flying then
+						flying = false
+					else
+						flying = true
+						Fly()
+					end
+				elseif key:lower() == "w" then
+					ctrl.f = 1
+				elseif key:lower() == "s" then
+					ctrl.b = -1
+				elseif key:lower() == "a" then
+					ctrl.l = -1
+				elseif key:lower() == "d" then
+					ctrl.r = 1
+				end
+			end)
+			mouse.KeyUp:connect(function(key)
+				if key:lower() == "w" then
+					ctrl.f = 0
+				elseif key:lower() == "s" then
+					ctrl.b = 0
+				elseif key:lower() == "a" then
+					ctrl.l = 0
+				elseif key:lower() == "d" then
+					ctrl.r = 0
+				elseif key:lower() == "r" then
+
+				end
+			end)
+			Fly()
+
+
+
+		elseif k == "x" then
+
+
+			spawn(function()
+				local message = Instance.new("Message", workspace)
+				message.Text = "Ok respawning dont spam it pslpslsp"
+				wait(2)
+				message:Destroy()
+			end)
+
+			local saved = groot.Position
+
+			local ch = game.Players.LocalPlayer.Character
+			local prt = Instance.new("Model", workspace)
+			local z1 = Instance.new("Part", prt)
+			z1.Name = "Torso"
+			z1.CanCollide = false
+			z1.Anchored = true
+			local z2 = Instance.new("Part", prt)
+			z2.Name = "Head"
+			z2.Anchored = true
+			z2.CanCollide = false
+			local z3 = Instance.new("Humanoid", prt)
+			z3.Name = "Humanoid"
+			z1.Position = Vector3.new(0, 9999, 0)
+			z2.Position = Vector3.new(0, 9991, 0)
+			game.Players.LocalPlayer.Character = prt
+			wait(5)
+			game.Players.LocalPlayer.Character = ch
+			local poop = nil
+			repeat
+				wait()
+				poop = game.Players.LocalPlayer.Character:FindFirstChild("Head")
+			until poop ~= nil
+			wait(1)
+			game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(saved)
+
+		end
+
+
+	end)
+end)
+
+PlrMod:NewTextBox("WalkSpeed", "Type 're' to reset do default", function(txt)
+	if txt == "re" then
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+	else
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = txt
+	end
+end)
+
+PlrMod:NewTextBox("JumpPower", "Type 're' to reset do default", function(txt)
+	if txt == "re" then
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+	else
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = txt
+	end
+end)
+
+PlrTP:NewButton("TP Spawn", "Teleports your character here", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(44, 13, -76)
+end)
+
+PlrTP:NewButton("TP Winners", "Teleports your character here", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(310, 863, 322)
+end)
+
+PlrTP:NewButton("TP Cart", "Teleports your character here", function()
+	for i, v in pairs(game.workspace:GetDescendants()) do
+		if v:IsA("Seat") then
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+		end
+	end
+end)
+
+PlrTP:NewTextBox("Goto Player", "Can be shortened", function(txt)
+	local player = game.Players.LocalPlayer
+	for i, v in pairs(game.Players:GetChildren()) do
+		if (string.sub(string.lower(v.Name), 1, string.len(txt))) == string.lower(txt) then
+			txt = v.Name
+		end
+	end
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players[txt].Character.Head.Position)
+end)
+
+--MISC TAB BEGINS
+Random:NewButton("Client Admin", "Loads IY Admin", function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Random:NewButton("Win", "Wins without teleporting", function()
+	local Hitter = game.Players.LocalPlayer.Character.HumanoidRootPart
+	for i, v in pairs(workspace:GetDescendants()) do
+		if v.Name == "SpawnLocation" then
+			firetouchinterest(Hitter, v, 0)
+			wait(.1)
+			firetouchinterest(Hitter, v, 1)
+		end
+	end
+end)
+
+Random:NewButton("Sit", "Sits your ass down", function()
+	game.Players.LocalPlayer.Character.Humanoid.Sit = true
+end)
+
+Random:NewButton("Ragdoll Reset", "Um you die", function()
+	game.Players.LocalPlayer.Character.Humanoid:Destroy() --ikr so ep0k
+end)
+
+Random:NewToggle("Visible RootPart", "Makes you be able to see your root part", function(tog)
+	if tog == true then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = .5
+	else
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = 1
+	end
+end)
+
+Random:NewTextBox("View Player", "Can be shortened", function(txt)
+	local player = game.Players.LocalPlayer
+	for i, v in pairs(game.Players:GetChildren()) do
+		if (string.sub(string.lower(v.Name), 1, string.len(txt))) == string.lower(txt) then
+			txt = v.Name
+		end
+	end
+	if txt == "me" or txt == "unview" then
+		workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+	else
+		workspace.CurrentCamera.CameraSubject = game.Players[txt].Character.Humanoid
+	end
+end)
+
+SettingGUI:NewKeybind("Toggle", "Shows/Hides GUI when button has been pressed", Enum.KeyCode.LeftAlt, function()
+	Library:ToggleUI()
+end)
