@@ -1,0 +1,824 @@
+-- Made by oldspak4
+-- Version: 3.2
+
+-- Instances:
+
+local LuckyBlock = Instance.new("ScreenGui")
+local Frame = Instance.new("ImageLabel")
+local Frame_2 = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local Pattern = Instance.new("ImageLabel")
+local SuperBlock = Instance.new("TextButton")
+local Shadow = Instance.new("Frame")
+local TextLabel_3 = Instance.new("TextLabel")
+local MegaBlock = Instance.new("TextButton")
+local Shadow_2 = Instance.new("Frame")
+local TextLabel_4 = Instance.new("TextLabel")
+local RainbowBlock = Instance.new("TextButton")
+local Shadow_3 = Instance.new("Frame")
+local TextLabel_5 = Instance.new("TextLabel")
+local RainbowBlock_2 = Instance.new("TextButton")
+local Shadow_4 = Instance.new("Frame")
+local TextLabel_6 = Instance.new("TextLabel")
+local CosmicBlock = Instance.new("TextButton")
+local Shadow_5 = Instance.new("Frame")
+local TextLabel_7 = Instance.new("TextLabel")
+local Admin = Instance.new("TextButton")
+local Shadow_6 = Instance.new("Frame")
+local TextLabel_8 = Instance.new("TextLabel")
+local Fly = Instance.new("TextButton")
+local Shadow_7 = Instance.new("Frame")
+local TextLabel_9 = Instance.new("TextLabel")
+local Speed = Instance.new("TextButton")
+local Shadow_8 = Instance.new("Frame")
+local TextLabel_10 = Instance.new("TextLabel")
+local jump = Instance.new("TextButton")
+local Shadow_9 = Instance.new("Frame")
+local TextLabel_11 = Instance.new("TextLabel")
+local void = Instance.new("TextButton")
+local Shadow_10 = Instance.new("Frame")
+local TextLabel_12 = Instance.new("TextLabel")
+
+--Properties:
+
+LuckyBlock.Name = "LuckyBlock"
+LuckyBlock.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+Frame.Name = "Frame"
+Frame.Parent = LuckyBlock
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.Position = UDim2.new(0.352830172, 0, 0.241584152, 0)
+Frame.Size = UDim2.new(0, 485, 0, 292)
+Frame.Image = "rbxassetid://3570695787"
+Frame.ImageColor3 = Color3.fromRGB(34, 34, 34)
+Frame.ScaleType = Enum.ScaleType.Slice
+Frame.SliceCenter = Rect.new(100, 100, 100, 100)
+Frame.SliceScale = 0.120
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+Frame_2.Position = UDim2.new(0, 0, 0.126712322, 0)
+Frame_2.Size = UDim2.new(0, 485, 0, 10)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Size = UDim2.new(0, 261, 0, 37)
+TextLabel.ZIndex = 7
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "Lucky Block script"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 33.000
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0.41855669, 0, 0.0753424689, 0)
+TextLabel_2.Size = UDim2.new(0, 179, 0, 15)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text = "By oldspak4"
+TextLabel_2.TextColor3 = Color3.fromRGB(253, 255, 255)
+TextLabel_2.TextSize = 14.000
+
+Pattern.Name = "Pattern"
+Pattern.Parent = Frame
+Pattern.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Pattern.BackgroundTransparency = 1.000
+Pattern.Position = UDim2.new(0, 0, 0.160958901, 0)
+Pattern.Size = UDim2.new(0, 485, 0, 245)
+Pattern.ZIndex = 2
+Pattern.Image = "rbxassetid://2151781758"
+Pattern.ImageTransparency = 0.600
+Pattern.ScaleType = Enum.ScaleType.Tile
+Pattern.SliceCenter = Rect.new(0, 256, 0, 256)
+Pattern.TileSize = UDim2.new(0, 30, 0, 60)
+
+SuperBlock.Name = "SuperBlock"
+SuperBlock.Parent = Frame
+SuperBlock.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+SuperBlock.BorderSizePixel = 0
+SuperBlock.Position = UDim2.new(0.0237113405, 0, 0.256849319, 0)
+SuperBlock.Size = UDim2.new(0, 146, 0, 27)
+SuperBlock.ZIndex = 2
+SuperBlock.Font = Enum.Font.GothamMedium
+SuperBlock.Text = ""
+SuperBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
+SuperBlock.TextScaled = true
+SuperBlock.TextSize = 14.000
+SuperBlock.TextWrapped = true
+SuperBlock.MouseButton1Down:connect(function()
+	game:GetService("ReplicatedStorage").SpawnSuperBlock:FireServer()
+end)
+
+Shadow.Name = "Shadow"
+Shadow.Parent = SuperBlock
+Shadow.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow.BorderSizePixel = 0
+Shadow.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_3.Parent = SuperBlock
+TextLabel_3.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.5, 0, 0.5, 0)
+TextLabel_3.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_3.ZIndex = 2
+TextLabel_3.Font = Enum.Font.GothamMedium
+TextLabel_3.Text = "Spawn SuperLuckyBlock"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextWrapped = true
+
+MegaBlock.Name = "MegaBlock"
+MegaBlock.Parent = Frame
+MegaBlock.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+MegaBlock.BorderSizePixel = 0
+MegaBlock.Position = UDim2.new(0.0237113405, 0, 0.400684953, 0)
+MegaBlock.Size = UDim2.new(0, 146, 0, 27)
+MegaBlock.ZIndex = 2
+MegaBlock.Font = Enum.Font.GothamMedium
+MegaBlock.Text = ""
+MegaBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
+MegaBlock.TextScaled = true
+MegaBlock.TextSize = 14.000
+MegaBlock.TextWrapped = true
+MegaBlock.MouseButton1Down:connect(function()
+	game:GetService("ReplicatedStorage").SpawnDiamondBlock:FireServer()
+end)
+
+Shadow_2.Name = "Shadow"
+Shadow_2.Parent = MegaBlock
+Shadow_2.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_2.BorderSizePixel = 0
+Shadow_2.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_4.Parent = MegaBlock
+TextLabel_4.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(0.5, 0, 0.57407409, 0)
+TextLabel_4.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_4.ZIndex = 2
+TextLabel_4.Font = Enum.Font.GothamMedium
+TextLabel_4.Text = "Spawn DiamondLuckyBlock"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextWrapped = true
+
+RainbowBlock.Name = "RainbowBlock"
+RainbowBlock.Parent = Frame
+RainbowBlock.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+RainbowBlock.BorderSizePixel = 0
+RainbowBlock.Position = UDim2.new(0.0237113405, 0, 0.534246564, 0)
+RainbowBlock.Size = UDim2.new(0, 146, 0, 27)
+RainbowBlock.ZIndex = 2
+RainbowBlock.Font = Enum.Font.GothamMedium
+RainbowBlock.Text = ""
+RainbowBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
+RainbowBlock.TextScaled = true
+RainbowBlock.TextSize = 14.000
+RainbowBlock.TextWrapped = true
+RainbowBlock.MouseButton1Down:connect(function()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+end)
+
+Shadow_3.Name = "Shadow"
+Shadow_3.Parent = RainbowBlock
+Shadow_3.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_3.BorderSizePixel = 0
+Shadow_3.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_5.Parent = RainbowBlock
+TextLabel_5.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.BackgroundTransparency = 1.000
+TextLabel_5.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_5.BorderSizePixel = 0
+TextLabel_5.Position = UDim2.new(0.5, 0, 0.57407409, 0)
+TextLabel_5.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_5.ZIndex = 2
+TextLabel_5.Font = Enum.Font.GothamMedium
+TextLabel_5.Text = "Spawn RainbowLuckyBlock"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextScaled = true
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextWrapped = true
+
+RainbowBlock_2.Name = "RainbowBlock"
+RainbowBlock_2.Parent = Frame
+RainbowBlock_2.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+RainbowBlock_2.BorderSizePixel = 0
+RainbowBlock_2.Position = UDim2.new(0.0237113405, 0, 0.671232879, 0)
+RainbowBlock_2.Size = UDim2.new(0, 146, 0, 27)
+RainbowBlock_2.ZIndex = 2
+RainbowBlock_2.Font = Enum.Font.GothamMedium
+RainbowBlock_2.Text = ""
+RainbowBlock_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+RainbowBlock_2.TextScaled = true
+RainbowBlock_2.TextSize = 14.000
+RainbowBlock_2.TextWrapped = true
+
+Shadow_4.Name = "Shadow"
+Shadow_4.Parent = RainbowBlock_2
+Shadow_4.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_4.BorderSizePixel = 0
+Shadow_4.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_6.Parent = RainbowBlock_2
+TextLabel_6.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.BackgroundTransparency = 1.000
+TextLabel_6.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_6.BorderSizePixel = 0
+TextLabel_6.Position = UDim2.new(0.5, 0, 0.57407409, 0)
+TextLabel_6.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_6.ZIndex = 2
+TextLabel_6.Font = Enum.Font.GothamMedium
+TextLabel_6.Text = "Spawn CosmicLuckyBlock"
+TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.TextScaled = true
+TextLabel_6.TextSize = 14.000
+TextLabel_6.TextWrapped = true
+
+CosmicBlock.Name = "CosmicBlock"
+CosmicBlock.Parent = Frame
+CosmicBlock.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+CosmicBlock.BorderSizePixel = 0
+CosmicBlock.Position = UDim2.new(0.0237113405, 0, 0.828767121, 0)
+CosmicBlock.Size = UDim2.new(0, 146, 0, 27)
+CosmicBlock.ZIndex = 2
+CosmicBlock.Font = Enum.Font.GothamMedium
+CosmicBlock.Text = ""
+CosmicBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
+CosmicBlock.TextScaled = true
+CosmicBlock.TextSize = 14.000
+CosmicBlock.TextWrapped = true
+CosmicBlock.MouseButton1Down:connect(function()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+end)
+
+
+Shadow_5.Name = "Shadow"
+Shadow_5.Parent = CosmicBlock
+Shadow_5.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_5.BorderSizePixel = 0
+Shadow_5.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_7.Parent = CosmicBlock
+TextLabel_7.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_7.BackgroundTransparency = 1.000
+TextLabel_7.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_7.BorderSizePixel = 0
+TextLabel_7.Position = UDim2.new(0.5, 0, 0.499999881, 0)
+TextLabel_7.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_7.ZIndex = 2
+TextLabel_7.Font = Enum.Font.GothamMedium
+TextLabel_7.Text = "Spawn CosmicLuckyBlock"
+TextLabel_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_7.TextScaled = true
+TextLabel_7.TextSize = 14.000
+TextLabel_7.TextWrapped = true
+
+Admin.Name = "Admin"
+Admin.Parent = Frame
+Admin.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+Admin.BorderSizePixel = 0
+Admin.Position = UDim2.new(0.656700969, 0, 0.256849289, 0)
+Admin.Size = UDim2.new(0, 146, 0, 27)
+Admin.ZIndex = 2
+Admin.Font = Enum.Font.GothamMedium
+Admin.Text = ""
+Admin.TextColor3 = Color3.fromRGB(255, 255, 255)
+Admin.TextScaled = true
+Admin.TextSize = 14.000
+Admin.TextWrapped = true
+Admin.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+Shadow_6.Name = "Shadow"
+Shadow_6.Parent = Admin
+Shadow_6.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_6.BorderSizePixel = 0
+Shadow_6.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_8.Parent = Admin
+TextLabel_8.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_8.BackgroundTransparency = 1.000
+TextLabel_8.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_8.BorderSizePixel = 0
+TextLabel_8.Position = UDim2.new(0.472602844, 0, 0.5, 0)
+TextLabel_8.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_8.ZIndex = 2
+TextLabel_8.Font = Enum.Font.GothamMedium
+TextLabel_8.Text = "Admin"
+TextLabel_8.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_8.TextScaled = true
+TextLabel_8.TextSize = 14.000
+TextLabel_8.TextWrapped = true
+
+Fly.Name = "Fly"
+Fly.Parent = Frame
+Fly.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+Fly.BorderSizePixel = 0
+Fly.Position = UDim2.new(0.656700969, 0, 0.407534242, 0)
+Fly.Size = UDim2.new(0, 146, 0, 27)
+Fly.ZIndex = 2
+Fly.Font = Enum.Font.GothamMedium
+Fly.Text = ""
+Fly.TextColor3 = Color3.fromRGB(255, 255, 255)
+Fly.TextScaled = true
+Fly.TextSize = 14.000
+Fly.TextWrapped = true
+Fly.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+Shadow_7.Name = "Shadow"
+Shadow_7.Parent = Fly
+Shadow_7.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_7.BorderSizePixel = 0
+Shadow_7.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_9.Parent = Fly
+TextLabel_9.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_9.BackgroundTransparency = 1.000
+TextLabel_9.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_9.BorderSizePixel = 0
+TextLabel_9.Position = UDim2.new(0.500000119, 0, 0.42592597, 0)
+TextLabel_9.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_9.ZIndex = 2
+TextLabel_9.Font = Enum.Font.GothamMedium
+TextLabel_9.Text = "Fly"
+TextLabel_9.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_9.TextScaled = true
+TextLabel_9.TextSize = 14.000
+TextLabel_9.TextWrapped = true
+
+Speed.Name = "Speed"
+Speed.Parent = Frame
+Speed.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+Speed.BorderSizePixel = 0
+Speed.Position = UDim2.new(0.656700969, 0, 0.534246564, 0)
+Speed.Size = UDim2.new(0, 146, 0, 27)
+Speed.ZIndex = 2
+Speed.Font = Enum.Font.GothamMedium
+Speed.Text = ""
+Speed.TextColor3 = Color3.fromRGB(255, 255, 255)
+Speed.TextScaled = true
+Speed.TextSize = 14.000
+Speed.TextWrapped = true
+Speed.MouseButton1Down:connect(function()
+	-- Notification
+	wait(3)
+
+	warn("loading Celerestial WalkSpeed GUI")
+
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Celerestial WalkSpeed GUI";
+		Text = "Loaded!";
+		Icon = "";
+		Duration = "2";
+	})
+	wait(2)
+
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Credit";
+		Text = "By : Celerestial#0608";
+		Icon = "";
+		Duration = "2";
+	})
+	-- Instances:
+
+	local SpeedGUI = Instance.new("ScreenGui")
+	local SpeedGUI_2 = Instance.new("Frame")
+	local TextLabel = Instance.new("TextLabel")
+	local SpeedValue = Instance.new("TextBox")
+	local SetSpeed = Instance.new("TextButton")
+	local ResetSpeed = Instance.new("TextButton")
+	local Close = Instance.new("TextButton")
+
+	--Properties:
+
+	SpeedGUI.Name = "Speed GUI"
+	SpeedGUI.Parent = game.CoreGui
+
+	SpeedGUI_2.Name = "SpeedGUI"
+	SpeedGUI_2.Parent = SpeedGUI
+	SpeedGUI_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SpeedGUI_2.Position = UDim2.new(0.00799503271, 0, 0.883194327, 0)
+	SpeedGUI_2.Size = UDim2.new(0, 241, 0, 70)
+
+	TextLabel.Parent = SpeedGUI_2
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.Size = UDim2.new(0, 217, 0, 23)
+	TextLabel.Font = Enum.Font.SourceSans
+	TextLabel.Text = "Enter Speed:"
+	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.TextSize = 14.000
+
+	SpeedValue.Name = "SpeedValue"
+	SpeedValue.Parent = SpeedGUI_2
+	SpeedValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SpeedValue.Position = UDim2.new(0, 0, 0.326807767, 0)
+	SpeedValue.Size = UDim2.new(0, 241, 0, 24)
+	SpeedValue.Font = Enum.Font.SourceSans
+	SpeedValue.Text = ""
+	SpeedValue.TextColor3 = Color3.fromRGB(0, 0, 0)
+	SpeedValue.TextSize = 14.000
+
+	SetSpeed.Name = "SetSpeed"
+	SetSpeed.Parent = SpeedGUI_2
+	SetSpeed.BackgroundColor3 = Color3.fromRGB(85, 255, 0)
+	SetSpeed.Position = UDim2.new(0.522821605, 0, 0.669664681, 0)
+	SetSpeed.Size = UDim2.new(0, 115, 0, 23)
+	SetSpeed.Font = Enum.Font.SourceSans
+	SetSpeed.Text = "Set"
+	SetSpeed.TextColor3 = Color3.fromRGB(0, 0, 0)
+	SetSpeed.TextSize = 14.000
+
+	ResetSpeed.Name = "ResetSpeed"
+	ResetSpeed.Parent = SpeedGUI_2
+	ResetSpeed.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	ResetSpeed.Position = UDim2.new(0, 0, 0.669664681, 0)
+	ResetSpeed.Size = UDim2.new(0, 126, 0, 23)
+	ResetSpeed.Font = Enum.Font.SourceSans
+	ResetSpeed.Text = "Reset"
+	ResetSpeed.TextColor3 = Color3.fromRGB(0, 0, 0)
+	ResetSpeed.TextSize = 14.000
+
+	Close.Name = "Close"
+	Close.Parent = SpeedGUI_2
+	Close.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	Close.Position = UDim2.new(0.900414944, 0, 0, 0)
+	Close.Size = UDim2.new(0, 24, 0, 22)
+	Close.Font = Enum.Font.SourceSans
+	Close.Text = "X"
+	Close.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Close.TextSize = 14.000
+
+	--Scripts:
+
+	Close.MouseButton1Down:connect(function()
+		SpeedGUI_2.Visible = false
+	end)
+
+	SetSpeed.MouseButton1Down:connect(function()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = SpeedValue.Text
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "WalkSpeedGui";
+			Text = "Speed has been set to".. SpeedValue.Text;
+			Icon = "";
+			Duration = "2";
+		})
+	end)
+
+	ResetSpeed.MouseButton1Down:connect(function()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "WalkSpeedGui";
+			Text = "Your speed has been reset.";
+			Icon = "";
+			Duration = "2";
+		})
+
+	end)
+
+end)
+
+Shadow_8.Name = "Shadow"
+Shadow_8.Parent = Speed
+Shadow_8.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_8.BorderSizePixel = 0
+Shadow_8.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_10.Parent = Speed
+TextLabel_10.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_10.BackgroundTransparency = 1.000
+TextLabel_10.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_10.BorderSizePixel = 0
+TextLabel_10.Position = UDim2.new(0.500000119, 0, 0.500000119, 0)
+TextLabel_10.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_10.ZIndex = 2
+TextLabel_10.Font = Enum.Font.GothamMedium
+TextLabel_10.Text = "Speedhack"
+TextLabel_10.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_10.TextScaled = true
+TextLabel_10.TextSize = 14.000
+TextLabel_10.TextWrapped = true
+
+jump.Name = "jump"
+jump.Parent = Frame
+jump.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+jump.BorderSizePixel = 0
+jump.Position = UDim2.new(0.656700969, 0, 0.671232879, 0)
+jump.Size = UDim2.new(0, 146, 0, 27)
+jump.ZIndex = 2
+jump.Font = Enum.Font.GothamMedium
+jump.Text = ""
+jump.TextColor3 = Color3.fromRGB(255, 255, 255)
+jump.TextScaled = true
+jump.TextSize = 14.000
+jump.TextWrapped = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")       
+end)
+
+Shadow_9.Name = "Shadow"
+Shadow_9.Parent = jump
+Shadow_9.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_9.BorderSizePixel = 0
+Shadow_9.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_11.Parent = jump
+TextLabel_11.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_11.BackgroundTransparency = 1.000
+TextLabel_11.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_11.BorderSizePixel = 0
+TextLabel_11.Position = UDim2.new(0.500000119, 0, 0.5, 0)
+TextLabel_11.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_11.ZIndex = 2
+TextLabel_11.Font = Enum.Font.GothamMedium
+TextLabel_11.Text = "Inf Jump"
+TextLabel_11.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_11.TextScaled = true
+TextLabel_11.TextSize = 14.000
+TextLabel_11.TextWrapped = true
+
+void.Name = "void"
+void.Parent = Frame
+void.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+void.BorderSizePixel = 0
+void.Position = UDim2.new(0.648453534, 0, 0.828767121, 0)
+void.Size = UDim2.new(0, 146, 0, 27)
+void.ZIndex = 2
+void.Font = Enum.Font.GothamMedium
+void.Text = ""
+void.TextColor3 = Color3.fromRGB(255, 255, 255)
+void.TextScaled = true
+void.TextSize = 14.000
+void.TextWrapped = true
+void.MouseButton1Down:connect(function()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        	 	 	 
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        	 	 	 
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        	 	 	 
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        	 	 	 
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()        
+end)
+
+
+Shadow_10.Name = "Shadow"
+Shadow_10.Parent = void
+Shadow_10.BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+Shadow_10.BorderSizePixel = 0
+Shadow_10.Size = UDim2.new(1, 0, 1, 4)
+
+TextLabel_12.Parent = void
+TextLabel_12.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel_12.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_12.BackgroundTransparency = 1.000
+TextLabel_12.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextLabel_12.BorderSizePixel = 0
+TextLabel_12.Position = UDim2.new(0.500000119, 0, 0.500000119, 0)
+TextLabel_12.Size = UDim2.new(1.13698626, -20, 1.74074078, -20)
+TextLabel_12.ZIndex = 2
+TextLabel_12.Font = Enum.Font.GothamMedium
+TextLabel_12.Text = "SpawnVoidBlock"
+TextLabel_12.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_12.TextScaled = true
+TextLabel_12.TextSize = 14.000
+TextLabel_12.TextWrapped = true
+
+local function WIWVZU_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	local UIS = game:GetService('UserInputService')
+	
+	local frame = script.Parent
+	
+	
+	
+	local dragToggle = nil
+	
+	local dragSpeed = 0.25
+	
+	local dragStart = nil
+	
+	local startPos = nil
+	
+	
+	
+	local function updateInput(input)
+	
+		local delta = input.Position - dragStart
+	
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+	
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	
+	end
+	
+	
+	
+	frame.InputBegan:Connect(function(input)
+	
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+	
+			dragToggle = true
+	
+			dragStart = input.Position
+	
+			startPos = frame.Position
+	
+			input.Changed:Connect(function()
+	
+				if input.UserInputState == Enum.UserInputState.End then
+	
+					dragToggle = false
+	
+				end
+	
+			end)
+	
+		end
+	
+	end)
+	
+	
+	
+	UIS.InputChanged:Connect(function(input)
+	
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	
+			if dragToggle then
+	
+				updateInput(input)
+	
+			end
+	
+		end
+	
+	end)
+end
+coroutine.wrap(WIWVZU_fake_script)()
