@@ -1,0 +1,1218 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Galaxy Hub X", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Tab = Window:MakeTab({
+	Name = "Home",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Section = Tab:AddSection({
+	Name = "Discord"
+})
+OrionLib:MakeNotification({
+	Name = "Welcome to Galaxy Hub!",
+	Content = "More Information Will Be in Discord,Please make sure to authorise to use|Successfully Loaded Galaxy Hub :D!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+Tab:AddButton({
+	Name = "Discord!",
+	Callback = function() setclipboard("https://discord.gg/JfHegdV7")
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+local Tab = Window:MakeTab({
+	Name = "Settings ⛮",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+local Section = Tab:AddSection({
+	Name = "Player Settings"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+Tab:AddButton({
+	Name = "WalkSpeed!",
+	Callback = function() Game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 200
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "JumpPower!",
+	Callback = function() Game.Players.LocalPlayer.Character.Humanoid.JumpPower = 100
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Inf Jump!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Inf-Jump-script-11981"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+local Section = Tab:AddSection({
+	Name = "Xploit Needs"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+Tab:AddButton({
+	Name = "Infinite Yield!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Inf-Yield-41467"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Simple Spy!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Simple-Spy-32021"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Dex Explorer!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Universal-Mobile-Dex-32474"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+local Tab = Window:MakeTab({
+	Name = "Adopt me 🐶",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+Tab:AddButton({
+	Name = "Ice Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Ice-Hub-6414"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Prodigy X!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Prodigy-x-33518"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Fly & Ride!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Adopt-Me!-Me-FlyRide-4123"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Mega,Neon,Fly & Ride!",
+	Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Nischit785/Adopt-me-Pets-/refs/heads/main/Adopt%20me%20best", true))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+local Tab = Window:MakeTab({
+	Name = "Arsenal 🔫",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+Tab:AddButton({
+	Name = "Thunder client V2",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Thunder-Client-V2-12177"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Anti-Cheat disabler!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Anticheat-Disabler-5512"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Stormware!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Stormware-2647"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Non-Fe Dev Skins",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Non-FE-Dev-Skins-2542"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Autovent V4",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Autovent-V4-2444"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Thunder Client - For Solara",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Arsenal-Thunder-Client-For-Solara-13092"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Brookhaven 🏡",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+Tab:AddButton({
+	Name = "FE Ban Hammer!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Fe-ban-hammer-Made-By-Jinxx-works-on-brookhaven-40409"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "R4 Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-R4-HUB-Brookhaven-script-36237"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Free admin (Be careful script not tested)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Free-Admin-35495"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Chaos Hub V2",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-V2-33387"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "TrollXHub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-TrollXHub-30799"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Zeo BH Script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Zeo-Brookhaven-Script-39925"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "BladeBall 🎯",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "AutoParry1!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blade-Ball-FREE-AUTO-PARRY-AUTO-CLASH-AND-GUI-40798"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "CludeHub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-CludeHub-9824"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "BladeBall Gui",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blade-Ball-OP-FREE-GUI-39585"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "AutoParry 2!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-blade-ball-auto-parry-37967"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "BT project",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/UPD-Blade-Ball-BT-Project-8688"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Bedwars ⚔",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Voidware(☆)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/BedWars-S12-Voidware-24203"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "OP Voidware Config Installer(☆)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/FREE-KIT-BedWars-VOIDWARE-VAPE-CONFIG-INSTALLER-35130"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Vape V4!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Vape-V4-For-Roblox_316"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Aurora!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/CTF-BedWars-AURORA-31884"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "CocoSploit!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/BedWars-SUMMER-SHOWDOWN-cocosploit-14490"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Blox Fruits 🍏",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Chest Farm (Bannable)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/XMAS-Blox-Fruits-Cash-Generator-OPEN-SOURCE-and-KEYLESS-25553"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Bean Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blox-Fruits-Bean-Hub-6555"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Solix Hub!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/DRAGON-Blox-Fruits-Dragon-Update-SolixHub-Best-Free-Working-Script-25010"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Auto Farming script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/GRAVITY-Blox-Fruits-OP-FREE-SCRIPT-AND-GUI-AUTO-FARM-AUTO-STATS-AND-MORE-41497"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+Tab:AddButton({
+	Name = "Redz Hub!",
+	Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+local Tab = Window:MakeTab({
+	Name = "Build a Boat 🛥",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+Tab:AddButton({
+	Name = "Ultimate BABFT script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Ultimte-B3BFT-Script-28601"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Ruby Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Ruby-Hub-8338"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Moon Gui!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-m00ngui-babft-38287"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Izolation Gui!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-Izolation-38332"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Blue lock ⚽",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Plasma Script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blue-Lock:-Rivals-plasma-bluelock-free-41791"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Ather Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/KAISER-Blue-Lock:-Rivals-AtherHub-33793"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Souls Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blue-Lock:-Rivals-SOULS-HUB-OP-FREE-41758"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Hitbox Expander",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Blue-Lock:-Rivals-OP-FREE-SCRIPT-HITBOX-EXPANDER-ESP-ANY-STYLE-OR-FLOW-41747"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Summer",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/SUMMER-Blue-Lock:-Rivals-AutoFarm-Free-VIP-Auto-Shoot-Goal-And-Much-More-Stuff-40413"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Fisch 🐠",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Ronix Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Fisch-LEGO(r)-EVENT-Ronix-Hub-Fisch-Free-and-Keyless-38357"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Lunor fisch",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Fisch-Lunor-Fisch-30609"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Vixie",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/FischEVENT-VIXIE-FREE-OP-FISH-AUTOFARM-KEYLESS-32193"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Aussi WIRE",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/2ND-SEA-Fisch-Aussie-WIRE-Second-Sea-Update-33636"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Forge Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Fisch-Forge-Hub-OP-FAST-AUTOFARMS-TELEPORTS-MISC-AND-LOTS-MORE-22236"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Grow A Garden 🍅",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Stock & Weather Alert Bot",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Grow-a-Garden-Grow-a-Garden-Stock-bot-41500"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Keyless Gui(☆)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Grow-a-Garden-BEST-FREE-SCRIPT-AUTO-FARM-AUTO-PLANT-AUTO-SELL-AND-MORE-41497"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Keyless money Dupe (Be careful not tested)",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Grow-a-Garden-KEYLESS-Grow-a-garden-INFINITE-MONEY-DUPE-auto-farm-script-41396"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Black Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Grow-a-Garden-Blackhub-Infinite-Sheckles-41369"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Keyless auto Farm Gui",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Grow-a-Garden-GAG-Auto-Farm-GUI-Keyless-41847"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Hide And Seek ???",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Invisible Script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invisible-35376"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Fly Script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-fly-Script-41453"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Speed Script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Credits-to-the-person-who-made-it-28580"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "JailBreak 👮",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Get weapons and unlock doors",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Jailbreak-Update!-Get-Weapons-Unlock-Doors-Telepots-3904"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Jailbreak Script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Jailbreak-BEST-FREE-SCRIPT-OUT-RIGHT-NOW-28112"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Sensation",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Jailbreak-Sensation-7024"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Sensation V2",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Jailbreak-Sensation-V2-11619"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Silent Aim ,esp & more",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Jailbreak-Season-25-BEST-OP-UNDETECTED-SCRIPT-SILENT-AIM-ESP-AUTO-ARREST-CAR-MOD-31827"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "MM2 ⚔",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Aussie x MM2",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Murder-Mystery-2-Aussie-x-MM2-40376"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Ather Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Murder-Mystery-2-AtherHub-17204"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Roles Checker",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Murder-Mystery-2-Roles-Checker-I-Open-Source-17951"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Natural Disaster Survival 🌋",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Balloon Giver (Client-Sided)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Choose Map (be carefull script not tested)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-Choose-Map-NoFall-WaterWalk-7793"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "NDS Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-Katers-NDS-Hub-19533"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Auto Farm",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-Auto-Farm-5285"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Ninja Legends ⚔",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Updated Autofarm",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Ninja-Legends-Auto-Farm-Updated-Simple-5097"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Ninja legends Script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Ninja-Legends-Ninja-Script-3113"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Auto Farm and more script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/OP-SCRIPT-+-AUTOFARM-and-MORE!_1079"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Hero Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Ninja-Legends-Ninja-Hero-Hub-2656"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "PrisonLife 👮",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Prison Life script!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Troll-GUI-Including-Admin-and-GunMods_967"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Tiger Admin!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Tiger-Admin-40262"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Unknown Admin!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Tiger-Admin-Reborn-29913"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Prizz Admin(☆)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Prizz-Admin-14511"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Inf stamina!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Unlimited-Stamina-OPEN-SOURCE-41023"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Rivals 🚩",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Ronix Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Ronix-Hub-Dead-Rivals-Free-and-Keyless-38130"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Duck Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Duck-Hub-29794"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Tbao Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Tbao-hub-rivals-1helloimgoated-40616"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Tower of H 🗼",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "TOH Script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Tower-of-Hell-Toh-4311"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Tower Of Hacks",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Tower-of-Hell-Hax-5597"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "UnderGround war ⚔",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Op Panel (be carefull script not tested)",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Underground-War-2.0-NUKE-OP-Panel-35617"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Y Hub",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Underground-War-2.0-NUKE-YHUB-new-update-29295"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Pizza Place 🍕",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Auto Farm script",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Pizz-PLce-utoFrm-OP_366"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]Tab:AddButton({
+	Name = "Fe admin Commands (be carefull script not tested)!",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/FE-Commnds-nd-other-Scripts_266"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Yeet A Friend 🤣",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Auto Stuff And More",
+	Callback = function() loadstring(game:HttpGet("https://rawscripts.net/raw/Yeet-A-Friend!-INF-WINS-AUTO-STARS-OP-GUI-39914"))()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "Destroy Ui ❌️",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Destroy Ui",
+	Callback = function() OrionLib:Destroy()
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]local Tab = Window:MakeTab({
+	Name = "More By Me",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]Tab:AddButton({
+	Name = "Copy",
+	Callback = function() setclipboard("pls ask in galaxy hub discord in script section")
+      		print("button pressed")
+  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
