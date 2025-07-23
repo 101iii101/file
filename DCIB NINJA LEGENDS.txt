@@ -1,0 +1,246 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/sq9xMQyi')))()
+local Window = OrionLib:MakeWindow({Name = "DCIB NINJA LEGENDS", HidePremium = false, SaveConfig = false, ConfigFolder = "Ninja Legends Script"})
+
+-- Farm
+local Farm = Window:MakeTab({
+	Name = "Auto Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local autoSwingEnabled = false
+
+Farm:AddToggle({ 
+    Name = "Auto Swing", 
+    Default = false,
+    Callback = function(Value)
+        autoSwingEnabled = Value
+
+        if autoSwingEnabled then
+            spawn(function()
+                while autoSwingEnabled do
+                    wait(0.1) 
+                    local args = {
+                        [1] = "swingKatana"
+                    }
+
+                    game:GetService("Players").LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                end
+            end)
+        end
+    end    
+})
+
+local position1 = Vector3.new(99, 91246, 111)
+local position2 = Vector3.new(76, 91246, 120)
+local currentPosition = position1
+local teleporting = false
+
+Farm:AddToggle({ 
+    Name = "Auto Sell", 
+    Default = false,
+    Callback = function(Value)
+        teleporting = Value
+        while teleporting do
+            game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(currentPosition))
+            wait(0.1)
+            if currentPosition == position1 then
+                currentPosition = position2
+            else
+                currentPosition = position1
+            end
+        end
+    end    
+})
+
+
+
+local ranks = {
+    "Aether Genesis Master Ninja",
+    "Ancient Battle Legend",
+    "Ancient Battle Master",
+    "Apprentice",
+    "Assassin",
+    "Awakened Scythe Legend",
+    "Awakened Scythemaster",
+    "Chaos Legend",
+    "Chaos Sensei",
+    "Comet Strike Lion",
+    "Cybernetic Azure Sensei",
+    "Cybernetic Electro Legend",
+    "Cybernetic Electro Master",
+    "Dark Elements Blademaster",
+    "Dark Elements Guardian",
+    "Dark Sun Samurai Legend",
+    "Dragon Evolution Form I",
+    "Dragon Evolution Form II",
+    "Dragon Evolution Form III",
+    "Dragon Evolution Form IV",
+    "Dragon Evolution Form V",
+    "Dragon Master",
+    "Dragon Warrior",
+    "Eclipse Series Soul Master",
+    "Elemental Legend",
+    "Elite Series Master Legend",
+    "Eternity Hunter",
+    "Evolved Series Master Ninja",
+    "Golden Sun Shuriken Legend",
+    "Golden Sun Shuriken Master",
+    "Grasshopper",
+    "Immortal Assassin",
+    "Infinity Legend",
+    "Infinity Sensei",
+    "Infinity Shadows Master",
+    "Legendary Shadow Duelist",
+    "Legendary Shadowmaster",
+    "Lightning Storm Sensei",
+    "Master Elemental Hero",
+    "Master Legend Assassin",
+    "Master Legend Sensei Hunter",
+    "Master Legend Zephyr",
+    "Master Ninja",
+    "Master Of Elements",
+    "Master Of Shadows",
+    "Master Sensei",
+    "Mythic Shadowmaster",
+    "Ninja",
+    "Ninja Legend",
+    "Rising Shadow Eternal Ninja",
+    "Rookie",
+    "Samurai",
+    "Sensei",
+    "Shadow",
+    "Shadow Chaos Assassin",
+    "Shadow Chaos Legend",
+    "Shadow Legend",
+    "Shadow Storm Sensei",
+    "Skyblade Ninja Master",
+    "Skystorm Series Samurai Legend",
+    "Starstrike Master Sensei",
+    "Ultra Genesis Shadow"
+}
+
+Farm:AddToggle({
+    Name = "Auto Rank",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            spawn(function()
+                while true do
+                    wait(0.1)
+                    
+                    for _, rank in ipairs(ranks) do
+                        local args = {
+                            [1] = "buyRank",
+                            [2] = rank
+                        }
+                        
+                        game:GetService("Players").LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                    end
+
+                    if not Value then
+                        break
+                    end
+                end
+            end)
+        end
+    end    
+})
+
+Farm:AddButton({
+	Name = "Unlock Every Islands",
+	Callback = function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(80, 766, -188)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-128, 39439, 173)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(183, 46010, 36)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(188, 59594, 24)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(166, 52607, 34)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(180, 33206, 28)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(80, 766, -118)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(233, 2013, 331)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(165, 4047, 51)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(186, 5656, 76)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(189, 9284, 31)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(135, 17686, 61)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(171, 28255, 39)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(139, 13680, 74)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(108, 24069, 84)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(175, 39317, 25)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(226, 66669, 15)
+    
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(197, 70271, 7)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(121, 74461, 88)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(115, 79762, 61)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(102, 83199, 150)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(133, 87050, 72)
+
+    wait(0.001)
+    
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(161, 91244, 39)
+      	end    
+})
