@@ -1,0 +1,506 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Murder Mystery 2",
+    LoadingTitle = "KAIDOU HUB",
+    LoadingSubtitle = "by KG3L",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "KaidouHub",
+        FileName = "MM2FullConfig"
+    },
+    KeySystem = false,
+})
+
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+local Camera = Workspace.CurrentCamera
+local Lighting = game:GetService("Lighting")
+
+-- MAIN TAB
+local MainTab = Window:CreateTab("Main", nil)
+MainTab:CreateSection("Movement")
+
+local currentWalkSpeed = 16
+
+local function applyWalkSpeed()
+    local character = LocalPlayer.Character
+    if character and character:FindFirstChildOfClass("Humanoid") then
+        character:FindFirstChildOfClass("Humanoid").WalkSpeed = currentWalkSpeed
+    end
+end
+
+MainTab:CreateSlider({
+    Name = "🏃‍♂️ Walk Speed",
+    Range = {16, 50},
+    Increment = 1,
+    CurrentValue = 16,
+    Suffix = "studs/sec",
+    Callback = function(value)
+        currentWalkSpeed = value
+        applyWalkSpeed()
+    end
+})
+
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(1)
+    applyWalkSpeed()
+end)
+
+MainTab:CreateSlider({
+    Name = "🦘 Jump Power",
+    Range = {50, 120},
+    Increment = 5,
+    CurrentValue = 50,
+    Suffix = "power",
+    Callback = function(value)
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+            LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = value
+        end
+    end
+})
+
+MainTab:CreateSlider({
+    Name = "👁️ Field of View",
+    Range = {70, 120},
+    Increment = 1,
+    CurrentValue = 70,
+    Suffix = "°",
+    Callback = function(value)
+        Camera.FieldOfView = value
+    end
+})
+
+-- No-Clip Feature
+local noClipEnabled = false
+
+local function toggleNoClip()
+    local character = LocalPlayer.Character
+    if character then
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.PlatformStand = noClipEnabled
+            for _, part in pairs(character:GetChildren()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = not noClipEnabled
+                end
+            end
+        end
+    end
+end
+
+MainTab:CreateToggle({
+    Name = "🚶‍♂️ No Clip",
+    CurrentValue = false,
+    Callback = function(value)
+        noClipEnabled = value
+        toggleNoClip()
+    end
+})
+
+-- Full-Bright Feature
+local fullBrightEnabled = false
+
+MainTab:CreateToggle({
+    Name = "💡 Full Bright",
+    CurrentValue = false,
+    Callback = function(value)
+        fullBrightEnabled = value
+        if fullBrightEnabled then
+            Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+            Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+        else
+            Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+            Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+        end
+    end
+})
+
+-- Teleport to Spawn Feature with specific CFrame
+MainTab:CreateButton({
+    Name = "📍 Teleport To Spawn",
+    Callback = function()
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local spawnCFrame = CFrame.new(
+                -108.129585, 141.846268, 101.686722,
+                0.20028998, 1.57664566e-08, -0.979736686,
+                1.81982305e-08, 1, 1.98128554e-08,
+                0.979736686, -2.17977902e-08, 0.20028998
+            )
+            LocalPlayer.Character.HumanoidRootPart.CFrame = spawnCFrame
+        else
+            Rayfield:Notify({
+                Title = "Teleport To Spawn",
+                Content = "Character not found!",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- KILL ALL FEATURE
+MainTab:CreateSection("Murderer Features")
+
+MainTab:CreateButton({
+    Name = "🔪 Kill All Players",
+    Callback = function()
+        if LocalPlayer.Backpack:FindFirstChild("Knife") or (LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Knife")) then
+            Rayfield:Notify({
+                Title = "Kill All",
+                Content = "Starting to kill all players...",
+                Duration = 3
+            })
+            
+            for _, player in ipairs(Players:GetPlayers()) do
+                if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+                    local humanoid = player.Character.Humanoid
+                    
+                    -- Teleport to player
+                    LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+                    
+                    -- Wait until player is dead or 5 seconds pass
+                    local startTime = os.time()
+                    repeat
+                        task.wait(0.1)
+                        -- Attack by simulating click
+                        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Knife") then
+                            LocalPlayer.Character.Knife:Activate()
+                        end
+                    until humanoid.Health <= 0 or os.time() - startTime > 5
+                end
+            end
+            
+            Rayfield:Notify({
+                Title = "Kill All",
+                Content = "Finished killing all players!",
+                Duration = 3
+            })
+        else
+            Rayfield:Notify({
+                Title = "Kill All Failed",
+                Content = "You are not the murderer!",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- TELEPORT SYSTEM
+local TeleportTab = Window:CreateTab("Teleport", nil)
+TeleportTab:CreateSection("Player Teleport")
+
+TeleportTab:CreateButton({
+    Name = "👮 Teleport to Sheriff",
+    Callback = function()
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player.Backpack:FindFirstChild("Gun") or (player.Character and player.Character:FindFirstChild("Gun")) then
+                LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+                Rayfield:Notify({
+                    Title = "Teleport",
+                    Content = "Teleported to Sheriff!",
+                    Duration = 3
+                })
+                return
+            end
+        end
+        Rayfield:Notify({
+            Title = "Teleport Failed",
+            Content = "No Sheriff found!",
+            Duration = 3
+        })
+    end
+})
+
+TeleportTab:CreateButton({
+    Name = "🔪 Teleport to Murderer",
+    Callback = function()
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player.Backpack:FindFirstChild("Knife") or (player.Character and player.Character:FindFirstChild("Knife")) then
+                LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+                Rayfield:Notify({
+                    Title = "Teleport",
+                    Content = "Teleported to Murderer!",
+                    Duration = 3
+                })
+                return
+            end
+        end
+        Rayfield:Notify({
+            Title = "Teleport Failed",
+            Content = "No Murderer found!",
+            Duration = 3
+        })
+    end
+})
+
+TeleportTab:CreateSection("Precise Movement")
+
+local directions = {
+    {"↑ 10 studs forward", CFrame.new(0, 0, -10)},
+    {"↑ 20 studs forward", CFrame.new(0, 0, -20)},
+    {"↑ 10 studs up", CFrame.new(0, 10, 0)},
+    {"↑ 20 studs up", CFrame.new(0, 20, 0)},
+    {"↓ 10 studs down", CFrame.new(0, -10, 0)},
+    {"↓ 20 studs down", CFrame.new(0, -20, 0)}
+}
+
+for _, dir in ipairs(directions) do
+    TeleportTab:CreateButton({
+        Name = dir[1],
+        Callback = function()
+            if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * dir[2]
+            end
+        end
+    })
+end
+
+-- ANTI-AFK SYSTEM
+local UtilityTab = Window:CreateTab("Utility", nil)
+UtilityTab:CreateSection("Anti-AFK")
+
+local antiAFKEnabled = false
+local virtualUser
+
+UtilityTab:CreateToggle({
+    Name = "🔄 Anti-AFK",
+    CurrentValue = false,
+    Callback = function(value)
+        antiAFKEnabled = value
+        if value then
+            virtualUser = game:GetService("VirtualUser")
+            game:GetService("Players").LocalPlayer.Idled:Connect(function()
+                virtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+                task.wait(1)
+                virtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+            end)
+            Rayfield:Notify({
+                Title = "Anti-AFK Enabled",
+                Content = "You won't be kicked for idling!",
+                Duration = 3
+            })
+        else
+            if virtualUser then
+                virtualUser:Destroy()
+            end
+        end
+    end
+})
+
+-- KEYBINDS
+local SettingsTab = Window:CreateTab("Settings", nil)
+SettingsTab:CreateSection("Keybinds")
+
+SettingsTab:CreateKeybind({
+    Name = "Toggle Menu",
+    CurrentKeybind = "K",
+    HoldToInteract = false,
+    Callback = function()
+        Rayfield:Toggle()
+    end,
+})
+
+-- ESP TAB
+-- ESP TAB
+local ESPTab = Window:CreateTab("ESP", nil)
+ESPTab:CreateSection("ESP Features")
+
+local highlightEnabled = false
+local highlights = {}
+
+local function getRole(player)
+    if player.Backpack:FindFirstChild("Knife") or (player.Character and player.Character:FindFirstChild("Knife")) then
+        return "Murderer"
+    elseif player.Backpack:FindFirstChild("Gun") or (player.Character and player.Character:FindFirstChild("Gun")) then
+        return "Sheriff"
+    else
+        return "Innocent"
+    end
+end
+
+local function createHighlight(player)
+    if player.Character and not highlights[player] then
+        local highlight = Instance.new("Highlight")
+        highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        highlight.Parent = player.Character
+        highlights[player] = highlight
+    end
+end
+
+local function refreshHighlights()
+    for player, highlight in pairs(highlights) do
+        if not player.Parent or not player.Character then
+            highlight:Destroy()
+            highlights[player] = nil
+        end
+    end
+
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer then
+            createHighlight(player)
+            if highlights[player] then
+                highlights[player].Adornee = player.Character
+                local role = getRole(player)
+                if role == "Murderer" then
+                    highlights[player].FillColor = Color3.fromRGB(255, 0, 0)
+                elseif role == "Sheriff" then
+                    highlights[player].FillColor = Color3.fromRGB(0, 0, 255)
+                else
+                    highlights[player].FillColor = Color3.fromRGB(128, 128, 128)
+                end
+                highlights[player].Enabled = highlightEnabled
+            end
+        end
+    end
+end
+
+task.spawn(function()
+    while task.wait(2) do
+        if highlightEnabled then
+            refreshHighlights()
+        end
+    end
+end)
+
+ESPTab:CreateToggle({
+    Name = "🔍 Role ESP (Highlight)",
+    CurrentValue = false,
+    Callback = function(value)
+        highlightEnabled = value
+        if not value then
+            for _, highlight in pairs(highlights) do
+                if highlight then
+                    highlight:Destroy()
+                end
+            end
+            highlights = {}
+        end
+    end
+})
+
+
+-- Gun ESP
+local gunESPEnabled = false
+local gunDrawings = {}
+
+local function updateGunESP()
+    for _, drawing in ipairs(gunDrawings) do
+        drawing:Remove()
+    end
+    table.clear(gunDrawings)
+
+    if not gunESPEnabled then return end
+
+    for _, obj in ipairs(Workspace:GetChildren()) do
+        if obj.Name == "GunDrop" and obj:FindFirstChild("Handle") then
+            local text = Drawing.new("Text")
+            text.Size = 20
+            text.Center = true
+            text.Outline = true
+            text.Color = Color3.fromRGB(0, 255, 0)
+            text.Visible = true
+
+            local conn
+            conn = RunService.RenderStepped:Connect(function()
+                if obj and obj.Parent then
+                    local screenPos, onScreen = Camera:WorldToViewportPoint(obj.Handle.Position)
+                    if onScreen then
+                        text.Position = Vector2.new(screenPos.X, screenPos.Y)
+                        text.Text = "GUN"
+                        text.Visible = true
+                    else
+                        text.Visible = false
+                    end
+                else
+                    text:Remove()
+                    conn:Disconnect()
+                end
+            end)
+
+            table.insert(gunDrawings, text)
+        end
+    end
+end
+
+ESPTab:CreateToggle({
+    Name = "🔫 Gun ESP",
+    CurrentValue = false,
+    Callback = function(value)
+        gunESPEnabled = value
+        updateGunESP()
+    end
+})
+
+Workspace.ChildAdded:Connect(function(child)
+    if gunESPEnabled and child.Name == "GunDrop" then
+        updateGunESP()
+    end
+end)
+
+-- Infinite Yield
+UtilityTab:CreateButton({
+    Name = "📜 Load Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        Rayfield:Notify({
+            Title = "Infinite Yield",
+            Content = "Loaded successfully!",
+            Duration = 3
+        })
+    end
+})
+
+-- Aimbot Feature
+MainTab:CreateSection("Combat")
+
+local Aimbot = nil
+
+MainTab:CreateButton({
+    Name = "🎯 Load Aimbot",
+    Callback = function()
+        if not Aimbot then
+            Aimbot = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
+            Aimbot.Load()
+            Rayfield:Notify({
+                Title = "Aimbot Loaded",
+                Content = "Aimbot V3 has been successfully loaded!",
+                Duration = 5
+            })
+        else
+            Rayfield:Notify({
+                Title = "Aimbot Already Loaded",
+                Content = "Aimbot is already running!",
+                Duration = 3
+            })
+        end
+    end
+})
+
+MainTab:CreateButton({
+    Name = "❌ Unload Aimbot",
+    Callback = function()
+        if Aimbot then
+            Aimbot = nil
+            -- Note: Actual unloading might require more complex handling depending on the Aimbot implementation
+            Rayfield:Notify({
+                Title = "Aimbot Unloaded",
+                Content = "Aimbot has been unloaded!",
+                Duration = 5
+            })
+        else
+            Rayfield:Notify({
+                Title = "No Aimbot Loaded",
+                Content = "Aimbot is not currently running!",
+                Duration = 3
+            })
+        end
+    end
+})
+
+Rayfield:Notify({
+    Title = "Murder Mystery 2 Loaded",
+    Content = "All features ready!",
+    Duration = 6.5
+})
