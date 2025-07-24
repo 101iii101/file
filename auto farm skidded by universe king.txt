@@ -1,0 +1,85 @@
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = nil
+
+-- GUI "Vlain made this"
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.ResetOnSpawn = false
+
+local label = Instance.new("TextLabel", gui)
+label.Size = UDim2.new(1, 0, 0, 50)
+label.Position = UDim2.new(0, 0, 0.4, 0)
+label.BackgroundTransparency = 1
+label.Text = "Vlain made this"
+label.TextScaled = true
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.GothamBold
+
+TweenService:Create(label, TweenInfo.new(1), {TextTransparency = 0}):Play()
+task.wait(2)
+TweenService:Create(label, TweenInfo.new(1), {TextTransparency = 1}):Play()
+task.wait(1)
+label:Destroy()
+
+local speed = 25
+local autoFarmEnabled = true
+
+-- Поиск ближайшей монеты
+local function getNearestCoin()
+	local nearest = nil
+	local minDist = math.huge
+
+	for _, part in pairs(workspace:GetDescendants()) do
+		if part:IsA("BasePart") and part.Name == "Coin_Server" then
+			local dist = (part.Position - humanoidRootPart.Position).Magnitude
+			if dist < minDist then
+				minDist = dist
+				nearest = part
+			end
+		end
+	end
+
+	return nearest
+end
+
+-- Движение к монете
+local function moveToPart(part)
+	if not part or not part:IsDescendantOf(workspace) then return end
+
+	local dist = (part.Position - humanoidRootPart.Position).Magnitude
+	local time = dist / speed
+
+	local tween = TweenService:Create(humanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {
+		CFrame = CFrame.new(part.Position + Vector3.new(0, 3, 0))
+	})
+	tween:Play()
+	tween.Completed:Wait()
+end
+
+-- Главный автофарм-поток
+local function startAutoFarm()
+	task.spawn(function()
+		while autoFarmEnabled do
+			local target = getNearestCoin()
+			if target then
+				moveToPart(target)
+				task.wait(0.5)
+			else
+				task.wait(1)
+			end
+		end
+	end)
+end
+
+-- Поддержка респавна
+local function onCharacterAdded(char)
+	character = char
+	humanoidRootPart = char:WaitForChild("HumanoidRootPart")
+	startAutoFarm()
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
+onCharacterAdded(character)
