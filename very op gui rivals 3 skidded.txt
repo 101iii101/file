@@ -1,0 +1,109 @@
+-- rivals script made by hayze
+ 
+-- pastebin loadstring version >>> loadstring(game:HttpGet("https://pastebin.com/raw/KGrbBeQA"))() github: loadstring(game:HttpGet("https://raw.githubusercontent.com/hayze08/rivals/refs/heads/main/rivals%20hub%20by%20hayze%20script%20roblox%202025"))()
+ 
+-- lmk if im cooking and if i should add more scripts like this 🔥
+ 
+local player = game:GetService("Players").LocalPlayer
+local coreGui = game:GetService("CoreGui")
+local runService = game:GetService("RunService")
+ 
+local guiName = "RivalsHub"
+ 
+-- Clear if already there
+pcall(function()
+	if coreGui:FindFirstChild(guiName) then
+		coreGui[guiName]:Destroy()
+	end
+end)
+ 
+-- Create GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = guiName
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = coreGui
+ 
+-- Main Frame
+local main = Instance.new("Frame")
+main.Name = "Main"
+main.Size = UDim2.new(0, 350, 0, 300)
+main.Position = UDim2.new(0.049, 0, 0.528, 0)
+main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = gui
+ 
+-- UICorner
+local corner = Instance.new("UICorner", main)
+corner.CornerRadius = UDim.new(0, 12)
+ 
+-- Title
+local title = Instance.new("TextLabel", main)
+title.Size = UDim2.new(1, 0, 0, 50)
+title.BackgroundTransparency = 1
+title.Text = "Rivals Script by hayze"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 24
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+ 
+-- Create Button Function
+local function createButton(name, position, callback)
+	local btn = Instance.new("TextButton", main)
+	btn.Size = UDim2.new(0.9, 0, 0, 45)
+	btn.Position = UDim2.new(0.05, 0, position, 0)
+	btn.Text = name
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 20
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+ 
+	local btnCorner = Instance.new("UICorner", btn)
+	btnCorner.CornerRadius = UDim.new(0, 8)
+	btn.MouseButton1Click:Connect(callback)
+end
+ 
+-- Buttons
+createButton("Noclip", 0.22, function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/B8wjXHPX"))()
+end)
+ 
+createButton("Fly", 0.42, function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/8jxj4Kb6"))()
+end)
+ 
+createButton("AimBot", 0.62, function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/TkE47fFz"))()
+end)
+ 
+createButton("ESP", 0.82, function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/SGSHYm9A"))()
+end)
+ 
+-- Close Button
+local closeButton = Instance.new("TextButton", main)
+closeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+closeButton.Position = UDim2.new(0.9, 0, 0, 0)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 20
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+ 
+local closeBtnCorner = Instance.new("UICorner", closeButton)
+closeBtnCorner.CornerRadius = UDim.new(0, 8)
+ 
+closeButton.MouseButton1Click:Connect(function()
+	gui:Destroy()
+end)
+ 
+-- 💥 Anti-delete loop (protects GUI from being removed)
+runService.Stepped:Connect(function()
+	if not coreGui:FindFirstChild(guiName) then
+		gui.Parent = coreGui
+	end
+	main.Visible = true
+	gui.Enabled = true
+end)
