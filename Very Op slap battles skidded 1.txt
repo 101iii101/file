@@ -1,0 +1,134 @@
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+local PhantomForcesWindow = Library:NewWindow("Mani's Slap Battles")
+local KillingCheats = PhantomForcesWindow:NewSection("slap +")
+KillingCheats:CreateButton("slap +250", function()
+local args = {
+    [1] = 250
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +500", function()
+local args = {
+    [1] = 500
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +1000", function()
+local args = {
+    [1] = 1000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +5000", function()
+local args = {
+    [1] = 5000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +10000", function()
+local args = {
+    [1] = 10000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +50000", function()
+local args = {
+    [1] = 50000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap +100000", function()
+local args = {
+    [1] = 100000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+local KillingCheats = PhantomForcesWindow:NewSection("slap -")
+KillingCheats:CreateButton("slap -250", function()
+local args = {
+    [1] = -250
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+
+print("HI")
+end)
+KillingCheats:CreateButton("slap -500", function()
+local args = {
+    [1] = -500
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+
+print("HI")
+end)
+KillingCheats:CreateButton("slap -1000", function()
+local args = {
+    [1] = -1000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap -2500", function()
+local args = {
+    [1] = -2500
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+
+print("HI")
+end)
+KillingCheats:CreateButton("slap -5000", function()
+local args = {
+    [1] = -5000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap -10000", function()
+local args = {
+    [1] = -10000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap -50000", function()
+local args = {
+    [1] = -50000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+KillingCheats:CreateButton("slap -100000", function()
+local args = {
+    [1] = -100000
+}
+
+game:GetService("ReplicatedStorage").Events.RewardEvent:FireServer(unpack(args))
+print("HI")
+end)
+local KillingCheats = PhantomForcesWindow:NewSection("cooldown")
+KillingCheats:CreateButton("no cooldown", function()
+g = hookfunction(wait, function(seconds)
+return g(0)
+end)
+print("HI")
+end)
