@@ -1,0 +1,194 @@
+-- Кози Тушкан GUI для Slap Battles
+-- by Nepal
+
+local Player = game:GetService("Players").LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+-- Создаем основной GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "KozziTushkanGUI"
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+-- Основной фрейм
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 220, 0, 70)
+MainFrame.Position = UDim2.new(0.5, -110, 0, 10)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+MainFrame.BackgroundTransparency = 0.3
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Parent = ScreenGui
+
+-- Добавляем градиент к основному фрейму
+local Gradient = Instance.new("UIGradient")
+Gradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 40, 120)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(40, 20, 80))
+})
+Gradient.Rotation = 90
+Gradient.Parent = MainFrame
+
+-- Добавляем скругленные углы
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 12)
+Corner.Parent = MainFrame
+
+-- Добавляем анимированную обводку
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(150, 80, 200)
+Stroke.Thickness = 2
+Stroke.Transparency = 0.5
+Stroke.Parent = MainFrame
+
+-- Анимация обводки (переливание цветов)
+spawn(function()
+    while ScreenGui and ScreenGui.Parent do
+        TweenService:Create(Stroke, TweenInfo.new(3, Enum.EasingStyle.Linear), {
+            Color = Color3.fromRGB(200, 100, 255)
+        }):Play()
+        wait(3)
+        TweenService:Create(Stroke, TweenInfo.new(3, Enum.EasingStyle.Linear), {
+            Color = Color3.fromRGB(100, 50, 150)
+        }):Play()
+        wait(3)
+    end
+end)
+
+-- Кнопка получения перчаток
+local GetGlovesButton = Instance.new("TextButton")
+GetGlovesButton.Name = "GetGlovesButton"
+GetGlovesButton.Size = UDim2.new(0.9, 0, 0.7, 0)
+GetGlovesButton.Position = UDim2.new(0.05, 0, 0.15, 0)
+GetGlovesButton.Text = "GET ALL GLOVES"
+GetGlovesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GetGlovesButton.Font = Enum.Font.FredokaOne -- Крутой кастомный шрифт
+GetGlovesButton.TextSize = 16
+GetGlovesButton.BackgroundTransparency = 0.5
+GetGlovesButton.BorderSizePixel = 0
+GetGlovesButton.TextStrokeTransparency = 1
+GetGlovesButton.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+GetGlovesButton.Parent = MainFrame
+
+-- Градиент для кнопки с анимацией
+local ButtonGradient = Instance.new("UIGradient")
+ButtonGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 70, 220)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(140, 50, 180)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(100, 30, 140))
+})
+ButtonGradient.Rotation = 0
+ButtonGradient.Parent = GetGlovesButton
+
+-- Анимация градиента кнопки
+spawn(function()
+    while ScreenGui and ScreenGui.Parent do
+        TweenService:Create(ButtonGradient, TweenInfo.new(4, Enum.EasingStyle.Linear), {
+            Rotation = 360
+        }):Play()
+        wait(4)
+        TweenService:Create(ButtonGradient, TweenInfo.new(4, Enum.EasingStyle.Linear), {
+            Rotation = 0
+        }):Play()
+        wait(4)
+    end
+end)
+
+-- Скругление кнопки
+local ButtonCorner = Instance.new("UICorner")
+ButtonCorner.CornerRadius = UDim.new(0, 8)
+ButtonCorner.Parent = GetGlovesButton
+
+-- Обводка кнопки
+local ButtonStroke = Instance.new("UIStroke")
+ButtonStroke.Color = Color3.fromRGB(200, 120, 255)
+ButtonStroke.Thickness = 1.5
+ButtonStroke.Transparency = 0.7
+ButtonStroke.Parent = GetGlovesButton
+
+-- Эффекты при наведении
+GetGlovesButton.MouseEnter:Connect(function()
+    TweenService:Create(GetGlovesButton, TweenInfo.new(0.2), {
+        BackgroundTransparency = 0.3,
+        TextColor3 = Color3.fromRGB(255, 220, 255)
+    }):Play()
+    TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {
+        Transparency = 0.3,
+        Thickness = 2
+    }):Play()
+end)
+
+GetGlovesButton.MouseLeave:Connect(function()
+    TweenService:Create(GetGlovesButton, TweenInfo.new(0.2), {
+        BackgroundTransparency = 0.5,
+        TextColor3 = Color3.fromRGB(255, 255, 255)
+    }):Play()
+    TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {
+        Transparency = 0.7,
+        Thickness = 1.5
+    }):Play()
+end)
+
+-- Функция для перемещения GUI
+local dragging, dragInput, dragStart, startPos
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+-- Скрипт для получения перчаток
+GetGlovesButton.MouseButton1Click:Connect(function()
+    -- Сохраняем оригинальный текст кнопки
+    local originalText = GetGlovesButton.Text
+    
+    -- Меняем текст на время выполнения
+    GetGlovesButton.Text = "WORKING..."
+    
+    -- Ваш скрипт для получения перчаток
+    local function NetworkFunc(Name)
+        for i,v in pairs(game:GetService("ReplicatedStorage")._NETWORK:GetChildren()) do
+            if v:IsA("RemoteEvent") then
+                v:FireServer(Name)
+            end
+        end
+    end
+
+    local GaypassGloves = {"OVERKILL", "CUSTOM", "Spectator", "Titan", "Ultra Instinct", "Acrobat"}
+    for i,v in pairs(game:GetService("Workspace").Lobby:GetChildren()) do
+        pcall(function()
+            if v.CFrame.Z < -18 and not table.find(GaypassGloves, v.Name) then
+                NetworkFunc(v.Name)
+            end
+        end)
+    end
+    NetworkFunc("potato")
+    
+    -- Возвращаем оригинальный текст через 2 секунды
+    wait(2)
+    GetGlovesButton.Text = originalText
+end)
