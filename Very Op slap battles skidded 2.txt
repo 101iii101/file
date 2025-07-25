@@ -1,0 +1,193 @@
+-- Slap Battles Hack Script with GUI
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SlapBattlesHack"
+screenGui.Parent = player.PlayerGui
+screenGui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame")
+frame.Parent = screenGui
+frame.Size = UDim2.new(0, 200, 0, 100) -- Adjusted size to account for removed button
+frame.Position = UDim2.new(0, 10, 0, 10)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.Active = true
+frame.Draggable = true
+
+local title = Instance.new("TextLabel")
+title.Parent = frame
+title.Text = "Slap Battles Hack"
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.new(1, 1, 1)
+
+local antiVoidButton = Instance.new("TextButton")
+antiVoidButton.Parent = frame
+antiVoidButton.Text = "Anti Void (Off)"
+antiVoidButton.Size = UDim2.new(0.5, 0, 0, 30)
+antiVoidButton.Position = UDim2.new(0, 0, 0.3, 0)
+antiVoidButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+
+local espButton = Instance.new("TextButton")
+espButton.Parent = frame
+espButton.Text = "ESP Players (Off)"
+espButton.Size = UDim2.new(0.5, 0, 0, 30)
+espButton.Position = UDim2.new(0.5, 0, 0.3, 0)
+espButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+
+local noCooldownButton = Instance.new("TextButton")
+noCooldownButton.Parent = frame
+noCooldownButton.Text = "No Cooldown (Off)"
+noCooldownButton.Size = UDim2.new(0.5, 0, 0, 30)
+noCooldownButton.Position = UDim2.new(0, 0, 0.6, 0)
+noCooldownButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+
+-- Toggle variables
+local antiVoidToggled = false
+local espToggled = false
+local noCooldownToggled = false
+
+-- Anti Void
+local antiVoidThread
+function startAntiVoid()
+    if antiVoidThread then return end
+    antiVoidToggled = true
+    antiVoidThread = spawn(function()
+        while antiVoidToggled do
+            wait(0.1)
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local rootPart = player.Character.HumanoidRootPart
+                local rayOrigin = rootPart.Position
+                local rayDirection = Vector3.new(0, -50, 0)
+                local raycastParams = RaycastParams.new()
+                raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+                raycastParams.FilterDescendantsInstances = {player.Character}
+                local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+                if not raycastResult then
+                    rootPart.CFrame = CFrame.new(rootPart.Position.X, 10, rootPart.Position.Z)
+                end
+            end
+        end
+        antiVoidThread = nil
+    end)
+end
+function stopAntiVoid()
+    antiVoidToggled = false
+end
+
+-- ESP Players
+local highlights = {}
+local espConnections = {}
+function createHighlight(char)
+    local highlight = Instance.new("Highlight")
+    highlight.Parent = char
+    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+    highlight.FillTransparency = 0.5
+    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+    highlight.OutlineTransparency = 0.5
+    table.insert(highlights, highlight)
+end
+function startESP()
+    espToggled = true
+    highlights = {}
+    espConnections = {}
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if plr ~= player and plr.Character then
+            createHighlight(plr.Character)
+        end
+        local charAddedConn = plr.CharacterAdded:Connect(function(char)
+            createHighlight(char)
+        end)
+        table.insert(espConnections, charAddedConn)
+    end
+    local playerAddedConn = Players.PlayerAdded:Connect(function(newPlr)
+        if newPlr ~= player then
+            local charAddedConn = newPlr.CharacterAdded:Connect(function(char)
+                createHighlight(char)
+            end)
+            table.insert(espConnections, charAddedConn)
+        end
+    end)
+    table.insert(espConnections, playerAddedConn)
+end
+function stopESP()
+    espToggled = false
+    for _, highlight in ipairs(highlights) do
+        if highlight.Parent then
+            highlight:Destroy()
+        end
+    end
+    highlights = {}
+    for _, conn in ipairs(espConnections) do
+        conn:Disconnect()
+    end
+    espConnections = {}
+end
+
+-- No Cooldown
+local noCooldownThread
+function startNoCooldown()
+    if noCooldownThread then return end
+    noCooldownToggled = true
+    noCooldownThread = spawn(function()
+        while noCooldownToggled do
+            wait(0.1)
+            local character = player.Character
+            local backpack = player.Backpack
+            if character then
+                local tool = character:FindFirstChildOfClass("Tool") or backpack:FindFirstChildOfClass("Tool")
+                if tool then
+                    local localscript = tool:FindFirstChildOfClass("LocalScript")
+                    if localscript then
+                        local localscriptclone = localscript:Clone()
+                        localscript:Destroy()
+                        localscriptclone.Parent = tool
+                    end
+                end
+            end
+        end
+        noCooldownThread = nil
+    end)
+end
+function stopNoCooldown()
+    noCooldownToggled = false
+end
+
+-- Button connections
+antiVoidButton.MouseButton1Click:Connect(function()
+    if antiVoidToggled then
+        stopAntiVoid()
+        antiVoidButton.Text = "Anti Void (Off)"
+    else
+        startAntiVoid()
+        antiVoidButton.Text = "Anti Void (On)"
+    end
+end)
+
+espButton.MouseButton1Click:Connect(function()
+    if espToggled then
+        stopESP()
+        espButton.Text = "ESP Players (Off)"
+    else
+        startESP()
+        espButton.Text = "ESP Players (On)"
+    end
+end)
+
+noCooldownButton.MouseButton1Click:Connect(function()
+    if noCooldownToggled then
+        stopNoCooldown()
+        noCooldownButton.Text = "No Cooldown (Off)"
+    else
+        startNoCooldown()
+        noCooldownButton.Text = "No Cooldown (On)"
+    end
+end)
+
+-- Ensure GUI persists
+player.CharacterRemoving:Connect(function()
+    screenGui.Enabled = true
+end)
