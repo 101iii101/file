@@ -1,0 +1,273 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+getgenv().SecureMode = true
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local Window = Rayfield:CreateWindow({
+   Name = "Starkield Series Hub | Slap Battles",
+   LoadingTitle = "Slap Battles",
+   LoadingSubtitle = "by Un Robloxxer",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, 
+      FileName = "Starkield Series"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+-- States
+
+--
+
+
+local PS = Window:CreateTab("Player", 4483362458) -- Title, Image
+local ScriptPS = PS:CreateLabel("This script is made by Un Robloxxer in yt and the updates will be in my chanel")
+local SliderSpeedP = PS:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {0, 500},
+   Increment = 1,
+   Suffix = "speed",
+   CurrentValue = 20,
+   Flag = "speed",
+   Callback = function(Value)
+   chr.Humanoid.WalkSpeed = Value
+   end,
+})
+local ButtonSDS = PS:CreateButton({
+   Name = "Set default speed",
+   Callback = function()
+   SliderSpeedP:Set(20) 
+   chr.Humanoid.WalkSpeed = 20
+   end,
+})
+local TextSpeedP = PS:CreateInput({
+   Name = "WalkSpeed",
+   PlaceholderText = "Speed",
+   RemoveTextAfterFocusLost = true,
+   Callback = function(Text)
+   SliderSpeedP:Set(Text)
+   chr.Humanoid.WalkSpeed = Text
+   end,
+})
+local NoteTJP = PS:CreateLabel("Note: if you put the SPEED on the text more that 500 you have risk of BAN")
+local SliderJumpP = PS:CreateSlider({
+   Name = "Jump",
+   Range = {0, 500},
+   Increment = 1,
+   Suffix = "Jump",
+   CurrentValue = 40,
+   Flag = "Jump",
+   Callback = function(Value)
+   chr.Humanoid.JumpPower = Value
+   end,
+})
+local ButtonSDJ = PS:CreateButton({
+   Name = "Set default jump",
+   Callback = function()
+   SliderJumpP:Set(40) 
+   chr.Humanoid.JumpPower = 40
+   end,
+})
+local TextJumpP = PS:CreateInput({
+   Name = "Jump",
+   PlaceholderText = "Jump",
+   RemoveTextAfterFocusLost = true,
+   Callback = function(Text)
+   SliderJumpP:Set(Text)
+   chr.Humanoid.JumpPower = Text
+   end,
+})
+local NoteTJP = PS:CreateLabel("Note: if you put the JUMP on the text more that 500 you have risk of BAN")
+
+local BadgesTab = Window:CreateTab("Badges", 4483362458) -- Title, Image
+
+local Lamp = BadgesTab:CreateButton({
+   Name = "Get Lamp | need ZZZZZ glove",
+   Callback = function()
+    if game.Players.LocalPlayer.leaderstats.Glove.Value == "ZZZZZZZ" then
+            for i = 1,5 do
+                game:GetService("ReplicatedStorage").nightmare:FireServer("LightBroken")
+            end
+        else
+            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "Need ZZZZZZZ Glove.",Icon = "rbxassetid://7733658504",Duration = 10})
+        end
+   end,
+})
+local IceSkate = BadgesTab:CreateButton({
+   Name = "Get Ice Skate Glove",
+   Callback = function()
+    local args = {
+        [1] = "Freeze"
+    }
+    game:GetService("ReplicatedStorage").IceSkate:FireServer(unpack(args))
+   end,
+})
+local TycoonB = BadgesTab:CreateToggle({
+   Name = "Get Tycoon Glove",
+   CurrentValue = false,
+   Flag = "Tycoon", 
+  Callback = function(Value)
+	   _G.AutoTpPlate = Value
+if game.Players.LocalPlayer.Character:FindFirstChild("entered") and #game.Players:GetPlayers() >= 7 then
+while _G.AutoTpPlate do
+if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("entered") and #game.Players:GetPlayers() >= 7 then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Arena.Plate.CFrame
+end
+task.wait()
+end
+elseif _G.AutoTpPlate == true then
+
+wait(0.05)
+AutoTycoon:Set(false)
+end
+	end,
+})
+
+
+local OrangeB = BadgesTab:CreateButton({
+   Name = "Get Orage Badge",
+   Callback = function()
+    fireclickdetector(game.Workspace.Arena.island5.Orange.ClickDetector)
+   end,
+})
+local CE = BadgesTab:CreateButton({
+   Name = "Get Court Evidence Badge",
+   Callback = function()
+    fireclickdetector(game.Workspace.Lobby.Scene.knofe.ClickDetector)
+   end,
+})
+local DuckB = BadgesTab:CreateButton({
+   Name = "Get Duck Badge",
+   Callback = function()
+    fireclickdetector(game.Workspace.Arena["default island"]["Rubber Ducky"].ClickDetector)
+   end,
+})
+  
+local SpamTab = Window:CreateTab("Spam", 4483362458) -- Title, Image
+
+local NSB = SpamTab:CreateToggle({
+   Name = "Null Spam",
+   CurrentValue = false,
+   Flag = "idk", 
+ Callback = function(Value)
+    NSBV = Value
+       if NSBV then
+       while NSBV do
+           wait (0.1)
+          game:GetService("ReplicatedStorage"):WaitForChild("NullAbility"):FireServer()
+       end
+       end
+   end,
+})
+
+local RSB = SpamTab:CreateToggle({
+   Name = "Rhythm Spam",
+   CurrentValue = false,
+   Flag = "idk", 
+ Callback = function(Value)
+      RSV = Value
+        if RSV then
+        while RSV do 
+        wait(0.1)
+        local args = {
+        [1] = "AoeExplosion",
+        [2] = 42
+        }
+       game:GetService("ReplicatedStorage"):WaitForChild("rhythmevent"):FireServer(unpack(args))
+        end
+        end
+   end,
+})
+
+
+
+
+local MiscTab = Window:CreateTab("Misc", 4483362458) -- Title, Image 
+
+local Section = MiscTab:CreateSection("Farm")
+local FTycoon = MiscTab:CreateButton({
+   Name = "Farm Tycoon (until 500 money)",
+ Callback = function()
+      
+      local Tycoon = game.Workspace:FindFirstChild("ÅTycoon"..plr.Name)
+      local Cliker = Tycoon.Click.ClickDetector
+      if Tycoon then
+             while wait(0.1) do
+             fireclickdetector(Cliker)
+            end
+      end
+   end,
+})
+
+local Section = MiscTab:CreateSection("Boss Fights Hubs")
+local BFAvatar = MiscTab:CreateButton({
+   Name = "Avatar Hub | Use in the bounty mission ",
+ Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
+   end,
+})
+
+local Section = MiscTab:CreateSection("TP")
+
+local TPNA = MiscTab:CreateButton({
+   Name = "Normal Arena",
+ Callback = function()
+      chr.HumanoidRootPart.CFrame = CFrame.new(22.498939514160156, 35.16099548339844, 33.01105499267578)
+   end,
+})
+local TPMI = MiscTab:CreateButton({
+   Name = "Moai Island",
+ Callback = function()
+      chr.HumanoidRootPart.CFrame = CFrame.new(200.049881, -15.7160635, 0.79826206, 0.601817191, 9.24247061e-08, -0.798633873, 6.84636653e-11, 1, 1.15780104e-07, 0.798633873, -6.9733133e-08, 0.601817191)
+   end,
+})
+
+
+local Section = MiscTab:CreateSection("Anti")
+
+local ASI = MiscTab:CreateToggle({
+   Name = "Anti Squid Ink",
+   CurrentValue = false,
+   Flag = "idk", 
+  Callback = function(Value)
+    ASIV = Value
+    if ASIV == true then
+    plr.PlayerGui.SquidInk.Enabled = false
+    else
+    plr.PlayerGui.SquidInk.Enabled = true
+    end
+	end,
+})
+
+
+
+
+
+
+
+
+local Stt = Window:CreateTab("Setting", 4483362458) -- Title, Image
+local ButtonLIY = Stt:CreateButton({
+   Name = "Load Infinity Yield",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+   end,
+})
+local ButtonD = Stt:CreateButton({
+   Name = "Destroy hack",
+   Callback = function()
+   Rayfield:Destroy()
+   end,
+})
