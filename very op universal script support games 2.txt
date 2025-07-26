@@ -1,0 +1,138 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "SUSSES HUB!by iogjigj",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "susses hub",
+   LoadingSubtitle = "by iogjigj",
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "susses hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Key system",
+      Subtitle = "Key System",
+      Note = "GO TO https://loot-link.com/s?PeFePaq6 TO GET THE KEY OR LINK IN MY VIDEO IN COMMENTS", -- Use this to tell the user how to get a key
+      FileName = "Key System!", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"https://pastebin.com/raw/RT1Sebwa"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("DEAD RAILS", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("DEAD RAILS")
+
+local Button = MainTab:CreateButton({
+   Name = "NullFire",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/InfernusScripts/Null-Fire/main/Loader"))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "MicroHub",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/TrustsenseDev/MicroHub/refs/heads/main/loader.lua"))()
+   end,
+})
+
+  local Button = MainTab:CreateButton({
+   Name = "[💰NEW] Dead Rails Script - BONDS FARM, END GAME, KILL MOBS (NO KEY!!)",
+   Callback = function()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DeadRails"))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Skull Hub",
+   Callback = function()
+  loadstring(game:HttpGet('https://skullhub.xyz/loader.lua'))()
+   end,
+})
+
+local teleportTab = Window:CreateTab("DOORS", nil) -- Title, Image
+local teleportSection = teleportTab:CreateSection("DOORS")
+
+local Button = teleportTab:CreateButton({
+   Name = "NullFire",
+   Callback = function()
+  loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-NullFire-BETA-35449"))()
+   end,
+})
+
+local Button = teleportTab:CreateButton({
+   Name = "Blackking",
+   Callback = function()
+   loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-Blackking-Hub-30787"))()
+   end,
+})
+
+local Button = teleportTab:CreateButton({
+   Name = "Palmen6789",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/plamen6789/UtilitiesHub/main/UtilitiesGUI'))()
+   end,
+})
+
+local Button = teleportTab:CreateButton({
+   Name = "Sensation V2",
+   Callback = function()
+   loadstring(game:HttpGet("https://rawscripts.net/raw/FLOOR-2-DOORS-Sensation-V2-20105"))()
+   end,
+})
+
+local Button = teleportTab:CreateButton({
+   Name = "Msdoors V1",
+   Callback = function()
+   loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Msdoors-by-rhyan57-27611"))()
+   end,
+})
+
+local evadeTab = Window:CreateTab("Evade", nil) -- Title, Image
+local evadetSection = evadeTab:CreateSection("Evade")
+
+local Button = evadeTab:CreateButton({
+   Name = "King Hub",
+   Callback = function()
+   loadstring(game:HttpGet("https://rawscripts.net/raw/Evade-Evade-The-Best-Free-GUI-Script-lots-of-Features-20718"))()
+   end,
+})
+
+local Button = evadeTab:CreateButton({
+   Name = "Evade script – (Autofarm, Bot ESP)",
+   Callback = function()
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/9Strew/roblox/main/gamescripts/evade.lua'))()
+   end,
+})
+
+local lolTab = Window:CreateTab("the best scripts", nil) -- Title, Image
+local loltSection = lolTab:CreateSection("the best scripts")
+
+local Button = lolTab:CreateButton({
+   Name = "orca gui",
+   Callback = function()
+   loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/richie0866/orca/master/public/latest.lua"))()
+   end,
+})
+
+local Button = lolTab:CreateButton({
+   Name = "sirius menu",
+   Callback = function()
+   loadstring(game:HttpGet('https://sirius.menu/script'))();
+   end,
+})
