@@ -1,0 +1,1333 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Naxi Hub V3" .. Fluent.Version,
+    SubTitle = "By Ray + More",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Rose",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    Main = Window:AddTab({ Title = "Others (Universal)", Icon = "building" }),
+    Kid = Window:AddTab({ Title = "BrookHaven", Icon = "building-2" }),
+    Balls = Window:AddTab({ Title = "Misc + LocalPlayers", Icon = "box" }),
+    Jkb = Window:AddTab({ Title = "Classics", Icon = "aperture" }),
+    Man = Window:AddTab({ Title = "Evade", Icon = "smile" }),
+    Diddy = Window:AddTab({ Title = "TSB", Icon = "swords" }),
+    DOM = Window:AddTab({ Title = "Fisch", Icon = "anchor" }),
+    Pan = Window:AddTab({ Title = "Dusty Trip", Icon = "speaker" }),
+    None = Window:AddTab({ Title = "Slap Battles", Icon = "hand" }),
+    POOP = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Idk",
+        Content = "Idk",
+        SubContent = "Idk", -- Optional
+        Duration = 1 -- Set to nil to make the notification not disappear
+    })
+
+
+
+    Tabs.Main:AddParagraph({
+        Title = "Others (Universal) ",
+        Content = "This Shows What Universal Scripts You Can Use Or Other Scripts Aswell"
+    })
+
+
+
+    Tabs.Main:AddButton({
+        Title = "Fly V3",
+        Description = "You Can Fly",
+        Callback = function()
+            Window:Dialog({
+                Title = "Fly V3",
+                Content = "Let's You fly Normally",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "Honored One Troll Script",
+        Description = "This Still Works Lol (Only For R6 Games)",
+        Callback = function()
+            Window:Dialog({
+                Title = "Honored One Troll Script (R6)",
+                Content = "Become Honored",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cortzalno666/NectoVerse-Industries-Data/master/Scripts%20Folder/Honored.lua'),true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "Infinite Yield",
+        Description = "Use FE Admin Commands",
+        Callback = function()
+            Window:Dialog({
+                Title = "Infinite Yield",
+                Content = "(Secret): You can Also Bang People With This!",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.Main:AddButton({
+        Title = "Simple Spy Script",
+        Description = "This Let's You SPY On Workspace",
+        Callback = function()
+            Window:Dialog({
+                Title = "Simple SPY Script",
+                Content = "This Spectates The Game WorkSpace In The Server (Spy)",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "Dark Dex V3",
+        Description = "Exploit The Game's Manual WorkSpace",
+        Callback = function()
+            Window:Dialog({
+                Title = "Dark Dex V3",
+                Content = "Hack Cliently On the Script GameSpace",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Main:AddButton({
+        Title = "NeverGonnaGiveYouUpV4",
+        Description = "Client Sided Script That turns You into Some Guy",
+        Callback = function()
+            Window:Dialog({
+                Title = "NeverGonnaGiveYouUpV4",
+                Content = "Goofy Ahh V4 script",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://pastebin.com/raw/DQ04bbZi"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddParagraph({
+        Title = "TSB Script Hubs (First One is mine)",
+        Content = "This Shows All Working TSB Hubs In Here (Pls use Mine)"
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "My TSB Hub",
+        Description = "Pls Use I put My custom Movesets in there Aswell",
+        Callback = function()
+            Window:Dialog({
+                Title = "My TSB Script Hub",
+                Content = "Good TSB Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://pastefy.app/fAT0BJZx/raw"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "GLACIER Hub",
+        Description = "Another Good TSB Hub (Same lib alert)",
+        Callback = function()
+            Window:Dialog({
+                Title = "GLACIER Hub",
+                Content = "Good TSB Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/xVicity/GLACIER/main/LATEST.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "Batman Hub",
+        Description = "Cool TSB Hub (Honest)",
+        Callback = function()
+            Window:Dialog({
+                Title = "Batman Hub",
+                Content = "Good TSB Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://github.com/l0ckerV5/BatmanHub/raw/main/Sources/Lite"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "Limitless Hub",
+        Description = "Has 3 Custom Movesets!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Limitless Hub",
+                Content = "Good TSB Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet"https://raw.githubusercontent.com/Wi-sp/Limitless-legacy/refs/heads/main/GUI")()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "TSB Aimlock Script",
+        Description = "Good Script That Makes You Better At Fighting",
+        Callback = function()
+            Window:Dialog({
+                Title = "TSB Aimlock",
+                Content = "Good TSB lock Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Aepione/Prensado/refs/heads/main/Prensado%20camlock"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Kid:AddParagraph({
+        Title = "Brookhaven Scripts",
+        Content = "This Shows All Working Brookhaven Scripts That are pretty Gud!"
+    })
+
+Tabs.Kid:AddButton({
+        Title = "G Hub",
+        Description = "Gives Scripts Brookhaven Exploitz (Cool)",
+        Callback = function()
+            Window:Dialog({
+                Title = "G Hub",
+                Content = "Good Brookhaven Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/GHUBV14XZ/main/Ghub_Main_Loader.txt"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Kid:AddButton({
+        Title = "Shadow Hub",
+        Description = "Pretty Gud Brookhaven Script (Keysystem)",
+        Callback = function()
+            Window:Dialog({
+                Title = "Shadow Hub",
+                Content = "Good Brookhaven Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/xscripts7/XScripts/refs/heads/XScript/ShadowHub", true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Kid:AddButton({
+        Title = "VexHub (Goated Hub But Keysystem)",
+        Description = "Probably Best Script Hub for Brookhaven",
+        Callback = function()
+            Window:Dialog({
+                Title = "Vex Hub",
+                Content = "Good Brookhaven Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/V31nc/discord.com/invite/3NN5zTW7h2"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Kid:AddButton({
+        Title = "Halloween Brookhaven Script Auto Candy",
+        Description = "Farm Candy",
+        Callback = function()
+            Window:Dialog({
+                Title = "Halloween Brookhaven Script",
+                Content = "Good Brookhaven Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/r4mpage4/BrookHavenRP/refs/heads/main/AutoFarmCandy.lua",true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Kid:AddButton({
+        Title = "Brookhaven GUI 1.10 Hub",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "1.10 Hub",
+                Content = "Good Brookhaven Hub Always Works",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet'https://raw.githubusercontent.com/SilentExpl/Loader-Source-/main/SilentExploit.md')()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddParagraph({
+        Title = "Classics (Popular Classic Games)",
+        Content = "This Shows All Working Good Scripts For All Classic And Popular games!"
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "CHAOS Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "CHAOS Hub",
+                Content = "Nice Chaos Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/1111-ssss/Chaos_Script/main/Chaos_script.txt'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.Jkb:AddButton({
+        Title = "Prison Life Admin Commands Script + FTF",
+        Description = "Best 2 Scripts",
+        Callback = function()
+            Window:Dialog({
+                Title = "PL Commands + FTF",
+                Content = "Nice  Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Roblox-script-and-scipt-Flee-The-facility-15864"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "CHAOS Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "CHAOS Hub",
+                Content = "Nice Chaos Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/1111-ssss/Chaos_Script/main/Chaos_script.txt'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "Doors Script",
+        Description = "Key: 8X5nu95XMzKhrfxEzTNhxTW7",
+        Callback = function()
+            Window:Dialog({
+                Title = "Doors Script",
+                Content = "Nice  Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/mazzikasjjzjzj/Key/main/DOORS%20%20%5BNEW%5D'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "Pet Sim 99 Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Pet Sim 99 ",
+                Content = "Nice Okay Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-storgen-HUB-100-plus-games-supported-14-universal-SCRIPTS-23648"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "Dahood Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Dahood Script",
+                Content = "Nice Dahood Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Impulseonyoutube/scripts/main/dahood"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "Rate My Avatar Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Rate My Avatar",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/SmartModBoy/rate-my-avatars/master/rate%20my%20avatar", true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "LGBTQ Hangout Script",
+        Description = "Cool Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "LGBTQ Hangout",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/V1P3R88/LGBTQ-Hangout/main/Decal-logger"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Jkb:AddButton({
+        Title = "Hand Wrestling Simulator Script",
+        Description = "Keysystem Required!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Hand Wrestling Simulator",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/userp1/self/main/Main.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.DOM:AddParagraph({
+        Title = "All Fisch Scripts",
+        Content = "This Shows All Woking Fisch Scripts (Enjoy!)"
+    })
+
+Tabs.DOM:AddButton({
+        Title = "Fisch BonkHub  .1.",
+        Description = "Keysystem Required!",
+        Callback = function()
+            Window:Dialog({
+                Title = "BonkHub 1",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://bonkhubloader.netlify.app",true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.DOM:AddButton({
+        Title = "Fisch Script .2.",
+        Description = "Keysystem Also Required!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Fisch Script 2",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/LHking123456/u3hy6tsa72nd/refs/heads/main/Fisch"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.DOM:AddButton({
+        Title = "Fisch Script  .3.",
+        Description = "Keysystem Discord Key - https://discord.gg/dracohub",
+        Callback = function()
+            Window:Dialog({
+                Title = "Fisch Script 3",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/cdc8ffd74b2c33f6c9f47b85f4b77c45.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.DOM:AddButton({
+        Title = "Fisch Script  .4.",
+        Description = "IDK If it Still Works But Check It's discord - https://discord.gg/HkRUtyTbk2",
+        Callback = function()
+            Window:Dialog({
+                Title = "Fisch Script 4",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Yumiara/Python/main/Main.lua"))();
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.DOM:AddButton({
+        Title = "Fisch Script  .5.",
+        Description = "Keysystem Required!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Fisch Script 5",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://pastebin.com/raw/N4weEdmM'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Pan:AddParagraph({
+        Title = "Dusty Trip Scripts",
+        Content = "This Shows What Working Dusty Trips Are Available!"
+    })
+
+Tabs.Pan:AddButton({
+        Title = "Dusty Trip Script 1.10",
+        Description = "Yey script!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Dusty Trip 1.10",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/artemy133563/Utilities/main/ADustyTrip",true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Pan:AddButton({
+        Title = "Demonic Hub",
+        Description = "Probably Works",
+        Callback = function()
+            Window:Dialog({
+                Title = "Demonic Hub",
+                Content = "Nice Hub",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Alan0947383/Demonic-HUB-V2/main/S-C-R-I-P-T.lua",true))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Balls:AddParagraph({
+        Title = "Misc And More localPlayers Stuff",
+        Content = "This Shows All Gud LocalPlayers shit and some cool things aswell!"
+    })
+
+Tabs.Balls:AddButton({
+        Title = "Infinite Jump Script",
+        Description = "Jump Infinity",
+        Callback = function()
+            Window:Dialog({
+                Title = "Infinite Jump",
+                Content = "Nice Script",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+local Slider = Tabs.Balls:AddSlider("Slider", {
+        Title = "Naxi WalkSpeed Changer",
+        Description = "You can Increase Your WalkSpeed Nicely With no Bugs!",
+        Default = 16,
+        Min = 1,
+        Max = 350,
+        Rounding = 1,
+        Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+            print("Slider was changed:", Value)
+        end
+    })
+
+Tabs.Balls:AddButton({
+        Title = "Better Mobile Keyboard Script",
+        Description = "Use Buttons Instead Of shit And Ye",
+        Callback = function()
+            Window:Dialog({
+                Title = "Mobile Keyboard ",
+                Content = "Nice Script",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Mobile-Keyboard-Script-20056"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Balls:AddButton({
+        Title = "Misc Console Script",
+        Description = "Pretty Useless But for Nerds!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Console Script",
+                Content = "Goofy",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-ConsPlus-20460"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Diddy:AddButton({
+        Title = "Domain Expansion Script",
+        Description = "Requires Garou Only!",
+        Callback = function()
+            Window:Dialog({
+                Title = "Domain Expansion Script",
+                Content = "2 moves only let this Happen - Flowing Water - Lethal WhirlWind Stream",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/JohnyGamingLUA/DomainExpansion/main/source.lua'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Man:AddParagraph({
+        Title = "All Evade Scripts",
+        Content = "This Shows All Working And Available Evade Scripts!"
+    })
+
+Tabs.Man:AddButton({
+        Title = "Evade Script .1.",
+        Description = "Yez evade Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Evade Script 1",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Evade-Evade-The-Best-Free-GUI-Script-lots-of-Features-20718"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+    
+    Tabs.Man:AddButton({
+        Title = "Evade Script .2.",
+        Description = "Yez evade Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Evade Script 2",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://raw.githubusercontent.com/9Strew/roblox/main/gamescripts/evade.lua'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Man:AddButton({
+        Title = "Tbao Hub .3.",
+        Description = "Yez evade Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Tbao Hub 3",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubEvade"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.Man:AddButton({
+        Title = "Evade Script .4.",
+        Description = "Yez evade Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Evade Script 4",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet('https://factshub.vercel.app'))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.None:AddParagraph({
+        Title = "Slap Battles Scripts",
+        Content = "This Shows What Working And Good slap Battles Scripts Are available!"
+    })
+
+Tabs.None:AddButton({
+        Title = "Slap Battles Hub (Oldest But Good)",
+        Description = "Yez gud Script",
+        Callback = function()
+            Window:Dialog({
+                Title = "Slap battles hub",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()
+                        loadstring(game:HttpGet(("https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Slap%20Battles")))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.None:AddButton({
+        Title = "Slap Battles ScriptMaster Hub",
+        Description = "Yez Probably Works",
+        Callback = function()
+            Window:Dialog({
+                Title = "ScriptMaster Hub",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()                    
+                        loadstring(game:HttpGet(('https://raw.githubusercontent.com/TheScriptMaster1/ScriptMaster-Hub/main/scriptmasterhub.lua')))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.None:AddButton({
+        Title = "Slap Battles Script Giang",
+        Description = "Yez Probably gud",
+        Callback = function()
+            Window:Dialog({
+                Title = "Giang Hub",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()                    
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.None:AddButton({
+        Title = "Slap Battles 06 Hub",
+        Description = "Good",
+        Callback = function()
+            Window:Dialog({
+                Title = "06 Hub",
+                Content = "Lol Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()                    
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/KykyryzoB/KykyryzoB-Hub-SB/main/KykryzoB.lua"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+Tabs.None:AddButton({
+        Title = "Slap Battles Script",
+        Description = "Might Not Work",
+        Callback = function()
+            Window:Dialog({
+                Title = "SB Hub",
+                Content = "Not Cul",
+                Buttons = {
+                    {
+                        Title = "Accept",
+                        Callback = function()                    
+                        loadstring(game:HttpGet("pastebin.com/raw/RqBejuMj"))()
+                            print("Confirmed the dialog.")
+                        end
+                    },
+                    {
+                        Title = "Decline",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+    local Keybind = Tabs.main:AddKeybind("Keybind", {
+        Title = "KeyBind",
+        Mode = "Toggle", -- Always, Toggle, Hold
+        Default = "LeftControl", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+
+        -- Occurs when the keybind is clicked, Value is `true`/`false`
+        Callback = function(Value)
+            print("Keybind clicked!", Value)
+        end,
+
+        -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+        ChangedCallback = function(New)
+            print("Keybind changed!", New)
+        end
+    })
+
+    -- OnClick is only fired when you press the keybind and the mode is Toggle
+    -- Otherwise, you will have to use Keybind:GetState()
+    Keybind:OnClick(function()
+        print("Keybind clicked:", Keybind:GetState())
+    end)
+
+    Keybind:OnChanged(function()
+        print("Keybind changed:", Keybind.Value)
+    end)
+
+    task.spawn(function()
+        while true do
+            wait(1)
+
+            -- example for checking if a keybind is being pressed
+            local state = Keybind:GetState()
+            if state then
+                print("Keybind is being held down")
+            end
+
+            if Fluent.Unloaded then break end
+        end
+    end)
+
+    Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
+
+
+    local Input = Tabs.main:AddInput("Input", {
+        Title = "Input",
+        Default = "Default",
+        Placeholder = "Placeholder",
+        Numeric = false, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+        Callback = function(Value)
+            print("Input changed:", Value)
+        end
+    })
+
+    Input:OnChanged(function()
+        print("Input updated:", Input.Value)
+    end)
+end
