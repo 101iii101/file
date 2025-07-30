@@ -1,0 +1,114 @@
+-- Load Rayfield
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local LocalPlayer = Players.LocalPlayer
+
+-- Setup GUI
+local Window = Rayfield:CreateWindow({
+    Name = "Steal A Brainrot Script",
+    LoadingTitle = "made by @robloxscripter700",
+    ConfigurationSaving = { Enabled = false },
+})
+
+local MainTab = Window:CreateTab("Main", 4483362458)
+
+-- Button 1: Teleport up 100 feet
+MainTab:CreateButton({
+    Name = "Teleport Up 100 feet",
+    Callback = function()
+        local char = LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            char.HumanoidRootPart.CFrame = char.HumanoidRootPart.CFrame + Vector3.new(0, 100, 0)
+        end
+    end,
+})
+
+-- Button 2: Set WalkSpeed to 50 (bypass reset)
+MainTab:CreateButton({
+    Name = "Set Speed to 50 (Bypass)",
+    Callback = function()
+        local function applySpeed()
+            local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+            local humanoid = char:WaitForChild("Humanoid")
+            humanoid.WalkSpeed = 50
+            humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                if humanoid.WalkSpeed < 50 then
+                    humanoid.WalkSpeed = 50
+                end
+            end)
+        end
+
+        applySpeed()
+        LocalPlayer.CharacterAdded:Connect(applySpeed)
+    end,
+})
+
+-- Highlight storage
+local highlights = {}
+
+-- Button 3: Enable blue ESP for all players
+MainTab:CreateButton({
+    Name = "Enable Blue ESP",
+    Callback = function()
+        local function highlightPlayer(player)
+            player.CharacterAdded:Connect(function(char)
+                task.wait(1)
+                if highlights[player] then highlights[player]:Destroy() end
+                local hl = Instance.new("Highlight")
+                hl.FillColor = Color3.fromRGB(0, 0, 255)
+                hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                hl.Adornee = char
+                hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                hl.Parent = char
+                highlights[player] = hl
+            end)
+
+            if player.Character then
+                local char = player.Character
+                local hl = Instance.new("Highlight")
+                hl.FillColor = Color3.fromRGB(0, 0, 255)
+                hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                hl.Adornee = char
+                hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                hl.Parent = char
+                highlights[player] = hl
+            end
+        end
+
+        for _, p in pairs(Players:GetPlayers()) do
+            if p ~= LocalPlayer then
+                highlightPlayer(p)
+            end
+        end
+
+        Players.PlayerAdded:Connect(highlightPlayer)
+    end,
+})
+
+-- Button 4: Anti-glitch (reset velocity)
+MainTab:CreateButton({
+    Name = "Anti-Glitch Fix",
+    Callback = function()
+        local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+        local root = char:WaitForChild("HumanoidRootPart")
+        root.Velocity = Vector3.zero
+        root.RotVelocity = Vector3.zero
+    end,
+})
+
+-- Button 5: Change ESP to black/white
+MainTab:CreateButton({
+    Name = "ESP Black Fill / White Outline",
+    Callback = function()
+        for _, hl in pairs(highlights) do
+            if hl and hl:IsA("Highlight") then
+                hl.FillColor = Color3.fromRGB(0, 0, 0)
+                hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+            end
+        end
+    end,
+})
