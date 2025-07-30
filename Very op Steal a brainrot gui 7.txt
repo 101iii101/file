@@ -1,0 +1,457 @@
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = (gethui and gethui()) or game:GetService("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local Frame = Instance.new("Frame")
+Frame.Name = "MainFrame"
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Frame.Position = UDim2.new(0.4, 0, 0.3, 0)
+Frame.Size = UDim2.new(0, 220, 0, 175)
+Frame.Active = true
+Frame.Draggable = true
+
+local MinimizeBtn = Instance.new("TextButton")
+local TpUpBtn = Instance.new("TextButton")
+local TpDownBtn = Instance.new("TextButton")
+local SpeedBtn = Instance.new("TextButton")
+local ESPBrainrotsBtn = Instance.new("TextButton")
+
+MinimizeBtn.Name = "MinimizeBtn"
+MinimizeBtn.Parent = Frame
+MinimizeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MinimizeBtn.Position = UDim2.new(1, -30, 0, 5)
+MinimizeBtn.Size = UDim2.new(0, 25, 0, 25)
+MinimizeBtn.Text = "-"
+MinimizeBtn.TextColor3 = Color3.new(1, 1, 1)
+MinimizeBtn.Font = Enum.Font.SourceSansBold
+MinimizeBtn.TextSize = 20
+
+TpUpBtn.Name = "TpUpBtn"
+TpUpBtn.Parent = Frame
+TpUpBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TpUpBtn.Position = UDim2.new(0, 10, 0, 40)
+TpUpBtn.Size = UDim2.new(0, 200, 0, 30)
+TpUpBtn.Text = "Teleport Up 193"
+TpUpBtn.TextColor3 = Color3.new(0, 1, 1)
+TpUpBtn.Font = Enum.Font.SourceSansBold
+TpUpBtn.TextSize = 18
+
+TpDownBtn.Name = "TpDownBtn"
+TpDownBtn.Parent = Frame
+TpDownBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TpDownBtn.Position = UDim2.new(0, 10, 0, 75)
+TpDownBtn.Size = UDim2.new(0, 200, 0, 30)
+TpDownBtn.Text = "Teleport Down"
+TpDownBtn.TextColor3 = Color3.new(1, 1, 1)
+TpDownBtn.Font = Enum.Font.SourceSansBold
+TpDownBtn.TextSize = 18
+
+SpeedBtn.Name = "SpeedBtn"
+SpeedBtn.Parent = Frame
+SpeedBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+SpeedBtn.Position = UDim2.new(0, 10, 0, 110)
+SpeedBtn.Size = UDim2.new(0, 200, 0, 30)
+SpeedBtn.Text = "Speed: OFF"
+SpeedBtn.TextColor3 = Color3.new(1, 1, 1)
+SpeedBtn.Font = Enum.Font.SourceSansBold
+SpeedBtn.TextSize = 18
+
+ESPBrainrotsBtn.Name = "ESPBrainrotsBtn"
+ESPBrainrotsBtn.Parent = Frame
+ESPBrainrotsBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+ESPBrainrotsBtn.Position = UDim2.new(0, 10, 0, 145)
+ESPBrainrotsBtn.Size = UDim2.new(0, 200, 0, 30)
+ESPBrainrotsBtn.Text = "ESP Brainrots"
+ESPBrainrotsBtn.TextColor3 = Color3.new(1, 1, 1)
+ESPBrainrotsBtn.Font = Enum.Font.SourceSansBold
+ESPBrainrotsBtn.TextSize = 18
+
+local minimized = false
+
+MinimizeBtn.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	local newSize
+	if minimized then
+		newSize = UDim2.new(0, 220, 0, 35)
+	else
+		newSize = UDim2.new(0, 220, 0, 175)
+	end
+	Frame.Size = newSize
+	TpUpBtn.Visible = not minimized
+	TpDownBtn.Visible = not minimized
+	SpeedBtn.Visible = not minimized
+	ESPBrainrotsBtn.Visible = not minimized
+	if ESPSelectionFrame then
+		ESPSelectionFrame.Visible = not minimized and ESPSelectionFrame.Visible
+	end
+end)
+
+local markerPart = nil
+
+local function spawnGroundMarker(hrp)
+	if markerPart then
+		markerPart:Destroy()
+	end
+	markerPart = Instance.new("Part")
+	markerPart.Anchored = true
+	markerPart.CanCollide = false
+	markerPart.Size = Vector3.new(2, 0.2, 2)
+	markerPart.Material = Enum.Material.Neon
+	markerPart.BrickColor = BrickColor.new("Cyan")
+	markerPart.Name = "TeleportMarker"
+	markerPart.Position = Vector3.new(hrp.Position.X, -7, hrp.Position.Z)
+	markerPart.Parent = workspace
+	coroutine.wrap(function()
+		for _ = 1, 80 do
+			if markerPart and hrp then
+				markerPart.Position = Vector3.new(hrp.Position.X, -7, hrp.Position.Z)
+			end
+			wait(0.1)
+		end
+		if markerPart then
+			markerPart:Destroy()
+		end
+	end)()
+end
+
+TpUpBtn.MouseButton1Click:Connect(function()
+	local plr = game.Players.LocalPlayer
+	local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+	if hrp then
+		hrp.CFrame = hrp.CFrame + Vector3.new(0, 193, 0)
+		spawnGroundMarker(hrp)
+	end
+end)
+
+TpDownBtn.MouseButton1Click:Connect(function()
+	local plr = game.Players.LocalPlayer
+	local hrp = plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
+	if hrp then
+		hrp.CFrame = hrp.CFrame - Vector3.new(0, 193, 0)
+		if markerPart then
+			markerPart:Destroy()
+		end
+	end
+end)
+
+local speedOn = false
+
+SpeedBtn.MouseButton1Click:Connect(function()
+	speedOn = not speedOn
+	if speedOn then
+		SpeedBtn.Text = "Speed: ON"
+	else
+		SpeedBtn.Text = "Speed: OFF"
+	end
+	local function enforceSpeed()
+		local plr = game.Players.LocalPlayer
+		local hum = plr.Character and plr.Character:FindFirstChildOfClass("Humanoid")
+		if hum then
+			hum:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+				if speedOn then
+					hum.WalkSpeed = 42
+				end
+			end)
+			hum.WalkSpeed = speedOn and 42 or 16
+		end
+	end
+	enforceSpeed()
+end)
+
+-- ESP Brainrots GUI
+local ESPSelectionFrame = Instance.new("Frame")
+ESPSelectionFrame.Name = "ESPSelectionFrame"
+ESPSelectionFrame.Parent = ScreenGui
+ESPSelectionFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+ESPSelectionFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
+ESPSelectionFrame.Size = UDim2.new(0, 260, 0, 250)
+ESPSelectionFrame.Visible = false
+ESPSelectionFrame.Active = true
+ESPSelectionFrame.Draggable = true
+
+local SearchBox = Instance.new("TextBox")
+SearchBox.Name = "SearchBox"
+SearchBox.Parent = ESPSelectionFrame
+SearchBox.Size = UDim2.new(1, -20, 0, 30)
+SearchBox.Position = UDim2.new(0, 10, 0, 10)
+SearchBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+SearchBox.TextColor3 = Color3.new(1, 1, 1)
+SearchBox.Font = Enum.Font.SourceSans
+SearchBox.Text = ""
+SearchBox.TextSize = 16
+SearchBox.PlaceholderText = "Search..."
+
+local BackBtn = Instance.new("TextButton")
+BackBtn.Parent = ESPSelectionFrame
+BackBtn.Text = "Back"
+BackBtn.Size = UDim2.new(0, 60, 0, 25)
+BackBtn.Position = UDim2.new(1, -70, 0, 10)
+BackBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+BackBtn.TextColor3 = Color3.new(1, 1, 1)
+BackBtn.Font = Enum.Font.SourceSansBold
+BackBtn.TextSize = 16
+
+local Scroll = Instance.new("ScrollingFrame")
+Scroll.Parent = ESPSelectionFrame
+Scroll.Position = UDim2.new(0, 10, 0, 50)
+Scroll.Size = UDim2.new(1, -20, 1, -60)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+Scroll.ScrollBarThickness = 6
+Scroll.BackgroundTransparency = 1
+Scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.Parent = Scroll
+UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+local brainrots = {
+	Common = {
+		"Noobini Pizzanini",
+		"Tim Cheese",
+		"Talpa Di Fero",
+		"Svinina Bombardino",
+		"Pipi Kiwi",
+"Lirilì Larilà",
+"Fluriflura",
+	},
+	Rare = {
+		"Trippi Troppi",
+		"Tung Tung Tung Sahur",
+		"Gangster Footera",
+		"Bandito Bobritto (NEW)",
+		"Boneca Ambalabu",
+		"Ta Ta Ta Ta Sahur",
+		"Tric Trac Baraboom"
+	},
+	Epic = {
+		"Cappuccino Assassino",
+		"Brr Brr Patapim",
+		"Trulimero Trulicina",
+		"Bambini Crostini",
+		"Bananita Dolphinita",
+		"Perochello Lemonchello",
+		"Brri Brri Bicus Dicus Bombicus"
+	},
+	Legendary = {
+		"Burbaloni Luliloli",
+		"Chimpanzini Bananini",
+		"Ballerina Cappuccina",
+		"Chef Crabracadabra",
+		"Lionel Cactuseli",
+		"Glorbo Fruttodrillo",
+		"Blueberrinni Octopusini",
+"Glorbo Fruttodrillo"
+	},
+	Mythic = {
+		"Frigo Camelo",
+		"Orangutini Ananassini",
+		"Rhino Toasterino",
+		"Bombardiro Crocodilo",
+		"Bombombini Gusini",
+		"Cavallo Virtuoso"
+	},
+	["Brainrot God"] = {
+		"Cocofanto Elefanto",
+		"Girafa Celestre",
+		"Matteo",
+		"Tralalero Tralala",
+		"Odin Din Din Dun",
+		"Unclito Samito",
+		"Trenostruzzo Turbo 3000",
+"Gattatino Nyanino"
+	},
+	Secret = {
+		"La Vacca Saturno Saturnita",
+		"Sammyni Spyderini (NEW)",
+		"Los Tralaleritos",
+		"Graipuss Medussi",
+		"La Grande Combinasion",
+		"Garama and Madundung"
+	}
+}
+
+local currentRarity = nil
+local selectedBrainrots = {}
+
+local function clearScroll()
+	for _, child in pairs(Scroll:GetChildren()) do
+		if child:IsA("TextButton") then
+			child:Destroy()
+		end
+	end
+end
+
+local function addESP(model, name)
+	local head = model:FindFirstChild("Head") or model:FindFirstChildWhichIsA("BasePart")
+	if head and not model:FindFirstChild("ESPLabel") then
+		local bill = Instance.new("BillboardGui")
+		bill.Name = "ESPLabel"
+		bill.Size = UDim2.new(0, 100, 0, 40)
+		bill.StudsOffset = Vector3.new(0, 3, 0)
+		bill.Adornee = head
+		bill.AlwaysOnTop = true
+		bill.MaxDistance = 500
+		bill.Parent = model
+
+		local text = Instance.new("TextLabel")
+		text.Size = UDim2.new(1, 0, 1, 0)
+		text.BackgroundTransparency = 1
+		text.TextColor3 = Color3.fromRGB(170, 0, 255)
+		text.TextStrokeTransparency = 0.5
+		text.Text = name
+		text.Font = Enum.Font.SourceSansBold
+		text.TextScaled = true
+		text.Parent = bill
+	end
+end
+
+local function removeESP(model)
+	local esp = model:FindFirstChild("ESPLabel")
+	if esp then
+		esp:Destroy()
+	end
+end
+
+local function createBrainrotButton(name)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(1, 0, 0, 30)
+	btn.BackgroundColor3 = selectedBrainrots[name] and Color3.fromRGB(0, 85, 255) or Color3.fromRGB(40, 40, 40)
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Font = Enum.Font.SourceSansBold
+	btn.TextSize = 18
+	btn.Text = name
+	btn.Parent = Scroll
+
+	btn.MouseButton1Click:Connect(function()
+		if selectedBrainrots[name] then
+			selectedBrainrots[name] = nil
+			btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			for _, model in pairs(workspace:GetDescendants()) do
+				if model:IsA("Model") and model.Name == name then
+					removeESP(model)
+				end
+			end
+		else
+			selectedBrainrots[name] = true
+			btn.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
+			for _, model in pairs(workspace:GetDescendants()) do
+				if model:IsA("Model") and model.Name == name then
+					addESP(model, name)
+				end
+			end
+		end
+	end)
+end
+
+local function createRarityButton(rarity)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(1, 0, 0, 30)
+	btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Font = Enum.Font.SourceSansBold
+	btn.TextSize = 18
+	btn.Text = rarity
+	btn.Parent = Scroll
+
+	btn.MouseButton1Click:Connect(function()
+		currentRarity = rarity
+		clearScroll()
+		for _, brainrotName in ipairs(brainrots[rarity]) do
+			createBrainrotButton(brainrotName)
+		end
+	end)
+end
+
+local function populateRarityButtons()
+	clearScroll()
+	for rarity, _ in pairs(brainrots) do
+		createRarityButton(rarity)
+	end
+end
+
+-- Filtering brainrots in current rarity by search box text
+SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+	local filter = SearchBox.Text:lower()
+	clearScroll()
+	if currentRarity then
+		for _, brainrotName in ipairs(brainrots[currentRarity]) do
+			if brainrotName:lower():find(filter) then
+				createBrainrotButton(brainrotName)
+			end
+		end
+	else
+		for rarity, names in pairs(brainrots) do
+			if rarity:lower():find(filter) then
+				createRarityButton(rarity)
+			end
+		end
+	end
+end)
+
+BackBtn.MouseButton1Click:Connect(function()
+	if currentRarity then
+		currentRarity = nil
+		SearchBox.Text = ""
+		populateRarityButtons()
+	else
+		ESPSelectionFrame.Visible = false
+		Frame.Size = UDim2.new(0, 220, 0, 175)
+		TpUpBtn.Visible = true
+		TpDownBtn.Visible = true
+		SpeedBtn.Visible = true
+		ESPBrainrotsBtn.Text = "ESP Brainrots"
+	end
+end)
+
+ESPBrainrotsBtn.MouseButton1Click:Connect(function()
+	if ESPSelectionFrame.Visible then
+		ESPSelectionFrame.Visible = false
+		Frame.Size = UDim2.new(0, 220, 0, 175)
+		TpUpBtn.Visible = true
+		TpDownBtn.Visible = true
+		SpeedBtn.Visible = true
+		ESPBrainrotsBtn.Text = "ESP Brainrots"
+		currentRarity = nil
+		SearchBox.Text = ""
+	else
+		ESPSelectionFrame.Visible = true
+		Frame.Size = UDim2.new(0, 220, 0, 35)
+		TpUpBtn.Visible = false
+		TpDownBtn.Visible = false
+		SpeedBtn.Visible = false
+		ESPBrainrotsBtn.Text = "Close ESP"
+		currentRarity = nil
+		SearchBox.Text = ""
+		populateRarityButtons()
+	end
+end)
+
+-- Make ESP persistent through respawn
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+	wait(1)
+	for brainrotName, _ in pairs(selectedBrainrots) do
+		for _, model in pairs(workspace:GetDescendants()) do
+			if model:IsA("Model") and model.Name == brainrotName then
+				addESP(model, brainrotName)
+			end
+		end
+	end
+end)
+
+print("ESP Brainrots GUI loaded!")
+-- 🔁 Auto-refresh ESP every 2 seconds without breaking old ones
+task.spawn(function()
+	while true do
+		for name in pairs(selectedBrainrots) do
+			for _, model in pairs(workspace:GetDescendants()) do
+				if model:IsA("Model") and model.Name == name and not model:FindFirstChild("ESPLabel") then
+					addESP(model, name)
+				end
+			end
+		end
+		task.wait(1)
+	end
+end)
