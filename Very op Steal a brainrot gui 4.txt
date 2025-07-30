@@ -1,0 +1,254 @@
+local player = game.Players.LocalPlayer
+local uis = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local workspace = game:GetService("Workspace")
+
+-- GUI
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "DelfiScript_UI"
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Главное меню
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 300, 0, 260)
+main.Position = UDim2.new(0.5, -150, 0.5, -130)
+main.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+main.Visible = false
+main.Active = true
+main.Draggable = true
+main.Parent = gui
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
+Instance.new("UIStroke", main).Color = Color3.fromRGB(80, 80, 100)
+
+-- Заголовок
+local title = Instance.new("TextLabel", main)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "DelfiScript"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextColor3 = Color3.new(1, 1, 1)
+
+-- Контейнер вкладок
+local tabFrame = Instance.new("Frame", main)
+tabFrame.Size = UDim2.new(1, -20, 0, 30)
+tabFrame.Position = UDim2.new(0, 10, 0, 35)
+tabFrame.BackgroundTransparency = 1
+
+-- Вкладки
+local tabButtons = {}
+local tabContents = {}
+local tabs = {"Main", "Visual", "Misc"}
+for i, name in ipairs(tabs) do
+	local btn = Instance.new("TextButton", tabFrame)
+	btn.Size = UDim2.new(0, 90, 1, 0)
+	btn.Position = UDim2.new(0, (i - 1) * 95, 0, 0)
+	btn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+	btn.Text = name
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 14
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	tabButtons[name] = btn
+
+	local content = Instance.new("Frame", main)
+	content.Size = UDim2.new(1, -20, 1, -80)
+	content.Position = UDim2.new(0, 10, 0, 70)
+	content.BackgroundTransparency = 1
+	content.Visible = (i == 1)
+	tabContents[name] = content
+end
+
+-- Переключение вкладок
+for name, btn in pairs(tabButtons) do
+	btn.MouseButton1Click:Connect(function()
+		for otherName, content in pairs(tabContents) do
+			content.Visible = (otherName == name)
+		end
+	end)
+end
+
+-- Infinite Jump
+local infJump = false
+local infBtn = Instance.new("TextButton", tabContents["Main"])
+infBtn.Size = UDim2.new(1, -20, 0, 40)
+infBtn.Position = UDim2.new(0, 10, 0, 10)
+infBtn.Text = "🔼 Infinite Jump"
+infBtn.Font = Enum.Font.GothamBold
+infBtn.TextSize = 16
+infBtn.TextColor3 = Color3.new(1, 1, 1)
+infBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+Instance.new("UICorner", infBtn).CornerRadius = UDim.new(0, 8)
+
+infBtn.MouseButton1Click:Connect(function()
+	infJump = not infJump
+	infBtn.BackgroundColor3 = infJump and Color3.fromRGB(30, 200, 30) or Color3.fromRGB(50, 50, 80)
+end)
+
+uis.JumpRequest:Connect(function()
+	if infJump and player.Character then
+		local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
+	end
+end)
+
+-- Noclip
+local noclip = false
+local noclipBtn = Instance.new("TextButton", tabContents["Main"])
+noclipBtn.Size = UDim2.new(1, -20, 0, 40)
+noclipBtn.Position = UDim2.new(0, 10, 0, 60)
+noclipBtn.Text = "🚪 Noclip"
+noclipBtn.Font = Enum.Font.GothamBold
+noclipBtn.TextSize = 16
+noclipBtn.TextColor3 = Color3.new(1, 1, 1)
+noclipBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+Instance.new("UICorner", noclipBtn).CornerRadius = UDim.new(0, 8)
+
+noclipBtn.MouseButton1Click:Connect(function()
+	noclip = not noclip
+	noclipBtn.BackgroundColor3 = noclip and Color3.fromRGB(30, 200, 30) or Color3.fromRGB(50, 50, 80)
+end)
+
+runService.Stepped:Connect(function()
+	if noclip and player.Character and player.Character:FindFirstChild("Humanoid") then
+		for _, part in pairs(player.Character:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CanCollide = false
+			end
+		end
+	end
+end)
+
+-- ESP (Visual)
+local espEnabled = false
+local espBtn = Instance.new("TextButton", tabContents["Visual"])
+espBtn.Size = UDim2.new(1, -20, 0, 40)
+espBtn.Position = UDim2.new(0, 10, 0, 10)
+espBtn.Text = "🧿 ESP"
+espBtn.Font = Enum.Font.GothamBold
+espBtn.TextSize = 16
+espBtn.TextColor3 = Color3.new(1, 1, 1)
+espBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+Instance.new("UICorner", espBtn).CornerRadius = UDim.new(0, 8)
+
+local function createESP(plr)
+	if plr == player then return end
+	local char = plr.Character
+	if not char then return end
+	local head = char:FindFirstChild("Head")
+	if not head then return end
+	if head:FindFirstChild("ESP") then return end
+
+	local tag = Instance.new("BillboardGui", head)
+	tag.Name = "ESP"
+	tag.Size = UDim2.new(0, 100, 0, 30)
+	tag.AlwaysOnTop = true
+	local label = Instance.new("TextLabel", tag)
+	label.Size = UDim2.new(1, 0, 1, 0)
+	label.BackgroundTransparency = 1
+	label.Text = plr.Name
+	label.TextColor3 = Color3.new(1, 0, 0)
+	label.TextStrokeTransparency = 0.5
+	label.TextScaled = true
+end
+
+espBtn.MouseButton1Click:Connect(function()
+	espEnabled = not espEnabled
+	espBtn.BackgroundColor3 = espEnabled and Color3.fromRGB(30, 200, 30) or Color3.fromRGB(50, 50, 80)
+
+	for _, plr in pairs(game.Players:GetPlayers()) do
+		if espEnabled then
+			createESP(plr)
+		else
+			local char = plr.Character
+			if char and char:FindFirstChild("Head") then
+				local esp = char.Head:FindFirstChild("ESP")
+				if esp then esp:Destroy() end
+			end
+		end
+	end
+end)
+
+-- Godmode
+local godmode = false
+local godBtn = Instance.new("TextButton", tabContents["Main"])
+godBtn.Size = UDim2.new(1, -20, 0, 40)
+godBtn.Position = UDim2.new(0, 10, 0, 110)
+godBtn.Text = "💚 Godmode"
+godBtn.Font = Enum.Font.GothamBold
+godBtn.TextSize = 16
+godBtn.TextColor3 = Color3.new(1, 1, 1)
+godBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+Instance.new("UICorner", godBtn).CornerRadius = UDim.new(0, 8)
+
+godBtn.MouseButton1Click:Connect(function()
+	godmode = not godmode
+	godBtn.BackgroundColor3 = godmode and Color3.fromRGB(30, 200, 30) or Color3.fromRGB(50, 50, 80)
+end)
+
+runService.Heartbeat:Connect(function()
+	if godmode and player.Character then
+		local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			if humanoid.Health < humanoid.MaxHealth then
+				humanoid.Health = humanoid.MaxHealth
+			end
+			-- Отключаем урон (если работает)
+			if not humanoid:FindFirstChild("NoDamage") then
+				local noDamage = Instance.new("BoolValue")
+				noDamage.Name = "NoDamage"
+				noDamage.Parent = humanoid
+				humanoid.TakeDamage = function() end
+			end
+		end
+	end
+end)
+
+-- Misc (только время)
+local miscText = Instance.new("TextLabel", tabContents["Misc"])
+miscText.Size = UDim2.new(1, -20, 0, 60)
+miscText.Position = UDim2.new(0, 10, 0, 10)
+miscText.BackgroundTransparency = 1
+miscText.Font = Enum.Font.Gotham
+miscText.TextSize = 16
+miscText.TextColor3 = Color3.new(1, 1, 1)
+miscText.TextWrapped = true
+
+runService.RenderStepped:Connect(function()
+	miscText.Text = "🕒 " .. os.date("%H:%M:%S")
+end)
+
+-- Значок для открытия/закрытия меню
+local icon = Instance.new("ImageButton", gui)
+icon.Size = UDim2.new(0, 64, 0, 64)
+icon.Position = UDim2.new(0.5, -32, 0, 30)
+icon.BackgroundTransparency = 1
+icon.Image = "rbxassetid://101703733024777"
+
+icon.MouseButton1Click:Connect(function()
+	main.Visible = not main.Visible
+end)
+
+-- Перемещение значка
+local dragging = false
+local dragOffset
+icon.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragOffset = Vector2.new(input.Position.X - icon.AbsolutePosition.X, input.Position.Y - icon.AbsolutePosition.Y)
+	end
+end)
+uis.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = false
+	end
+end)
+uis.InputChanged:Connect(function(input)
+	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		icon.Position = UDim2.new(0, input.Position.X - dragOffset.X, 0, input.Position.Y - dragOffset.Y)
+	end
+end)
