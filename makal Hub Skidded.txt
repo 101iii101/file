@@ -1,0 +1,1630 @@
+if (not debug.getinfo(loadstring).what == "Lua") or (not debug.getinfo(loadstring).what == "C") then
+game:Shutdown()
+game:GetService("BrowserService"):OpenWeChatAuthWindow()
+while true do end
+end
+
+function CloneReference(ServiceName)
+if cloneref then
+return cloneref(game:GetService(ServiceName))
+end
+return game:GetService(ServiceName)
+end
+
+local CoreGui = CloneReference("CoreGui")
+local Lighting = CloneReference("Lighting")
+local Workspace = CloneReference("Workspace")
+local RunService = CloneReference("RunService")
+local TeleportService = CloneReference("TeleportService")
+local Debris = CloneReference("Debris")
+local HttpService = CloneReference("HttpService")
+local Players = CloneReference("Players")
+local ReplicatedStorage =CloneReference("ReplicatedStorage")
+local CollectionService = CloneReference("CollectionService")
+local TweenService = CloneReference("TweenService")
+local ProximityPromptService = CloneReference("ProximityPromptService")
+local SoundService = CloneReference("SoundService")
+
+local FunctionToCheck = {}
+pcall(function()
+FunctionToCheck = {
+    rconsoleprint,
+    print,
+    setclipboard,
+    rconsoleerr,
+    rconsolewarn,
+    warn,
+    error,
+    writefile,
+    readfile,
+    appendfile
+}
+end)
+
+pcall(function()
+if hookfunction then
+hookfunction(RunService.Stop, function() return nil end)
+hookfunction(RunService.Pause, function() return nil end)
+end
+end)
+
+pcall(function()
+for _, x in pairs(FunctionToCheck) do
+if hookfunction then
+local OldFunction
+OldFunction = hookfunction(x, newcclosure(function(...)
+local Arguments = {...}
+for i, v in pairs(Arguments) do
+if (tostring(i):lower():find("adminpython") or tostring(v):lower():find("adminpython")) or (tostring(i):lower():find("replicatesignal") or tostring(v):lower():find("replicatesignal")) or (tostring(i):lower():find("keyrepo") or tostring(v):lower():find("keyrepo")) or (tostring(i):lower():find("ZBYJwNz") or tostring(v):lower():find("ZBYJwNz")) then
+game:Shutdown()
+game:GetService("BrowserServce"):OpenWeChatAuthWindow()
+while true do end
+end
+if Allowed == false and (tostring(i):lower():find("stringobfuscation=[[") or tostring(v):lower():find("stringobfuscation=[[")) then
+game:Shutdown()
+game:GetService("BrowserServce"):OpenWeChatAuthWindow()
+while true do end
+end
+end
+return OldFunction(...)
+end))
+end
+end
+end)
+
+CoreGui.DescendantAdded:Connect(function(x)
+pcall(function()
+if (string.find(x.Text:lower(), "adminpython")) or (string.find(x.Text:lower(), "keyrepo")) or (string.find(x.Text:lower(), "replicatesignal")) or (string.find(x.Text:lower(), "stringobfuscation=[[")) or (string.find(x.Text:lower(), "ZBYJwNz")) then
+game:Shutdown()
+game:GetService("BrowserServce"):OpenWeChatAuthWindow()
+while true do end
+end
+end)
+end)
+
+local Yielder = Workspace:WaitForChild("Plots")
+
+pcall(function()
+local Scanned = {}
+local FindFunc = loadstring(game:HttpGet("https://raw.githubusercontent.com/Awakenchan/GcViewerV2/refs/heads/main/Utility/FindFunction.lua"))()
+local Class,Default = loadstring(game:HttpGet("https://raw.githubusercontent.com/Awakenchan/GcViewerV2/refs/heads/main/Utility/Data2Code%40Amity.lua"))()
+
+local PlayerName = game:GetService("Players").LocalPlayer.Name
+
+local function HookRemote(Remote)
+if Remote:IsA("RemoteEvent") then
+local OldFire
+OldFire = hookfunction(Remote.FireServer, function(Self, ...)
+local Arguments = {...}
+if Arguments[1] and (tostring(Arguments[1]):lower() == "x-15" or tostring(Arguments[1]) == "X-15") or (tostring(Arguments[1]):lower() == "x-16" or tostring(Arguments[1]) == "X-16") then
+return task.wait(9e9)
+end
+return OldFire(Self, unpack(Arguments))
+end)
+end
+end
+
+local function IsRemote(Object)
+return typeof(Object) == "Instance" and Object:IsA("RemoteEvent")
+end
+
+local function DeepScan(Value)
+if getupvalues and hookfunction then
+if Scanned[Value] then return end
+Scanned[Value] = true
+if IsRemote(Value) then
+if not Value:IsDescendantOf(game:GetService("ReplicatedStorage")) then
+HookRemote(Value)
+local Old
+Old = hookfunction(getrenv().coroutine.wrap, function(...)
+if not checkcaller() then
+print(...,getfenv(2).script)
+return task.wait(9e9)
+end
+return Old(...)
+end)
+end
+return
+end
+if typeof(Value) == "function" then
+local UpValues = getupvalues(Value)
+for i, v in pairs(UpValues) do
+DeepScan(v)
+end
+end
+if typeof(Value) == "table" then
+for k, v in pairs(Value) do
+DeepScan(v)
+end
+end
+end
+end
+
+if getgc then
+for _, Object in next, getgc(true) do
+if typeof(Object) == "function" and islclosure(Object) and not isexecutorclosure(Object) then
+DeepScan(Object)
+end
+end
+end
+end)
+
+if MakalPremiumBrainrotLoaded == true then
+warn("Script already loaded!")
+return
+end
+pcall(function() getgenv().MakalPremiumBrainrotLoaded = true end)
+
+local BrandName = "Makal Premium"
+local IconBrand = "rbxassetid://15221233"
+local ThumbnailBrand = "rbxassetid://15221234"
+
+getgenv().ZBYJwNz = "IYAdmin.FE"
+getgenv().NJqbTxbKnwnxyOqodn = false
+local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/AkunDiscoOfficial/WindUI-Fork/refs/heads/main/src/modules/uilibtest.lua"))()
+
+if not isfile(ZBYJwNz) then
+local PopupClose = false
+
+UI:Popup({
+    Title = "Welcome Premium user!!",
+    Icon = "rbxassetid://15221233",
+    IconThemed = true,
+    Content = "Click continue idk bro.",
+    Buttons = {
+        {
+            Title = "Exit",
+            Callback = function() getgenv().MakalPremiumBrainrotLoaded = false; end,
+            Variant = "Secondary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() PopupClose = true end,
+            Variant = "Primary",
+        }
+    }
+})
+
+
+repeat wait() until PopupClose == true
+end
+
+function RouteRequest(Type, Query)
+local TableRoutes = {"https://adminpython.pythonanywhere.com/generate-key","https://adminpython.pythonanywhere.com/verify-key","https://adminpython.pythonanywhere.com/generate-link"}
+local GetRequest = game:HttpGet(TableRoutes[Type]..Query)
+if string.find(GetRequest:lower(), "http error") then
+return {status = "invalid"}
+end
+Response = HttpService:JSONDecode(GetRequest)
+return Response
+end
+
+function Random()
+return HttpService:GenerateGUID(false)
+end
+
+local UniqueID = Random()
+local Tween = false
+
+task.spawn(function()
+while task.wait() do
+if Tween == true and getgenv().NJqbTxbKnwnxyOqodn == true then
+break
+end
+if Tween == false and getgenv().NJqbTxbKnwnxyOqodn == true then
+game:Shutdown()
+while true do end
+end
+end
+end)
+
+local Generated = false
+local Progress = false
+
+function UsageFunc(_, TextBox)
+if Generated == true then Notify("Key link is already generated!", 2); return end
+if Progress == true then Notify("There is a progress request ongoing, please wait!", 2); return end
+Progress = true
+Notify("Generating key link, please wait!", 3)
+local Response = RouteRequest(3, "")
+repeat task.wait() until typeof(Response) == "table"
+local KeyUrl = Response["final_url"]
+if TextBox then
+TextBox.Text = KeyUrl
+end
+Notify("Success! Key link is generated, automatically copied to clipboard. If you can't copy then manually copy from the keybox", 3)
+if setclipboard then
+setclipboard(KeyUrl)
+end
+Generated = true
+Progress = false
+end
+
+function TweenFunc(Number, CF)
+if Number == nil then return end
+if Progress == true then Notify("There is a progress request ongoing, please wait!", 2); return end
+Progress = true
+local Response = RouteRequest(2, "?key="..Number)
+if Response.status == "valid" then
+Tween = true
+if Tween == true then
+getgenv().NJqbTxbKnwnxyOqodn = true
+end
+Notify("Success! Key has been validated and you may use the script!", 3)
+elseif Response.status == "invalid" then
+if CF == "ack" then
+Notify("Your key has expired, please get a new key!", 3)
+elseif CF == "bck" then
+Notify("The key you submitted was expired or wrong to the server!", 3)
+end
+elseif Response.status == "error" then
+Notify(Response.message, 3)
+elseif (Response.status ~= "valid") and (Response.status ~= "invalid") and (Response.status ~= "error") then
+Notify("Something went wrong, if it's maintenance join the discord server for updates!", 3)
+end
+Progress = false
+end
+
+function SafeSoundPlay(SoundInstance)
+if SoundInstance then
+SoundService:PlayLocalSound(SoundInstance)
+end
+end
+
+local SoundTable = {}
+
+local Sounds = {
+Notification = "rbxassetid://3398620867",
+Intro = "rbxassetid://9064208547"
+}
+
+for i, v in pairs(Sounds) do
+local Sound = Instance.new("Sound")
+if scg then
+Sound.Parent = scg
+else
+Sound.Parent = CoreGui
+end
+Sound.SoundId = v
+Sound.Looped = false
+Sound.Volume = 1
+SoundTable[i] = Sound
+end
+
+function Notify(Con, Dur)
+UI:Notify({
+            Title = BrandName,
+            Content = tostring(Con),
+            Icon = IconBrand,
+            IconThemed = true,
+            Duration = tonumber(Dur),
+})
+SafeSoundPlay(SoundTable["Notification"])
+end
+
+local Win = UI:CreateWindow({
+    Title = BrandName.." SAB",
+    Icon = IconBrand,
+    Author = BrandName.."Best script ever",
+    Folder = "MakalPremiumHub",
+    Size = UDim2.fromOffset(580, 460),
+    Transparent = false,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    Background = ThumbnailBrand,
+    BackgroundImageTransparency = 0.99,
+    HideSearchBar = false,
+    ScrollBarEnabled = true,
+    User = {
+        Enabled = true,
+        Anonymous = true,
+    },
+    --KeySystem = {
+    --Key = TweenFunc,
+    --Note = "Welcome User, this script is for premium. If you haven't been whitelisted then do not try using this and use the free version",
+    --URL = UsageFunc,
+    --SaveKey = true,
+    --},
+})
+
+local ConfigManager = Win.ConfigManager
+UserConfig = ConfigManager:CreateConfig("MakalPremiumHubConfig")
+
+function FindRemote(Name)
+local Found = nil
+for i, v in pairs(ReplicatedStorage:GetDescendants()) do
+if (v:IsA("RemoteEvent") and string.find(v.Name:lower(), Name:lower())) or (v:IsA("RemoteFunction") and string.find(v.Name:lower(), Name:lower())) then
+Found = v
+break
+end
+end
+return Found
+end
+
+function FindClone(Name)
+local Found = nil
+for i, v in pairs(Workspace:GetChildren()) do
+if string.find(v.Name:lower(), "clone") and v:FindFirstChildOfClass("Humanoid") and v:FindFirstChildOfClass("Humanoid").DisplayName == Name then
+Found = v
+break
+end
+end
+return Found
+end
+
+function FindPlot(Name)
+local PlotTarget = nil
+if Workspace:FindFirstChild("Plots") then
+for i, v in pairs(Workspace:FindFirstChild("Plots"):GetDescendants()) do
+if v:IsA("TextLabel") and string.find(v.Text:lower(), Name:lower()) then
+PlotTarget = v.Parent.Parent.Parent
+end
+end
+end
+return PlotTarget
+end
+
+local ControlTable = {HideMethod = false, Fling = false, AntiSteal = false, AntiItem = false, PermDeathPlayer = false, BaseESP = false, AntiSlow = false, SpeedUp = false, Tool = nil, AutoRebirth = false, AutoBuy = false, AutoBuyItem = "", PlayerTarget = nil, SpeedMultiplier = 0.98, VelocityFling = 10000, AutoSkyDeliver = false, Stealing = false, ChosenESP = false, TableESP = {}, SkyDeliverSpeed = 5, BreakAll = false, AutoSteal = false, AntiHit = false, AutoVoidAura = false}
+local ControlConnections = {}
+
+local LocalPlayer = Players.LocalPlayer
+local CurrentCamera = Workspace.CurrentCamera
+
+local ShopItems = ReplicatedStorage:FindFirstChild("ShopItems", true)
+local Animals = ReplicatedStorage:FindFirstChild("Datas"):FindFirstChild("Animals")
+
+local Cash = LocalPlayer:FindFirstChild("leaderstats"):FindFirstChild("Cash")
+local RebirthA = LocalPlayer:FindFirstChild("leaderstats"):FindFirstChild("Rebirths")
+
+local ClaimCoins = FindRemote("claimcoins")
+local Rebirth = FindRemote("requestrebirth")
+local Buy = FindRemote("requestbuy")
+local UseItem = FindRemote("re/useitem")
+local OnTeleport = FindRemote("onteleport")
+
+function AvailableItems()
+local Items = {}
+pcall(function()
+for i, v in pairs(require(ShopItems)) do
+if Cash and Cash.Value >= v.Price and v.Currency == "Coins" and v.RebirthRequired and v.RebirthRequired <= RebirthA.Value then
+table.insert(Items, i)
+end
+end
+end)
+return Items
+end
+
+function GetBodyClass(Name)
+if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA(Name, true) then
+return LocalPlayer.Character:FindFirstChildWhichIsA(Name, true)
+end
+return nil
+end
+
+function GetBodyChild(Name)
+if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild(Name, true) then
+return LocalPlayer.Character:FindFirstChild(Name, true)
+end
+return nil
+end
+
+function BrokeJoints()
+if GetBodyChild("Neck") == nil then
+return true
+end
+return false
+end
+
+function SafeReplicateSignal(Signal, ...)
+if replicatesignal then
+replicatesignal(Signal, ...)
+end
+end
+
+function SafeDestroy(TargetDelete)
+Debris:AddItem(TargetDelete,0)
+end
+
+function GetPlotNames()
+local Plots = {}
+if Workspace:FindFirstChild("Plots") then
+for i, v in pairs(Workspace:FindFirstChild("Plots"):GetDescendants()) do
+if v.Name == "TextLabel" and v:IsA("TextLabel") and (not string.find(v.Text:lower(), "your base")) and v:FindFirstAncestor("PlotSign") then
+table.insert(Plots, v.Text)
+end
+end
+end
+return Plots
+end
+
+function GetTool(Name)
+local FoundTool = nil
+if LocalPlayer:FindFirstChild("Backpack") then
+for i, v in pairs(LocalPlayer:FindFirstChild("Backpack"):GetChildren()) do
+if v:IsA("Tool") and v.Name == Name then
+FoundTool = v
+break
+end
+end
+end
+if FoundTool == nil and LocalPlayer.Character then
+for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("Tool") and v.Name == Name then
+FoundTool = v
+break
+end
+end
+end
+return FoundTool
+end
+
+function TableTools()
+local ListTools = {}
+for i, v in pairs(LocalPlayer:FindFirstChild("Backpack"):GetChildren()) do
+if v:IsA("Tool") and (string.find(v.Name:lower(), "bat") or string.find(v.Name:lower(), "slap")) then
+table.insert(ListTools, v.Name)
+end
+end
+for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("Tool") and (string.find(v.Name:lower(), "bat") or string.find(v.Name:lower(), "slap")) then
+table.insert(ListTools, v.Name)
+end
+end
+return ListTools
+end
+
+function OwnBase()
+local OwnPlot
+for i, v in pairs(Workspace.Plots:GetDescendants()) do
+if string.find(v.Name:lower(), "yourbase") and v.Enabled == true then
+OwnPlot = v:FindFirstAncestorOfClass("Model")
+break
+end
+end
+return OwnPlot
+end
+
+function GetPlayerTargets()
+local Targets = {}
+for i, v in pairs(Players:GetPlayers()) do
+if v and v ~= LocalPlayer then
+table.insert(Targets, v.Name)
+end
+end
+return Targets
+end
+
+function Ragdoll(Player)
+if Player and Player.Character and Player.Character:FindFirstChildWhichIsA("BallSocketConstraint",true) then
+return true
+end
+return false
+end
+
+function AttemptServerHop()
+local PlaceId = game.PlaceId
+
+local JobId = game.JobId
+
+
+
+local RootFolder = "MakalPremiumHub"
+
+local StorageFile = RootFolder.."/"..tostring(PlaceId)..".json"
+local Data = {
+
+Start = tick(),
+
+Jobs = {},
+}
+
+if not isfolder(RootFolder) then
+
+makefolder(RootFolder)
+
+end
+
+
+
+if isfile(StorageFile) then
+
+local NewData = HttpService:JSONDecode(readfile(StorageFile))
+
+if tick() - NewData.Start < 300 then
+
+Data = NewData
+end
+
+end
+
+
+
+if not table.find(Data.Jobs, JobId) then
+
+table.insert(Data.Jobs, JobId)
+
+end
+
+
+
+writefile(StorageFile, HttpService:JSONEncode(Data))
+
+
+
+local Servers = {}
+
+local Cursor = ""
+
+Notify("ServerHopping!", 3)
+while Cursor and #Servers <= 0 and task.wait(1) do
+
+local Request = request or HttpService.RequestAsync
+
+local RequestSuccess, Response = pcall(Request, {
+
+Url = "https://games.roblox.com/v1/games/"..PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true&cursor"..Cursor,
+
+Method = "GET",
+})
+
+if not RequestSuccess then
+
+continue
+
+end
+
+local DecodeSuccess, Body = pcall(HttpService.JSONDecode, HttpService, Response.Body)
+
+if not DecodeSuccess or not Body or not Body.data then
+
+continue
+
+end
+
+task.spawn(function()
+
+for _, Server in pairs(Body.data) do
+
+if typeof(Server) ~= "table" or not Server.id or not tonumber(Server.playing) or not tonumber(Server.maxPlayers) then
+
+continue
+
+end
+
+if Server.playing < Server.maxPlayers and not table.find(Data.Jobs, Server.id) then
+
+table.insert(Servers, 1, Server.id)
+
+end
+
+end
+
+end)
+
+if Body.nextPageCursor then
+
+Cursor = Body.nextPageCursor
+
+end
+
+end
+
+while #Servers > 0 and task.wait(1) do
+
+local Server = Servers[math.random(1, #Servers)]
+
+TeleportService:TeleportToPlaceInstance(PlaceId, Server, LocalPlayer)
+end
+
+end
+
+function FlingTarget(State, Player)
+ControlTable.Fling = State
+if Player and Player.Character and Player.Character.PrimaryPart and GetBodyChild("HumanoidRootPart") then
+GetBodyChild("HumanoidRootPart").CFrame = Player.Character.PrimaryPart.CFrame
+GetBodyChild("HumanoidRootPart").CanCollide = false
+end
+end
+
+local BF = Instance.new("Folder", CoreGui)
+local HF = Instance.new("Folder", CoreGui)
+
+function StopESP(Folder)
+if #Folder:GetChildren() == 0 then return end
+for i, v in pairs(Folder:GetChildren()) do
+if v:IsA("Highlight") then
+v.Enabled = false
+end
+v.Adornee = nil
+SafeDestroy(v)
+end
+end
+
+local function GetClosestChar()
+if not LocalPlayer.Character then return nil end
+local Pos = LocalPlayer.Character:GetPivot().Position
+local Distance = math.huge
+local ClosestChar = nil
+for _, x in pairs(Players:GetPlayers()) do
+if x ~= LocalPlayer and x.Character then
+local PlayerPos = x.Character:GetPivot().Position
+local DistPos = (Pos - PlayerPos).Magnitude
+if DistPos < Distance then
+Distance = DistPos
+ClosestChar = x.Character
+end
+end
+end
+return ClosestChar
+end
+
+function SafeTeleport(Tool, Char)
+if Tool and Char and LocalPlayer.Character and LocalPlayer:FindFirstChild("Backpack") then
+Tool.Parent = LocalPlayer.Character
+task.wait(0.1)
+for i = 1, 20 do
+LocalPlayer.Character:PivotTo(Char:GetPivot())
+Tool:Activate()
+end
+task.wait(0.1)
+Tool.Parent = LocalPlayer.Backpack
+end
+end
+
+task.spawn(function()
+local Vel, Movel = nil, 0.1
+while true do
+local Delta = RunService.Heartbeat:Wait()
+if ControlTable.BreakAll == true then
+break
+end
+
+if ControlTable.HideMethod == true then
+if GetBodyClass("Humanoid") then
+GetBodyClass("Humanoid").CameraOffset = Vector3.new(9e9,9e9,9e9)
+end
+CurrentCamera.CameraType = Enum.CameraType.Scriptable
+CurrentCamera.CFrame = CFrame.new(9e9,9e9,9e9)*CFrame.Angles(0,0,0)
+else
+if GetBodyClass("Humanoid") then
+GetBodyClass("Humanoid").CameraOffset = vector.zero
+end
+CurrentCamera.CameraType = Enum.CameraType.Custom
+end
+
+if ControlTable.SpeedUp == true and LocalPlayer.Character and GetBodyClass("Humanoid") and GetBodyClass("Humanoid").MoveDirection.Magnitude > 0 then
+if ControlTable.Stealing == false and ControlTable.AntiSlow == true then
+return
+end
+LocalPlayer.Character:TranslateBy(GetBodyClass("Humanoid").MoveDirection * ControlTable.SpeedMultiplier * Delta * 10)
+end
+
+if ControlTable.Fling == true then
+pcall(function()
+Vel = GetBodyChild("HumanoidRootPart").Velocity
+GetBodyChild("HumanoidRootPart").Velocity = Vel * ControlTable.VelocityFling + Vector3.new(0, ControlTable.VelocityFling, 0)
+RunService.RenderStepped:Wait()
+GetBodyChild("HumanoidRootPart").Velocity = Vel
+RunService.Stepped:Wait()
+GetBodyChild("HumanoidRootPart").Velocity = Vel + Vector3.new(0, Movel, 0)
+Movel = Movel * -1
+end)
+end
+
+end
+end)
+
+pcall(function()
+for i, v in pairs(Workspace:GetDescendants()) do
+if v:IsA("WeldConstraint") and v.Part0 == LocalPlayer.Character.PrimaryPart then
+ControlTable.Stealing = true
+break
+end
+end
+end)
+
+table.insert(ControlConnections, Workspace.DescendantAdded:Connect(function(AddedInstance)
+if ControlTable.AntiItem == true then
+if string.find(AddedInstance.Name:lower(), "trap") and AddedInstance:FindFirstChildWhichIsA("TouchTransmitter",true) then
+SafeDestroy(AddedInstance:FindFirstChildWhichIsA("TouchTransmitter",true))
+end
+end
+
+if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart and AddedInstance:IsA("WeldConstraint") and AddedInstance.Part0 == LocalPlayer.Character.PrimaryPart then
+ControlTable.Stealing = true
+local NotFail
+NotFail = pcall(function()
+repeat task.wait() until AddedInstance:FindFirstAncestorOfClass("Model").Parent == nil
+ControlTable.Stealing = false
+end)
+repeat task.wait() until NotFail == false
+ControlTable.Stealing = false
+end
+end))
+
+function GetUnlockTime(Base)
+if Base and Base:FindFirstChild("RemainingTime", true) and Base:FindFirstChild("RemainingTime", true).Text:split("s")[1] and tonumber(Base:FindFirstChild("RemainingTime", true).Text:split("s")[1]) then
+return tonumber(Base:FindFirstChild("RemainingTime", true).Text:split("s")[1])
+end
+return 100
+end
+
+local ProgressTween = false
+function TweenTo(part, targetCFrame, speed)
+if ControlTable.Stealing == true then
+ProgressTween = true
+local distance = (part.Position - targetCFrame.Position).Magnitude
+local time = distance / speed
+local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
+local tween = TweenService:Create(part, tweenInfo, {CFrame = targetCFrame})
+tween:Play()
+tween.Completed:Wait()
+ProgressTween = false
+end
+end
+
+function NewTweenTo(part, targetCFrame, speed)
+ProgressTween = true
+local distance = (part.Position - targetCFrame.Position).Magnitude
+local time = distance / speed
+local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
+local tween = TweenService:Create(part, tweenInfo, {CFrame = targetCFrame})
+tween:Play()
+tween.Completed:Wait()
+ProgressTween = false
+end
+
+local ProgressInvisible = false
+local AlreadyDelivering = false
+
+function GetPlayerFromDistance()
+local PlayerFound = nil
+for i, v in pairs(Players:GetPlayers()) do
+if v ~= LocalPlayer and v.Character and LocalPlayer:DistanceFromCharacter(v.Character:GetPivot().Position) <= 25 then
+PlayerFound = v
+break
+end
+end
+return PlayerFound
+end
+
+function AttemptInvisible()
+if ProgressInvisible == true then return end
+if GetBodyChild("Head") and GetBodyChild("Head").Transparency ~= 0 then
+Notify("You already are invisible!", 2)
+return
+end
+ProgressInvisible = true
+local NotWork = false
+Notify("Dont do anything and making yourself invisible wait!", 3)
+local args = {
+	"Invisibility Cloak"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Net"):WaitForChild("RF/CoinsShopService/RequestBuy"):InvokeServer(unpack(args))
+task.wait(2)
+local IC = GetTool("Invisibility Cloak")
+IC.Grip = CFrame.new(0,-300,0)
+delay(0.5, function()
+if LocalPlayer.Character then
+IC.Parent = LocalPlayer.Character
+IC.ManualActivationOnly = true
+task.wait(5)
+if GetBodyChild("Head") and GetBodyChild("Head").Transparency == 0 then
+NotWork = true
+end
+end
+end)
+repeat RunService.Heartbeat:Wait()
+if NotWork == true then
+break
+end
+until LocalPlayer.Character:FindFirstChild("RightGrip", true)
+pcall(function()
+IC:Activate()
+LocalPlayer.Character:FindFirstChild("RightGrip", true).Enabled = false
+end)
+task.spawn(function()
+while task.wait() do
+if IC.Parent == nil then
+Notify("Done, you have permanent invisible!", 3)
+break
+end
+end
+end)
+ProgressInvisible = false
+end
+
+local HipHeight = LocalPlayer.Character:FindFirstChildOfClass("Humanoid").HipHeight
+local FallenPartsDestroyHeight = Workspace.FallenPartsDestroyHeight
+
+table.insert(ControlConnections, ProximityPromptService.PromptShown:Connect(function(Prompt)
+if ControlTable.AutoSteal == true and Prompt and string.find(Prompt.ActionText:lower(), "steal") then
+Prompt:InputHoldBegin()
+end
+end))
+
+table.insert(ControlConnections, ProximityPromptService.PromptTriggered:Connect(function(Prompt, PlayerTriggered)
+if Prompt and PlayerTriggered == LocalPlayer and ControlTable.AntiHit == true and string.find(Prompt.ActionText:lower(), "steal") then
+ControlTable.HideMethod = true
+GetBodyClass("Humanoid").HipHeight = 20
+if LocalPlayer.Character and GetBodyClass("Humanoid") then
+SafeReplicateSignal(GetBodyClass("Humanoid").ServerBreakJoints)
+for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" and v.Name ~= "UpperTorso" then
+SafeDestroy(v)
+end
+end
+end
+task.wait(0.1)
+if GetBodyClass("Humanoid") then
+GetBodyClass("Humanoid"):MoveTo(Vector3.new(0,0,0))
+end
+task.wait(0.1)
+Workspace.FallenPartsDestroyHeight = FallenPartsDestroyHeight
+GetBodyChild("HumanoidRootPart").CFrame = CFrame.new(GetBodyChild("HumanoidRootPart").Position.X,FallenPartsDestroyHeight+5, GetBodyChild("HumanoidRootPart"))
+local ABC = false
+repeat RunService.Heartbeat:Wait()
+pcall(function()
+sethiddenproperty(LocalPlayer.Character.PrimaryPart, "NetworkIsSleeping", true)
+end)
+if ABC == false then
+ABC = true
+delay(3, function()
+if GetBodyChild("HumanoidRootPart") then
+if GetBodyClass("Humanoid") then
+GetBodyClass("Humanoid"):ChangeState(15)
+end
+Notify("Anti Hit failed try again!", 3)
+SafeReplicateSignal(LocalPlayer.Kill)
+ControlTable.HideMethod = false
+end
+end)
+end
+until not GetBodyChild("HumanoidRootPart")
+local Stolen = false
+task.spawn(function()
+local NetCon
+NetCon = RunService.Heartbeat:Connect(function()
+if Stolen == true then
+NetCon:Disconnect()
+end
+LocalPlayer.Character.PrimaryPart = GetBodyChild("UpperTorso")
+GetBodyChild("UpperTorso"):ApplyImpulse(Vector3.new(0.1,0.1,0.1))
+sethiddenproperty(GetBodyChild("UpperTorso"), "NetworkIsSleeping", false)
+end)
+local Humanoid = GetBodyClass("Humanoid")
+while RunService.Heartbeat:Wait() do
+if ProgressTween == false then
+if GetBodyChild("UpperTorso") and GetBodyChild("UpperTorso").Position.Y >= 200 and OwnBase() then
+NewTweenTo(GetBodyChild("UpperTorso"), OwnBase():FindFirstChild("DeliveryHitbox").CFrame, 500)
+end
+end
+if LocalPlayer:FindFirstChild("Notification",true) then
+for i, v in pairs(LocalPlayer:FindFirstChild("Notification",true):GetChildren()) do
+if v:IsA("TextLabel") and string.find(v.Text:lower(), "stole") then
+if Stolen == true then return end
+SafeReplicateSignal(LocalPlayer.Kill)
+Stolen = true
+Notify("Successfully stolen a brainrot with anti hit!", 3)
+break
+end
+end
+end
+if not GetBodyChild("HumanoidRootPart") and GetBodyClass("Humanoid") and GetBodyClass("Humanoid").Health == 0 then
+SafeReplicateSignal(LocalPlayer.Kill)
+if Stolen == false then
+Stolen = true
+Notify("Anti Hit failed try again!", 3)
+end
+break
+end
+end
+end)
+pcall(function()
+for _, Item in ipairs(LocalPlayer.Character:GetChildren()) do
+if Item:IsA("Shirt") or Item:IsA("Pants") or Item:IsA("ShirtGraphic") then
+Item:Destroy()
+end
+if Item.Name == "UpperTorso" then
+Item.Material = Enum.Material.Plastic
+Item.Color = Color3.fromRGB(255, 255, 255)
+Item.Transparency = 0
+end
+end
+end)
+LocalPlayer.Character.PrimaryPart = GetBodyChild("UpperTorso")
+Workspace.FallenPartsDestroyHeight = tonumber("nan")
+ControlTable.HideMethod = false
+end
+end))
+
+table.insert(ControlConnections, scg.Destroying:Connect(function()
+for i, v in pairs(ControlConnections) do
+v:Disconnect()
+end
+ControlTable.BreakAll = true
+pcall(function() getgenv().MakalPremiumBrainrotLoaded = false end)
+end))
+
+local OwnPlot = OwnBase()
+Workspace.FallenPartsDestroyHeight = tonumber("nan")
+local StealBox = OwnPlot:FindFirstChild("StealHitbox", true)
+local DeliveryHitbox = OwnPlot:FindFirstChild("DeliveryHitbox", true)
+table.insert(ControlConnections, RunService.Heartbeat:Connect(function(x)
+
+if ControlTable.AutoVoidAura == true then
+if not GetTool("Web Slinger") then
+Buy:InvokeServer("Web Slinger")
+end
+local Tool = GetTool("Web Slinger")
+if Tool then
+Tool.ManualActivationOnly = true
+local PlayerFromDistance = GetPlayerFromDistance()
+if PlayerFromDistance and PlayerFromDistance.Character and LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+Tool.Parent = LocalPlayer.Character
+repeat RunService.Heartbeat:Wait() until Tool.Parent == LocalPlayer.Character
+local args = {
+PlayerFromDistance.Character:GetPivot(),
+PlayerFromDistance.Character.PrimaryPart,
+Tool:WaitForChild("Handle")
+}
+UseItem:FireServer(unpack(args))
+repeat RunService.Heartbeat:Wait() until PlayerFromDistance.Character.PrimaryPart.ReceiveAge == 0
+local Prim = PlayerFromDistance.Character.PrimaryPart
+for i = 1, 500 do
+Prim.CFrame = CFrame.new(PlayerFromDistance.Character:GetPivot().Position.X,math.random(FallenPartsDestroyHeight+5,FallenPartsDestroyHeight+10),PlayerFromDistance.Character:GetPivot().Position.Z)
+task.wait()
+end
+GetBodyClass("Humanoid"):EquipTool(Tool)
+Tool:Activate()
+LocalPlayer.Character.PrimaryPart.Anchored = false
+end
+end
+elseif ControlTable.AutoVoidAura == false then
+local Tool = GetTool("Web Slinger")
+if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+LocalPlayer.Character.PrimaryPart.Anchored = false
+end
+if Tool then
+Tool.ManualActivationOnly = false
+end
+end
+
+if ControlTable.AutoRespawnAura == true then
+if not GetTool("Web Slinger") then
+Buy:InvokeServer("Web Slinger")
+end
+local Tool = GetTool("Web Slinger")
+if Tool then
+Tool.ManualActivationOnly = true
+local PlayerFromDistance = GetPlayerFromDistance()
+if PlayerFromDistance and PlayerFromDistance.Character and LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+Tool.Parent = LocalPlayer.Character
+repeat RunService.Heartbeat:Wait() until Tool.Parent == LocalPlayer.Character
+local args = {
+PlayerFromDistance.Character:GetPivot(),
+PlayerFromDistance.Character.PrimaryPart,
+Tool:WaitForChild("Handle")
+}
+UseItem:FireServer(unpack(args))
+repeat RunService.Heartbeat:Wait() until PlayerFromDistance.Character.PrimaryPart.ReceiveAge == 0
+for i = 1, 3 do
+LocalPlayer.Character.PrimaryPart.Anchored = true
+PlayerFromDistance.Character.PrimaryPart.CFrame = CFrame.new(9e9,0,9e9)
+task.wait()
+end
+LocalPlayer.Character.PrimaryPart.Anchored = false
+end
+end
+elseif ControlTable.AutoRespawnAura == false then
+local Tool = GetTool("Web Slinger")
+if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+LocalPlayer.Character.PrimaryPart.Anchored = false
+end
+if Tool then
+Tool.ManualActivationOnly = false
+end
+end
+
+if ControlTable.AutoBuy == true then
+for i, v in pairs(require(ShopItems)) do
+if ControlTable.AutoBuyItem == i and (not GetTool(i)) and Cash and Cash.Value >= v.Price and v.Currency == "Coins" and v.RebirthRequired and v.RebirthRequired <= RebirthA.Value then
+Buy:InvokeServer(i)
+end
+end
+end
+
+for _, x in pairs(ControlTable.TableESP) do
+for i, v in pairs(Workspace:GetChildren()) do
+if v:IsA("Model") and string.find(v.Name:lower(), x:lower()) then
+if ControlTable.ChosenESP == true and (not v:FindFirstChildOfClass("Highlight")) then
+local ESP = Instance.new("Highlight")
+ESP.Name = v.Name
+ESP.FillTransparency = 0.5
+ESP.FillColor = Color3.new(0, 0, 0)
+ESP.OutlineColor = Color3.new(255, 255, 255)
+ESP.OutlineTransparency = 0
+ESP.Parent = v
+elseif ControlTable.ChosenESP == false and v:FindFirstChildOfClass("Highlight") then
+v:FindFirstChildOfClass("Highlight").Enabled = false
+v:FindFirstChildOfClass("Highlight").Adornee = nil
+SafeDestroy(v:FindFirstChildOfClass("Highlight"))
+end
+end
+end
+end
+
+if ControlTable.AutoSkyDeliver and ControlTable.Stealing and LocalPlayer.Character then
+local HumanoidRootPart = GetBodyChild("HumanoidRootPart")
+local Humanoid = GetBodyClass("Humanoid")
+
+local Parameter = OverlapParams.new()
+Parameter.FilterType = Enum.RaycastFilterType.Blacklist
+Parameter.FilterDescendantsInstances = {LocalPlayer.Character}
+local TouchingParts = Workspace:GetPartsInPart(HumanoidRootPart, Parameter)
+if #TouchingParts == 0 and not AlreadyDelivering then
+if ProgressTween == true then return end
+AlreadyDelivering = true
+if Humanoid then
+Humanoid.PlatformStand = true
+end
+TweenTo(HumanoidRootPart, CFrame.new(HumanoidRootPart.Position.X, 173, HumanoidRootPart.Position.Z), 500)
+repeat task.wait() until ProgressTween == false
+TweenTo(HumanoidRootPart, CFrame.new(DeliveryHitbox.Position.X, 173, DeliveryHitbox.Position.Z), 20*ControlTable.SkyDeliverSpeed)
+repeat task.wait() until ProgressTween == false
+TweenTo(HumanoidRootPart, CFrame.new(DeliveryHitbox.Position.X, 0, DeliveryHitbox.Position.Z), 500)
+repeat task.wait() until ProgressTween == false
+if Humanoid then
+Humanoid.PlatformStand = false
+end
+Notify("Successfully delivered a brainrot!", 3)
+AlreadyDelivering = false
+end
+if #TouchingParts > 0 then
+AlreadyDelivering = false
+end
+end
+
+if ControlTable.AutoRebirth == true then
+if LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Rebirth", true) then
+local ProgressRebirth = LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("Rebirth", true):FindFirstChild("ProgressText", true)
+if ProgressRebirth.Text and ProgressRebirth.Text:split(" / ") then
+local Split = ProgressRebirth.Text:split(" / ")
+if Split[1] and Split[2] and Split[2] == Split[1] then
+Rebirth:InvokeServer()
+end
+end
+end
+end
+
+if ControlTable.BaseESP == true then
+for i, v in pairs(Workspace.Plots:GetChildren()) do
+if (GetUnlockTime(v) <= 10)  then
+if v and v:FindFirstChild("StealHitbox", true) and (not BF:FindFirstChild(v.Name)) then
+local ESPObj = Instance.new("BoxHandleAdornment")
+ESPObj.Transparency = 0.5
+ESPObj.Name = v.Name
+ESPObj.Adornee = v:FindFirstChild("StealHitbox", true)
+ESPObj.AlwaysOnTop = true
+ESPObj.ZIndex = 10
+ESPObj.Size = v:FindFirstChild("StealHitbox", true).Size
+ESPObj.Color3 = Color3.fromRGB(255, 255, 255)
+ESPObj.Parent = BF
+local BillboardGui = Instance.new("BillboardGui")
+local TextLabel = Instance.new("TextLabel")
+BillboardGui.Adornee = v:FindFirstChild("StealHitbox", true)
+BillboardGui.Name = v.Name.."_BG"
+BillboardGui.Parent = ESPObj
+BillboardGui.Size = UDim2.new(0, 100, 0, 150)
+BillboardGui.StudsOffset = Vector3.new(0, 0, 0)
+BillboardGui.AlwaysOnTop = true
+TextLabel.Parent = BillboardGui
+TextLabel.BackgroundTransparency = 1
+TextLabel.Position = UDim2.new(0, 0, 0, -50)
+TextLabel.Size = UDim2.new(0, 100, 0, 100)
+TextLabel.Font = Enum.Font.SourceSansSemibold
+TextLabel.TextSize = 20
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextStrokeTransparency = 0
+TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+TextLabel.Text = "Opening!"
+TextLabel.ZIndex = 10
+end
+elseif (GetUnlockTime(v) > 10) and BF:FindFirstChild(v.Name) then
+SafeDestroy(BF:FindFirstChild(v.Name))
+end
+end
+elseif ControlTable.BaseESP == false then
+StopESP(BF)
+end
+
+if ControlTable.AntiSteal == true and StealBox and LocalPlayer.Character then
+for i, v in pairs(Workspace:GetPartsInPart(StealBox)) do
+if v and v.Parent ~= LocalPlayer.Character and v.Parent:FindFirstChildOfClass("Humanoid") and Players:FindFirstChild(v.Parent.Name) then
+LocalPlayer:Kick("[ANTI STEAL DEFENSE] Intiated kick, someone tried stealing in your base")
+end
+end
+end
+
+end))
+
+Win:EditOpenButton({
+    Title = "Open "..BrandName,
+    Icon = "bird",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.new(0,0,0)),
+    Draggable = true,
+})
+
+
+local Tabs = {}
+Tabs.MainSection = Win:Section({
+        Title = "Main",
+        Icon = IconBrand,
+        Opened = true,
+})
+
+Tabs.BypassTab = Tabs.MainSection:Tab({Title = "Bypass Tab", Icon = "door-open", Desc = "This tab is based for bypassing features", })
+Tabs.AutoTab = Tabs.MainSection:Tab({Title = "Auto Tab", Icon = "refresh-ccw-dot", Desc = "This tab is based for auto features", })
+Tabs.AntiTab = Tabs.MainSection:Tab({Title = "Anti Tab", Icon = "shield-ban", Desc = "This tab is based for anti features that might be useful", })
+Tabs.ToolsTab = Tabs.MainSection:Tab({Title = "Tools Tab", Icon = "wrench", Desc = "This tab is based for tools features that might be useful", })
+Tabs.TrollTab = Tabs.MainSection:Tab({Title = "Troll Tab", Icon = "angry", Desc = "This tab is based for trolls features you can troll players with", })
+Tabs.ConfigTab = Tabs.MainSection:Tab({Title = "Config Tab", Icon = "settings", Desc = "This tab is based for configuration of the hub", })
+Tabs.DiscordServerTab = Tabs.MainSection:Tab({Title = BrandName.." Discord Server Tab", Icon = IconBrand, Desc = "This tab is for joining "..BrandName.." Discord Server", })
+
+function CreateButton(Tab, TitleText, DescText, Function)
+Tab:Button({
+    Title = TitleText,
+    Desc = DescText,
+    Callback = function() Function() end
+})
+end
+
+function CreateToggle(Tab, TitleText, Function)
+ToggleElement = Tab:Toggle({
+    Title = TitleText,
+    Type = "Checkbox",
+    Value = false,
+    Callback = function(State) Function(State) end
+})
+return ToggleElement
+end
+
+function CreateInput(Tab, TitleText, PlaceHolder, Function)
+InputElement = Tab:Input({
+    Title = TitleText,
+    Value = "",
+    Placeholder = PlaceHolder,
+    Callback = function(Input) Function(Input) end
+})
+return InputElement
+end
+
+function CreateDropdown(Tab, TitleText, ValueTable, Function)
+DropdownElement = Tab:Dropdown({
+    Title = TitleText,
+    Multi = false,
+    AllowNone = true,
+    Values = ValueTable,
+    Callback = function(Pick) Function(Pick) end
+})
+return DropdownElement
+end
+
+pcall(function()
+local InviteLink = "https://discord.gg/4c75TymwbB"
+local InviteCode = InviteLink:split("gg/")[2]
+local DiscordAPI = "https://discord.com/api/v10/invites/" .. InviteCode .. "?with_counts=true&with_expiration=true"
+
+local Response = HttpService:JSONDecode(UI.Creator.Request({
+Url = DiscordAPI,
+Method = "GET",
+Headers = {
+["User-Agent"] = "RobloxBot/1.0",
+["Accept"] = "application/json"
+}
+}).Body)
+
+if Response and Response.guild then
+local DiscordInfo = Tabs.DiscordServerTab:Paragraph({
+Title = Response.guild.name,
+Desc = " 1. Member Count : " .. tostring(Response.approximate_member_count) .. "\n 2. Online Count : " .. tostring(Response.approximate_presence_count),
+Image = "https://cdn.discordapp.com/icons/" .. Response.guild.id .. "/" .. Response.guild.icon .. ".png?size=1024",
+ImageSize = 42,
+})
+end
+end)
+
+CreateButton(Tabs.DiscordServerTab, "Press this button to copy discord invite and join usercreated", InviteLink, function()
+if setclipboard then
+setclipboard(InviteLink)
+end
+if getclipboard and getclipboard() == InviteLink then
+Notify("Copied to your clipboard application!", 2)
+end
+end)
+    
+Win:SelectTab(1)
+
+Tabs.BypassTab:Paragraph({
+    Title = "Join "..BrandName.." Discord Server On Discord Server Tab",
+    Desc = "For best hub and many more!",
+    Image = IconBrand,
+    ImageSize = 50,
+    Thumbnail = ThumbnailBrand,
+    ThumbnailSize = 130
+})
+
+Tabs.BypassTab:Divider()
+
+CreateButton(Tabs.BypassTab, "Invisible / Anticheat Bypass", "This will bypass anticheat of teleport, fly, fling and you are invisible.", function()
+if BrokeJoints() == true then
+Notify("Anticheat Bypass is already activated!", 2)
+return
+end
+ControlTable.HideMethod = true
+local LastCFrame = LocalPlayer.Character:GetPivot()
+GetBodyClass("Humanoid").HipHeight = 999
+if LocalPlayer.Character and GetBodyClass("Humanoid") then
+SafeReplicateSignal(GetBodyClass("Humanoid").ServerBreakJoints)
+for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+SafeDestroy(v)
+end
+end
+end
+task.wait(0.1)
+GetBodyClass("Humanoid").HipHeight = HipHeight
+GetBodyChild("HumanoidRootPart").CFrame = LastCFrame
+Notify("Anticheat Bypass is done, voided character!", 2) 
+ControlTable.HideMethod = false
+end)
+
+InputAutoESPBrainrot = CreateInput(Tabs.AutoTab, "Type Brainrot you want to ESP", "odin, los tra, graipus", function(ValueInput)
+local result = {}
+for _, name in ipairs(string.split(ValueInput, ",")) do
+table.insert(result, name:match("^%s*(.-)%s*$"))
+end
+for _, x in pairs(ControlTable.TableESP) do
+for i, v in pairs(Workspace:GetChildren()) do
+if v:IsA("Model") and string.find(v.Name:lower(), x:lower()) then
+if v:FindFirstChildOfClass("Highlight") then
+v:FindFirstChildOfClass("Highlight").Enabled = false
+v:FindFirstChildOfClass("Highlight").Adornee = nil
+SafeDestroy(v:FindFirstChildOfClass("Highlight"))
+end
+end
+end
+end
+ControlTable.TableESP = result
+end)
+
+ToggleAutoESPBrainrot = CreateToggle(Tabs.AutoTab, "Auto ESP Brainrot From Input", function(State)
+ControlTable.ChosenESP = State
+if ControlTable.ChosenESP == true then
+Notify("Auto ESP Brainrot From Input is activated!", 3)
+end
+end)
+
+
+local BuyDropdown
+BuyDropdown = CreateDropdown(Tabs.AutoTab, "Choose Item To Auto Buy", AvailableItems(), function(Pick)
+ControlTable.AutoBuyItem = Pick
+end)
+
+ToggleAutoBuy = CreateToggle(Tabs.AutoTab, "Auto Buy Item From Dropdown", function(State)
+ControlTable.AutoBuy = State
+if ControlTable.AutoBuy == true then
+Notify("Auto Buy is activated", 3)
+end
+end)
+
+CreateToggle(Tabs.AutoTab, "Auto Rebirth", function(State)
+ControlTable.AutoRebirth = State
+if ControlTable.AutoRebirth == true then
+Notify("Auto Rebirth is activated", 3)
+end
+end)
+
+AutoESPBaseToggle = CreateToggle(Tabs.AutoTab, "Auto ESP When Random Base Is Almost Opened Or Opened", function(State)
+ControlTable.BaseESP = State
+if ControlTable.BaseESP == true then
+Notify("ESP Opened Base activated", 3)
+end
+end)
+
+ToggleAutoSteal = CreateToggle(Tabs.AutoTab, "Auto Steal", function(State)
+ControlTable.AutoSteal = State
+if ControlTable.AutoSteal == true then
+Notify("Auto Steal activated", 3)
+end
+end)
+
+SkyDeliverInput = CreateInput(Tabs.AutoTab, "Change SkyDeliver Speed", "Type numbers here", function(ValueInput)
+if tonumber(ValueInput) then
+ControlTable.SkyDeliverSpeed = tonumber(ValueInput)
+end
+end)
+
+CreateToggle(Tabs.AutoTab, "Auto Sky Delivery (70% Success Rate)", function(State)
+ControlTable.AutoSkyDeliver = State
+if ControlTable.AutoSkyDeliver == true then
+Notify("Auto Sky Delivery activated", 3)
+end
+end)
+
+CreateToggle(Tabs.AutoTab, "Auto Respawn Aura", function(State)
+ControlTable.AutoRespawnAura = State
+if ControlTable.AutoRespawnAura == true then
+Notify("Auto Respawn Aura activated", 3)
+task.wait(2)
+if not GetTool("Web Slinger") then
+ControlTable.AutoRespawnAura = false
+Notify("Auto Respawn Aura disabled because you do not meet requirements!", 3)
+end
+end
+end)
+
+CreateToggle(Tabs.AutoTab, "Auto Void Aura", function(State)
+ControlTable.AutoVoidAura = State
+if ControlTable.AutoVoidAura == true then
+Notify("Auto Stuck Aura activated", 3)
+task.wait(2)
+if not GetTool("Web Slinger") then
+ControlTable.AutoVoidAura = false
+Notify("Auto Void Aura disabled because you do not meet requirements!", 3)
+end
+end
+end)
+
+CreateToggle(Tabs.AntiTab, "Anti Slow When Stealing A Brainrot", function(State)
+if ControlTable.UltraSpeed == true then return end
+ControlTable.AntiSlow = State
+if ControlTable.AntiSlow == true then
+Notify("Anti Slow is activated", 3)
+end
+end)
+
+CreateToggle(Tabs.AntiTab, "Anti Hit When Stealing Brainrot (60% Success Rate)", function(State)
+ControlTable.AntiHit = State
+if ControlTable.AntiHit == true then
+Notify("Anti Hit When Stealing is activated", 3)
+end
+end)
+
+CreateButton(Tabs.ToolsTab, "Server Hop", "This will try to serverhop", function()
+AttemptServerHop()
+end)
+
+CreateButton(Tabs.ToolsTab, "Generate Pet Finder JobId (WIP)", "This will generate a random jobid that has gambling chances (WIP)", function()
+
+end)
+
+CreateButton(Tabs.AntiTab, "Semi Anti Item Effect (Traps, Bee Gun) (NO DEACTIVATION)", "This will disable item effects and make you less vulnerable", function()
+if ControlTable.AntiItem == true then
+Notify("Semi Anti Item Effect is already activated!", 3)
+return
+end
+ControlTable.AntiItem = true
+local TableToFind = {"useitem",  "combatservice", "ragdoll"}
+if getconnections then
+for i, v in pairs(ReplicatedStorage:GetDescendants()) do
+if v:IsA("RemoteEvent") then
+for _, x in pairs(TableToFind) do
+if string.find(v.Name:lower(), x) then
+for _, x in pairs(getconnections(v.OnClientEvent)) do
+x:Disable()
+end
+end
+end
+end
+end
+end
+Notify("Semi Anti Item Effect activated", 3)
+end)
+
+ToggleAntiSteal = CreateToggle(Tabs.AntiTab, "Anti Steal", function(State)
+ControlTable.AntiSteal = State
+if ControlTable.AntiSteal == true then
+Notify("Anti Steal Is Activated", 3)
+end
+end)
+
+local TargetDropdown
+TargetDropdown = CreateDropdown(Tabs.TrollTab, "Select Target Player", GetPlayerTargets(), function(SelectedName)
+if Players:FindFirstChild(SelectedName) then
+ControlTable.PlayerTarget = Players:FindFirstChild(SelectedName)
+end
+end)
+
+CreateButton(Tabs.TrollTab, "Void Player (80% Success Rate)", "Makes the player unable to respawn entirely and in permadeath state", function()
+local Success = pcall(function()
+return ControlTable.PlayerTarget.Character.Head
+end)
+if Success == false then
+Notify("Player already voided!", 2)
+return
+end
+ControlTable.HideMethod = true
+ControlTable.VelocityFling = -90000
+local LastCFrame = LocalPlayer.Character:GetPivot()
+GetBodyClass("Humanoid").HipHeight = 999
+if LocalPlayer.Character and GetBodyClass("Humanoid") then
+SafeReplicateSignal(GetBodyClass("Humanoid").ServerBreakJoints)
+for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+SafeDestroy(v)
+end
+end
+end
+task.wait(0.1)
+GetBodyClass("Humanoid").HipHeight = HipHeight
+GetBodyChild("HumanoidRootPart").CFrame = LastCFrame
+ControlTable.HideMethod = false
+while RunService.Heartbeat:Wait() do
+local Success = pcall(function()
+return ControlTable.PlayerTarget.Character.Head
+end)
+if GetBodyClass("Humanoid") and GetBodyClass("Humanoid").Health == 0 then
+Notify("Failed voiding player", 3)
+FlingTarget(false, ControlTable.PlayerTarget)
+ControlTable.VelocityFling = 10000
+break
+end
+if Success == false then
+SafeReplicateSignal(LocalPlayer.Kill)
+if GetBodyClass("Humanoid") then
+GetBodyClass("Humanoid"):ChangeState(15)
+Notify("Voided player", 3)
+FlingTarget(false, ControlTable.PlayerTarget)
+ControlTable.VelocityFling = 10000
+end
+break
+end
+FlingTarget(true, ControlTable.PlayerTarget)
+end
+end)
+
+CreateToggle(Tabs.TrollTab, "Touch Fling", function(State)
+if ControlTable.PermDeathPlayer == true then return end
+ControlTable.Fling = State
+if ControlTable.Fling == true then
+ControlTable.VelocityFling = 10000
+Notify("Hidden Fling Is Activated", 3)
+end
+end)
+
+local ToolDropdown
+ToolDropdown = CreateDropdown(Tabs.TrollTab, "Select Target Hit Aura Item", TableTools(), function(ToolName)
+ControlTable.Tool = ToolName
+end)
+
+CreateButton(Tabs.TrollTab, "Hit Aura (Press Each Time) (Invisibility Cloak for better)", "This will attempt to hit nearest player", function()
+if ControlTable.HitAura == true then return end
+if ControlTable.Tool == nil then
+Notify("Please choose a item target to use hit aura!", 3)
+return
+end
+local Closest = GetClosestChar()
+if GetTool(ControlTable.Tool) then
+SafeTeleport(GetTool(ControlTable.Tool), Closest)
+end
+end)
+
+CreateButton(Tabs.ToolsTab, "Permanent Invisible", "This will make you permanently invisible by disabling serverscript of specific item", function()
+AttemptInvisible()
+end)
+
+local MultiplierSpeed = 3
+
+UltraSpeedInput = CreateInput(Tabs.ToolsTab, "Ultra Speed Multiplier", "3", function(ValueInput)
+if tonumber(ValueInput) then
+MultiplierSpeed = tonumber(ValueInput)
+end
+end)
+
+CreateToggle(Tabs.ToolsTab, "Ultra Speed (Needs Invisibility Cloak)", function(State)
+ControlTable.UltraSpeed = State
+if ControlTable.UltraSpeed == true then
+ControlTable.AntiSlow = false
+ControlTable.SpeedUp = true
+ControlTable.SpeedMultiplier = 0.98 * MultiplierSpeed
+Notify("Ultra Speed is activated", 3)
+elseif ControlTable.UltraSpeed == false then
+ControlTable.AntiSlow = false
+ControlTable.SpeedUp = false
+ControlTable.SpeedMultiplier = 0.98
+end
+end)
+
+
+function SafeSetFlag(flag, value)
+pcall(function()
+if getfflag and setfflag and getfflag(flag) then
+setfflag(flag, value)
+end
+end)
+end
+
+function LowerPing()
+SafeSetFlag("ConnectionMTUSize","900")SafeSetFlag("RakNetResendBufferArrayLength","128")SafeSetFlag("OptimizeNetwork","True")SafeSetFlag("OptimizeNetworkRouting","True")SafeSetFlag("OptimizeNetworkTransport","True")SafeSetFlag("OptimizeServerTickRate","True")SafeSetFlag("ServerPhysicsUpdateRate","60")SafeSetFlag("ServerTickRate","60")SafeSetFlag("RakNetResendRttMultiple","1")SafeSetFlag("RaknetBandwidthPingSendEveryXSeconds","1")SafeSetFlag("OptimizePingThreshold","50")SafeSetFlag("PlayerNetworkUpdateQueueSize","20")SafeSetFlag("PlayerNetworkUpdateRate","60")SafeSetFlag("NetworkPrediction","120")SafeSetFlag("NetworkLatencyTolerance","1")SafeSetFlag("MinimalNetworkPrediction","0.1")
+end
+
+function ReduceLag()
+SafeSetFlag("RenderShadowIntensity","0")SafeSetFlag("TaskSchedulerTargetFps","9999999999")SafeSetFlag("DebugFRMQualityLevelOverride","1")SafeSetFlag("MaxFrameBufferSize","4")SafeSetFlag("DebugRestrictGCDistance","1")SafeSetFlag("DisablePostFx","True")SafeSetFlag("DebugPauseVoxelizer","True")SafeSetFlag("NewLightAttenuation","True")SafeSetFlag("FastGPULightCulling3","True")SafeSetFlag("PerformanceControlTextureQualityBestUtility","-1")SafeSetFlag("DebugForceMSAASamples","4")SafeSetFlag("CSGLevelOfDetailSwitchingDistance","0")SafeSetFlag("CSGLevelOfDetailSwitchingDistanceL12lWindActivated","0")SafeSetFlag("CSGLevelOfDetailSwitchingDistanceL23","0")SafeSetFlag("CSGLevelOfDetailSwitchingDistanceL34","0")Lighting.GlobalShadows=false;Lighting.FogEnd=9e9;Lighting.FogStart=9e9;settings().Rendering.QualityLevel=1;for a,b in pairs(game:GetDescendants())do if b:IsA("BasePart")then b.Material="Plastic"b.Reflectance=0;b.BackSurface="SmoothNoOutlines"b.BottomSurface="SmoothNoOutlines"b.FrontSurface="SmoothNoOutlines"b.LeftSurface="SmoothNoOutlines"b.RightSurface="SmoothNoOutlines"b.TopSurface="SmoothNoOutlines"elseif b:IsA("Decal")then b.Transparency=1 elseif b:IsA("ParticleEmitter")or b:IsA("Trail")then b.Lifetime=NumberRange.new(0)end end;for a,b in pairs(Lighting:GetDescendants())do if b:IsA("PostEffect")then b.Enabled=false end end;Workspace.DescendantAdded:Connect(function(c)task.spawn(function()if c:IsA('ForceField')or c:IsA('Sparkles')or c:IsA('Smoke')or c:IsA('Fire')or c:IsA('Beam')then RunService.Heartbeat:Wait()c:Destroy()end end)end)
+end
+
+local RL = false
+local LP = false
+
+CreateButton(Tabs.ToolsTab, "Optimize Ping (FFLAG DOESNT ALWAYS WORK) (NO DEACTIVATION)", "This feature will lower or stabilize ping via fflag of roblox that tries to optimize internet connection", function()
+if LP == true then
+Notify("You have already activated lower ping!", 3)
+end
+LP = true
+LowerPing()
+end)
+
+CreateButton(Tabs.ToolsTab, "Reduce Lag (FFLAG DOESNT ALWAYS WORK) (NO DEACTIVATION)", "This feature will increase FPS via fflags by forcing MSAA, unlocking FPS limit etc.", function()
+if RL == true then
+Notify("You have already activated reduce lag!", 3)
+end
+Win:Dialog({Title = "Are You Sure?",Content = "Once reduce lag feature is turned on, it can reduce graphics, make your game worse, and many issues can occur. Like ESP will not work far away, do you want that?",Icon = "shield-alert",Buttons = {
+{Title = "Yes",Icon = "check",Variant = "Primary",Callback = function() RL = true; ReduceLag() end, },
+{Title = "No",Icon = "x",Variant = "Secondary",Callback = function() end,}}})
+end)
+
+CreateButton(Tabs.ConfigTab, "Save some feature that is turned on", "This will save: Auto Steal, Anti Steal, Auto Buy Item, Auto ESP Brainrot, Ultra Speed Multiplier, Sky Deliver Speed", function()
+UserConfig:Register("AutoESPBrainrotSave", ToggleAutoESPBrainrot)
+UserConfig:Register("InputESPBrainrotSave", InputAutoESPBrainrot)
+UserConfig:Register("AutoBuySave", ToggleAutoBuy)
+UserConfig:Register("BuyDropdownSave", BuyDropDown)
+UserConfig:Register("AutoStealSave", ToggleAutoSteal)
+UserConfig:Register("AntiStealSave", ToggleAntiSteal)
+UserConfig:Register("UltraSpeedSave", UltraSpeedInput)
+UserConfig:Register("SkyDeliverSave", SkyDeliverInput)
+UserConfig:Register("AutoESPBaseSave", AutoESPBaseToggle)
+UserConfig:Save()
+Notify("Saved selected elements that is turned on!", 3)
+end)
+
+local NewSoundId = SoundTable["Notification"].SoundId
+SoundIdInput = CreateInput(Tabs.ConfigTab, "SoundId Notification", NewSoundId, function(ValueInput)
+NewSoundId = ValueInput
+end)
+
+SetNotification = CreateButton(Tabs.ConfigTab, "Set notification sound", "This will set notification sound from input", function()
+UserConfig:Register("SoundIdSave", SoundIdInput)
+UserConfig:Register("SoundIdButtonSave", SetNotification)
+SoundTable["Notification"].SoundId = NewSoundId
+UserConfig:Save()
+end)
+
+UserConfig:Register("SoundIdSave", SoundIdInput)
+UserConfig:Register("SoundIdButtonSave", SetNotification)
+UserConfig:Register("AutoESPBrainrotSave", ToggleAutoESPBrainrot)
+UserConfig:Register("InputESPBrainrotSave", InputAutoESPBrainrot)
+UserConfig:Register("AutoBuySave", ToggleAutoBuy)
+UserConfig:Register("AutoESPBaseSave", AutoESPBaseToggle)
+UserConfig:Register("BuyDropdownSave", BuyDropDown)
+UserConfig:Register("AutoStealSave", ToggleAutoSteal)
+UserConfig:Register("AntiStealSave", ToggleAntiSteal)
+UserConfig:Register("UltraSpeedSave", UltraSpeedInput)
+UserConfig:Register("SkyDeliverSave", SkyDeliverInput)
+UserConfig:Load()
+
+task.spawn(function()
+while task.wait(10) do
+if ControlTable.BreakAll == true then
+break
+end
+TargetDropdown:Refresh(GetPlayerTargets())
+ToolDropdown:Refresh(TableTools())
+BuyDropdown:Refresh(AvailableItems())
+end
+end)
+
+SafeSoundPlay(SoundTable["Intro"])
