@@ -1,0 +1,125 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "UsernameListGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Outer Frame (for easier dragging)
+local outerFrame = Instance.new("Frame")
+outerFrame.Size = UDim2.new(0, 240, 0, 320) -- Slightly larger than main GUI
+outerFrame.Position = UDim2.new(0.5, -120, 0.5, -160)
+outerFrame.BackgroundTransparency = 1
+outerFrame.Active = true
+outerFrame.Draggable = true
+outerFrame.Parent = screenGui
+
+-- Main Frame (inside outer frame)
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 220, 0, 300)
+mainFrame.Position = UDim2.new(0, 10, 0, 10)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = outerFrame
+
+-- Rounded corners
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 16) -- Bigger corners
+corner.Parent = mainFrame
+
+-- Glow effect
+local glow = Instance.new("UIStroke")
+glow.Thickness = 2
+glow.Color = Color3.fromRGB(0, 0, 0)
+glow.Transparency = 0.3
+glow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+glow.Parent = mainFrame
+
+-- X Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 25, 0, 25)
+closeButton.Position = UDim2.new(0, 5, 0, 5)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+closeButton.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeButton
+
+-- ScrollingFrame
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Size = UDim2.new(1, -10, 1, -40)
+scrollFrame.Position = UDim2.new(0, 5, 0, 35)
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.ScrollBarThickness = 6
+scrollFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+scrollFrame.BorderSizePixel = 0
+scrollFrame.Parent = mainFrame
+
+local scrollCorner = Instance.new("UICorner")
+scrollCorner.CornerRadius = UDim.new(0, 8)
+scrollCorner.Parent = scrollFrame
+
+-- UIListLayout
+local layout = Instance.new("UIListLayout")
+layout.Padding = UDim.new(0, 5)
+layout.Parent = scrollFrame
+
+-- Store buttons to avoid duplicates
+local playerButtons = {}
+
+-- Function to add a player to the GUI
+local function addPlayer(player)
+	if playerButtons[player.Name] then return end
+
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(1, -10, 0, 28)
+	btn.Text = player.Name
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	btn.Parent = scrollFrame
+
+	local btnCorner = Instance.new("UICorner")
+	btnCorner.CornerRadius = UDim.new(0, 6)
+	btnCorner.Parent = btn
+
+	btn.MouseButton1Click:Connect(function()
+		if setclipboard then
+			setclipboard(player.Name)
+		end
+	end)
+
+	playerButtons[player.Name] = btn
+end
+
+-- Function to refresh the list
+local function refreshList()
+	for _, player in ipairs(Players:GetPlayers()) do
+		addPlayer(player)
+	end
+	scrollFrame.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y)
+end
+
+-- Initial population
+refreshList()
+
+-- Detect new players joining
+Players.PlayerAdded:Connect(function(player)
+	addPlayer(player)
+end)
+
+-- Periodic refresh
+local refreshConnection = game:GetService("RunService").RenderStepped:Connect(function()
+	refreshList()
+end)
+
+-- Close button functionality
+closeButton.MouseButton1Click:Connect(function()
+	refreshConnection:Disconnect()
+	screenGui:Destroy()
+end)
