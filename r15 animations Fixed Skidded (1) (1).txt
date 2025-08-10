@@ -1,0 +1,1950 @@
+--- Keybind to open for pc is "comma" -> " , "
+
+-- Made by Gi#7331
+
+
+
+if getgenv().Emotesbruh == true then
+
+return end
+
+getgenv().Emotesbruh = true
+
+
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+
+                Title = "Wait!",
+
+                Text = "Please Wait, it just loading the button",
+
+                 Duration = 15})
+
+
+
+if game:GetService("CoreGui"):FindFirstChild("Emotes") then
+
+    game:GetService("CoreGui"):FindFirstChild("Emotes"):Destroy()
+
+end
+
+
+
+wait(1)
+
+
+
+local ContextActionService = game:GetService("ContextActionService")
+
+local HttpService = game:GetService("HttpService")
+
+local GuiService = game:GetService("GuiService")
+
+local CoreGui = game:GetService("CoreGui")
+
+local Open = Instance.new("TextButton")
+
+UICorner = Instance.new("UICorner")
+
+local MarketplaceService = game:GetService("MarketplaceService")
+
+local Players = game:GetService("Players")
+
+local StarterGui = game:GetService("StarterGui")
+
+local UserInputService = game:GetService("UserInputService")
+
+
+
+
+
+local LoadedEmotes, Emotes = {}, {}
+
+
+
+local function AddEmote(name: string, id: number, price: number?)
+
+	LoadedEmotes[id] = false
+
+	task.spawn(function()
+
+		if not (name and id) then return end
+
+
+
+		local success, date = pcall(function()
+
+			local info = MarketplaceService:GetProductInfo(id)
+
+			local updated = info.Updated
+
+			return DateTime.fromIsoDate(updated):ToUniversalTime()
+
+		end)
+
+
+
+		if not success or not date then
+
+			task.wait(10)
+
+			AddEmote(name, id, price)
+
+			return
+
+		end
+
+
+
+		local unix = os.time({
+
+			year = date.Year,
+
+			month = date.Month,
+
+			day = date.Day,
+
+			hour = date.Hour,
+
+			min = date.Minute,
+
+			sec = date.Second
+
+		})
+
+
+
+		LoadedEmotes[id] = true
+
+
+
+		local emoteData = {
+
+			name = name,
+
+			id = id,
+
+			icon = "rbxthumb://type=Asset&id=".. id .."&w=150&h=150",
+
+			price = price or 0,
+
+			lastupdated = unix,
+
+			sort = {}
+
+		}
+
+		table.insert(Emotes, emoteData)
+
+	end)
+
+end
+
+
+
+
+
+local function CreateButtonFromEmoteInfo(emote)
+
+	local button = Instance.new("TextButton")
+
+	button.Name = tostring(emote.id)
+
+	button.Text = emote.name .. " - $" .. emote.price
+
+	button.Size = UDim2.new(0, 200, 0, 50)
+
+	button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+
+	button.TextColor3 = Color3.new(1, 1, 1)
+
+	button.MouseButton1Click:Connect(function()
+
+		print("Selected Emote: " .. emote.name .. ", ID: " .. emote.id)
+
+	end)
+
+	return button
+
+end
+
+
+
+
+
+
+
+
+
+
+
+local CurrentSort = "recentfirst"
+
+
+
+local FavoriteOff = "rbxassetid://10651060677"
+
+local FavoriteOn = "rbxassetid://10651061109"
+
+local FavoritedEmotes = {}
+
+
+
+local ScreenGui = Instance.new("ScreenGui")
+
+ScreenGui.Name = "Emotes"
+
+ScreenGui.DisplayOrder = 2
+
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ScreenGui.Enabled = true
+
+
+
+local BackFrame = Instance.new("Frame")
+
+BackFrame.Size = UDim2.new(0.9, 0, 0.5, 0)
+
+BackFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+
+BackFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+
+BackFrame.SizeConstraint = Enum.SizeConstraint.RelativeYY
+
+BackFrame.BackgroundTransparency = 1
+
+BackFrame.BorderSizePixel = 0
+
+BackFrame.Parent = ScreenGui
+
+
+
+Open.Name = "Open"
+
+Open.Parent = ScreenGui
+
+Open.Draggable = true
+
+Open.Size = UDim2.new(0.05,0,0.114,0)
+
+Open.Position = UDim2.new(0.05, 0, 0.25, 0)
+
+Open.Text = "Close"
+
+Open.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+Open.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+Open.TextScaled = true
+
+Open.TextSize = 20
+
+Open.Visible = true
+
+Open.BackgroundTransparency = .5
+
+Open.MouseButton1Up:Connect(function()
+
+if Open.Text == "Open" then
+
+		Open.Text = "Close"
+
+		BackFrame.Visible = true
+
+else
+
+		if Open.Text == "Close" then
+
+			Open.Text = "Open"
+
+			BackFrame.Visible = false
+
+		end
+
+end
+
+end)
+
+
+
+UICorner.Name = "UICorner"
+
+UICorner.Parent = Open
+
+UICorner.CornerRadius = UDim.new(1, 0)
+
+
+
+local EmoteName = Instance.new("TextLabel")
+
+EmoteName.Name = "EmoteName"
+
+EmoteName.TextScaled = true
+
+EmoteName.AnchorPoint = Vector2.new(0.5, 0.5)
+
+EmoteName.Position = UDim2.new(-0.1, 0, 0.5, 0)
+
+EmoteName.Size = UDim2.new(0.2, 0, 0.2, 0)
+
+EmoteName.SizeConstraint = Enum.SizeConstraint.RelativeYY
+
+EmoteName.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+EmoteName.TextColor3 = Color3.new(1, 1, 1)
+
+EmoteName.BorderSizePixel = 0
+
+EmoteName.Parent = BackFrame
+
+
+
+local Corner = Instance.new("UICorner")
+
+Corner.Parent = EmoteName
+
+
+
+local Loading = Instance.new("TextLabel", BackFrame)
+
+Loading.AnchorPoint = Vector2.new(0.5, 0.5)
+
+Loading.Text = "Fixing.."
+
+Loading.TextColor3 = Color3.new(1, 1, 1)
+
+Loading.BackgroundColor3 = Color3.new(0, 0, 0)
+
+Loading.TextScaled = true
+
+Loading.BackgroundTransparency = 0.5
+
+Loading.Size = UDim2.fromScale(0.2, 0.1)
+
+Loading.Position = UDim2.fromScale(0.5, 0.2)
+
+Corner:Clone().Parent = Loading
+
+
+
+local Frame = Instance.new("ScrollingFrame")
+
+Frame.Size = UDim2.new(1, 0, 1, 0)
+
+Frame.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+Frame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+Frame.ScrollingDirection = Enum.ScrollingDirection.Y
+
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+
+Frame.BackgroundTransparency = 1
+
+Frame.ScrollBarThickness = 5
+
+Frame.BorderSizePixel = 0
+
+Frame.MouseLeave:Connect(function()
+
+	EmoteName.Text = "Select an Emote"
+
+end)
+
+Frame.Parent = BackFrame
+
+
+
+local Grid = Instance.new("UIGridLayout")
+
+Grid.CellSize = UDim2.new(0.105, 0, 0, 0)
+
+Grid.CellPadding = UDim2.new(0.006, 0, 0.006, 0)
+
+Grid.SortOrder = Enum.SortOrder.LayoutOrder
+
+Grid.Parent = Frame
+
+
+
+local SortFrame = Instance.new("Frame")
+
+SortFrame.Visible = false
+
+SortFrame.BorderSizePixel = 0
+
+SortFrame.Position = UDim2.new(1, 5, -0.125, 0)
+
+SortFrame.Size = UDim2.new(0.2, 0, 0, 0)
+
+SortFrame.AutomaticSize = Enum.AutomaticSize.Y
+
+SortFrame.BackgroundTransparency = 1
+
+Corner:Clone().Parent = SortFrame
+
+SortFrame.Parent = BackFrame
+
+
+
+local SortList = Instance.new("UIListLayout")
+
+SortList.Padding = UDim.new(0.02, 0)
+
+SortList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+SortList.VerticalAlignment = Enum.VerticalAlignment.Top
+
+SortList.SortOrder = Enum.SortOrder.LayoutOrder
+
+SortList.Parent = SortFrame
+
+
+
+local function SortEmotes()
+
+	for i,Emote in pairs(Emotes) do
+
+		local EmoteButton = Frame:FindFirstChild(Emote.id)
+
+		if not EmoteButton then
+
+			continue
+
+		end
+
+		local IsFavorited = table.find(FavoritedEmotes, Emote.id)
+
+		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 0) or #Emotes)
+
+		EmoteButton.number.Text = Emote.sort[CurrentSort]
+
+	end
+
+end
+
+
+
+local function createsort(order, text, sort)
+
+	local CreatedSort = Instance.new("TextButton")
+
+	CreatedSort.SizeConstraint = Enum.SizeConstraint.RelativeXX
+
+	CreatedSort.Size = UDim2.new(1, 0, 0.2, 0)
+
+	CreatedSort.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+	CreatedSort.LayoutOrder = order
+
+	CreatedSort.TextColor3 = Color3.new(1, 1, 1)
+
+	CreatedSort.Text = text
+
+	CreatedSort.TextScaled = true
+
+	CreatedSort.BorderSizePixel = 0
+
+	Corner:Clone().Parent = CreatedSort
+
+	CreatedSort.Parent = SortFrame
+
+	CreatedSort.MouseButton1Click:Connect(function()
+
+		SortFrame.Visible = false
+
+		Open.Text = "Open"
+
+		CurrentSort = sort
+
+		SortEmotes()
+
+	end)
+
+	return CreatedSort
+
+end
+
+
+
+createsort(1, "Recently Updated First", "recentfirst")
+
+createsort(2, "Recently Updated Last", "recentlast")
+
+createsort(3, "Alphabetically First", "alphabeticfirst")
+
+createsort(4, "Alphabetically Last", "alphabeticlast")
+
+createsort(5, "Highest Price", "highestprice")
+
+createsort(6, "Lowest Price", "lowestprice")
+
+
+
+local SortButton = Instance.new("TextButton")
+
+SortButton.BorderSizePixel = 0
+
+SortButton.AnchorPoint = Vector2.new(0.5, 0.5)
+
+SortButton.Position = UDim2.new(0.925, -5, -0.075, 0)
+
+SortButton.Size = UDim2.new(0.15, 0, 0.1, 0)
+
+SortButton.TextScaled = true
+
+SortButton.TextColor3 = Color3.new(1, 1, 1)
+
+SortButton.BackgroundColor3 = Color3.new(0, 0, 0)
+
+SortButton.BackgroundTransparency = 0.3
+
+SortButton.Text = "Sort"
+
+SortButton.MouseButton1Click:Connect(function()
+
+	SortFrame.Visible = not SortFrame.Visible
+
+	Open.Text = "Open"
+
+end)
+
+Corner:Clone().Parent = SortButton
+
+SortButton.Parent = BackFrame
+
+
+
+local CloseButton = Instance.new("TextButton")
+
+CloseButton.BorderSizePixel = 0
+
+CloseButton.AnchorPoint = Vector2.new(0.5, 0.5)
+
+CloseButton.Position = UDim2.new(0.075, 0, -0.075, 0)
+
+CloseButton.Size = UDim2.new(0.15, 0, 0.1, 0)
+
+CloseButton.TextScaled = true
+
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+
+CloseButton.BackgroundColor3 = Color3.new(0.5, 0, 0)
+
+CloseButton.BackgroundTransparency = 0.3
+
+CloseButton.Text = "Kill Gui"
+
+CloseButton.MouseButton1Click:Connect(function()
+
+	ScreenGui:Destroy()
+
+	getgenv().Emotesbruh = false
+
+end)
+
+Corner:Clone().Parent = CloseButton
+
+CloseButton.Parent = BackFrame
+
+
+
+local SearchBar = Instance.new("TextBox")
+
+SearchBar.BorderSizePixel = 0
+
+SearchBar.AnchorPoint = Vector2.new(0.5, 0.5)
+
+SearchBar.Position = UDim2.new(0.5, 0, -0.075, 0)
+
+SearchBar.Size = UDim2.new(0.55, 0, 0.1, 0)
+
+SearchBar.TextScaled = true
+
+SearchBar.PlaceholderText = "Search"
+
+SearchBar.TextColor3 = Color3.new(1, 1, 1)
+
+SearchBar.BackgroundColor3 = Color3.new(0, 0, 0)
+
+SearchBar.BackgroundTransparency = 0.3
+
+SearchBar:GetPropertyChangedSignal("Text"):Connect(function()
+
+	local text = SearchBar.Text:lower()
+
+	local buttons = Frame:GetChildren()
+
+	if text ~= text:sub(1,50) then
+
+		SearchBar.Text = SearchBar.Text:sub(1,50)
+
+		text = SearchBar.Text:lower()
+
+	end
+
+	if text ~= ""  then
+
+		for i,button in pairs(buttons) do
+
+			if button:IsA("GuiButton") then
+
+				local name = button:GetAttribute("name"):lower()
+
+				if name:match(text) then
+
+					button.Visible = true
+
+				else
+
+					button.Visible = false
+
+				end
+
+			end
+
+		end
+
+	else
+
+		for i,button in pairs(buttons) do
+
+			if button:IsA("GuiButton") then
+
+				button.Visible = true
+
+			end
+
+		end
+
+	end
+
+end)
+
+Corner:Clone().Parent = SearchBar
+
+SearchBar.Parent = BackFrame
+
+
+
+local function openemotes(name, state, input)
+
+	if state == Enum.UserInputState.Begin then
+
+		BackFrame.Visible = not BackFrame.Visible
+
+		Open.Text = "Open"
+
+	end
+
+end
+
+
+
+ContextActionService:BindCoreActionAtPriority(
+
+	"Emote Menu",
+
+	openemotes,
+
+	true,
+
+	2001,
+
+	Enum.KeyCode.Comma
+
+)
+
+
+
+local inputconnect
+
+ScreenGui:GetPropertyChangedSignal("Enabled"):Connect(function()
+
+	if BackFrame.Visible == false then
+
+		EmoteName.Text = "Select an Emote"
+
+		SearchBar.Text = ""
+
+		SortFrame.Visible = false
+
+		GuiService:SetEmotesMenuOpen(false)
+
+		inputconnect = UserInputService.InputBegan:Connect(function(input, processed)
+
+			if not processed then
+
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+
+					BackFrame.Visible = false
+
+					Open.Text = "Open"
+
+				end
+
+			end
+
+		end)
+
+	else
+
+		inputconnect:Disconnect()
+
+	end
+
+end)
+
+
+
+GuiService.EmotesMenuOpenChanged:Connect(function(isopen)
+
+	if isopen then
+
+		BackFrame.Visible = false
+
+		Open.Text = "Open"
+
+	end
+
+end)
+
+
+
+GuiService.MenuOpened:Connect(function()
+
+	BackFrame.Visible = false
+
+	Open.Text = "Open"
+
+end)
+
+
+
+if not game:IsLoaded() then
+
+	game.Loaded:Wait()
+
+end
+
+
+
+--thanks inf yield
+
+local SynV3 = syn and DrawingImmediate
+
+if (not is_sirhurt_closure) and (not SynV3) and (syn and syn.protect_gui) then
+
+	syn.protect_gui(ScreenGui)
+
+	ScreenGui.Parent = CoreGui
+
+elseif get_hidden_gui or gethui then
+
+	local hiddenUI = get_hidden_gui or gethui
+
+	ScreenGui.Parent = hiddenUI()
+
+else
+
+	ScreenGui.Parent = CoreGui
+
+end
+
+
+
+local function SendNotification(title, text)
+
+	if syn and syn.toast_notification then
+
+		syn.toast_notification({
+
+			Type = ToastType.Error,
+
+			Title = title,
+
+			Content = text
+
+		})
+
+	else
+
+		StarterGui:SetCore("SendNotification", {
+
+			Title = title,
+
+			Text = text
+
+		})
+
+	end
+
+end
+
+
+
+local LocalPlayer = Players.LocalPlayer
+
+
+
+local function PlayEmote(name: string, id: IntValue)
+
+	BackFrame.Visible = false
+
+	Open.Text = "Open"
+
+	SearchBar.Text = ""
+
+	local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+
+	local Description = Humanoid and Humanoid:FindFirstChildOfClass("HumanoidDescription")
+
+	if not Description then
+
+		return
+
+	end
+
+	if LocalPlayer.Character.Humanoid.RigType ~= Enum.HumanoidRigType.R6 then
+
+		local succ, err = pcall(function()
+
+			Humanoid:PlayEmoteAndGetAnimTrackById(id)
+
+		end)
+
+		if not succ then
+
+			Description:AddEmote(name, id)
+
+			Humanoid:PlayEmoteAndGetAnimTrackById(id)
+
+		end
+
+	else
+
+		SendNotification(
+
+			"r6? lol",
+
+			"you gotta be r15 dude"
+
+		)
+
+	end
+
+end
+
+
+
+local function WaitForChildOfClass(parent, class)
+
+	local child = parent:FindFirstChildOfClass(class)
+
+	while not child or child.ClassName ~= class do
+
+		child = parent.ChildAdded:Wait()
+
+	end
+
+	return child
+
+end
+
+local Emotes = {
+
+	{ name = "Around Town", id = 3576747102, icon = "rbxthumb://type=Asset&id=3576747102&w=150&h=150", price = 1000, lastupdated = 1663264200, sort = {} },
+
+{
+
+    name = "TWICE TAKEDOWN DANCE 2",
+
+    id = 85623000473425,
+
+    icon = "rbxthumb://type=Asset&id=85623000473425&w=150&h=150",
+
+    price = 100,
+
+    lastupdated = 1752192000,
+
+    sort = {}
+
+},
+
+	{ name = "Fashionable", id = 3576745472, icon = "rbxthumb://type=Asset&id=3576745472&w=150&h=150", price = 750, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Swish", id = 3821527813, icon = "rbxthumb://type=Asset&id=3821527813&w=150&h=150", price = 750, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Top Rock", id = 3570535774, icon = "rbxthumb://type=Asset&id=3570535774&w=150&h=150", price = 750, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Fancy Feet", id = 3934988903, icon = "rbxthumb://type=Asset&id=3934988903&w=150&h=150", price = 500, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Idol", id = 4102317848, icon = "rbxthumb://type=Asset&id=4102317848&w=150&h=150", price = 500, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Sneaky", id = 3576754235, icon = "rbxthumb://type=Asset&id=3576754235&w=150&h=150", price = 500, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Elton John - Piano Jump", id = 11453096488, icon = "rbxthumb://type=Asset&id=11453096488&w=150&h=150", price = 500, lastupdated = 1668382206, sort = {} },
+
+	{ name = "Cartwheel - George Ezra", id = 10370929905, icon = "rbxthumb://type=Asset&id=10370929905&w=150&h=150", price = 450, lastupdated = 1659650848, sort = {} },
+
+	{ name = "Super Charge", id = 10478368365, icon = "rbxthumb://type=Asset&id=10478368365&w=150&h=150", price = 450, lastupdated = 1659649594, sort = {} },
+
+	{ name = "Rise Above - The Chainsmokers", id = 13071993910, icon = "rbxthumb://type=Asset&id=13071993910&w=150&h=150", price = 400, lastupdated = 1681411386, sort = {} },
+
+	{ name = "Elton John - Elevate", id = 11394056822, icon = "rbxthumb://type=Asset&id=11394056822&w=150&h=150", price = 400, lastupdated = 1667432393, sort = {} },
+
+	{ name = "Sturdy Dance - Ice Spice", id = 17746270218, icon = "rbxthumb://type=Asset&id=17746270218&w=150&h=150", price = 300, lastupdated = 1717619314, sort = {} },
+
+	{ name = "YUNGBLUD – HIGH KICK", id = 14022978026, icon = "rbxthumb://type=Asset&id=14022978026&w=150&h=150", price = 300, lastupdated = 1691769382, sort = {} },
+
+	{ name = "Robot", id = 3576721660, icon = "rbxthumb://type=Asset&id=3576721660&w=150&h=150", price = 250, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Louder", id = 3576751796, icon = "rbxthumb://type=Asset&id=3576751796&w=150&h=150", price = 250, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Twirl", id = 3716633898, icon = "rbxthumb://type=Asset&id=3716633898&w=150&h=150", price = 250, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Bodybuilder", id = 3994130516, icon = "rbxthumb://type=Asset&id=3994130516&w=150&h=150", price = 200, lastupdated = 1663281649, sort = {} },
+
+	{ name = "NBA Monster Dunk", id = 117511481049460, icon = "rbxthumb://type=Asset&id=117511481049460&w=150&h=150", price = 200, lastupdated = 1739396302, sort = {} },
+
+	{ name = "Jacks", id = 3570649048, icon = "rbxthumb://type=Asset&id=3570649048&w=150&h=150", price = 200, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Shuffle", id = 4391208058, icon = "rbxthumb://type=Asset&id=4391208058&w=150&h=150", price = 200, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Elton John - Still Standing", id = 11435177473, icon = "rbxthumb://type=Asset&id=11435177473&w=150&h=150", price = 200, lastupdated = 1667779047, sort = {} },
+
+	{ name = "Elton John - Cat Man", id = 11435175895, icon = "rbxthumb://type=Asset&id=11435175895&w=150&h=150", price = 200, lastupdated = 1667535727, sort = {} },
+
+	{ name = "Shrek Roar", id = 18524331128, icon = "rbxthumb://type=Asset&id=18524331128&w=150&h=150", price = 200, lastupdated = 1721176055, sort = {} },
+
+	{ name = "Dorky Dance", id = 4212499637, icon = "rbxthumb://type=Asset&id=4212499637&w=150&h=150", price = 200, lastupdated = 1663281649, sort = {} },
+
+	{ name = "HOLIDAY Dance - Lil Nas X (LNX)", id = 5938396308, icon = "rbxthumb://type=Asset&id=5938396308&w=150&h=150", price = 190, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Old Town Road Dance - Lil Nas X (LNX)", id = 5938394742, icon = "rbxthumb://type=Asset&id=5938394742&w=150&h=150", price = 190, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Panini Dance - Lil Nas X (LNX)", id = 5915781665, icon = "rbxthumb://type=Asset&id=5915781665&w=150&h=150", price = 190, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Rodeo Dance - Lil Nas X (LNX)", id = 5938397555, icon = "rbxthumb://type=Asset&id=5938397555&w=150&h=150", price = 190, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Drum Master - Royal Blood", id = 6531538868, icon = "rbxthumb://type=Asset&id=6531538868&w=150&h=150", price = 190, lastupdated = 1663281649, sort = {} },
+
+	{ name = "It Ain't My Fault - Zara Larsson", id = 6797948622, icon = "rbxthumb://type=Asset&id=6797948622&w=150&h=150", price = 190, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Flex Walk", id = 15506506103, icon = "rbxthumb://type=Asset&id=15506506103&w=150&h=150", price = 175, lastupdated = 1705451683, sort = {} },
+
+	{ name = "Dizzy", id = 3934986896, icon = "rbxthumb://type=Asset&id=3934986896&w=150&h=150", price = 175, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Uprise - Tommy Hilfiger", id = 10275057230, icon = "rbxthumb://type=Asset&id=10275057230&w=150&h=150", price = 170, lastupdated = 1660240736, sort = {} },
+
+	{ name = "Tommy - Archer", id = 13823339506, icon = "rbxthumb://type=Asset&id=13823339506&w=150&h=150", price = 170, lastupdated = 1687980934, sort = {} },
+
+	{ name = "Mean Mug - Tommy Hilfiger", id = 10214415687, icon = "rbxthumb://type=Asset&id=10214415687&w=150&h=150", price = 170, lastupdated = 1660240753, sort = {} },
+
+	{ name = "Rock Star - Royal Blood", id = 6533100850, icon = "rbxthumb://type=Asset&id=6533100850&w=150&h=150", price = 170, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Floor Rock Freeze - Tommy Hilfiger", id = 10214411646, icon = "rbxthumb://type=Asset&id=10214411646&w=150&h=150", price = 170, lastupdated = 1658271615, sort = {} },
+
+	{ name = "Saturday Dance - Twenty One Pilots", id = 7422833723, icon = "rbxthumb://type=Asset&id=7422833723&w=150&h=150", price = 170, lastupdated = 1663281651, sort = {} },
+
+	{ name = "V Pose - Tommy Hilfiger", id = 10214418283, icon = "rbxthumb://type=Asset&id=10214418283&w=150&h=150", price = 170, lastupdated = 1660240743, sort = {} },
+
+	{ name = "Boxing Punch - KSI", id = 7202896732, icon = "rbxthumb://type=Asset&id=7202896732&w=150&h=150", price = 170, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Drum Solo - Royal Blood", id = 6532844183, icon = "rbxthumb://type=Asset&id=6532844183&w=150&h=150", price = 170, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Frosty Flair - Tommy Hilfiger", id = 10214406616, icon = "rbxthumb://type=Asset&id=10214406616&w=150&h=150", price = 170, lastupdated = 1658271594, sort = {} },
+
+	{ name = "Hips Poppin' - Zara Larsson", id = 6797919579, icon = "rbxthumb://type=Asset&id=6797919579&w=150&h=150", price = 170, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Drummer Moves - Twenty One Pilots", id = 7422838770, icon = "rbxthumb://type=Asset&id=7422838770&w=150&h=150", price = 160, lastupdated = 1663281649, sort = {} },
+
+	{ name = "On The Outside - Twenty One Pilots", id = 7422841700, icon = "rbxthumb://type=Asset&id=7422841700&w=150&h=150", price = 160, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Thanos Happy Jump - Squid Game", id = 82217023310738, icon = "rbxthumb://type=Asset&id=82217023310738&w=150&h=150", price = 150, lastupdated = 1750314239, sort = {} },
+
+	{ name = "Block Partier", id = 6865011755, icon = "rbxthumb://type=Asset&id=6865011755&w=150&h=150", price = 150, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Up and Down - Twenty One Pilots", id = 7422843994, icon = "rbxthumb://type=Asset&id=7422843994&w=150&h=150", price = 150, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Ay-Yo Dance Move - NCT 127", id = 12804173616, icon = "rbxthumb://type=Asset&id=12804173616&w=150&h=150", price = 150, lastupdated = 1679554914, sort = {} },
+
+	{ name = "Young-hee Head Spin - Squid Game", id = 134615135651900, icon = "rbxthumb://type=Asset&id=134615135651900&w=150&h=150", price = 150, lastupdated = 1750314256, sort = {} },
+
+	{ name = "T", id = 3576719440, icon = "rbxthumb://type=Asset&id=3576719440&w=150&h=150", price = 150, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Air Dance", id = 4646302011, icon = "rbxthumb://type=Asset&id=4646302011&w=150&h=150", price = 150, lastupdated = 1663264200, sort = {} },
+
+	{ name = "TMNT Dance", id = 18665886405, icon = "rbxthumb://type=Asset&id=18665886405&w=150&h=150", price = 150, lastupdated = 1722010678, sort = {} },
+
+	{ name = "Take Me Under - Zara Larsson", id = 6797938823, icon = "rbxthumb://type=Asset&id=6797938823&w=150&h=150", price = 150, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Sticker Dance Move - NCT 127", id = 12259885838, icon = "rbxthumb://type=Asset&id=12259885838&w=150&h=150", price = 150, lastupdated = 1675067049, sort = {} },
+
+	{ name = "Line Dance", id = 4049646104, icon = "rbxthumb://type=Asset&id=4049646104&w=150&h=150", price = 150, lastupdated = 1663281650, sort = {} },
+
+	{ name = "NBA WNBA Fadeaway", id = 18526373545, icon = "rbxthumb://type=Asset&id=18526373545&w=150&h=150", price = 150, lastupdated = 1721396854, sort = {} },
+
+	{ name = "SpongeBob Imaginaaation 🌈", id = 18443268949, icon = "rbxthumb://type=Asset&id=18443268949&w=150&h=150", price = 150, lastupdated = 1720822244, sort = {} },
+
+	{ name = "Chill Vibes - George Ezra", id = 10370918044, icon = "rbxthumb://type=Asset&id=10370918044&w=150&h=150", price = 150, lastupdated = 1659650823, sort = {} },
+
+	{ name = "Wake Up Call - KSI", id = 7202900159, icon = "rbxthumb://type=Asset&id=7202900159&w=150&h=150", price = 150, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Kick It Dance Move - NCT 127", id = 12259888240, icon = "rbxthumb://type=Asset&id=12259888240&w=150&h=150", price = 150, lastupdated = 1674794102, sort = {} },
+
+	{ name = "The Weeknd Starboy Strut", id = 130245358716273, icon = "rbxthumb://type=Asset&id=130245358716273&w=150&h=150", price = 150, lastupdated = 1747429898, sort = {} },
+
+	{ name = "2 Baddies Dance Move - NCT 127", id = 12259890638, icon = "rbxthumb://type=Asset&id=12259890638&w=150&h=150", price = 150, lastupdated = 1674793873, sort = {} },
+
+	{ name = "Rock Guitar - Royal Blood", id = 6532155086, icon = "rbxthumb://type=Asset&id=6532155086&w=150&h=150", price = 150, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Show Dem Wrists - KSI", id = 7202898984, icon = "rbxthumb://type=Asset&id=7202898984&w=150&h=150", price = 140, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Dancin' Shoes - Twenty One Pilots", id = 7405123844, icon = "rbxthumb://type=Asset&id=7405123844&w=150&h=150", price = 140, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Arm Twist", id = 9710992846, icon = "rbxthumb://type=Asset&id=9710992846&w=150&h=150", price = 140, lastupdated = 1691019410, sort = {} },
+
+	{ name = "AOK - Tai Verdes", id = 7942960760, icon = "rbxthumb://type=Asset&id=7942960760&w=150&h=150", price = 140, lastupdated = 1663281649, sort = {} },
+
+	{ name = "M3GAN's Dance", id = 127271798262177, icon = "rbxthumb://type=Asset&id=127271798262177&w=150&h=150", price = 140, lastupdated = 1749963148, sort = {} },
+
+	{ name = "High Hands", id = 9710994651, icon = "rbxthumb://type=Asset&id=9710994651&w=150&h=150", price = 140, lastupdated = 1691019393, sort = {} },
+
+	{ name = "Cobra Arms - Tai Verdes", id = 7942964447, icon = "rbxthumb://type=Asset&id=7942964447&w=150&h=150", price = 130, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Lasso Turn - Tai Verdes", id = 7942972744, icon = "rbxthumb://type=Asset&id=7942972744&w=150&h=150", price = 130, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Beauty Touchdown", id = 16303091119, icon = "rbxthumb://type=Asset&id=16303091119&w=150&h=150", price = 125, lastupdated = 1709320484, sort = {} },
+
+	{ name = "Sidekicks - George Ezra", id = 10370922566, icon = "rbxthumb://type=Asset&id=10370922566&w=150&h=150", price = 125, lastupdated = 1659650831, sort = {} },
+
+	{ name = "Boom Boom Clap - George Ezra", id = 10370934040, icon = "rbxthumb://type=Asset&id=10370934040&w=150&h=150", price = 125, lastupdated = 1659650857, sort = {} },
+
+	{ name = "DearALICE - Ariana", id = 133765015173412, icon = "rbxthumb://type=Asset&id=133765015173412&w=150&h=150", price = 125, lastupdated = 1748015544, sort = {} },
+
+	{ name = "Chappell Roan HOT TO GO!", id = 79312439851071, icon = "rbxthumb://type=Asset&id=79312439851071&w=150&h=150", price = 125, lastupdated = 1728072364, sort = {} },
+
+	{ name = "Bone Chillin' Bop", id = 15123050663, icon = "rbxthumb://type=Asset&id=15123050663&w=150&h=150", price = 125, lastupdated = 1698882605, sort = {} },
+
+	{ name = "Power Blast", id = 4849497510, icon = "rbxthumb://type=Asset&id=4849497510&w=150&h=150", price = 120, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Flowing Breeze", id = 7466047578, icon = "rbxthumb://type=Asset&id=7466047578&w=150&h=150", price = 110, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Swan Dance", id = 7466048475, icon = "rbxthumb://type=Asset&id=7466048475&w=150&h=150", price = 110, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Quiet Waves", id = 7466046574, icon = "rbxthumb://type=Asset&id=7466046574&w=150&h=150", price = 110, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Rolling Stones Guitar Strum", id = 18148839527, icon = "rbxthumb://type=Asset&id=18148839527&w=150&h=150", price = 100, lastupdated = 1718999383, sort = {} },
+
+	{ name = "Break Dance", id = 5915773992, icon = "rbxthumb://type=Asset&id=5915773992&w=150&h=150", price = 100, lastupdated = 1663281649, sort = {} },
+
+	{ name = "KATSEYE - Touch", id = 139021427684680, icon = "rbxthumb://type=Asset&id=139021427684680&w=150&h=150", price = 100, lastupdated = 1732569484, sort = {} },
+
+	{ name = "Zombie", id = 4212496830, icon = "rbxthumb://type=Asset&id=4212496830&w=150&h=150", price = 100, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Olivia Rodrigo Head Bop", id = 15554010118, icon = "rbxthumb://type=Asset&id=15554010118&w=150&h=150", price = 100, lastupdated = 1701888912, sort = {} },
+
+	{ name = "Rasputin – Boney M.", id = 133477296392756, icon = "rbxthumb://type=Asset&id=133477296392756&w=150&h=150", price = 100, lastupdated = 1750102356, sort = {} },
+
+	{ name = "Tommy K-Pop Mic Drop", id = 14024722653, icon = "rbxthumb://type=Asset&id=14024722653&w=150&h=150", price = 100, lastupdated = 1691505558, sort = {} },
+
+	{ name = "TWICE Feel Special", id = 14900153406, icon = "rbxthumb://type=Asset&id=14900153406&w=150&h=150", price = 100, lastupdated = 1695849104, sort = {} },
+
+	{ name = "Olivia Rodrigo good 4 u", id = 15554013003, icon = "rbxthumb://type=Asset&id=15554013003&w=150&h=150", price = 100, lastupdated = 1701899524, sort = {} },
+
+	{ name = "Olivia Rodrigo Fall Back to Float", id = 15554016057, icon = "rbxthumb://type=Asset&id=15554016057&w=150&h=150", price = 100, lastupdated = 1704909517, sort = {} },
+
+	{ name = "Air Guitar", id = 15506499986, icon = "rbxthumb://type=Asset&id=15506499986&w=150&h=150", price = 100, lastupdated = 1705451692, sort = {} },
+
+	{ name = "Fashion Klossette - Runway my way", id = 126683684984862, icon = "rbxthumb://type=Asset&id=126683684984862&w=150&h=150", price = 100, lastupdated = 1725032194, sort = {} },
+
+	{ name = "Elton John - Heart Skip", id = 11309263077, icon = "rbxthumb://type=Asset&id=11309263077&w=150&h=150", price = 100, lastupdated = 1667432377, sort = {} },
+
+	{ name = "Baby Dance", id = 4272484885, icon = "rbxthumb://type=Asset&id=4272484885&w=150&h=150", price = 100, lastupdated = 1663264200, sort = {} },
+
+	{ name = "Cha Cha", id = 6865013133, icon = "rbxthumb://type=Asset&id=6865013133&w=150&h=150", price = 100, lastupdated = 1625675362, sort = {} },
+
+	{ name = "Dolphin Dance", id = 5938365243, icon = "rbxthumb://type=Asset&id=5938365243&w=150&h=150", price = 100, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Elton John - Rock Out", id = 11753545334, icon = "rbxthumb://type=Asset&id=11753545334&w=150&h=150", price = 100, lastupdated = 1670628204, sort = {} },
+
+	{ name = "ALTÉGO - Couldn’t Care Less", id = 92859581691366, icon = "rbxthumb://type=Asset&id=92859581691366&w=150&h=150", price = 100, lastupdated = 1726765025, sort = {} },
+
+	{ name = "Fashion Roadkill", id = 73683655527605, icon = "rbxthumb://type=Asset&id=73683655527605&w=150&h=150", price = 100, lastupdated = 1727716460, sort = {} },
+
+	{ name = "Paris Hilton Sanasa", id = 16126526506, icon = "rbxthumb://type=Asset&id=16126526506&w=150&h=150", price = 100, lastupdated = 1706312634, sort = {} },
+
+	{ name = "TWICE I GOT YOU part 1", id = 16215060261, icon = "rbxthumb://type=Asset&id=16215060261&w=150&h=150", price = 100, lastupdated = 1708450164, sort = {} },
+
+	{ name = "The Zabb", id = 71389516735424, icon = "rbxthumb://type=Asset&id=71389516735424&w=150&h=150", price = 100, lastupdated = 1725033197, sort = {} },
+
+	{ name = "Y", id = 4391211308, icon = "rbxthumb://type=Asset&id=4391211308&w=150&h=150", price = 100, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Wanna play?", id = 16646438742, icon = "rbxthumb://type=Asset&id=16646438742&w=150&h=150", price = 100, lastupdated = 1709741603, sort = {} },
+
+	{ name = "TWICE I GOT YOU part 2", id = 16256253954, icon = "rbxthumb://type=Asset&id=16256253954&w=150&h=150", price = 100, lastupdated = 1708450173, sort = {} },
+
+	{ name = "Nicki Minaj Starships", id = 15571540519, icon = "rbxthumb://type=Asset&id=15571540519&w=150&h=150", price = 100, lastupdated = 1704780058, sort = {} },
+
+	{ name = "Mean Girls Dance Break", id = 15963348695, icon = "rbxthumb://type=Asset&id=15963348695&w=150&h=150", price = 100, lastupdated = 1705126454, sort = {} },
+
+	{ name = "TWICE Takedown", id = 94796833553521, icon = "rbxthumb://type=Asset&id=94796833553521&w=150&h=150", price = 100, lastupdated = 1750434081, sort = {} },
+
+	{ name = "Samba", id = 6869813008, icon = "rbxthumb://type=Asset&id=6869813008&w=150&h=150", price = 100, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Rock Out - Bebe Rexha", id = 18225077553, icon = "rbxthumb://type=Asset&id=18225077553&w=150&h=150", price = 100, lastupdated = 1719448619, sort = {} },
+
+	{ name = "TWICE LIKEY", id = 14900151704, icon = "rbxthumb://type=Asset&id=14900151704&w=150&h=150", price = 100, lastupdated = 1695849068, sort = {} },
+
+	{ name = "Sol de Janeiro - Samba", id = 16276506814, icon = "rbxthumb://type=Asset&id=16276506814&w=150&h=150", price = 100, lastupdated = 1707323755, sort = {} },
+
+	{ name = "The Weeknd Opening Night", id = 105098895743105, icon = "rbxthumb://type=Asset&id=105098895743105&w=150&h=150", price = 100, lastupdated = 1747430460, sort = {} },
+
+	{ name = "Paris Hilton - Sliving For The Groove", id = 15392927897, icon = "rbxthumb://type=Asset&id=15392927897&w=150&h=150", price = 100, lastupdated = 1700334418, sort = {} },
+
+	{ name = "Paris Hilton - Checking My Angles", id = 15392937495, icon = "rbxthumb://type=Asset&id=15392937495&w=150&h=150", price = 100, lastupdated = 1700334434, sort = {} },
+
+	{ name = "Nicki Minaj Boom Boom Boom", id = 15571538346, icon = "rbxthumb://type=Asset&id=15571538346&w=150&h=150", price = 100, lastupdated = 1704779662, sort = {} },
+
+	{ name = "Stray Kids Walkin On Water", id = 100773414188482, icon = "rbxthumb://type=Asset&id=100773414188482&w=150&h=150", price = 100, lastupdated = 1738351370, sort = {} },
+
+	{ name = "Team USA Breaking Emote", id = 18526338976, icon = "rbxthumb://type=Asset&id=18526338976&w=150&h=150", price = 100, lastupdated = 1721666622, sort = {} },
+
+	{ name = "Side to Side", id = 3762641826, icon = "rbxthumb://type=Asset&id=3762641826&w=150&h=150", price = 100, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Skibidi Toilet - Titan Speakerman Laser Spin", id = 103102322875221, icon = "rbxthumb://type=Asset&id=103102322875221&w=150&h=150", price = 100, lastupdated = 1727890994, sort = {} },
+
+	{ name = "Paris Hilton - Iconic IT-Grrrl", id = 15392932768, icon = "rbxthumb://type=Asset&id=15392932768&w=150&h=150", price = 100, lastupdated = 1700334426, sort = {} },
+
+	{ name = "Dave's Spin Move - Glass Animals", id = 16276501655, icon = "rbxthumb://type=Asset&id=16276501655&w=150&h=150", price = 95, lastupdated = 1707321025, sort = {} },
+
+	{ name = "HUGO Let's Drive!", id = 17360720445, icon = "rbxthumb://type=Asset&id=17360720445&w=150&h=150", price = 95, lastupdated = 1721145133, sort = {} },
+
+	{ name = "Fast Hands", id = 4272351660, icon = "rbxthumb://type=Asset&id=4272351660&w=150&h=150", price = 80, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Tree", id = 4049634387, icon = "rbxthumb://type=Asset&id=4049634387&w=150&h=150", price = 80, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Godlike", id = 3823158750, icon = "rbxthumb://type=Asset&id=3823158750&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Keeping Time", id = 4646306072, icon = "rbxthumb://type=Asset&id=4646306072&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Elton John - Heart Shuffle", id = 17748346932, icon = "rbxthumb://type=Asset&id=17748346932&w=150&h=150", price = 80, lastupdated = 1720191180, sort = {} },
+
+	{ name = "Tantrum", id = 5104374556, icon = "rbxthumb://type=Asset&id=5104374556&w=150&h=150", price = 80, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Rock On", id = 5915782672, icon = "rbxthumb://type=Asset&id=5915782672&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Hero Landing", id = 5104377791, icon = "rbxthumb://type=Asset&id=5104377791&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Fishing", id = 3994129128, icon = "rbxthumb://type=Asset&id=3994129128&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Floss Dance", id = 5917570207, icon = "rbxthumb://type=Asset&id=5917570207&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Get Out", id = 3934984583, icon = "rbxthumb://type=Asset&id=3934984583&w=150&h=150", price = 80, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Victory Dance", id = 15506503658, icon = "rbxthumb://type=Asset&id=15506503658&w=150&h=150", price = 75, lastupdated = 1705451709, sort = {} },
+
+	{ name = "d4vd - Backflip", id = 15694504637, icon = "rbxthumb://type=Asset&id=15694504637&w=150&h=150", price = 50, lastupdated = 1703220450, sort = {} },
+
+	{ name = "GloRilla - \"Tomorrow\" Dance", id = 15689315657, icon = "rbxthumb://type=Asset&id=15689315657&w=150&h=150", price = 50, lastupdated = 1703220424, sort = {} },
+
+	{ name = "Monkey", id = 3716636630, icon = "rbxthumb://type=Asset&id=3716636630&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Imagine Dragons - “Bones” Dance", id = 15689314578, icon = "rbxthumb://type=Asset&id=15689314578&w=150&h=150", price = 50, lastupdated = 1703220437, sort = {} },
+
+	{ name = "Greatest", id = 3762654854, icon = "rbxthumb://type=Asset&id=3762654854&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Jawny - Stomp", id = 16392120020, icon = "rbxthumb://type=Asset&id=16392120020&w=150&h=150", price = 50, lastupdated = 1708707354, sort = {} },
+
+	{ name = "Jumping Wave", id = 4940602656, icon = "rbxthumb://type=Asset&id=4940602656&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "HIPMOTION - Amaarae", id = 16572756230, icon = "rbxthumb://type=Asset&id=16572756230&w=150&h=150", price = 50, lastupdated = 1709321680, sort = {} },
+
+	{ name = "Haha", id = 4102315500, icon = "rbxthumb://type=Asset&id=4102315500&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Agree", id = 4849487550, icon = "rbxthumb://type=Asset&id=4849487550&w=150&h=150", price = 50, lastupdated = 1663264200, sort = {} },
+
+	{ name = "Mae Stephens - Piano Hands", id = 16553249658, icon = "rbxthumb://type=Asset&id=16553249658&w=150&h=150", price = 50, lastupdated = 1713462132, sort = {} },
+
+	{ name = "Mini Kong", id = 17000058939, icon = "rbxthumb://type=Asset&id=17000058939&w=150&h=150", price = 50, lastupdated = 1712176275, sort = {} },
+
+	{ name = "Mae Stephens – Arm Wave", id = 16584496781, icon = "rbxthumb://type=Asset&id=16584496781&w=150&h=150", price = 50, lastupdated = 1713462122, sort = {} },
+
+	{ name = "Festive Dance", id = 15679955281, icon = "rbxthumb://type=Asset&id=15679955281&w=150&h=150", price = 50, lastupdated = 1703018450, sort = {} },
+
+	{ name = "Jumping Cheer", id = 5895009708, icon = "rbxthumb://type=Asset&id=5895009708&w=150&h=150", price = 50, lastupdated = 1604988014, sort = {} },
+
+	{ name = "Sleep", id = 4689362868, icon = "rbxthumb://type=Asset&id=4689362868&w=150&h=150", price = 50, lastupdated = 1663281651, sort = {} },
+
+	{ name = "ericdoa - dance", id = 15698510244, icon = "rbxthumb://type=Asset&id=15698510244&w=150&h=150", price = 50, lastupdated = 1703220462, sort = {} },
+
+	{ name = "Disagree", id = 4849495710, icon = "rbxthumb://type=Asset&id=4849495710&w=150&h=150", price = 50, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Happy", id = 4849499887, icon = "rbxthumb://type=Asset&id=4849499887&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Bored", id = 5230661597, icon = "rbxthumb://type=Asset&id=5230661597&w=150&h=150", price = 50, lastupdated = 1663281649, sort = {} },
+
+	{ name = "High Wave", id = 5915776835, icon = "rbxthumb://type=Asset&id=5915776835&w=150&h=150", price = 50, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Alo Yoga Pose - Warrior II", id = 12507106431, icon = "rbxthumb://type=Asset&id=12507106431&w=150&h=150", price = 50, lastupdated = 1677711229, sort = {} },
+
+	{ name = "Cower", id = 4940597758, icon = "rbxthumb://type=Asset&id=4940597758&w=150&h=150", price = 50, lastupdated = 1591404331, sort = {} },
+
+	{ name = "Wisp - air guitar", id = 17370797454, icon = "rbxthumb://type=Asset&id=17370797454&w=150&h=150", price = 50, lastupdated = 1714753031, sort = {} },
+
+	{ name = "Alo Yoga Pose - Triangle", id = 12507120275, icon = "rbxthumb://type=Asset&id=12507120275&w=150&h=150", price = 50, lastupdated = 1677711156, sort = {} },
+
+	{ name = "Cuco - Levitate", id = 15698511500, icon = "rbxthumb://type=Asset&id=15698511500&w=150&h=150", price = 50, lastupdated = 1708707329, sort = {} },
+
+	{ name = "Rock n Roll", id = 15506496093, icon = "rbxthumb://type=Asset&id=15506496093&w=150&h=150", price = 50, lastupdated = 1705451701, sort = {} },
+
+	{ name = "Shy", id = 3576717965, icon = "rbxthumb://type=Asset&id=3576717965&w=150&h=150", price = 50, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Alo Yoga Pose - Lotus Position", id = 12507097350, icon = "rbxthumb://type=Asset&id=12507097350&w=150&h=150", price = 50, lastupdated = 1677711092, sort = {} },
+
+	{ name = "Curtsy", id = 4646306583, icon = "rbxthumb://type=Asset&id=4646306583&w=150&h=150", price = 50, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Celebrate", id = 3994127840, icon = "rbxthumb://type=Asset&id=3994127840&w=150&h=150", price = 50, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Yungblud Happier Jump", id = 15610015346, icon = "rbxthumb://type=Asset&id=15610015346&w=150&h=150", price = 50, lastupdated = 1702326238, sort = {} },
+
+	{ name = "Baby Queen - Face Frame", id = 14353421343, icon = "rbxthumb://type=Asset&id=14353421343&w=150&h=150", price = 50, lastupdated = 1692371043, sort = {} },
+
+	{ name = "Confused", id = 4940592718, icon = "rbxthumb://type=Asset&id=4940592718&w=150&h=150", price = 50, lastupdated = 1590791657, sort = {} },
+
+	{ name = "Beckon", id = 5230615437, icon = "rbxthumb://type=Asset&id=5230615437&w=150&h=150", price = 50, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Secret Handshake Dance", id = 120642514156293, icon = "rbxthumb://type=Asset&id=120642514156293&w=150&h=150", price = 50, lastupdated = 1733254849, sort = {} },
+
+	{ name = "Baby Queen - Air Guitar & Knee Slide", id = 14353417553, icon = "rbxthumb://type=Asset&id=14353417553&w=150&h=150", price = 50, lastupdated = 1692371054, sort = {} },
+
+	{ name = "Baby Queen - Bouncy Twirl", id = 14353423348, icon = "rbxthumb://type=Asset&id=14353423348&w=150&h=150", price = 50, lastupdated = 1692371037, sort = {} },
+
+	{ name = "Baby Queen - Strut", id = 14353425085, icon = "rbxthumb://type=Asset&id=14353425085&w=150&h=150", price = 50, lastupdated = 1692371026, sort = {} },
+
+	{ name = "Baby Queen - Dramatic Bow", id = 14353419229, icon = "rbxthumb://type=Asset&id=14353419229&w=150&h=150", price = 50, lastupdated = 1692371048, sort = {} },
+
+	{ name = "Sad", id = 4849502101, icon = "rbxthumb://type=Asset&id=4849502101&w=150&h=150", price = 50, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Robot M3GAN", id = 90569436057900, icon = "rbxthumb://type=Asset&id=90569436057900&w=150&h=150", price = 1, lastupdated = 1749316525, sort = {} },
+
+	{ name = "Nicki Minaj Anaconda", id = 15571539403, icon = "rbxthumb://type=Asset&id=15571539403&w=150&h=150", price = 0, lastupdated = 1702052956, sort = {} },
+
+	{ name = "Cha-Cha", id = 3696764866, icon = "rbxthumb://type=Asset&id=3696764866&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "BURBERRY LOLA ATTITUDE - BLOOM", id = 10147919199, icon = "rbxthumb://type=Asset&id=10147919199&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Skadoosh Emote - Kung Fu Panda 4", id = 16371235025, icon = "rbxthumb://type=Asset&id=16371235025&w=150&h=150", price = 0, lastupdated = 1708496660, sort = {} },
+
+	{ name = "Chicken Dance", id = 4849493309, icon = "rbxthumb://type=Asset&id=4849493309&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "BLACKPINK Don't know what to do", id = 18855609889, icon = "rbxthumb://type=Asset&id=18855609889&w=150&h=150", price = 0, lastupdated = 1723090163, sort = {} },
+
+	{ name = "Man City Scorpion Kick", id = 13694139364, icon = "rbxthumb://type=Asset&id=13694139364&w=150&h=150", price = 0, lastupdated = 1688061827, sort = {} },
+
+	{ name = "Gashina - SUNMI", id = 9528294735, icon = "rbxthumb://type=Asset&id=9528294735&w=150&h=150", price = 0, lastupdated = 1651539455, sort = {} },
+
+	{ name = "Fashion Spin", id = 130046968468383, icon = "rbxthumb://type=Asset&id=130046968468383&w=150&h=150", price = 0, lastupdated = 1732653968, sort = {} },
+
+	{ name = "Country Line Dance - Lil Nas X (LNX)", id = 5915780563, icon = "rbxthumb://type=Asset&id=5915780563&w=150&h=150", price = 0, lastupdated = 1605561299, sort = {} },
+
+	{ name = "Sandwich Dance", id = 4390121879, icon = "rbxthumb://type=Asset&id=4390121879&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "BLACKPINK LISA Money", id = 15679957363, icon = "rbxthumb://type=Asset&id=15679957363&w=150&h=150", price = 0, lastupdated = 1703004397, sort = {} },
+
+	{ name = "Nicki Minaj That's That Super Bass Emote", id = 15571536896, icon = "rbxthumb://type=Asset&id=15571536896&w=150&h=150", price = 0, lastupdated = 1702052899, sort = {} },
+
+	{ name = "Salute", id = 3360689775, icon = "rbxthumb://type=Asset&id=3360689775&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Olympic Dismount", id = 18666650035, icon = "rbxthumb://type=Asset&id=18666650035&w=150&h=150", price = 0, lastupdated = 1722014387, sort = {} },
+
+	{ name = "MANIAC - Stray Kids", id = 11309309359, icon = "rbxthumb://type=Asset&id=11309309359&w=150&h=150", price = 0, lastupdated = 1668458448, sort = {} },
+
+	{ name = "BLACKPINK JISOO Flower", id = 15439454888, icon = "rbxthumb://type=Asset&id=15439454888&w=150&h=150", price = 0, lastupdated = 1701124495, sort = {} },
+
+	{ name = "Man City Bicycle Kick", id = 13422286833, icon = "rbxthumb://type=Asset&id=13422286833&w=150&h=150", price = 0, lastupdated = 1684429651, sort = {} },
+
+	{ name = "Man City Backflip", id = 13694140956, icon = "rbxthumb://type=Asset&id=13694140956&w=150&h=150", price = 0, lastupdated = 1688061856, sort = {} },
+
+	{ name = "BLACKPINK Pink Venom - Straight to Ya Dome", id = 14548711723, icon = "rbxthumb://type=Asset&id=14548711723&w=150&h=150", price = 0, lastupdated = 1732579764, sort = {} },
+
+	{ name = "BLACKPINK Pink Venom - I Bring the Pain Like…", id = 14548710952, icon = "rbxthumb://type=Asset&id=14548710952&w=150&h=150", price = 0, lastupdated = 1732579780, sort = {} },
+
+	{ name = "Stadium", id = 3360686498, icon = "rbxthumb://type=Asset&id=3360686498&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "BLACKPINK ROSÉ On The Ground", id = 15679958535, icon = "rbxthumb://type=Asset&id=15679958535&w=150&h=150", price = 0, lastupdated = 1703004441, sort = {} },
+
+	{ name = "Bunny Hop", id = 4646296016, icon = "rbxthumb://type=Asset&id=4646296016&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "BLACKPINK Shut Down - Part 1", id = 14901369589, icon = "rbxthumb://type=Asset&id=14901369589&w=150&h=150", price = 0, lastupdated = 1732579788, sort = {} },
+
+	{ name = "BLACKPINK Kill This Love", id = 16181843366, icon = "rbxthumb://type=Asset&id=16181843366&w=150&h=150", price = 0, lastupdated = 1706724495, sort = {} },
+
+	{ name = "SpongeBob Dance", id = 18443271885, icon = "rbxthumb://type=Asset&id=18443271885&w=150&h=150", price = 0, lastupdated = 1720722377, sort = {} },
+
+	{ name = "Borock's Rage", id = 3236848555, icon = "rbxthumb://type=Asset&id=3236848555&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "The Conductor - George Ezra", id = 10370926562, icon = "rbxthumb://type=Asset&id=10370926562&w=150&h=150", price = 0, lastupdated = 1658879306, sort = {} },
+
+	{ name = "Swag Walk", id = 10478377385, icon = "rbxthumb://type=Asset&id=10478377385&w=150&h=150", price = 0, lastupdated = 1659642405, sort = {} },
+
+	{ name = "BLACKPINK Shut Down - Part 2", id = 14901371589, icon = "rbxthumb://type=Asset&id=14901371589&w=150&h=150", price = 0, lastupdated = 1732579772, sort = {} },
+
+	{ name = "BLACKPINK Ice Cream", id = 16181840356, icon = "rbxthumb://type=Asset&id=16181840356&w=150&h=150", price = 0, lastupdated = 1706724478, sort = {} },
+
+	{ name = "Superhero Reveal", id = 3696759798, icon = "rbxthumb://type=Asset&id=3696759798&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "BLACKPINK Pink Venom - Get em Get em Get em", id = 14548709888, icon = "rbxthumb://type=Asset&id=14548709888&w=150&h=150", price = 0, lastupdated = 1732579749, sort = {} },
+
+	{ name = "NBA Monster Dunk", id = 82163305721376, icon = "rbxthumb://type=Asset&id=82163305721376&w=150&h=150", price = 0, lastupdated = 1739396236, sort = {} },
+
+	{ name = "TWICE ABCD by Nayeon", id = 18933761755, icon = "rbxthumb://type=Asset&id=18933761755&w=150&h=150", price = 0, lastupdated = 1723561480, sort = {} },
+
+	{ name = "BURBERRY LOLA ATTITUDE - NIMBUS", id = 10147924028, icon = "rbxthumb://type=Asset&id=10147924028&w=150&h=150", price = 0, lastupdated = 1657728069, sort = {} },
+
+	{ name = "Ud'zal's Summoning", id = 3307604888, icon = "rbxthumb://type=Asset&id=3307604888&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "TWICE Pop by Nayeon", id = 13768975574, icon = "rbxthumb://type=Asset&id=13768975574&w=150&h=150", price = 0, lastupdated = 1687549777, sort = {} },
+
+	{ name = "TWICE Set Me Free - Dance 1", id = 12715395038, icon = "rbxthumb://type=Asset&id=12715395038&w=150&h=150", price = 0, lastupdated = 1678474186, sort = {} },
+
+	{ name = "TWICE Set Me Free - Dance 2", id = 12715397488, icon = "rbxthumb://type=Asset&id=12715397488&w=150&h=150", price = 0, lastupdated = 1678474350, sort = {} },
+
+	{ name = "Hyperfast 5G Dance Move", id = 9408642191, icon = "rbxthumb://type=Asset&id=9408642191&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "You can't sit with us - Sunmi", id = 9983549160, icon = "rbxthumb://type=Asset&id=9983549160&w=150&h=150", price = 0, lastupdated = 1657679637, sort = {} },
+
+	{ name = "Hype Dance", id = 3696757129, icon = "rbxthumb://type=Asset&id=3696757129&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "BLACKPINK - How You Like That", id = 16874596971, icon = "rbxthumb://type=Asset&id=16874596971&w=150&h=150", price = 0, lastupdated = 1711414303, sort = {} },
+
+	{ name = "BLACKPINK - Lovesick Girls", id = 16874600526, icon = "rbxthumb://type=Asset&id=16874600526&w=150&h=150", price = 0, lastupdated = 1711414329, sort = {} },
+
+	{ name = "TWICE Like Ooh-Ahh", id = 14124050904, icon = "rbxthumb://type=Asset&id=14124050904&w=150&h=150", price = 0, lastupdated = 1689868872, sort = {} },
+
+	{ name = "Heisman Pose", id = 3696763549, icon = "rbxthumb://type=Asset&id=3696763549&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "BLACKPINK As If It's Your Last", id = 18855603653, icon = "rbxthumb://type=Asset&id=18855603653&w=150&h=150", price = 0, lastupdated = 1723090177, sort = {} },
+
+	{ name = "TWICE Moonlight Sunrise ", id = 12715393154, icon = "rbxthumb://type=Asset&id=12715393154&w=150&h=150", price = 0, lastupdated = 1678474249, sort = {} },
+
+	{ name = "TWICE Fancy", id = 13520623514, icon = "rbxthumb://type=Asset&id=13520623514&w=150&h=150", price = 0, lastupdated = 1685112803, sort = {} },
+
+	{ name = "Point2", id = 3576823880, icon = "rbxthumb://type=Asset&id=3576823880&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "BURBERRY LOLA ATTITUDE - GEM", id = 10147916560, icon = "rbxthumb://type=Asset&id=10147916560&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Vroom Vroom", id = 18526410572, icon = "rbxthumb://type=Asset&id=18526410572&w=150&h=150", price = 0, lastupdated = 1721931643, sort = {} },
+
+	{ name = "Hwaiting (화이팅)", id = 9528291779, icon = "rbxthumb://type=Asset&id=9528291779&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "BLACKPINK JENNIE You and Me", id = 15439457146, icon = "rbxthumb://type=Asset&id=15439457146&w=150&h=150", price = 0, lastupdated = 1701124471, sort = {} },
+
+	{ name = "Tilt", id = 3360692915, icon = "rbxthumb://type=Asset&id=3360692915&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Applaud", id = 5915779043, icon = "rbxthumb://type=Asset&id=5915779043&w=150&h=150", price = 0, lastupdated = 1663264200, sort = {} },
+
+	{ name = "BLACKPINK DDU-DU DDU-DU", id = 16553262614, icon = "rbxthumb://type=Asset&id=16553262614&w=150&h=150", price = 0, lastupdated = 1709100790, sort = {} },
+
+	{ name = "BURBERRY LOLA ATTITUDE - HYDRO", id = 10147926081, icon = "rbxthumb://type=Asset&id=10147926081&w=150&h=150", price = 0, lastupdated = 1657814503, sort = {} },
+
+	{ name = "BURBERRY LOLA ATTITUDE - REFLEX", id = 10147921916, icon = "rbxthumb://type=Asset&id=10147921916&w=150&h=150", price = 0, lastupdated = 1663281649, sort = {} },
+
+	{ name = "Air Guitar", id = 3696761354, icon = "rbxthumb://type=Asset&id=3696761354&w=150&h=150", price = 0, lastupdated = 1663264200, sort = {} },
+
+	{ name = "Annyeong (안녕)", id = 9528286240, icon = "rbxthumb://type=Asset&id=9528286240&w=150&h=150", price = 0, lastupdated = 1651539455, sort = {} },
+
+	{ name = "BLACKPINK Boombayah Emote", id = 16553259683, icon = "rbxthumb://type=Asset&id=16553259683&w=150&h=150", price = 0, lastupdated = 1709339907, sort = {} },
+
+	{ name = "Victory - 24kGoldn", id = 9178397781, icon = "rbxthumb://type=Asset&id=9178397781&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+	{ name = "Hello", id = 3576686446, icon = "rbxthumb://type=Asset&id=3576686446&w=150&h=150", price = 0, lastupdated = 1663281650, sort = {} },
+
+	{ name = "Vans Ollie", id = 18305539673, icon = "rbxthumb://type=Asset&id=18305539673&w=150&h=150", price = 0, lastupdated = 1719938530, sort = {} },
+
+	{ name = "TWICE Strategy", id = 106862678450011, icon = "rbxthumb://type=Asset&id=106862678450011&w=150&h=150", price = 0, lastupdated = 1734540744, sort = {} },
+
+	{ name = "TWICE The Feels", id = 12874468267, icon = "rbxthumb://type=Asset&id=12874468267&w=150&h=150", price = 0, lastupdated = 1679673336, sort = {} },
+
+	{ name = "TWICE What Is Love", id = 13344121112, icon = "rbxthumb://type=Asset&id=13344121112&w=150&h=150", price = 0, lastupdated = 1683906913, sort = {} },
+
+	{ name = "Shrug", id = 3576968026, icon = "rbxthumb://type=Asset&id=3576968026&w=150&h=150", price = 0, lastupdated = 1663281651, sort = {} },
+
+}
+
+
+
+
+
+local function addEmote(name, id, price, date)
+    local months = {
+        Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6,
+        Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12
+    }
+    local function dateToUnix(d)
+        local mon, day, year = d:match("(%a+)%s+(%d+),%s*(%d+)")
+        return os.time({
+            year = tonumber(year),
+            month = months[mon],
+            day = tonumber(day),
+            hour = 0,
+            min = 0,
+            sec = 0
+        })
+    end
+    
+    table.insert(Emotes, {
+        name = name,
+        id = id,
+        icon = "rbxthumb://type=Asset&id=" .. id .. "&w=150&h=150",
+        price = price,
+        lastupdated = dateToUnix(date),
+        sort = {}
+    })
+end
+
+addEmote("PARROT PARTY DANCE", 121067808279598, 39, "Aug 08, 2025")
+addEmote("Dance n' Prance", 99031916674986, 39, "Aug 08, 2025")
+addEmote("R15 Death (Accurate)", 114899970878842, 39, "Aug 08, 2025")
+addEmote("Wally West", 133948663586698, 39, "Aug 08, 2025")
+addEmote("Take The L", 123159156696507, 39, "Aug 08, 2025")
+addEmote("Xaviersobased", 131763631172236, 39, "Aug 09, 2025")
+addEmote("Belly Dancing", 131939729732240, 39, "Aug 08, 2025")
+addEmote("RAT DANCE", 133461102795137, 78, "Aug 08, 2025")
+addEmote("CaramellDansen", 93105950995997, 39, "Aug 08, 2025")
+addEmote("Biblically Accurate", 133596366979822, 39, "Aug 08, 2025")
+addEmote("Rambunctious", 108128682361404, 39, "Aug 08, 2025")
+addEmote("Die Lit", 121001502815813, 39, "Aug 08, 2025")
+addEmote("Nyan Nyan!", 73796726960568, 39, "Aug 08, 2025")
+addEmote("Teto Territory", 114428584463004, 39, "Aug 08, 2025")
+addEmote("Skibidi", 124828909173982, 39, "Aug 08, 2025")
+addEmote("Chronoshift", 92600655160976, 39, "Aug 08, 2025")
+addEmote("Floating on Clouds", 111426928948833, 39, "Aug 08, 2025")
+addEmote("Jersey Joe", 134149640725489, 39, "Aug 08, 2025")
+addEmote("Virtual Insanity", 83261816934732, 39, "Aug 09, 2025")
+addEmote("Doodle Dance", 107091254142209, 39, "Aug 08, 2025")
+addEmote("Subject 3", 83732367439808, 39, "Aug 08, 2025")
+addEmote("Club Penguin", 98099211500155, 39, "Aug 09, 2025")
+addEmote("Kazotsky", 97629500912487, 39, "Aug 08, 2025")
+addEmote("Miku Dance", 117734400993750, 39, "Aug 08, 2025")
+addEmote("Deltarune - Tenna Swing", 103139492736941, 39, "Aug 08, 2025")
+addEmote("Hakari Dance", 80270168146449, 39, "Aug 08, 2025")
+addEmote("Addendum Dance [R6]", 134442882516163, 39, "Aug 09, 2025")
+addEmote("Gangnam Style", 77205409178702, 39, "Aug 08, 2025")
+addEmote("Push-Up", 117922227854118, 39, "Aug 09, 2025")
+
+
+addEmote("Split", 98522218962476, 39, "Aug 08, 2025")
+
+addEmote("PROXIMA", 81390693780805, 39, "Aug 08, 2025")
+
+
+addEmote("HeadBanging", 87447252507832, 39, "Aug 08, 2025")
+
+
+addEmote("Assumptions", 127507691649322, 39, "Aug 08, 2025")
+
+addEmote("Jumpstyle", 99563839802389, 39, "Aug 08, 2025")
+
+
+addEmote("Flopping Fish", 133142324349281, 39, "Aug 08, 2025")
+addEmote("Kicking Feet Sit", 78758922757947, 39, "Aug 08, 2025")
+
+addEmote("Fancy Feets", 124512151372711, 39, "Aug 08, 2025")
+
+addEmote("Cute Sit", 90244178386698, 39, "Aug 08, 2025")
+addEmote("Absolute Cinema", 97258018304125, 39, "Aug 08, 2025")
+addEmote("Bubbly Sit", 112758073578333, 39, "Aug 08, 2025")
+addEmote("Become A Car", 131544122623505, 39, "Aug 08, 2025")
+addEmote("Hiding Human Box", 124935873390035, 39, "Aug 08, 2025")
+addEmote("Magical Pose", 135489824748823, 39, "Aug 08, 2025")
+addEmote("Griddy", 116065653184749, 39, "Aug 08, 2025")
+addEmote("Spy Laugh tf2", 137720205462499, 39, "Aug 10, 2025") 
+addEmote("Head Juggling", 82224981519682, 39, "Aug 09, 2025")
+addEmote("Omniman Think", 70560694892323, 39, "Aug 09, 2025")
+addEmote("Ishowspeed Shake Dancing", 138386881919239, 39, "Aug 09, 2025")
+addEmote("Wait", 106569806588657, 39, "Aug 09, 2025")
+addEmote("Shinji Pose", 97629500912487, 39, "Aug 09, 2025")
+addEmote("Come At Me [ R6 ]", 107758370940834, 39, "Aug 09, 2025")
+addEmote("Oscillating Fan", 71493999860590, 39, "Aug 09, 2025")
+addEmote("Locked In", 110145155419199, 39, "Aug 10, 2025")
+addEmote("BirdBrain", 105730788757021, 39, "Aug 10, 2025")
+addEmote("Hakari (FULL)", 71056659089869, 39, "Aug 09, 2025")
+addEmote("Strongest Stance", 80146495484274, 39, "Aug 09, 2025")
+addEmote("Cat Things", 131193808160056, 39, "Aug 09, 2025")
+addEmote("Doggy Things", 105206768873249, 39, "Aug 09, 2025")
+addEmote("Wally West Edit", 72247161810866, 39, "Aug 09, 2025")
+addEmote("24 Hour Cinderella", 122972776209997, 39, "Aug 09, 2025")
+addEmote("Rafa Polinesio Baile", 133047022806044, 39, "Aug 09, 2025")
+addEmote("Mesmerizer", 92707348383277, 39, "Aug 09, 2025")
+addEmote("Soda Pop", 132718205548925, 39, "Aug 10, 2025")
+addEmote("Best Mates", 73271793399763, 39, "Aug 10, 2025")
+addEmote("Garou", 86200585395371, 39, "Aug 09, 2025")
+addEmote("Dio Pose", 76736978166708, 39, "Aug 09, 2025")
+addEmote("Twerkstuff", 133246132766663, 39, "Aug 09, 2025")
+addEmote("Golden Freddy", 122463450997235, 39, "Aug 09, 2025")
+addEmote("Noclip, Speed", 137006085779408, 39, "Aug 09, 2025")
+addEmote("Static [Hatsune Miku]", 84534006084837, 39, "Aug 09, 2025")
+
+addEmote("GOALL", 78830825254717, 39, "Aug 09, 2025")
+addEmote("Lethal Dance", 77108921633993, 39, "Aug 09, 2025")
+addEmote("Plug Walk", 100359724990859, 39, "Aug 09, 2025")
+addEmote("At Ease", 76993139936388, 39, "Aug 09, 2025")
+addEmote("Conga", 97547955535086, 39, "Aug 09, 2025")
+addEmote("Barrel", 84511772437190, 39, "Aug 08, 2025")
+addEmote("Helicopter", 84555218084038, 39, "Aug 08, 2025")
+addEmote("Aura Farm Boat", 88042995626011, 39, "Aug 09, 2025")
+addEmote("Prince Of Egypt", 134063402217274, 39, "Aug 08, 2025")
+addEmote("Jersey Joe2", 115782117564871, 39, "Aug 09, 2025")
+addEmote("Deltarune - Tenna Dance", 73715378215546, 39, "Aug 08, 2025")
+
+addEmote("California Girl", 132074413582912, 39, "Aug 08, 2025")
+addEmote("Default Dance", 80877772569772, 39, "Aug 08, 2025")
+
+addEmote("Shocked meme", 129501229484294, 39, "Aug 08, 2025")
+addEmote("Family Guy", 78459263478161, 39, "Aug 08, 2025")
+addEmote("Tank Transformation", 132382355371060, 39, "Aug 08, 2025")
+addEmote("Insanity", 129843344424281, 39, "Aug 08, 2025")
+addEmote("Honored One", 121643381580730, 39, "Aug 08, 2025")
+addEmote("Sukuna", 91839607010745, 39, "Aug 08, 2025")
+addEmote("Dropper", 130358790702800, 39, "Aug 08, 2025")
+addEmote("Be Not Afraid", 70635223083942, 39, "Aug 08, 2025")
+addEmote("Macarena", 91274761264433, 39, "Aug 08, 2025")
+addEmote("Helicopter2", 119431985170060, 39, "Aug 08, 2025")
+addEmote("RONALDO", 97547486465713, 39, "Aug 08, 2025")
+
+
+
+addEmote("Nya Anime Dance", 126647057611522, 39, "Aug 08, 2025")
+addEmote("Do that thang", 113772829398170, 39, "Aug 08, 2025")
+addEmote("Squat?", 95441477641149, 39, "Aug 08, 2025")
+addEmote("Slickback", 103789826265487, 39, "Aug 08, 2025")
+
+
+
+
+
+
+
+
+
+
+
+
+--wait for emotes to finish loading
+
+
+
+local function EmotesLoaded()
+
+	for i, loaded in pairs(LoadedEmotes) do
+
+		if not loaded then
+
+			return false
+
+		end
+
+	end
+
+	return true
+
+end
+
+while not EmotesLoaded() do
+
+	task.wait()
+
+end
+
+Loading:Destroy()
+
+
+
+--sorting options setup
+
+table.sort(Emotes, function(a, b)
+
+	return a.lastupdated > b.lastupdated
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.recentfirst = i
+
+end
+
+
+
+table.sort(Emotes, function(a, b)
+
+	return a.lastupdated < b.lastupdated
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.recentlast = i
+
+end
+
+
+
+table.sort(Emotes, function(a, b)
+
+	return a.name:lower() < b.name:lower()
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.alphabeticfirst = i
+
+end
+
+
+
+table.sort(Emotes, function(a, b)
+
+	return a.name:lower() > b.name:lower()
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.alphabeticlast = i
+
+end
+
+
+
+table.sort(Emotes, function(a, b)
+
+	return a.price < b.price
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.lowestprice = i
+
+end
+
+
+
+table.sort(Emotes, function(a, b)
+
+	return a.price > b.price
+
+end)
+
+for i,v in pairs(Emotes) do
+
+	v.sort.highestprice = i
+
+end
+
+
+
+if isfile("FavoritedEmotes.txt") then
+
+	if not pcall(function()
+
+		FavoritedEmotes = HttpService:JSONDecode(readfile("FavoritedEmotes.txt"))
+
+	end) then
+
+		FavoritedEmotes = {}
+
+	end
+
+else
+
+	writefile("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+
+end
+
+
+
+local UpdatedFavorites = {}
+
+for i,name in pairs(FavoritedEmotes) do
+
+	if typeof(name) == "string" then
+
+		for i,emote in pairs(Emotes) do
+
+			if emote.name == name then
+
+				table.insert(UpdatedFavorites, emote.id)
+
+				break
+
+			end
+
+		end
+
+	end
+
+end
+
+if #UpdatedFavorites ~= 0 then
+
+	FavoritedEmotes = UpdatedFavorites
+
+	writefile("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+
+end
+
+
+
+local function CharacterAdded(Character)
+
+	for i,v in pairs(Frame:GetChildren()) do
+
+		if not v:IsA("UIGridLayout") then
+
+			v:Destroy()
+
+		end
+
+	end
+
+	local Humanoid = WaitForChildOfClass(Character, "Humanoid")
+
+	local Description = Humanoid:WaitForChild("HumanoidDescription", 5) or Instance.new("HumanoidDescription", Humanoid)
+
+	local random = Instance.new("TextButton")
+
+	local Ratio = Instance.new("UIAspectRatioConstraint")
+
+	Ratio.AspectType = Enum.AspectType.ScaleWithParentSize
+
+	Ratio.Parent = random
+
+	random.LayoutOrder = 0
+
+	random.TextColor3 = Color3.new(1, 1, 1)
+
+	random.BorderSizePixel = 0
+
+	random.BackgroundTransparency = 0.5
+
+	random.BackgroundColor3 = Color3.new(0, 0, 0)
+
+	random.TextScaled = true
+
+	random.Text = "Random"
+
+	random:SetAttribute("name", "")
+
+	Corner:Clone().Parent = random
+
+	random.MouseButton1Click:Connect(function()
+
+		local randomemote = Emotes[math.random(1, #Emotes)]
+
+		PlayEmote(randomemote.name, randomemote.id)
+
+	end)
+
+	random.MouseEnter:Connect(function()
+
+		EmoteName.Text = "Random"
+
+	end)
+
+	random.Parent = Frame
+
+	for i,Emote in pairs(Emotes) do
+
+		Description:AddEmote(Emote.name, Emote.id)
+
+		local EmoteButton = Instance.new("ImageButton")
+
+		local IsFavorited = table.find(FavoritedEmotes, Emote.id)
+
+		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 0) or #Emotes)
+
+		EmoteButton.Name = Emote.id
+
+		EmoteButton:SetAttribute("name", Emote.name)
+
+		Corner:Clone().Parent = EmoteButton
+
+		EmoteButton.Image = Emote.icon
+
+		EmoteButton.BackgroundTransparency = 0.5
+
+		EmoteButton.BackgroundColor3 = Color3.new(0, 0, 0)
+
+		EmoteButton.BorderSizePixel = 0
+
+		Ratio:Clone().Parent = EmoteButton
+
+		local EmoteNumber = Instance.new("TextLabel")
+
+		EmoteNumber.Name = "number"
+
+		EmoteNumber.TextScaled = true
+
+		EmoteNumber.BackgroundTransparency = 1
+
+		EmoteNumber.TextColor3 = Color3.new(1, 1, 1)
+
+		EmoteNumber.BorderSizePixel = 0
+
+		EmoteNumber.AnchorPoint = Vector2.new(0.5, 0.5)
+
+		EmoteNumber.Size = UDim2.new(0.2, 0, 0.2, 0)
+
+		EmoteNumber.Position = UDim2.new(0.1, 0, 0.9, 0)
+
+		EmoteNumber.Text = Emote.sort[CurrentSort]
+
+		EmoteNumber.TextXAlignment = Enum.TextXAlignment.Center
+
+		EmoteNumber.TextYAlignment = Enum.TextYAlignment.Center
+
+		local UIStroke = Instance.new("UIStroke")
+
+		UIStroke.Transparency = 0.5
+
+		UIStroke.Parent = EmoteNumber
+
+		EmoteNumber.Parent = EmoteButton
+
+		EmoteButton.Parent = Frame
+
+		EmoteButton.MouseButton1Click:Connect(function()
+
+			PlayEmote(Emote.name, Emote.id)
+
+		end)
+
+		EmoteButton.MouseEnter:Connect(function()
+
+			EmoteName.Text = Emote.name
+
+		end)
+
+		local Favorite = Instance.new("ImageButton")
+
+		Favorite.Name = "favorite"
+
+		if table.find(FavoritedEmotes, Emote.id) then
+
+			Favorite.Image = FavoriteOn
+
+		else
+
+			Favorite.Image = FavoriteOff
+
+		end
+
+		Favorite.AnchorPoint = Vector2.new(0.5, 0.5)
+
+		Favorite.Size = UDim2.new(0.2, 0, 0.2, 0)
+
+		Favorite.Position = UDim2.new(0.9, 0, 0.9, 0)
+
+		Favorite.BorderSizePixel = 0
+
+		Favorite.BackgroundTransparency = 1
+
+		Favorite.Parent = EmoteButton
+
+		Favorite.MouseButton1Click:Connect(function()
+
+			local index = table.find(FavoritedEmotes, Emote.id)
+
+			if index then
+
+				table.remove(FavoritedEmotes, index)
+
+				Favorite.Image = FavoriteOff
+
+				EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + #Emotes
+
+			else
+
+				table.insert(FavoritedEmotes, Emote.id)
+
+				Favorite.Image = FavoriteOn
+
+				EmoteButton.LayoutOrder = Emote.sort[CurrentSort]
+
+			end
+
+			writefile("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+
+		end)
+
+	end
+
+	for i=1,9 do
+
+		local EmoteButton = Instance.new("Frame")
+
+		EmoteButton.LayoutOrder = 2147483647
+
+		EmoteButton.Name = "filler"
+
+		EmoteButton.BackgroundTransparency = 1
+
+		EmoteButton.BorderSizePixel = 0
+
+		Ratio:Clone().Parent = EmoteButton
+
+		EmoteButton.Visible = true
+
+		EmoteButton.Parent = Frame
+
+		EmoteButton.MouseEnter:Connect(function()
+
+			EmoteName.Text = "Select an Emote"
+
+		end)
+
+	end
+
+end
+
+
+
+if LocalPlayer.Character then
+
+	CharacterAdded(LocalPlayer.Character)
+
+end
+
+LocalPlayer.CharacterAdded:Connect(CharacterAdded)
+
+
+
+wait(1)
+
+
+
+
+
+game.CoreGui.Emotes.Enabled = true
+
+
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+
+                Title = "Done!",
+
+                Text = "Emotes gui is here!",
+
+                 Duration = 10})
+
+
+
+game.Players.LocalPlayer.PlayerGui.ContextActionGui:Destroy()
