@@ -1,0 +1,99 @@
+-- ONLY FOR R6 (Work With VC Too? Idk I Never Had That
+
+-- YOU MAY SEE YOURSELF FLOATING BUT ITS INVISIBLE ON OTHER PEOPLE
+-- THE BLUE PART IS WHERE YOUR CHAT BUBBLE APPEAR
+
+local height = 3
+
+
+-- more height makes your chat higher
+-- max height is 4
+
+-- Its Not Actual Invisible, Your Body Is Underground but your chat is far above?
+
+
+
+if height > 4 then
+    height = 4
+end
+
+
+
+
+local function fadeTextThatMadeByChatGpt(labeltext)
+
+    local screenGui = Instance.new("ScreenGui")
+    local label = Instance.new("TextLabel") -- Corrected label variable name
+
+    -- Set up the Sloves and Naggers properties
+    screenGui.Parent = coreGay
+    label.Parent = screenGui
+    label.Size = UDim2.new(0.5, 0, 0.2, 0)  
+    label.Position = UDim2.new(0.30, 0, 0.45, 0)  
+    label.BackgroundTransparency = 1
+    label.TextTransparency = 1
+    label.Text = labeltext
+    label.TextColor3 = Color3.new(0, 1, 1)  
+    label.TextScaled = true
+    label.Font = Enum.Font.GothamBlack -- Bold, modern font
+    local fadeDuration = 1
+    local tweenService = game:GetService("TweenService")
+    local fadeIn = tweenService:Create(label, TweenInfo.new(fadeDuration), {TextTransparency = 0})
+    fadeIn:Play()
+    fadeIn.Completed:Wait()
+    task.wait(fadeDuration)
+    local fadeOut = tweenService:Create(label, TweenInfo.new(fadeDuration), {TextTransparency = 1})
+    fadeOut:Play()
+    fadeOut.Completed:Wait()
+    screenGui:Destroy()
+end
+
+-- how is this work?
+
+-- Copying Player
+local lp = game.Players.LocalPlayer
+local c = lp.Character or lp.CharacterAdded:Wait()
+local hrp0 = c:FindFirstChild("HumanoidRootPart")
+local hrp1 = hrp0:Clone()
+
+-- Just where Bubble Chat Appear Part
+local part = Instance.new("Part")
+part.Size = Vector3.new(0.5, 0.5, 0.5)
+part.Anchored = true
+part.CanCollide = false
+part.Transparency = 0.5
+part.BrickColor = BrickColor.new("Bright blue")
+part.Parent = workspace
+
+c.Parent = nil
+hrp0.Parent = hrp1
+hrp0.RootJoint.Part0 = nil
+hrp1.Parent = c
+c.Parent = workspace
+
+
+local animId = "rbxassetid://215384594"
+local anim = Instance.new("Animation")
+anim.AnimationId = animId
+local humanoid = c:WaitForChild("Humanoid")
+local animTrack = humanoid:LoadAnimation(anim)
+    
+
+
+
+
+local h = game:GetService("RunService").Heartbeat
+while h:Wait() and c and c.Parent do
+
+humanoid.HipHeight = height
+humanoid.JumpPower = 20
+animTrack:Play()
+animTrack:AdjustSpeed(0)
+animTrack.TimePosition = 0.4
+    hrp0.CFrame = hrp1.CFrame 
+    hrp0.Orientation = Vector3.new(90, 0, 0)
+    hrp0.Position = hrp1.Position - Vector3.new(0, hrp0.Size.Y / 2, 0) 
+    hrp0.Velocity = hrp1.Velocity
+
+    part.Position = hrp0.Position + Vector3.new(-0.05, 0, 2.45)
+end
