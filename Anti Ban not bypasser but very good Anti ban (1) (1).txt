@@ -1,0 +1,247 @@
+everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+local gui,GazerMain,GazerTitle,TextBax,chat,coreGay,cloneref
+
+-- function cuz lazy
+function corner(gui, radius)
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, radius)
+    corner.Parent = gui
+end
+local CAPS = false
+
+function bypass(input)
+
+if input ~= "" then
+Notempty = true
+else 
+Notempty = false
+end
+  
+
+local NUMBER, WORDS, IDK, A_1, A_2, TextChatService, DefaultChat
+NUMBER = {
+    ["0"] = "\xEF\xBC\x90",
+    ["1"] = "\xEF\xBC\x91",
+    ["2"] = "\xEF\xBC\x92",
+    ["3"] = "\xEF\xBC\x93",
+    ["4"] = "\xEF\xBC\x94",
+    ["5"] = "\xEF\xBC\x95",
+    ["6"] = "\xEF\xBC\x96",
+    ["7"] = "\xEF\xBC\x97",
+    ["8"] = "\xEF\xBC\x98",
+    ["9"] = "\xEF\xBC\x99"
+}
+
+
+WORDS = {
+    ["nigg"] = "n\u{061A}ig\u{061A}g\u{0618}",
+    ["nhentai"] = "n\u{061A}he\u{061A}ntai",
+   
+}
+
+if CAPS then
+    IDK = input:upper()
+else
+    IDK = input:lower()
+end
+
+
+for word, swearWord in pairs(WORDS) do
+    IDK = IDK:gsub(word, swearWord)
+end
+
+
+IDK = IDK:gsub("%d", function(digit)
+    return NUMBER[digit] or digit
+end)
+
+
+local result = IDK
+TextChatService = game:GetService("TextChatService"):FindFirstChild("TextChannels")
+
+
+
+
+
+result = result:gsub(" ", "\u{0008}")
+result = result:gsub("|", "\b\r\b")
+
+
+-- Literally The Same Thing
+
+
+
+
+
+
+-- sapnu puas
+if Notempty then
+ 
+ A_1= "\u{05BE}>ˑ\u{0008}" .. result .. "ˑ\u{0008}"
+ A_2 = "All"
+    if TextChatService then
+        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(A_1)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer( A_1, A_2)
+    end
+end
+end
+    
+
+    
+    
+    
+
+
+cloneref = cloneref or function(o) return o end
+
+coreGay = cloneref(game:GetService("CoreGui"))
+gui = Instance.new("ScreenGui")
+GazerMain = Instance.new("Frame")
+GazerTitle = Instance.new("TextLabel")
+TextBax = Instance.new("TextBox")
+chat = Instance.new("TextButton")
+
+gui.Name = "GazerGui"
+gui.Parent = coreGay
+
+GazerMain.Size = UDim2.new(0.5, 0, 0.2, 0)
+GazerMain.Position = UDim2.new(0.25, 0, 0.25, 0)
+GazerMain.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- Cool gray
+GazerMain.BackgroundTransparency = 0.2
+GazerMain.Active = true
+GazerMain.Parent = gui
+
+-- Rounded corners
+local corner = Instance.new("UICorner", GazerMain)
+corner.CornerRadius = UDim.new(0.1, 0)
+
+-- Outline
+local outline = Instance.new("UIStroke", GazerMain)
+outline.Thickness = 2
+outline.Color = Color3.fromRGB(100, 100, 100)
+
+GazerTitle.Size = UDim2.new(1, 0, 0.4, 0)
+GazerTitle.Position = UDim2.new(0, 0, 0, 0)
+GazerTitle.BackgroundTransparency = 1
+GazerTitle.Text = "Gaze Bypass (Tutorial needed)"
+GazerTitle.TextSize = 14
+GazerTitle.TextScaled = true
+GazerTitle.TextColor3 = Color3.new(1, 1, 1)
+GazerTitle.Font = Enum.Font.DenkOne
+GazerTitle.Parent = GazerMain
+
+TextBax.Size = UDim2.new(0.8, 0, 0.5, 0)
+TextBax.Position = UDim2.new(0.1, 0, 0.45, 0)
+TextBax.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextBax.BackgroundTransparency = 0.2
+TextBax.TextColor3 = Color3.new(1, 1, 1)
+TextBax.Font = Enum.Font.DenkOne
+TextBax.Text = ""
+TextBax.PlaceholderText = "(chat)"
+TextBax.TextSize = 15
+TextBax.TextScaled = true
+TextBax.Parent = GazerMain
+
+-- Checkbox
+local checkBox = Instance.new("TextButton")
+checkBox.Parent = GazerMain
+checkBox.Text = "☐"
+checkBox.BackgroundTransparency = 1
+checkBox.TextColor3 = Color3.new(1, 1, 1)
+checkBox.TextScaled = true
+checkBox.Size = UDim2.new(0.1, 0, 0.5, 0)
+checkBox.Position = UDim2.new(0.9, 0, 0.6, 0)
+checkBox.AnchorPoint = Vector2.new(0, 0.5)
+
+
+local aspect = Instance.new("UIAspectRatioConstraint", checkBox)
+aspect.AspectRatio = 1
+
+
+checkBox.MouseButton1Click:Connect(function()
+    CAPS = not CAPS
+    checkBox.Text = CAPS and "☑" or "☐"
+    TextBax.PlaceholderText = CAPS and "(CHAT)" or "(chat)"
+end)
+
+
+
+
+
+
+
+
+TextBax.FocusLost:Connect(function()
+        local inputString = TextBax.Text
+        bypass(inputString)
+        TextBax.Text = ""
+end)
+
+
+
+--fade in
+local TS = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+
+local frame = GazerMain
+frame.Visible = true
+frame.Size = UDim2.new(0.4, 0, 0.1, 0)
+frame.Position = UDim2.new(0.5, 0, 0.7, 0) 
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.BackgroundTransparency = 1 
+
+
+
+
+local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local positionTween = TS:Create(frame, tweenInfo, {Position = UDim2.new(0.5, 0, 0.5, 0) })
+local sizeTween = TS:Create(frame, tweenInfo, {Size = UDim2.new(0.5, 0, 0.2, 0) })
+local transparencyTween = TS:Create(frame, tweenInfo, {BackgroundTransparency = 0})
+positionTween:Play()
+sizeTween:Play()
+transparencyTween:Play()
+
+
+
+
+function dragify(Frame)
+local dragToggle = nil
+local dragInput = nil
+local dragStart = nil
+local startPos = nil
+local function updateInput(input)
+local Delta = input.Position - dragStart
+local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X,
+startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+TS:Create(Frame, TweenInfo.new(0.1), {Position = Position}):Play()
+end
+Frame.InputBegan:Connect(function(input)
+if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+	dragToggle = true
+	dragStart = input.Position
+	startPos = Frame.Position
+	input.Changed:Connect(function()
+		if input.UserInputState == Enum.UserInputState.End then
+			dragToggle = false
+		end
+	end)
+end
+end)
+Frame.InputChanged:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	dragInput = input
+end
+end)
+UIS.InputChanged:Connect(function(input)
+if input == dragInput and dragToggle then
+	updateInput(input)
+end
+end)
+end
+
+dragify(GazerMain) 
+corner(GazerMain,5)
+corner(TextBax,5)
+corner(GazerTitle,5)
