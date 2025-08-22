@@ -1,0 +1,116 @@
+-- Enhanced Chat Spy GUI with Toggle Eye Button (Working Toggle)
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Destroy old GUI
+pcall(function() LocalPlayer.PlayerGui.ChatSpyBox:Destroy() end)
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ChatSpyBox"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Chatbox Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 320, 0, 240)
+frame.Position = UDim2.new(1, -330, 1, -250)
+frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+frame.BackgroundTransparency = 0.1
+frame.BorderSizePixel = 0
+frame.ClipsDescendants = true
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 22)
+title.BackgroundTransparency = 1
+title.Text = "🕵 ChatSpy"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 17
+title.Parent = frame
+
+-- ScrollingFrame
+local scroll = Instance.new("ScrollingFrame")
+scroll.Size = UDim2.new(1, -10, 1, -26)
+scroll.Position = UDim2.new(0, 5, 0, 24)
+scroll.BackgroundTransparency = 1
+scroll.BorderSizePixel = 0
+scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+scroll.ScrollBarThickness = 4
+scroll.Parent = frame
+
+local layout = Instance.new("UIListLayout", scroll)
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+layout.Padding = UDim.new(0, 2)
+
+-- Add message to chatbox
+local function addMessage(text, color)
+	local label = Instance.new("TextLabel")
+	label.Size = UDim2.new(1, -5, 0, 20)
+	label.Text = text
+	label.TextColor3 = color or Color3.new(1, 1, 1)
+	label.BackgroundTransparency = 1
+	label.Font = Enum.Font.SourceSans
+	label.TextSize = 16
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.TextWrapped = false
+	label.ClipsDescendants = true
+	label.Parent = scroll
+
+	scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 5)
+	task.delay(0.01, function()
+		scroll.CanvasPosition = Vector2.new(0, layout.AbsoluteContentSize.Y + 100)
+	end)
+end
+
+-- Listen for public messages using Chatted
+local function hookPlayer(player)
+	if player == LocalPlayer then return end
+	player.Chatted:Connect(function(msg)
+		addMessage("[" .. player.DisplayName .. "]: " .. msg, Color3.fromRGB(180, 255, 180))
+	end)
+end
+
+-- Hook existing players
+for _, plr in ipairs(Players:GetPlayers()) do
+	hookPlayer(plr)
+end
+
+-- Hook new players
+Players.PlayerAdded:Connect(hookPlayer)
+
+-- Show activation message
+addMessage("✅ ChatSpy Enabled (nickname view, autoscroll)", Color3.fromRGB(255, 255, 0))
+
+-- 👁️ Toggle Button
+local toggleBtn = Instance.new("TextButton")
+toggleBtn.Size = UDim2.new(0, 40, 0, 40)
+toggleBtn.Position = UDim2.new(1, -50, 1, -50)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+toggleBtn.Text = "👁️"
+toggleBtn.TextColor3 = Color3.new(1, 1, 1)
+toggleBtn.Font = Enum.Font.SourceSansBold
+toggleBtn.TextSize = 24
+toggleBtn.BorderSizePixel = 0
+toggleBtn.AutoButtonColor = true
+toggleBtn.Parent = screenGui
+toggleBtn.Active = true
+toggleBtn.Draggable = true
+toggleBtn.ZIndex = 10
+
+-- Rounded button
+local round = Instance.new("UICorner")
+round.CornerRadius = UDim.new(1, 0)
+round.Parent = toggleBtn
+
+-- Toggle logic
+local visible = true
+toggleBtn.MouseButton1Click:Connect(function()
+	visible = not visible
+	frame.Visible = visible
+end)
