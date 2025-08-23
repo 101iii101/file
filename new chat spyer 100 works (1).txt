@@ -1,0 +1,505 @@
+-- Configurazione iniziale
+local Config = {
+    enabled = true,
+    spyOnMyself = true,
+    publicItalics = true,
+}
+
+-- Proprietà visive del log
+local PrivateProperties = {
+    Color = Color3.fromRGB(0, 255, 255),
+    Font = Enum.Font.SourceSansBold,
+    TextSize = 18,
+}
+
+-- Riferimenti ai servizi di Roblox
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local TextChatService = game:GetService("TextChatService")
+local UIS = game:GetService("UserInputService")
+local instance = (_G.chatSpyInstance or 0) + 1
+_G.chatSpyInstance = instance
+
+-- Creazione della GUI moderna
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ChatSpyGUI"
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame", ScreenGui)
+MainFrame.Size = UDim2.new(0.3, 0, 0.4, 0)
+MainFrame.Position = UDim2.new(0.35, 0, 0.3, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+MainFrame.BackgroundTransparency = 0 -- Imposta la trasparenza iniziale
+MainFrame.BorderSizePixel = 0
+MainFrame.Name = "MainFrame"
+MainFrame.Active = true -- Permette il ridimensionamento e il trascinamento
+
+-- Creazione di un'angolatura arrotondata per il MainFrame
+local UICorner = Instance.new("UICorner", MainFrame)
+UICorner.CornerRadius = UDim.new(0, 10)
+
+-- Titolo della GUI
+local TitleBar = Instance.new("Frame", MainFrame)
+TitleBar.Size = UDim2.new(1, 0, 0, 40)
+TitleBar.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+TitleBar.Name = "TitleBar"
+
+local UICornerTitle = Instance.new("UICorner", TitleBar)
+UICornerTitle.CornerRadius = UDim.new(0, 10)
+
+local TitleLabel = Instance.new("TextLabel", TitleBar)
+TitleLabel.Text = "Chat Spy"
+TitleLabel.Size = UDim2.new(1, -120, 1, 0) -- Aggiornato per lasciare spazio ai nuovi pulsanti
+TitleLabel.Position = UDim2.new(0, 10, 0, 0)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.TextSize = 20
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Bottone delle impostazioni
+local SettingsButton = Instance.new("TextButton", TitleBar)
+SettingsButton.Text = "⚙"
+SettingsButton.Size = UDim2.new(0, 40, 0, 40)
+SettingsButton.Position = UDim2.new(1, -120, 0, 0)
+SettingsButton.BackgroundTransparency = 1
+SettingsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SettingsButton.Font = Enum.Font.GothamBold
+SettingsButton.TextSize = 20
+
+-- Bottone di minimizzazione
+local MinimizeButton = Instance.new("TextButton", TitleBar)
+MinimizeButton.Text = "-"
+MinimizeButton.Size = UDim2.new(0, 40, 0, 40)
+MinimizeButton.Position = UDim2.new(1, -80, 0, 0)
+MinimizeButton.BackgroundTransparency = 1
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 127)
+MinimizeButton.Font = Enum.Font.GothamBold
+MinimizeButton.TextSize = 20
+
+-- Bottone di chiusura
+local CloseButton = Instance.new("TextButton", TitleBar)
+CloseButton.Text = "X"
+CloseButton.Size = UDim2.new(0, 40, 0, 40)
+CloseButton.Position = UDim2.new(1, -40, 0, 0)
+CloseButton.BackgroundTransparency = 1
+CloseButton.TextColor3 = Color3.fromRGB(255, 85, 85)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 20
+
+-- ScrollingFrame per i messaggi spia
+local MessageFrame = Instance.new("ScrollingFrame", MainFrame)
+MessageFrame.Size = UDim2.new(1, -20, 1, -50)
+MessageFrame.Position = UDim2.new(0, 10, 0, 45)
+MessageFrame.BackgroundTransparency = 1
+MessageFrame.BorderSizePixel = 0
+MessageFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+MessageFrame.ScrollBarThickness = 5
+MessageFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+MessageFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y -- Aggiorna automaticamente la CanvasSize
+
+local UIListLayout = Instance.new("UIListLayout", MessageFrame)
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 5)
+
+-- Variabile per il filtro utente
+local filteredUser = nil
+
+-- Funzione per gestire i messaggi di chat
+local function onChatted(p, msg)
+    if _G.chatSpyInstance == instance then
+        if p == player and msg:lower():sub(1, 4) == "/spy" then
+            Config.enabled = not Config.enabled
+            task.wait(0.3)
+            TextChatService.TextChannels.RBXSystem:DisplaySystemMessage("{SPY " .. (Config.enabled and "EN" or "DIS") .. "ABLED}")
+        elseif Config.enabled and (Config.spyOnMyself or p ~= player) then
+            msg = msg:gsub("[\n\r]", ""):gsub("\t", " "):gsub("[ ]+", " ")
+
+            -- Se è filtrato, controlla se il messaggio è dell'utente selezionato
+            if filteredUser == nil or filteredUser == p.Name then
+
+                -- Cattura i messaggi e aggiungili alla GUI
+                local spyMessageFrame = Instance.new("Frame")
+                spyMessageFrame.Size = UDim2.new(1, 0, 0, 0)
+                spyMessageFrame.BackgroundTransparency = 0.3
+                spyMessageFrame.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+                spyMessageFrame.LayoutOrder = #MessageFrame:GetChildren()
+                spyMessageFrame.Parent = MessageFrame
+
+                local spyMessageLayout = Instance.new("UIListLayout", spyMessageFrame)
+                spyMessageLayout.FillDirection = Enum.FillDirection.Horizontal
+                spyMessageLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+                spyMessageLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+                spyMessageLayout.Padding = UDim.new(0, 5)
+
+                -- Controlla se il messaggio non è nel canale pubblico
+                local isPrivateMessage = not TextChatService.TextChannels.RBXGeneral or p ~= player
+
+                -- Crea un bottone per il nome utente
+                local nameButton = Instance.new("TextButton", spyMessageFrame)
+                nameButton.AutoButtonColor = false
+                nameButton.Text = "[" .. p.Name .. "]:"
+                nameButton.Size = UDim2.new(0, 0, 0, 0)
+                nameButton.BackgroundTransparency = 1
+                nameButton.TextColor3 = isPrivateMessage and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255)
+                nameButton.Font = PrivateProperties.Font
+                nameButton.TextSize = PrivateProperties.TextSize
+                nameButton.TextWrapped = false
+                nameButton.TextXAlignment = Enum.TextXAlignment.Left
+                nameButton.AutomaticSize = Enum.AutomaticSize.XY
+
+                -- Testo del messaggio
+                local messageText = Instance.new("TextLabel", spyMessageFrame)
+                messageText.Text = msg
+                messageText.Size = UDim2.new(1, -nameButton.AbsoluteSize.X, 0, 0)
+                messageText.BackgroundTransparency = 1
+                messageText.TextColor3 = isPrivateMessage and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255)
+                messageText.Font = PrivateProperties.Font
+                messageText.TextSize = PrivateProperties.TextSize
+                messageText.TextWrapped = true
+                messageText.TextXAlignment = Enum.TextXAlignment.Left
+                messageText.AutomaticSize = Enum.AutomaticSize.XY
+
+                -- Aggiorna l'altezza del messaggio in base al contenuto
+                spyMessageFrame.Size = UDim2.new(1, 0, 0, spyMessageFrame.UIListLayout.AbsoluteContentSize.Y)
+
+                -- Aggiungi evento per filtrare i messaggi cliccando sul nome
+                nameButton.MouseButton1Click:Connect(function()
+                    if filteredUser == p.Name then
+                        -- Se l'utente è già filtrato, rimuovi il filtro
+                        filteredUser = nil
+                        -- Mostra tutti i messaggi
+                        for _, child in ipairs(MessageFrame:GetChildren()) do
+                            if child:IsA("Frame") then
+                                child.Visible = true
+                            end
+                        end
+                    else
+                        -- Imposta il nuovo utente filtrato
+                        filteredUser = p.Name
+                        -- Aggiorna tutti i messaggi per mostrare solo quelli dell'utente filtrato
+                        for _, child in ipairs(MessageFrame:GetChildren()) do
+                            if child:IsA("Frame") then
+                                local nameBtn = child:FindFirstChildOfClass("TextButton")
+                                if nameBtn and nameBtn.Text:find("%[" .. p.Name .. "%]") then
+                                    child.Visible = true
+                                else
+                                    child.Visible = false
+                                end
+                            end
+                        end
+                    end
+                end)
+            end
+        end
+    end
+end
+
+-- Funzione per trascinare e ridimensionare il MainFrame
+local dragging
+local resizing
+local dragInput
+local dragStart
+local startPos
+local startSize
+
+-- Maniglia per il ridimensionamento
+local ResizeHandle = Instance.new("Frame", MainFrame)
+ResizeHandle.Size = UDim2.new(0, 20, 0, 20)
+ResizeHandle.Position = UDim2.new(1, -20, 1, -20)
+ResizeHandle.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+ResizeHandle.Name = "ResizeHandle"
+ResizeHandle.Active = true
+
+ResizeHandle.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        resizing = true
+        dragStart = input.Position
+        startSize = MainFrame.Size
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                resizing = false
+            end
+        end)
+    end
+end)
+
+ResizeHandle.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if input == dragInput and resizing then
+        local delta = input.Position - dragStart
+        MainFrame.Size = UDim2.new(
+            startSize.X.Scale,
+            startSize.X.Offset + delta.X,
+            startSize.Y.Scale,
+            startSize.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- Funzione per trascinare il MainFrame
+TitleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+TitleBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- Funzione per chiudere la GUI
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Funzione per minimizzare e massimizzare la GUI
+local isMinimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+
+    if isMinimized then
+        MessageFrame.Visible = false
+        MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, 40)
+    else
+        MessageFrame.Visible = true
+        MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, startSize.Y.Offset)
+    end
+end)
+
+-- Implementazione delle impostazioni
+local SettingsFrame = Instance.new("Frame", ScreenGui)
+SettingsFrame.Size = UDim2.new(0, 250, 0, 200)
+SettingsFrame.Position = UDim2.new(0.5, -125, 0.5, -100)
+SettingsFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+SettingsFrame.Visible = false
+SettingsFrame.Active = true
+
+local UICornerSettings = Instance.new("UICorner", SettingsFrame)
+UICornerSettings.CornerRadius = UDim.new(0, 10)
+
+-- Titolo delle impostazioni
+local SettingsTitle = Instance.new("TextLabel", SettingsFrame)
+SettingsTitle.Text = "Impostazioni"
+SettingsTitle.Size = UDim2.new(1, 0, 0, 40)
+SettingsTitle.Position = UDim2.new(0, 0, 0, 0)
+SettingsTitle.BackgroundTransparency = 1
+SettingsTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+SettingsTitle.Font = Enum.Font.GothamBold
+SettingsTitle.TextSize = 20
+SettingsTitle.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Color Picker
+local ColorPickerLabel = Instance.new("TextLabel", SettingsFrame)
+ColorPickerLabel.Text = "Colore GUI:"
+ColorPickerLabel.Size = UDim2.new(0, 100, 0, 30)
+ColorPickerLabel.Position = UDim2.new(0, 10, 0, 50)
+ColorPickerLabel.BackgroundTransparency = 1
+ColorPickerLabel.TextColor3 = Color3.new(1,1,1)
+ColorPickerLabel.Font = Enum.Font.Gotham
+ColorPickerLabel.TextSize = 16
+ColorPickerLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local ColorPickerButton = Instance.new("TextButton", SettingsFrame)
+ColorPickerButton.Size = UDim2.new(0, 120, 0, 30)
+ColorPickerButton.Position = UDim2.new(0, 120, 0, 50)
+ColorPickerButton.BackgroundColor3 = MainFrame.BackgroundColor3
+ColorPickerButton.Text = ""
+ColorPickerButton.AutoButtonColor = false
+
+local function updateGUIColor(color)
+    MainFrame.BackgroundColor3 = color
+    ColorPickerButton.BackgroundColor3 = color
+end
+
+ColorPickerButton.MouseButton1Click:Connect(function()
+    -- Apri un ColorPicker per scegliere il colore
+    -- Poiché Roblox non ha un ColorPicker nativo, per semplicità cicleremo tra alcuni colori predefiniti
+    local colors = {
+        Color3.fromRGB(45, 45, 45),
+        Color3.fromRGB(0, 0, 0),
+        Color3.fromRGB(100, 100, 100),
+        Color3.fromRGB(255, 0, 0),
+        Color3.fromRGB(0, 255, 0),
+        Color3.fromRGB(0, 0, 255),
+        Color3.fromRGB(255, 255, 0),
+        Color3.fromRGB(255, 165, 0),
+        Color3.fromRGB(255, 192, 203),
+    }
+    local currentIndex = table.find(colors, MainFrame.BackgroundColor3) or 1
+    local nextIndex = currentIndex % #colors + 1
+    updateGUIColor(colors[nextIndex])
+end)
+
+-- Slider per la trasparenza
+
+local TransparencyLabel = Instance.new("TextLabel", SettingsFrame)
+TransparencyLabel.Text = "Trasparenza GUI:"
+TransparencyLabel.Size = UDim2.new(0, 120, 0, 30)
+TransparencyLabel.Position = UDim2.new(0, 10, 0, 90)
+TransparencyLabel.BackgroundTransparency = 1
+TransparencyLabel.TextColor3 = Color3.new(1,1,1)
+TransparencyLabel.Font = Enum.Font.Gotham
+TransparencyLabel.TextSize = 16
+TransparencyLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local TransparencySlider = Instance.new("Frame", SettingsFrame)
+TransparencySlider.Size = UDim2.new(0, 120, 0, 30)
+TransparencySlider.Position = UDim2.new(0, 120, 0, 90)
+TransparencySlider.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+TransparencySlider.BorderSizePixel = 0
+
+local SliderButton = Instance.new("TextButton", TransparencySlider)
+SliderButton.Size = UDim2.new(0, 10, 1, 0)
+SliderButton.Position = UDim2.new(0, MainFrame.BackgroundTransparency * (TransparencySlider.AbsoluteSize.X - 10), 0, 0)
+SliderButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
+SliderButton.Text = ""
+SliderButton.AutoButtonColor = false
+
+local function updateTransparency(positionX)
+    local sliderSize = TransparencySlider.AbsoluteSize.X - SliderButton.AbsoluteSize.X
+    local percent = math.clamp(positionX / sliderSize, 0, 1)
+    MainFrame.BackgroundTransparency = percent
+    SliderButton.Position = UDim2.new(0, percent * sliderSize, 0, 0)
+end
+
+SliderButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        local moveConn
+        local releaseConn
+
+        moveConn = UIS.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                local localPos = Vector2.new(input.Position.X - TransparencySlider.AbsolutePosition.X, 0)
+                updateTransparency(localPos.X)
+            end
+        end)
+
+        releaseConn = input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                moveConn:Disconnect()
+                releaseConn:Disconnect()
+            end
+        end)
+    end
+end)
+
+-- Bottone per chiudere le impostazioni
+local CloseSettingsButton = Instance.new("TextButton", SettingsFrame)
+CloseSettingsButton.Text = "Chiudi"
+CloseSettingsButton.Size = UDim2.new(0, 230, 0, 30)
+CloseSettingsButton.Position = UDim2.new(0, 10, 1, -40)
+CloseSettingsButton.BackgroundColor3 = Color3.fromRGB(255, 85, 85)
+CloseSettingsButton.TextColor3 = Color3.new(1,1,1)
+CloseSettingsButton.Font = Enum.Font.GothamBold
+CloseSettingsButton.TextSize = 20
+
+CloseSettingsButton.MouseButton1Click:Connect(function()
+    SettingsFrame.Visible = false
+end)
+
+SettingsButton.MouseButton1Click:Connect(function()
+    SettingsFrame.Visible = true
+end)
+
+-- Collegamento degli eventi di chat per i giocatori esistenti e futuri
+for _, p in ipairs(Players:GetPlayers()) do
+    p.Chatted:Connect(function(msg)
+        onChatted(p, msg)
+    end)
+end
+
+Players.PlayerAdded:Connect(function(p)
+    p.Chatted:Connect(function(msg)
+        onChatted(p, msg)
+    end)
+end)
+
+-- Implementazione della modalità mobile
+local isMobile = UIS.TouchEnabled and (not UIS.KeyboardEnabled) and (not UIS.MouseEnabled)
+if isMobile then
+    -- Modalità mobile
+    MainFrame.Position = UDim2.new(-0.3, 0, MainFrame.Position.Y.Scale, MainFrame.Position.Y.Offset)
+
+    local OpenButton = Instance.new("TextButton", ScreenGui)
+    OpenButton.Text = ">"
+    OpenButton.Size = UDim2.new(0, 30, 0, 100)
+    OpenButton.Position = UDim2.new(0, 0, 0.5, -50)
+    OpenButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    OpenButton.TextColor3 = Color3.new(1,1,1)
+    OpenButton.Font = Enum.Font.GothamBold
+    OpenButton.TextSize = 20
+    OpenButton.Active = true
+
+    local isOpen = false
+    OpenButton.MouseButton1Click:Connect(function()
+        isOpen = not isOpen
+        if isOpen then
+            MainFrame:TweenPosition(UDim2.new(0, 0, MainFrame.Position.Y.Scale, MainFrame.Position.Y.Offset), "Out", "Quad", 0.5, true)
+            OpenButton.Text = "<"
+        else
+            MainFrame:TweenPosition(UDim2.new(-0.3, 0, MainFrame.Position.Y.Scale, MainFrame.Position.Y.Offset), "Out", "Quad", 0.5, true)
+            OpenButton.Text = ">"
+        end
+    end)
+
+    -- Permetti il trascinamento e il ridimensionamento su mobile
+    ResizeHandle.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch then
+            resizing = true
+            dragStart = input.Position
+            startSize = MainFrame.Size
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    resizing = false
+                end
+            end)
+        end
+    end)
+
+    TitleBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = MainFrame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+end
+
+-- Messaggio di stato iniziale per lo spionaggio della chat
+TextChatService.TextChannels.RBXSystem:DisplaySystemMessage("{SPY " .. (Config.enabled and "EN" or "DIS") .. "ABLED}")
