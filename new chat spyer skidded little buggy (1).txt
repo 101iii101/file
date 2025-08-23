@@ -1,0 +1,299 @@
+print("Made by Draconic#0995")
+
+local RSR = false
+
+local StartUpMessage = "Welcome to Chat Log! | Made by Draconic#0995"
+
+local Parent
+if game:GetService("CoreGui"):FindFirstChild("RobloxGui") then
+    Parent = game:GetService("CoreGui").RobloxGui
+else
+    Parent = game:GetService("CoreGui")
+end
+
+local Minimized = false
+local Logging = true
+local AtBottom = true
+
+local ChatLog = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local LogPanel = Instance.new("ScrollingFrame")
+local ChatLogLabel = Instance.new("TextLabel")
+local Exit = Instance.new("TextButton")
+local Minimize = Instance.new("TextButton")
+local Status = Instance.new("TextButton")
+local Clear = Instance.new("TextButton")
+local FrameHolder = Instance.new("Frame")
+local Loading = Instance.new("ImageLabel")
+
+local UIL = Instance.new("UIListLayout")
+UIL.Name = "UIListLayout"
+UIL.Parent = LogPanel
+UIL.FillDirection = Enum.FillDirection.Vertical
+UIL.HorizontalAlignment = Enum.HorizontalAlignment.Left
+UIL.VerticalAlignment = Enum.VerticalAlignment.Top
+UIL.SortOrder = Enum.SortOrder.LayoutOrder
+UIL.Padding = UDim.new(0, 2)
+
+ChatLog.Name = "ChatLog"
+ChatLog.Parent = game.CoreGui
+
+if RSR then
+    print("Disabled")
+else
+    ChatLog.ResetOnSpawn = false
+    print("Enabled")
+end
+
+Frame.Parent = ChatLog
+Frame.BackgroundColor3 = Color3.new(0.254902, 0.254902, 0.254902)
+Frame.BackgroundTransparency = 0.2
+Frame.BorderColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+Frame.Position = UDim2.new(0, 0, 0, 0)
+Frame.Size = UDim2.new(0, 463, 0, 24)
+Frame.Visible = false
+Frame.Active = false
+
+LogPanel.Name = "LogPanel"
+LogPanel.Parent = Frame
+LogPanel.BackgroundColor3 = Color3.new(0.215686, 0.215686, 0.215686)
+LogPanel.BackgroundTransparency = 0.2
+LogPanel.BorderColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+LogPanel.Position = UDim2.new(0, 0, 1, 0)
+LogPanel.Size = UDim2.new(0, 463, 0, 214)
+LogPanel.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+local welcomeLabel = Instance.new("TextLabel")
+welcomeLabel.Parent = LogPanel
+welcomeLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+welcomeLabel.BackgroundTransparency = 1
+welcomeLabel.Size = UDim2.new(1, 0, 0, 15)
+welcomeLabel.Font = Enum.Font.SourceSans
+welcomeLabel.Text = StartUpMessage
+welcomeLabel.TextColor3 = Color3.new(1, 1, 1)
+welcomeLabel.TextSize = 15
+welcomeLabel.TextWrapped = true
+welcomeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+ChatLogLabel.Name = "ChatLogLabel"
+ChatLogLabel.Parent = Frame
+ChatLogLabel.BackgroundColor3 = Color3.new(0.215686, 0.215686, 0.215686)
+ChatLogLabel.BackgroundTransparency = 1
+ChatLogLabel.BorderSizePixel = 0
+ChatLogLabel.Position = UDim2.new(-0.0018, 0, -0.0417, 0)
+ChatLogLabel.Size = UDim2.new(0, 463, 0, 23)
+ChatLogLabel.Font = Enum.Font.SourceSansBold
+ChatLogLabel.Text = "Chat Log"
+ChatLogLabel.TextColor3 = Color3.new(1, 1, 1)
+ChatLogLabel.TextSize = 20
+ChatLogLabel.TextWrapped = true
+
+Exit.Name = "Exit"
+Exit.Parent = Frame
+Exit.BackgroundColor3 = Color3.new(1, 1, 1)
+Exit.BackgroundTransparency = 1
+Exit.Position = UDim2.new(0.9393, 0, 0, 0)
+Exit.Size = UDim2.new(0, 19, 0, 21)
+Exit.Font = Enum.Font.Arcade
+Exit.Text = "X"
+Exit.TextColor3 = Color3.new(1, 1, 1)
+Exit.TextSize = 16
+Exit.TextWrapped = true
+
+Exit.MouseButton1Down:Connect(function()
+    LogPanel:TweenPosition(UDim2.new(-1, 0, 2, 0), "InOut", "Sine", 1, false, nil)
+    wait(0.5)
+    ChatLog:Destroy()
+end)
+
+Minimize.Name = "Minimize"
+Minimize.Parent = Frame
+Minimize.BackgroundColor3 = Color3.new(1, 1, 1)
+Minimize.BackgroundTransparency = 1
+Minimize.Position = UDim2.new(0.8786, 0, 0, 0)
+Minimize.Size = UDim2.new(0, 19, 0, 21)
+Minimize.Font = Enum.Font.Arcade
+Minimize.Text = "_"
+Minimize.TextColor3 = Color3.new(1, 1, 1)
+Minimize.TextSize = 16
+Minimize.TextWrapped = true
+
+Minimize.MouseButton1Down:Connect(function()
+    if Minimized then
+        LogPanel.Visible = true
+        wait(0.03)
+        LogPanel:TweenSize(UDim2.new(0, 463, 0, 214), "InOut", "Sine", 0.5, false, nil)
+    else
+        LogPanel.Visible = false
+        wait(0.03)
+        LogPanel:TweenSize(UDim2.new(0, 463, 0, 1), "InOut", "Sine", 0.5, false, nil)
+    end
+    Minimized = not Minimized
+end)
+
+Status.Name = "Status"
+Status.Parent = Frame
+Status.BackgroundColor3 = Color3.new(1, 1, 1)
+Status.BackgroundTransparency = 1
+Status.Position = UDim2.new(0, 0, 0.0417, 0)
+Status.Size = UDim2.new(0, 54, 0, 20)
+Status.Font = Enum.Font.Highway
+Status.Text = "Online"
+Status.TextColor3 = Color3.new(0.301961, 0.988235, 0.0509804)
+Status.TextSize = 14
+
+Status.MouseButton1Down:Connect(function()
+    Logging = not Logging
+    if Logging then
+        Status.Text = "Online"
+        Status.TextColor3 = Color3.new(0.301961, 0.988235, 0.0509804)
+    else
+        Status.Text = "Offline"
+        Status.TextColor3 = Color3.new(0.988235, 0.164706, 0)
+    end
+end)
+
+function updateCanvasSize()
+    local contentHeight = UIL.AbsoluteContentSize.Y
+    LogPanel.CanvasSize = UDim2.new(0, 0, 0, contentHeight)
+end
+
+local function autoScroll()
+    if AtBottom then
+        LogPanel.CanvasPosition = Vector2.new(0, LogPanel.CanvasSize.Y.Offset)
+    end
+end
+
+function Output(Player, Message)
+    if not Logging then return end
+    local Color = Color3.fromRGB(255,255,255)
+    if string.sub(Message, 1,1) == ":" or string.sub(Message,1,1) == ";" then
+        Color = Color3.fromRGB(220,20,60)
+    elseif string.sub(Message,1,2) == "/w" or string.sub(Message,1,7) == "/whisper" then
+        Color = Color3.fromRGB(0,200,0)
+    elseif string.sub(Message, 1,2) == "/e" then
+        Color = Color3.fromRGB(255,232,11)
+    elseif string.sub(Message,1,5) == "/team" or string.sub(Message,1,2) == "/t" then
+        Color = Color3.fromRGB(30,144,255)
+    elseif string.sub(Message,1,3) == "/me" then
+        Color = Color3.fromRGB(138,43,226)
+    elseif string.sub(Message,1,1) == "!" or string.sub(Message,1,1) == "?" then
+        Color = Color3.fromRGB(255,140,0)
+    else
+        Color = Color3.fromRGB(255,255,255)
+    end
+    local o = Instance.new("TextLabel")
+    o.Parent = LogPanel
+    o.Text = Player.Name .. ": " .. Message
+    o.Size = UDim2.new(1, 0, 0, 15)
+    o.Font = Enum.Font.SourceSansSemibold
+    o.TextColor3 = Color
+    o.BackgroundTransparency = 1
+    o.BackgroundColor3 = Color3.new(0.215686, 0.215686, 0.215686)
+    o.BorderSizePixel = 0
+    o.FontSize = "Size14"
+    o.TextXAlignment = Enum.TextXAlignment.Left
+    o.TextYAlignment = Enum.TextYAlignment.Top
+    o.ClipsDescendants = false
+    o.TextWrapped = true
+
+    updateCanvasSize()
+    autoScroll()
+end
+
+Clear.Name = "Clear"
+Clear.Parent = Frame
+Clear.BackgroundColor3 = Color3.new(1, 1, 1)
+Clear.BackgroundTransparency = 1
+Clear.BorderSizePixel = 0
+Clear.Position = UDim2.new(0.7485, 0, 0, 0)
+Clear.Size = UDim2.new(0, 52, 0, 20)
+Clear.Font = Enum.Font.Highway
+Clear.Text = "Clear"
+Clear.TextColor3 = Color3.new(0, 0.627451, 0)
+Clear.TextSize = 14
+
+Clear.MouseButton1Down:Connect(function()
+    for i,v in pairs(LogPanel:GetChildren()) do
+        if v:IsA("TextLabel") and v.Name ~= "UIListLayout" then
+            v:Destroy()
+        end
+    end
+    local welcomeLabel = Instance.new("TextLabel")
+    welcomeLabel.Parent = LogPanel
+    welcomeLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+    welcomeLabel.BackgroundTransparency = 1
+    welcomeLabel.Size = UDim2.new(1, 0, 0, 15)
+    welcomeLabel.Font = Enum.Font.SourceSans
+    welcomeLabel.Text = StartUpMessage
+    welcomeLabel.TextColor3 = Color3.new(1, 1, 1)
+    welcomeLabel.TextSize = 15
+    welcomeLabel.TextWrapped = true
+    welcomeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    updateCanvasSize()
+    autoScroll()
+end)
+
+for i,v in pairs(game.Players:GetChildren()) do
+    v.Chatted:Connect(function(Message)
+        Output(v, Message)
+    end)
+end
+
+game.Players.ChildAdded:Connect(function(Player)
+    if Player:IsA("Player") then
+        Player.Chatted:Connect(function(Message)
+            Output(Player, Message)
+        end)
+    end
+end)
+
+FrameHolder.Name = "FrameHolder"
+FrameHolder.Parent = ChatLog
+FrameHolder.BackgroundColor3 = Color3.new(1, 1, 1)
+FrameHolder.BackgroundTransparency = 1
+FrameHolder.Position = UDim2.new(0, 0, 0, 0)
+FrameHolder.Size = UDim2.new(0, 100, 0, 100)
+
+Loading.Name = "Loading"
+Loading.Parent = FrameHolder
+Loading.BackgroundColor3 = Color3.new(1, 1, 1)
+Loading.BackgroundTransparency = 1
+Loading.Position = UDim2.new(0, 0, 0, 0)
+Loading.Size = UDim2.new(0, 436, 0, 346)
+Loading.Image = "rbxassetid://2601977061"
+
+FrameHolder:TweenPosition(UDim2.new(0.434, 0, 0.133, 0), "InOut", "Sine", 0.5, false, nil)
+wait()
+Loading:TweenPosition(UDim2.new(-1.371, 0, -0.185, 0), "InOut", "Sine", 0.5, false, nil)
+wait(2)
+Loading:TweenPosition(UDim2.new(-10, 0, -5, 0), "InOut", "Sine", 0.5, false, nil)
+wait(1)
+FrameHolder:Destroy()
+
+Frame.Visible = true
+Frame:TweenPosition(UDim2.new(0.307, 0, 0.337, 0), "InOut", "Sine", 0.5, false, nil)
+Frame.Active = true
+Frame.Draggable = true
+wait()
+
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Notification";
+    Text = "Chat Log Enabled!";
+    Icon = "rbxassetid://2599962896";
+    Duration = 3;
+})
+
+LogPanel.ChildAdded:Connect(function()
+    updateCanvasSize()
+    autoScroll()
+end)
+
+LogPanel.Scrolled:Connect(function()
+    local yOffset = LogPanel.CanvasPosition.Y
+    local maxScroll = LogPanel.CanvasSize.Y.Offset - LogPanel.AbsoluteSize.Y
+    AtBottom = math.abs(yOffset - maxScroll) < 10
+end)
+
+updateCanvasSize()
