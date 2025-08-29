@@ -1,0 +1,115 @@
+local lIlIlI = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+local o0Oo0O = lIlIlI:Load("MMMPlxyer", "Default")
+local iIi1I1 = lIlIlI.newTab("MMMAutoPlayer", "7733960981")
+local O0O00 = true
+
+pcall(function()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "MMMPlxyer",
+        Text = "Thanks for using the script :D!\nBy Lxnny",
+        Duration = 5
+    })
+end)
+
+iIi1I1.newToggle("Toggle Autoplayer", "Toggles the autoplayer", true, function(v)
+    O0O00 = v
+end)
+
+iIi1I1.newKeybind("Close GUI", "A Keybind to close the gui", function()
+    o0Oo0O:Close()
+end)
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local _G1 = game:GetService("ReplicatedStorage")
+local VIM = game:GetService("VirtualInputManager")
+local RS = game:GetService("RunService")
+local PLR = game:GetService("Players")
+local Opts = getrenv()._G.PlayerData.Options
+local TYP = {"Left", "Right"}
+local C0nns = {}
+
+local KeyMap = {
+    [9] = {"Left", "Down", "Up", "Right", "Space", "Left2", "Down2", "Up2", "Right2"},
+    [8] = {"Left", "Down", "Up", "Right", "Left2", "Down2", "Up2", "Right2"},
+    [7] = {"Left", "Up", "Right", "Space", "Left2", "Down", "Right2"},
+    [6] = {"Left", "Up", "Right", "Left2", "Down", "Right2"},
+    [5] = {"Left", "Down", "Space", "Up", "Right"},
+    [4] = {"Left", "Down", "Up", "Right"}
+}
+
+local function sorter(p)
+    local c = p:GetChildren()
+    table.sort(c, function(a, b)
+        return a.AbsolutePosition.X < b.AbsolutePosition.X
+    end)
+    return c
+end
+
+local function getMatch()
+    for _,v in ipairs(getgc(true)) do
+        if type(v) == "table" and rawget(v, "MatchFolder") then
+            return v
+        end
+    end
+end
+
+local function MAIN()
+    local m = getMatch()
+    if not m then return end
+    repeat task.wait() until rawget(m, "Songs")
+
+    local s = TYP[m.PlayerType]
+    local G = m.ArrowGui[s]
+    local cont = sorter(G.MainArrowContainer)
+    local long = sorter(G.LongNotes)
+    local notes = sorter(G.Notes)
+    local max = m.MaxArrows
+    local keys = KeyMap[max]
+    local binds = max < 5 and Opts or Opts.ExtraKeySettings[tostring(max)]
+
+    for i,holder in ipairs(notes) do
+        local name = keys[i]
+        local keycode = binds[name.."Key"]
+        local fakeNote = cont[i]
+        local longNote = long[i]
+        local dist = 10 * max
+
+        table.insert(C0nns,
+            holder.ChildAdded:Connect(function(n)
+                while (fakeNote.AbsolutePosition - n.AbsolutePosition).Magnitude >= dist do
+                    RS.RenderStepped:Wait()
+                end
+                if not O0O00 then return end
+                VIM:SendKeyEvent(true, keycode, false, nil)
+                if #longNote:GetChildren() == 0 then
+                    VIM:SendKeyEvent(false, keycode, false, nil)
+                end
+            end)
+        )
+    end
+
+    for i,holder in ipairs(long) do
+        local name = keys[i]
+        local keycode = binds[name.."Key"]
+        table.insert(C0nns,
+            holder.ChildRemoved:Connect(function()
+                if not O0O00 then return end
+                VIM:SendKeyEvent(false, keycode, false, nil)
+            end)
+        )
+    end
+
+    return m
+end
+
+while true do task.wait(1)
+    if not lIlIlI then break end
+    for _,v in ipairs(C0nns) do
+        v:Disconnect()
+    end
+    table.clear(C0nns)
+    local m = MAIN()
+    if not m then continue end
+    m.MatchFolder.Destroying:Wait()
+end
