@@ -1,0 +1,546 @@
+-- BUILD A PLANE - Auto Farm with Smart Return
+-- Auto launches, flies forward, returns at $1300 to maximize profits
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+
+-- Character variables (will be updated on respawn)
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local Humanoid = Character:WaitForChild("Humanoid")
+
+-- Get remotes (for launch/return)
+local Remotes = ReplicatedStorage:WaitForChild("Remotes", 10)
+local LaunchEvents = Remotes:WaitForChild("LaunchEvents", 10)
+local LaunchRemote = LaunchEvents:WaitForChild("Launch")
+local ReturnRemote = LaunchEvents:WaitForChild("Return")
+
+-- Simple GUI
+local ScreenGui = PlayerGui:FindFirstChild("SimpleFly")
+if ScreenGui then
+    ScreenGui:Destroy()
+end
+
+ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SimpleFly"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = PlayerGui
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 350, 0, 380)
+MainFrame.Position = UDim2.new(0, 10, 0.5, -190)
+MainFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+MainFrame.BorderSizePixel = 2
+MainFrame.BorderColor3 = Color3.new(0, 1, 0)
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+
+-- Title
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Size = UDim2.new(1, 0, 0, 35)
+TitleLabel.BackgroundColor3 = Color3.new(0, 0.5, 0)
+TitleLabel.Text = "✈️ AUTO FARM FLY"
+TitleLabel.TextColor3 = Color3.new(1, 1, 1)
+TitleLabel.TextScaled = true
+TitleLabel.Font = Enum.Font.SourceSansBold
+TitleLabel.Parent = MainFrame
+
+-- Cash Display
+local MoneyLabel = Instance.new("TextLabel")
+MoneyLabel.Size = UDim2.new(0.9, 0, 0, 30)
+MoneyLabel.Position = UDim2.new(0.05, 0, 0, 45)
+MoneyLabel.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+MoneyLabel.Text = "Cash Earned: $0 | Distance: 0"
+MoneyLabel.TextColor3 = Color3.new(1, 1, 0)
+MoneyLabel.TextScaled = true
+MoneyLabel.Font = Enum.Font.SourceSansBold
+MoneyLabel.Parent = MainFrame
+
+-- Auto Farm Toggle
+local AutoFarmToggle = Instance.new("TextButton")
+AutoFarmToggle.Size = UDim2.new(0.9, 0, 0, 40)
+AutoFarmToggle.Position = UDim2.new(0.05, 0, 0, 80)
+AutoFarmToggle.BackgroundColor3 = Color3.new(0.5, 0, 0)
+AutoFarmToggle.Text = "AUTO FARM: OFF"
+AutoFarmToggle.TextColor3 = Color3.new(1, 1, 1)
+AutoFarmToggle.TextScaled = true
+AutoFarmToggle.Font = Enum.Font.SourceSansBold
+AutoFarmToggle.Parent = MainFrame
+
+-- Fly Toggle
+local FlyToggle = Instance.new("TextButton")
+FlyToggle.Size = UDim2.new(0.9, 0, 0, 40)
+FlyToggle.Position = UDim2.new(0.05, 0, 0, 125)
+FlyToggle.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+FlyToggle.Text = "FLY: OFF"
+FlyToggle.TextColor3 = Color3.new(1, 0.3, 0.3)
+FlyToggle.TextScaled = true
+FlyToggle.Font = Enum.Font.SourceSansBold
+FlyToggle.Parent = MainFrame
+
+-- Speed Input
+local SpeedLabel = Instance.new("TextLabel")
+SpeedLabel.Size = UDim2.new(0.4, 0, 0, 30)
+SpeedLabel.Position = UDim2.new(0.05, 0, 0, 170)
+SpeedLabel.BackgroundTransparency = 1
+SpeedLabel.Text = "Speed:"
+SpeedLabel.TextColor3 = Color3.new(1, 1, 1)
+SpeedLabel.TextScaled = true
+SpeedLabel.Font = Enum.Font.SourceSans
+SpeedLabel.Parent = MainFrame
+
+local SpeedInput = Instance.new("TextBox")
+SpeedInput.Size = UDim2.new(0.5, 0, 0, 30)
+SpeedInput.Position = UDim2.new(0.45, 0, 0, 170)
+SpeedInput.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+SpeedInput.Text = "5000"
+SpeedInput.TextColor3 = Color3.new(1, 1, 1)
+SpeedInput.TextScaled = true
+SpeedInput.Font = Enum.Font.SourceSans
+SpeedInput.Parent = MainFrame
+
+-- Up/Down Buttons
+local UpButton = Instance.new("TextButton")
+UpButton.Size = UDim2.new(0.42, 0, 0, 35)
+UpButton.Position = UDim2.new(0.05, 0, 0, 210)
+UpButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.4)
+UpButton.Text = "⬆️ UP"
+UpButton.TextColor3 = Color3.new(1, 1, 1)
+UpButton.TextScaled = true
+UpButton.Font = Enum.Font.SourceSansBold
+UpButton.Parent = MainFrame
+
+local DownButton = Instance.new("TextButton")
+DownButton.Size = UDim2.new(0.42, 0, 0, 35)
+DownButton.Position = UDim2.new(0.53, 0, 0, 210)
+DownButton.BackgroundColor3 = Color3.new(0.4, 0.2, 0.2)
+DownButton.Text = "⬇️ DOWN"
+DownButton.TextColor3 = Color3.new(1, 1, 1)
+DownButton.TextScaled = true
+DownButton.Font = Enum.Font.SourceSansBold
+DownButton.Parent = MainFrame
+
+-- Manual Launch/Return Buttons
+local LaunchButton = Instance.new("TextButton")
+LaunchButton.Size = UDim2.new(0.42, 0, 0, 35)
+LaunchButton.Position = UDim2.new(0.05, 0, 0, 250)
+LaunchButton.BackgroundColor3 = Color3.new(0, 0.4, 0.8)
+LaunchButton.Text = "🚀 LAUNCH"
+LaunchButton.TextColor3 = Color3.new(1, 1, 1)
+LaunchButton.TextScaled = true
+LaunchButton.Font = Enum.Font.SourceSansBold
+LaunchButton.Parent = MainFrame
+
+local ReturnButton = Instance.new("TextButton")
+ReturnButton.Size = UDim2.new(0.42, 0, 0, 35)
+ReturnButton.Position = UDim2.new(0.53, 0, 0, 250)
+ReturnButton.BackgroundColor3 = Color3.new(0.5, 0.3, 0)
+ReturnButton.Text = "💰 RETURN"
+ReturnButton.TextColor3 = Color3.new(1, 1, 1)
+ReturnButton.TextScaled = true
+ReturnButton.Font = Enum.Font.SourceSansBold
+ReturnButton.Parent = MainFrame
+
+-- Stats Display
+local StatsLabel = Instance.new("TextLabel")
+StatsLabel.Size = UDim2.new(0.9, 0, 0, 50)
+StatsLabel.Position = UDim2.new(0.05, 0, 0, 290)
+StatsLabel.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
+StatsLabel.Text = "Runs: 0 | Total: $0\nStatus: Ready"
+StatsLabel.TextColor3 = Color3.new(0.7, 1, 0.7)
+StatsLabel.TextScaled = true
+StatsLabel.Font = Enum.Font.SourceSans
+StatsLabel.Parent = MainFrame
+
+-- Variables
+local flying = false
+local autoFarm = false
+local flyConnection = nil
+local monitorConnection = nil
+local flySpeed = 5000
+local totalRuns = 0
+local totalEarned = 0
+local startMoney = 0
+local currentMoney = 0
+local isLaunched = false
+
+-- Function to update character references
+local function updateCharacter()
+    Character = Player.Character
+    if Character then
+        HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+        Humanoid = Character:WaitForChild("Humanoid")
+        
+        -- Re-enable buttons after respawn
+        FlyToggle.Active = true
+        UpButton.Active = true
+        DownButton.Active = true
+        SpeedInput.Editable = true
+    end
+end
+
+-- Get current cash (the game uses Cash not Money)
+local function getCurrentMoney()
+    local leaderstats = Player:WaitForChild("leaderstats", 5)
+    if leaderstats then
+        local cash = leaderstats:FindFirstChild("Cash")
+        if cash then
+            return tonumber(cash.Value) or 0
+        end
+    end
+    return 0
+end
+
+-- Get current distance
+local function getCurrentDistance()
+    local leaderstats = Player:WaitForChild("leaderstats", 5)
+    if leaderstats then
+        local distance = leaderstats:FindFirstChild("Distance")
+        if distance then
+            return tonumber(distance.Value) or 0
+        end
+    end
+    return 0
+end
+
+-- Calculate expected cash from distance (game formula)
+local function calculateCashFromDistance(distance)
+    if distance <= 0 then return 0 end
+    local cash = (distance ^ 0.9) * 0.1
+    return math.round(cash)
+end
+
+-- Clean up old connections
+local function cleanup()
+    if flyConnection then
+        flyConnection:Disconnect()
+        flyConnection = nil
+    end
+    
+    if monitorConnection then
+        monitorConnection:Disconnect()
+        monitorConnection = nil
+    end
+    
+    -- Remove any BodyMovers
+    if HumanoidRootPart and HumanoidRootPart.Parent then
+        for _, obj in pairs(HumanoidRootPart:GetChildren()) do
+            if obj:IsA("BodyVelocity") or obj:IsA("BodyPosition") or obj:IsA("BodyGyro") or obj:IsA("BodyMover") then
+                obj:Destroy()
+            end
+        end
+    end
+end
+
+-- Start flying forward (SIMPLE VERSION - just teleport)
+local function startFlying()
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+        if not HumanoidRootPart then
+            return
+        end
+    end
+    
+    cleanup() -- Clean up first
+    
+    flying = true
+    FlyToggle.Text = "FLY: ON"
+    FlyToggle.TextColor3 = Color3.new(0.3, 1, 0.3)
+    FlyToggle.BackgroundColor3 = Color3.new(0.1, 0.3, 0.1)
+    
+    -- Simply teleport to target distance at extreme height
+    -- 15000 distance = ~$600
+    HumanoidRootPart.CFrame = CFrame.new(15030, 9000000000, 0) -- 15000 + 30 (start offset)
+    
+    task.wait(0.5)
+    
+    -- Keep at extreme height to avoid any issues
+    spawn(function()
+        while flying do
+            if HumanoidRootPart and HumanoidRootPart.Parent then
+                -- Keep at extreme height
+                if HumanoidRootPart.Position.Y < 9000000000 then
+                    HumanoidRootPart.CFrame = CFrame.new(HumanoidRootPart.Position.X, 9000000000, HumanoidRootPart.Position.Z)
+                end
+            end
+            task.wait(0.1)
+        end
+    end)
+end
+
+-- Stop flying
+local function stopFlying()
+    flying = false
+    FlyToggle.Text = "FLY: OFF"
+    FlyToggle.TextColor3 = Color3.new(1, 0.3, 0.3)
+    FlyToggle.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+    
+    cleanup()
+end
+
+-- Auto return when reaching optimal cash (NOT NEEDED WITH INSTANT TELEPORT)
+local function checkMoneyAndReturn()
+    -- This function is no longer needed with instant teleport method
+    -- Keep it empty for compatibility
+end
+
+-- Start auto farm cycle (INSTANT TELEPORT VERSION)
+function startAutoFarmCycle()
+    if not autoFarm then return end
+    
+    -- Update character if needed
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+    end
+    
+    -- Record starting cash BEFORE launching
+    startMoney = getCurrentMoney()
+    currentMoney = startMoney
+    local startDistance = getCurrentDistance()
+    
+    MoneyLabel.Text = "Cash: $0 | Distance: 0"
+    print(string.format("Starting - Cash: $%d, Distance: %d", startMoney, startDistance))
+    
+    -- Launch
+    LaunchRemote:FireServer()
+    isLaunched = true
+    StatsLabel.Text = string.format("Runs: %d | Total: $%d\nLaunching...", totalRuns, totalEarned)
+    
+    task.wait(2) -- Wait for launch to register
+    
+    -- INSTANT TELEPORT to 15000 distance at extreme height  
+    print("Teleporting to distance 15000...")
+    HumanoidRootPart.CFrame = CFrame.new(15030, 9000000000, 0) -- X=15030 for 15000 distance
+    
+    task.wait(3) -- Wait longer for position to register
+    
+    -- Auto return
+    print("Returning...")
+    ReturnRemote:FireServer()
+    isLaunched = false
+    
+    task.wait(2) -- Wait for reward
+    
+    local finalCash = getCurrentMoney()
+    local earnedThisRun = finalCash - startMoney
+    
+    if earnedThisRun > 0 then
+        totalRuns = totalRuns + 1
+        totalEarned = totalEarned + earnedThisRun
+        StatsLabel.Text = string.format("Runs: %d | Total: $%d\nEarned: $%d", totalRuns, totalEarned, earnedThisRun)
+        MoneyLabel.Text = string.format("Last earned: $%d", earnedThisRun)
+        print(string.format("Run %d earned: $%d", totalRuns, earnedThisRun))
+    else
+        print("No money earned - trying again...")
+    end
+    
+    -- Continue auto farm
+    if autoFarm then
+        task.wait(1)
+        startAutoFarmCycle()
+    end
+end
+
+-- Button Handlers
+AutoFarmToggle.MouseButton1Click:Connect(function()
+    autoFarm = not autoFarm
+    if autoFarm then
+        AutoFarmToggle.Text = "AUTO FARM: ON"
+        AutoFarmToggle.BackgroundColor3 = Color3.new(0, 0.7, 0)
+        AutoFarmToggle.TextColor3 = Color3.new(1, 1, 1)
+        startAutoFarmCycle()
+    else
+        AutoFarmToggle.Text = "AUTO FARM: OFF"
+        AutoFarmToggle.BackgroundColor3 = Color3.new(0.5, 0, 0)
+        AutoFarmToggle.TextColor3 = Color3.new(1, 1, 1)
+        stopFlying()
+        isLaunched = false
+    end
+end)
+
+LaunchButton.MouseButton1Click:Connect(function()
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+    end
+    
+    -- Get cash before launch
+    startMoney = getCurrentMoney()
+    currentMoney = startMoney
+    print("Starting cash:", startMoney)
+    
+    LaunchRemote:FireServer()
+    isLaunched = true
+    MoneyLabel.Text = "Teleporting to 15000..."
+    LaunchButton.Text = "✅ LAUNCHED"
+    
+    task.wait(2)
+    
+    -- INSTANT TELEPORT to 15000 distance
+    print("Teleporting to distance 15000...")
+    HumanoidRootPart.CFrame = CFrame.new(15030, 9000000000, 0)
+    
+    spawn(function()
+        task.wait(0.5)
+        LaunchButton.Text = "🚀 LAUNCH"
+    end)
+end)
+
+FlyToggle.MouseButton1Click:Connect(function()
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+    end
+    
+    if flying then
+        stopFlying()
+    else
+        -- Instant teleport method - no need for speed
+        startFlying()
+    end
+end)
+
+SpeedInput.FocusLost:Connect(function()
+    flySpeed = tonumber(SpeedInput.Text) or 5000
+end)
+
+UpButton.MouseButton1Click:Connect(function()
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+    end
+    
+    if HumanoidRootPart then
+        -- Teleport up 50 studs
+        HumanoidRootPart.CFrame = HumanoidRootPart.CFrame + Vector3.new(0, 50, 0)
+    end
+end)
+
+DownButton.MouseButton1Click:Connect(function()
+    if not HumanoidRootPart or not HumanoidRootPart.Parent then
+        updateCharacter()
+    end
+    
+    if HumanoidRootPart then
+        -- Don't go below 400 to avoid ALL obstacles
+        local newY = math.max(HumanoidRootPart.Position.Y - 30, 400)
+        HumanoidRootPart.CFrame = CFrame.new(
+            HumanoidRootPart.Position.X,
+            newY,
+            HumanoidRootPart.Position.Z
+        )
+    end
+end)
+
+ReturnButton.MouseButton1Click:Connect(function()
+    if not isLaunched then return end
+    
+    -- Get final distance before returning
+    local finalX = HumanoidRootPart and HumanoidRootPart.Position.X or 0
+    local finalDistance = math.max(finalX - 30, 0)
+    
+    stopFlying()
+    ReturnRemote:FireServer()
+    
+    -- Wait for cash to update
+    task.wait(1)
+    
+    local finalCash = getCurrentMoney()
+    local earned = finalCash - startMoney
+    
+    if earned > 0 then
+        totalRuns = totalRuns + 1
+        totalEarned = totalEarned + earned
+        MoneyLabel.Text = string.format("Cash Earned: $%d | Distance: %d", earned, math.round(finalDistance))
+        StatsLabel.Text = string.format("Runs: %d | Total: $%d\nLast earned: $%d", totalRuns, totalEarned, earned)
+        print(string.format("Run %d - Earned: $%d, Distance: %d", totalRuns, earned, math.round(finalDistance)))
+    else
+        StatsLabel.Text = string.format("Runs: %d | Total: $%d\nNo cash earned", totalRuns, totalEarned)
+    end
+    
+    isLaunched = false
+    ReturnButton.Text = "✅ RETURNED"
+    
+    spawn(function()
+        task.wait(1)
+        ReturnButton.Text = "💰 RETURN"
+    end)
+end)
+
+-- Monitor for display updates only
+spawn(function()
+    while true do
+        if isLaunched and HumanoidRootPart then
+            local currentX = HumanoidRootPart.Position.X
+            local distance = math.max(currentX - 30, 0)
+            local expectedCash = calculateCashFromDistance(distance)
+            MoneyLabel.Text = string.format("Distance: %d | Expected: $%d", math.round(distance), expectedCash)
+        end
+        task.wait(0.5)
+    end
+end)
+
+-- Update cash display periodically
+spawn(function()
+    while true do
+        local cash = getCurrentMoney()
+        local distance = getCurrentDistance()
+        
+        -- Only update total cash display when not flying
+        if not isLaunched then
+            local cashText = string.format("Total Cash: $%d | Best Distance: %d", cash, distance)
+            -- Don't override the earned display during runs
+        end
+        
+        task.wait(1)
+    end
+end)
+
+-- Handle character respawn
+Player.CharacterAdded:Connect(function(char)
+    task.wait(1) -- Wait for character to load
+    updateCharacter()
+    
+    -- Reset states
+    flying = false
+    isLaunched = false
+    FlyToggle.Text = "FLY: OFF"
+    FlyToggle.TextColor3 = Color3.new(1, 0.3, 0.3)
+    FlyToggle.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+    
+    -- Continue auto farm if it was on
+    if autoFarm then
+        task.wait(2)
+        startAutoFarmCycle()
+    end
+end)
+
+-- Clean up on character death
+if Humanoid then
+    Humanoid.Died:Connect(function()
+        cleanup()
+        flying = false
+        isLaunched = false
+    end)
+end
+
+print("=== AUTO FARM FLY LOADED ===")
+print("")
+print("Game Info:")
+print("• Cash formula: (distance^0.9) * 0.1")
+print("• Distance = X position - 30")
+print("• Teleports to 15000 distance (~$600)")
+print("")
+print("Features:")
+print("✅ Instant teleport to 15000 distance")
+print("✅ Extreme height (9 billion) to avoid all obstacles")
+print("✅ ~$600 per run (safer than higher distances)")
+print("✅ Auto farm mode for continuous farming")
+print("✅ Works after respawn")
+print("")
+print("How to use:")
+print("1. Click AUTO FARM to start")
+print("2. Script auto launches, teleports, and returns")
+print("3. Gets ~$600 per run reliably")
