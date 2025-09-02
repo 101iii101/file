@@ -1,0 +1,320 @@
+task.spawn(function()
+	repeat task.wait() until game:IsLoaded()
+	wait(2)
+
+	local Players = game:GetService("Players")
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+	setclipboard("https://direct-link.net/1275490/o7Hk0S5p6Tx6")
+	Rayfield:Notify({
+		Title = "🔑 Key Copied!",
+		Content = "The key link has been copied to your clipboard.",
+		Duration = 6,
+		Image = "check"
+	})
+
+	local Window = Rayfield:CreateWindow({
+		Name = "GrayHub 🚀",
+		LoadingTitle = "Launching GrayHub...",
+		LoadingSubtitle = "Teleport Auto Farm",
+		ShowText = "GrayHub",
+		Theme = "Ocean",
+		ToggleUIKeybind = Enum.KeyCode.K,
+		ConfigurationSaving = { Enabled = false },
+		KeySystem = true,
+		KeySettings = {
+			Title = "GrayHub Key System",
+			Subtitle = "Access Required - Key Link Copied",
+			Note = "Get your key from Linkvertise: direct-link.net/1275490/o7Hk0S5p6Tx6",
+			FileName = "GrayHubKey",
+			SaveKey = true,
+			GrabKeyFromSite = true,
+			Key = "https://pastebin.com/raw/xcqPS0GD"
+		},
+	})
+
+	local MainTab = Window:CreateTab("⚙️ Auto Farm", "rocket")
+	MainTab:CreateSection("Teleport Settings")
+
+	local AutoFarmEnabled = false
+	local AutoBuyEnabled = false
+	local AutoCoinFarmEnabled = false
+	local killScript = false
+	local TravelDistance = 20000
+	local TeleportDelay = 3
+	local VerticalOffset = 600
+	local MaxDistance = 100000
+	local TotalDistanceTraveled = 0
+	local StartTime = 0
+	local StartMoney = 0
+	local MoneyStatName = "Cash"
+	local currentIndex = 1
+	local cachedCoins = {}
+
+	MainTab:CreateSlider({
+		Name = "Constant Altitude",
+		Range = { 100, 1000 },
+		Increment = 50,
+		Suffix = " studs",
+		CurrentValue = VerticalOffset,
+		Callback = function(v) VerticalOffset = v end,
+	})
+
+	MainTab:CreateSlider({
+		Name = "Auto Stop After Total Distance",
+		Range = { 10000, 120000 },
+		Increment = 10000,
+		Suffix = "studs",
+		CurrentValue = MaxDistance,
+		Callback = function(v) MaxDistance = v end,
+	})
+
+	MainTab:CreateToggle({
+		Name = "Auto Farm (Teleport Mode)",
+		CurrentValue = false,
+		Callback = function(v)
+			AutoFarmEnabled = v
+			if v then
+				StartTime = tick()
+				TotalDistanceTraveled = 0
+				local stat = Players.LocalPlayer:FindFirstChild("leaderstats")
+				if stat and stat:FindFirstChild(MoneyStatName) then
+					StartMoney = stat[MoneyStatName].Value
+				end
+			end
+		end,
+	})
+
+	MainTab:CreateToggle({
+		Name = "Auto Collect Blood Moon Coins",
+		CurrentValue = false,
+		Callback = function(v)
+			AutoCoinFarmEnabled = v
+		end,
+	})
+
+	local BuyTab = Window:CreateTab("🛒 Auto Buy Blocks", "shopping-bag")
+
+	BuyTab:CreateToggle({
+		Name = "Enable Auto Buy",
+		CurrentValue = false,
+		Callback = function(v)
+			AutoBuyEnabled = v
+		end,
+	})
+
+	BuyTab:CreateSection("Select Items to Auto Buy")
+
+	local itemsToBuy = {
+		"block_1", "wing_1", "fuel_1", "propeller_1", "seat_1", "fuel_2",
+		"wing_2", "fuel_3", "propeller_2", "balloon", "boost_1",
+		"missile_1", "shield"
+	}
+
+	local itemDisplayNames = {
+		block_1 = "Block",
+		wing_1 = "Wing",
+		fuel_1 = "Fuel Can",
+		propeller_1 = "Propeller",
+		seat_1 = "Seat",
+		fuel_2 = "Better Fuel",
+		wing_2 = "Better Wing",
+		fuel_3 = "Best Fuel",
+		propeller_2 = "Better Propeller",
+		balloon = "Balloon Deployer",
+		boost_1 = "Rocket Booster",
+		missile_1 = "Missile",
+		shield = "Energy Shield"
+	}
+
+	local itemToggles = {}
+	for _, item in ipairs(itemsToBuy) do
+		itemToggles[item] = true
+		BuyTab:CreateToggle({
+			Name = itemDisplayNames[item] or item,
+			CurrentValue = true,
+			Callback = function(v)
+				itemToggles[item] = v
+			end,
+		})
+	end
+
+	MainTab:CreateButton({
+		Name = "❌ Kill Script + GUI",
+		Callback = function()
+			killScript = true
+			Rayfield:Destroy()
+		end,
+	})
+
+	local function getCharacter()
+		local char = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
+		repeat task.wait() until char:FindFirstChild("Humanoid") and char:FindFirstChild("HumanoidRootPart")
+		return char
+	end
+
+	local function waitForRespawn()
+		while true do
+			local char = getCharacter()
+			local hum = char:FindFirstChild("Humanoid")
+			if hum and hum.Health > 0 then break end
+			task.wait()
+		end
+	end
+
+	local function getVehicle()
+		local seat = getCharacter():FindFirstChildOfClass("Humanoid") and getCharacter():FindFirstChildOfClass("Humanoid").SeatPart
+		if not seat then return end
+		local model = seat:FindFirstAncestorOfClass("Model")
+		if not model then return end
+
+		if not model.PrimaryPart then
+			for _, part in ipairs(model:GetDescendants()) do
+				if part:IsA("BasePart") then
+					model.PrimaryPart = part
+					break
+				end
+			end
+		end
+		return model
+	end
+
+	local function fireLaunchAndPortal()
+		ReplicatedStorage.Remotes.LaunchEvents.Launch:FireServer()
+		task.wait(0.3)
+		ReplicatedStorage.Remotes.SpectialEvents.PortalTouched:FireServer()
+	end
+
+	local function collectCoin(coin)
+		ReplicatedStorage.Remotes.SpectialEvents.CollectCoin:FireServer(coin.Name)
+	end
+
+	local function tpVehicleTo(vehicle, position)
+		if not vehicle or not vehicle.PrimaryPart then return end
+		vehicle:SetPrimaryPartCFrame(CFrame.new(position + Vector3.new(0, 7, 0)))
+	end
+
+	local function getCoinsSorted()
+		if #cachedCoins > 0 then return cachedCoins end
+
+		local char = getCharacter()
+		local pos = char:WaitForChild("HumanoidRootPart").Position
+		local allCoins = {}
+
+		for _, section in ipairs(workspace:WaitForChild("SpawnedSections"):GetChildren()) do
+			local coins = section:FindFirstChild("Coins")
+			if coins then
+				for _, coin in ipairs(coins:GetChildren()) do
+					if coin:IsA("BasePart") then
+						table.insert(allCoins, coin)
+					end
+				end
+			end
+		end
+
+		table.sort(allCoins, function(a, b)
+			return (a.Position - pos).Magnitude < (b.Position - pos).Magnitude
+		end)
+
+		cachedCoins = allCoins
+		return cachedCoins
+	end
+
+	local LaunchRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("LaunchEvents"):WaitForChild("Launch")
+	local ReturnRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("LaunchEvents"):WaitForChild("Return")
+	local BuyBlockRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ShopEvents"):WaitForChild("BuyBlock")
+	local player = Players.LocalPlayer
+
+	task.spawn(function()
+		while not killScript do
+			if AutoFarmEnabled then
+				local stat = player:FindFirstChild("leaderstats")
+				local money = stat and stat:FindFirstChild(MoneyStatName) and stat[MoneyStatName].Value or 0
+				local earned = money - StartMoney
+				local elapsed = math.floor(tick() - StartTime)
+				Window:SetLabel("💸 Money Earned: " .. earned .. " | ⏱️ Time: " .. elapsed .. "s")
+			end
+			task.wait(1)
+		end
+	end)
+
+	task.spawn(function()
+		while not killScript do
+			if AutoBuyEnabled then
+				for _, item in ipairs(itemsToBuy) do
+					if itemToggles[item] then
+						pcall(function()
+							BuyBlockRemote:FireServer(item)
+						end)
+					end
+				end
+			end
+			task.wait(1)
+		end
+	end)
+
+	task.spawn(function()
+		while not killScript do
+			if AutoCoinFarmEnabled then
+				waitForRespawn()
+				fireLaunchAndPortal()
+				task.wait(0.2)
+
+				local vehicle = getVehicle()
+				if not vehicle then warn("No vehicle") task.wait(1) continue end
+
+				local coins = getCoinsSorted()
+				if currentIndex > #coins then
+					currentIndex = 1
+				end
+
+				local coin = coins[currentIndex]
+				if coin and coin:IsA("BasePart") then
+					tpVehicleTo(vehicle, coin.Position)
+					collectCoin(coin)
+					currentIndex += 1
+					task.wait(0.05)
+				end
+			end
+			task.wait(0.1)
+		end
+	end)
+
+	while not killScript do
+		if AutoFarmEnabled then
+			local character = player.Character or player.CharacterAdded:Wait()
+			local hrp = character:WaitForChild("HumanoidRootPart")
+
+			pcall(function() LaunchRemote:FireServer() end)
+			print("🚀 Launch remote fired.")
+
+			task.wait(1)
+
+			local move = hrp.CFrame.LookVector * TravelDistance
+			local newPos = Vector3.new(hrp.Position.X, VerticalOffset, hrp.Position.Z) + move
+			local newCFrame = CFrame.new(newPos, newPos + hrp.CFrame.LookVector)
+			hrp.CFrame = newCFrame
+
+			TotalDistanceTraveled += TravelDistance
+			print("📍 Teleported:", TravelDistance, " | Total:", TotalDistanceTraveled)
+
+			if TotalDistanceTraveled >= MaxDistance then
+				print("✅ Auto Stop: Reached max distance. Returning.")
+				pcall(function() ReturnRemote:FireServer() end)
+				task.wait(3)
+				TotalDistanceTraveled = 0
+				StartTime = tick()
+				local stat = Players.LocalPlayer:FindFirstChild("leaderstats")
+				if stat and stat:FindFirstChild(MoneyStatName) then
+					StartMoney = stat[MoneyStatName].Value
+				end
+			end
+
+			task.wait(TeleportDelay)
+		else
+			task.wait(0.25)
+		end
+	end
+end)
