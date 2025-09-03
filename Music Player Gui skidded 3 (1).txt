@@ -1,0 +1,183 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local existing = playerGui:FindFirstChild("ScriptBoxMusicPlayer")
+if existing then existing:Destroy() end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "ScriptBoxMusicPlayer"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.Parent = playerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.8, 0, 0.28, 0)
+frame.Position = UDim2.new(0.1, 0, 0.68, 0)
+frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+frame.BackgroundTransparency = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = gui
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0,12)
+
+frame.Position = UDim2.new(0.1,0,1.2,0)
+TweenService:Create(frame, TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+	Position = UDim2.new(0.1,0,0.68,0)
+}):Play()
+
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1,-16,0,26)
+title.Position = UDim2.new(0,8,0,6)
+title.BackgroundTransparency = 1
+title.Text = "ScriptBox Music Player"
+title.TextSize = 17
+title.Font = Enum.Font.GothamBold
+title.TextColor3 = Color3.fromRGB(235,235,235)
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+local idBox = Instance.new("TextBox", frame)
+idBox.Size = UDim2.new(0.58,-10,0,32)
+idBox.Position = UDim2.new(0,8,0,36)
+idBox.PlaceholderText = "Enter music ID"
+idBox.ClearTextOnFocus = false
+idBox.Text = ""
+idBox.Font = Enum.Font.Gotham
+idBox.TextSize = 15
+idBox.TextColor3 = Color3.fromRGB(240,240,240)
+idBox.BackgroundColor3 = Color3.fromRGB(35,35,35)
+Instance.new("UICorner", idBox).CornerRadius = UDim.new(0,8)
+
+local playBtn = Instance.new("TextButton", frame)
+playBtn.Size = UDim2.new(0.45,-8,0,32)
+playBtn.Position = UDim2.new(0,8,0,76)
+playBtn.Text = "▶ Play"
+playBtn.Font = Enum.Font.GothamBold
+playBtn.TextSize = 16
+playBtn.TextColor3 = Color3.new(1,1,1)
+playBtn.BackgroundColor3 = Color3.fromRGB(10,130,200)
+Instance.new("UICorner", playBtn).CornerRadius = UDim.new(0,8)
+
+local stopBtn = Instance.new("TextButton", frame)
+stopBtn.Size = UDim2.new(0.45,-8,0,32)
+stopBtn.Position = UDim2.new(0.52,0,0,76)
+stopBtn.Text = "■ Stop"
+stopBtn.Font = Enum.Font.GothamBold
+stopBtn.TextSize = 16
+stopBtn.TextColor3 = Color3.new(1,1,1)
+stopBtn.BackgroundColor3 = Color3.fromRGB(160,40,40)
+Instance.new("UICorner", stopBtn).CornerRadius = UDim.new(0,8)
+
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1,-16,0,20)
+status.Position = UDim2.new(0,8,0,112)
+status.BackgroundTransparency = 1
+status.Text = "Ready"
+status.Font = Enum.Font.Gotham
+status.TextSize = 14
+status.TextColor3 = Color3.fromRGB(200,200,200)
+status.TextXAlignment = Enum.TextXAlignment.Left
+
+local sliderFrame = Instance.new("Frame", frame)
+sliderFrame.Size = UDim2.new(0.9,0,0,30)
+sliderFrame.Position = UDim2.new(0.05,0,0,138)
+sliderFrame.BackgroundTransparency = 1
+
+local bar = Instance.new("Frame", sliderFrame)
+bar.Size = UDim2.new(1,0,0,10)
+bar.Position = UDim2.new(0,0,0.5,-5)
+bar.BackgroundColor3 = Color3.fromRGB(70,70,70)
+bar.BorderSizePixel = 0
+Instance.new("UICorner", bar).CornerRadius = UDim.new(0,5)
+
+local fill = Instance.new("Frame", bar)
+fill.Size = UDim2.new(0,0,1,0)
+fill.BackgroundColor3 = Color3.fromRGB(0,170,255)
+fill.BorderSizePixel = 0
+Instance.new("UICorner", fill).CornerRadius = UDim.new(0,5)
+
+local thumb = Instance.new("Frame", bar)
+thumb.Size = UDim2.new(0,18,0,18)
+thumb.Position = UDim2.new(0,0,0.5,-9)
+thumb.BackgroundColor3 = Color3.fromRGB(255,255,255)
+thumb.BorderSizePixel = 0
+Instance.new("UICorner", thumb).CornerRadius = UDim.new(1,0)
+
+local footer = Instance.new("TextLabel", frame)
+footer.Size = UDim2.new(1,-16,0,16)
+footer.Position = UDim2.new(0,8,1,-18)
+footer.BackgroundTransparency = 1
+footer.Font = Enum.Font.Gotham
+footer.TextSize = 12
+footer.TextColor3 = Color3.fromRGB(170,170,170)
+footer.Text = "script created by ScriptBox"
+footer.TextXAlignment = Enum.TextXAlignment.Left
+
+local sound = Instance.new("Sound", gui)
+sound.Name = "ScriptBoxSound"
+
+local function playId()
+	local id = idBox.Text:gsub("%D","")
+	if id == "" then
+		status.Text = "Invalid ID"
+		return
+	end
+	sound.SoundId = "rbxassetid://"..id
+	local ok,err = pcall(function() sound:Play() end)
+	if ok then
+		status.Text = "Playing: "..id
+	else
+		status.Text = "Error: "..err
+	end
+end
+
+local function stopSound()
+	sound:Stop()
+	status.Text = "Stopped"
+end
+
+playBtn.MouseButton1Click:Connect(playId)
+stopBtn.MouseButton1Click:Connect(stopSound)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	if sound.TimeLength > 0 and not UserInputService.TouchEnabled then
+		local progress = sound.TimePosition / sound.TimeLength
+		fill.Size = UDim2.new(progress,0,1,0)
+		thumb.Position = UDim2.new(progress,-9,0.5,-9)
+	end
+end)
+
+local dragging = false
+
+local function updateSeek(x)
+	local rel = math.clamp((x - bar.AbsolutePosition.X)/bar.AbsoluteSize.X,0,1)
+	fill.Size = UDim2.new(rel,0,1,0)
+	thumb.Position = UDim2.new(rel,-9,0.5,-9)
+	if sound.TimeLength > 0 then
+		sound.TimePosition = rel * sound.TimeLength
+	end
+end
+
+thumb.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		input.UserInputState = Enum.UserInputState.Begin
+	end
+end)
+
+thumb.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input, gpe)
+	if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+		updateSeek(input.Position.X)
+	end
+end)
