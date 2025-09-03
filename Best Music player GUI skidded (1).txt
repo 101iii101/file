@@ -1,0 +1,341 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- Made by luauruler26
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local textBox = Instance.new("TextBox")
+local playButton = Instance.new("TextButton")
+local stopButton = Instance.new("TextButton")
+local loopButton = Instance.new("TextButton")
+local closeButton = Instance.new("TextButton")
+local minimizeButton = Instance.new("TextButton")
+local title = Instance.new("TextLabel")
+
+gui.Name = "FyanPlay"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local originalSize = UDim2.new(0, 320, 0, 250)
+local minimizedSize = UDim2.new(0, 320, 0, 40)
+local isMinimized = false
+
+frame.Size = originalSize
+frame.Position = UDim2.new(0.5, -160, 0.5, -125)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BackgroundTransparency = 0.3
+frame.Draggable = true
+frame.Parent = gui
+
+local frameStroke = Instance.new("UIStroke")
+frameStroke.Color = Color3.new(0.8, 0.8, 0.8)
+frameStroke.Thickness = 2
+frameStroke.Parent = frame
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 12)
+frameCorner.Parent = frame
+
+title.Name = "Title"
+title.Text = "FyanPlay - Music Player"
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+title.BackgroundTransparency = 0.2
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 18
+title.Parent = frame
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 12)
+titleCorner.Parent = title
+
+local icon = Instance.new("ImageLabel")
+icon.Name = "Icon"
+icon.Size = UDim2.new(0, 30, 0, 30)
+icon.Position = UDim2.new(0, 10, 0, 5)
+icon.Image = "rbxassetid://121445381467948"
+icon.BackgroundTransparency = 1
+icon.Parent = frame
+
+textBox.PlaceholderText = "Enter Audio ID here!"
+textBox.Text = ""
+textBox.Size = UDim2.new(0.8, 0, 0, 35)
+textBox.Position = UDim2.new(0.1, 0, 0.2, 0)
+textBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+textBox.Font = Enum.Font.Gotham
+textBox.TextSize = 14
+textBox.TextColor3 = Color3.new(0, 0, 0)
+textBox.Parent = frame
+
+local textBoxCorner = Instance.new("UICorner")
+textBoxCorner.CornerRadius = UDim.new(0, 8)
+textBoxCorner.Parent = textBox
+
+playButton.Size = UDim2.new(0.35, 0, 0, 35)
+playButton.Position = UDim2.new(0.1, 0, 0.45, 0)
+playButton.Text = "▶ PLAY"
+playButton.BackgroundColor3 = Color3.fromRGB(0, 200, 100)
+playButton.Font = Enum.Font.GothamBold
+playButton.TextColor3 = Color3.new(1, 1, 1)
+playButton.TextSize = 14
+playButton.Visible = true
+playButton.Parent = frame
+
+local playCorner = Instance.new("UICorner")
+playCorner.CornerRadius = UDim.new(0, 8)
+playCorner.Parent = playButton
+
+stopButton.Size = UDim2.new(0.35, 0, 0, 35)
+stopButton.Position = UDim2.new(0.55, 0, 0.45, 0)
+stopButton.Text = "⏹ STOP"
+stopButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+stopButton.Font = Enum.Font.GothamBold
+stopButton.TextColor3 = Color3.new(1, 1, 1)
+stopButton.TextSize = 14
+stopButton.Visible = true
+stopButton.Parent = frame
+
+local stopCorner = Instance.new("UICorner")
+stopCorner.CornerRadius = UDim.new(0, 8)
+stopCorner.Parent = stopButton
+
+loopButton.Size = UDim2.new(0.35, 0, 0, 35)
+loopButton.Position = UDim2.new(0.1, 0, 0.65, 0)
+loopButton.Text = "🔁 LOOP: OFF"
+loopButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+loopButton.Font = Enum.Font.GothamBold
+loopButton.TextColor3 = Color3.new(1, 1, 1)
+loopButton.TextSize = 14
+loopButton.Visible = true
+loopButton.Parent = frame
+
+local loopCorner = Instance.new("UICorner")
+loopCorner.CornerRadius = UDim.new(0, 8)
+loopCorner.Parent = loopButton
+
+closeButton.Size = UDim2.new(0.35, 0, 0, 35)
+closeButton.Position = UDim2.new(0.55, 0, 0.65, 0)
+closeButton.Text = "❌ CLOSE"
+closeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.TextSize = 14
+closeButton.Visible = true
+closeButton.Parent = frame
+
+local timeDisplay = Instance.new("TextLabel")
+timeDisplay.Name = "TimeDisplay"
+timeDisplay.Size = UDim2.new(0.8, 0, 0, 20)
+timeDisplay.Position = UDim2.new(0.1, 0, 0.85, 0)
+timeDisplay.BackgroundTransparency = 1
+timeDisplay.Text = "00:00 / 00:00"
+timeDisplay.TextColor3 = Color3.new(1, 1, 1)
+timeDisplay.Font = Enum.Font.GothamMedium
+timeDisplay.TextSize = 14
+timeDisplay.Parent = frame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = closeButton
+
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -35, 0.5, -15)
+minimizeButton.Text = "-"
+minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.TextColor3 = Color3.new(1, 1, 1)
+minimizeButton.TextSize = 20
+minimizeButton.Parent = title
+
+local minimizeCorner = Instance.new("UICorner")
+minimizeCorner.CornerRadius = UDim.new(0, 8)
+minimizeCorner.Parent = minimizeButton
+
+local currentSound = nil
+local isLooping = false
+local timeUpdateConnection = nil
+local endedConnection = nil
+local originalElementStates = {}
+
+local function cleanUpSound()
+    if currentSound then
+        currentSound:Stop()
+        currentSound:Destroy()
+        currentSound = nil
+    end
+    
+    if timeUpdateConnection then
+        timeUpdateConnection:Disconnect()
+        timeUpdateConnection = nil
+    end
+    
+    if endedConnection then
+        endedConnection:Disconnect()
+        endedConnection = nil
+    end
+end
+
+local function toggleMinimize()
+    isMinimized = not isMinimized
+    
+    if isMinimized then
+        originalElementStates = {
+            textBox = {Visible = textBox.Visible},
+            playButton = {Visible = playButton.Visible},
+            stopButton = {Visible = stopButton.Visible},
+            loopButton = {Visible = loopButton.Visible},
+            closeButton = {Visible = closeButton.Visible},
+            timeDisplay = {Visible = timeDisplay.Visible}
+        }
+        
+        textBox.Visible = false
+        playButton.Visible = false
+        stopButton.Visible = false
+        loopButton.Visible = false
+        closeButton.Visible = false
+        timeDisplay.Visible = false
+        
+        frame.Size = minimizedSize
+        minimizeButton.Text = "+"
+    else
+        textBox.Visible = originalElementStates.textBox.Visible
+        playButton.Visible = originalElementStates.playButton.Visible
+        stopButton.Visible = originalElementStates.stopButton.Visible
+        loopButton.Visible = originalElementStates.loopButton.Visible
+        closeButton.Visible = originalElementStates.closeButton.Visible
+        timeDisplay.Visible = originalElementStates.timeDisplay.Visible
+        
+        frame.Size = originalSize
+        minimizeButton.Text = "-"
+    end
+end
+
+minimizeButton.MouseButton1Click:Connect(toggleMinimize)
+
+local function formatTime(seconds)
+    local minutes = math.floor(seconds / 60)
+    local remainingSeconds = math.floor(seconds % 60)
+    return string.format("%02d:%02d", minutes, remainingSeconds)
+end
+
+local function updateTimeDisplay(sound)
+    if sound and sound.IsPlaying then
+        local currentTime = formatTime(sound.TimePosition)
+        local totalTime = formatTime(sound.TimeLength)
+        timeDisplay.Text = currentTime.." / "..totalTime
+    else
+        timeDisplay.Text = "00:00 / 00:00"
+    end
+end
+
+local timeUpdateConnection = nil
+
+local function startTimeTracker(sound)
+    if timeUpdateConnection then
+        timeUpdateConnection:Disconnect()
+    end
+    
+    timeUpdateConnection = game:GetService("RunService").Heartbeat:Connect(function()
+        updateTimeDisplay(sound)
+    end)
+end
+
+local function startDrag(frame)
+    local dragging = false
+    local dragInput, dragStart
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input == dragInput then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(
+                frame.Position.X.Scale,
+                frame.Position.X.Offset + delta.X,
+                frame.Position.Y.Scale,
+                frame.Position.Y.Offset + delta.Y
+            )
+            dragStart = input.Position
+        end
+    end)
+end
+
+startDrag(frame)
+
+loopButton.MouseButton1Click:Connect(function()
+    isLooping = not isLooping
+    loopButton.Text = "🔁 LOOP: " .. (isLooping and "ON" or "OFF")
+    loopButton.BackgroundColor3 = isLooping and Color3.fromRGB(0, 180, 80) or Color3.fromRGB(100, 100, 100)
+    
+    if currentSound then
+        currentSound.Looped = isLooping
+        
+        if isLooping and not currentSound.IsPlaying then
+            currentSound:Play()
+        end
+    end
+end)
+
+playButton.MouseButton1Click:Connect(function()
+    local audioId = textBox.Text
+    if audioId == "" then return end
+    
+    cleanUpSound()
+    
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://"..audioId
+    sound.Looped = isLooping
+    sound.Parent = workspace
+    
+    sound.Loaded:Wait()
+    sound:Play()
+    
+    currentSound = sound
+    startTimeTracker(sound)
+    
+    endedConnection = sound.Ended:Connect(function()
+        if not isLooping then
+            cleanUpSound()
+            timeDisplay.Text = "00:00 / "..formatTime(sound.TimeLength)
+        else
+            sound:Play()
+        end
+    end)
+end)
+
+stopButton.MouseButton1Click:Connect(function()
+    cleanUpSound()
+    timeDisplay.Text = "00:00 / 00:00"
+end)
+
+closeButton.MouseButton1Click:Connect(function()
+    gui:Destroy()
+        if currentSound then
+        currentSound:Stop()
+        currentSound:Destroy()
+        currentSound = nil
+    end
+end)
