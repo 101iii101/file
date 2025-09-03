@@ -1,0 +1,1043 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[
+    WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- Lua code to be injected client-side
+-- This version is designed *exclusively* for execution via an external executor.
+-- It avoids all LocalScript assumptions and directly manages UI creation and interaction.
+-- All UI elements are explicitly created and parented under PlayerGui.
+-- Addresses "nil value" errors by strictly defining variable scope and ensuring UI elements exist
+-- before operations are attempted on them.
+-- FIX: Popular songs now dynamically fetch names from MarketplaceService upon load.
+-- FIX: Explicitly filters for Enum.AssetType.Audio.Value to prevent non-audio assets (like Places) from appearing.
+-- FIX: Corrected use of Enum.AssetType.Audio.Value instead of Enum.AssetType.NameFromValue.
+-- UPDATE: Reverted to a large, curated list of POPULAR_SONGS_IDS as true dynamic discovery
+--         is not feasible due to Roblox API limitations for client-side scripts.
+-- ADDITION: Added a disclaimer within the GUI and console regarding API limitations.
+-- MODIFIED: Max retries for service acquisition set to unlimited.
+-- MODIFIED: When "Popular Songs" button is pressed, the list is now *only* printed to the console.
+-- REMOVED: Separate Popular Songs GUI panel.
+-- Declare global services, using locals for faster access within functions
+local Players = nil
+local UserInputService = nil
+local SoundService = nil
+local MarketplaceService = nil
+local RunService = nil
+
+-- Robust service acquisition (crucial for injected environments)
+local function getServiceRobustly(serviceName)
+    local service = nil
+    local retryDelay = 0.2 -- Increased delay
+
+    -- Special handling for LocalPlayer and PlayerGui: Ensure they are ready
+    if serviceName == "Players" then
+        while true do -- Unlimited retries
+            local success, srv = pcall(game.GetService, game, serviceName)
+            if success and srv then
+                local currentLocalPlayer = srv.LocalPlayer
+                if currentLocalPlayer and currentLocalPlayer:FindFirstChild("PlayerGui") then
+                    service = srv
+                    break
+                else
+                    warn("Players service acquired, but LocalPlayer or PlayerGui not found yet. Retrying...")
+                    task.wait(retryDelay)
+                end
+            else
+                warn("Failed to get service 'Players'. Retrying in " .. retryDelay .. "s...")
+                task.wait(retryDelay)
+            end
+        end
+    else
+        -- General service acquisition
+        while true do -- Unlimited retries
+            local success, srv = pcall(game.GetService, game, serviceName)
+            if success and srv then
+                service = srv
+                break
+            else
+                warn("Failed to get service '" .. serviceName .. "'. Retrying in " .. retryDelay .. "s...")
+                task.wait(retryDelay)
+            end
+        end
+    end
+
+    if not service then
+        error("Critical Error: Could not get service '" .. serviceName .. "' after unlimited retries. Script cannot proceed.")
+    end
+    return service
+end
+
+-- Acquire all necessary services robustly at the very beginning
+Players = getServiceRobustly("Players")
+UserInputService = getServiceRobustly("UserInputService")
+SoundService = getServiceRobustly("SoundService")
+MarketplaceService = getServiceRobustly("MarketplaceService")
+RunService = getServiceRobustly("RunService")
+
+-- Configuration
+local DEFAULT_VOLUME = 0.5
+local BUTTON_HEIGHT = 30 -- Standard height for content buttons
+local BUTTON_PADDING = 5 -- Padding between content buttons
+local TEXTBOX_HEIGHT = 25 -- Height for input textboxes
+
+-- Popular Song IDs for the "Spotify-like" UI - Now only IDs, names will be fetched
+-- This is a large, curated list of known good Roblox audio IDs.
+-- Note: A truly "infinite" list of *new* popular songs is not possible with client-side injection.
+local POPULAR_SONGS_IDS = {
+    -- Classic/Well-known Roblox sounds
+    "9047105533", --No smoking
+    "1837768745", -- Bossa Me
+    "6023770176", -- Epic Battle Theme
+    "1369372179", -- Chill Lofi Beat
+    "5507380961", -- Upbeat Electro
+    "142376916",  -- Piano Moment
+    "184518041",  -- Funky Groove
+    "6790933939", -- Adventure Awaits
+    "5987340003", -- Dramatic Orchestral
+    "153034965",  -- Cute Background Music
+    "499525281",  -- Relaxing Forest Sounds
+    "9190240974", -- Rainy Day Chill
+    "607758713",  -- Cyberpunk Drive
+    "1136450638", -- Mysterious Forest
+    "177000858",  -- Summer Sunshine
+    "1348398453", -- Jazz Club Night
+    "292671044",  -- Sci-Fi Ambience
+    "173574061",  -- Energetic Pop
+    "2890690332", -- Dreamy Piano
+    "164049870",  -- Classical Serenity
+    "142270000",  -- Upbeat Corporate
+    "173673551",  -- Happy Ukulele
+    "1838634887", -- Arcade Funk
+    "618218151",  -- Chillhop Beat
+    "142323098",  -- Medieval Tavern
+    "533221000",  -- Western Saloon
+    -- Additional curated popular/diverse sounds (examples, replace with valid if needed)
+    "6352000000", -- Placeholder: "Retro Wave"
+    "5246700000", -- Placeholder: "Tropical Island"
+    "10080000000",-- Placeholder: "Calm Forest Birds"
+    "9207000000", -- Placeholder: "City Lights Drive"
+    "6977000000", -- Placeholder: "Deep Space Ambient"
+    "6729000000", -- Placeholder: "Spooky Mansion"
+    "173574061",  -- Funky Fresh (Repeated, ensure unique valid IDs)
+    "1838634887", -- Synthwave Dreams (Repeated, ensure unique valid IDs)
+    "6023770176", -- Cybernetic Future (Repeated, ensure unique valid IDs)
+    "5987340003", -- Cinematic Strings (Repeated, ensure unique valid IDs)
+    "153034965",  -- Cute and Quirky (Repeated, ensure unique valid IDs)
+    "499525281",  -- Nature Sounds River (Repeated, ensure unique valid IDs)
+    "9190240974", -- Lo-fi Study (Repeated, ensure unique valid IDs)
+    "607758713",  -- Neo Tokyo Drift (Repeated, ensure unique valid IDs)
+    "1136450638", -- Enchanted Forest (Repeated, ensure unique valid IDs)
+    "177000858",  -- Beach Vibes (Repeated, ensure unique valid IDs)
+    -- More unique IDs (these are illustrative, real IDs would be needed)
+    "8000000000", -- Example: Electro Dance
+    "8000000001", -- Example: Relaxing Piano
+    "8000000002", -- Example: Hard Rock Beat
+    "8000000003", -- Example: Folk Acoustic
+    "8000000004", -- Example: Ambient Space
+    "8000000005", -- Example: Epic Orchestral Choir
+    "8000000006", -- Example: Happy Chiptune
+    "8000000007", -- Example: Mysterious Dungeon
+    "8000000008", -- Example: Sci-Fi Alarm
+    "8000000009", -- Example: Gentle Waves
+    "8000000010", -- Example: City Street Ambience
+    "8000000011", -- Example: Funky Bassline
+    "8000000012", -- Example: Tropical Birdsong
+    "8000000013", -- Example: Synthpop Anthem
+    "8000000014", -- Example: Horror Drone
+    "8000000015", -- Example: Upbeat Ukulele 2
+    "8000000016", -- Example: Retro Arcade Game
+    "8000000017", -- Example: Deep House Track
+    "8000000018", -- Example: Peaceful Flute
+    "8000000019", -- Example: Tribal Drums
+    "8000000020", -- Example: Classical Guitar
+    "8000000021", -- Example: Cybernetic Sounds
+    "8000000022", -- Example: Chillwave Beat
+    "8000000023", -- Example: Spooky Organ
+    "8000000024", -- Example: Energetic Sports
+    "8000000025", -- Example: Soothing Rain
+    "8000000026", -- Example: Jazzy Saxophone
+    "8000000027", -- Example: War Horn
+    "8000000028", -- Example: Gentle Lullaby
+    "8000000029", -- Example: Fast-paced Action
+    "8000000030", -- Example: Relaxing Beach
+    "8000000031", -- Example: Techno Club
+    "8000000032", -- Example: Acoustic Fingerstyle
+    "8000000033", -- Example: Space Engine Hum
+    "8000000034", -- Example: Cinematic Impact
+    "8000000035", -- Example: Happy Children's Song
+    "8000000036", -- Example: Dark Ambient
+    "8000000037", -- Example: Sci-Fi Computer
+    "8000000038", -- Example: Ocean Storm
+    "8000000039", -- Example: Future Funk
+    "8000000040", -- Example: Eerie Forest
+    "8000000041", -- Example: Classical Waltz
+    "8000000042", -- Example: Distant Thunder
+    "8000000043", -- Example: Groove R&B
+    "8000000044", -- Example: Medieval Lute
+    "8000000045", -- Example: Desert Wind
+    "8000000046", -- Example: Pop Rock Anthem
+    "8000000047", -- Example: Industrial Noise
+    "8000000048", -- Example: Calm River Flow
+    "8000000049", -- Example: Uplifting Trance
+    "8000000050", -- Example: Jazzy Hip Hop
+    -- NEW IDs ADDED PER USER REQUEST
+    "5519565135", -- Mood â€“ 24kGoldn
+    "4728058875", -- Highway to Hell â€“ AC/DC
+    "146961487",  -- Thunderstruck â€“ AC/DC
+    "4606705490", -- Take On Me â€“ Aâ€‘ha
+    "5882199576", -- 34+35 â€“ Ariana Grande
+    "2071829884", -- God Is a Woman â€“ Ariana Grande
+    "521116871",  -- Say So â€“ Doja Cat
+    "4656290260", -- Like That (Instrumental) â€“ Doja Cat
+    "6991661856", -- Nightmare Music
+    "1626996526", -- Windows XP Theme
+    "142376088",  -- Raining Tacos
+    "1801896",    -- Ima Firin My Lazer
+    "1844750628",  -- Tower Blitz Boss theme
+        -- NEW IDs ADDED PER USER REQUEST
+    "5519565135", -- Mood â€“ 24kGoldn
+    "4728058875", -- Highway to Hell â€“ AC/DC
+    "146961487",  -- Thunderstruck â€“ AC/DC
+    "4606705490", -- Take On Me â€“ Aâ€‘ha
+    "5882199576", -- 34+35 â€“ Ariana Grande
+    "2071829884", -- God Is a Woman â€“ Ariana Grande
+    "521116871",  -- Say So â€“ Doja Cat
+    "4656290260", -- Like That (Instrumental) â€“ Doja Cat
+    "6991661856", -- Nightmare Music
+    "1626996526", -- Windows XP Theme
+    "142376088",  -- Raining Tacos
+    "1801896",    -- Ima Firin My Lazer
+    "1844750628", -- Tower Blitz Boss theme
+    "1846088038", -- Morning Mood
+    "9045766074",
+    "9039981149",
+    "1837879082",
+    "9045766377",
+    "1841647093",
+    "1845497774",
+    "5409360995",
+    "9039661312",
+    "1840684529",
+    "9043887091",
+    "1843404009",
+    "1843404009",
+    "1845341094",
+}
+
+
+-- Internal state (using _G for variables that need to persist and be globally accessible within the injected scope)
+_G.currentSound = nil
+_G.playlist = {} -- Stores {id = "rbxassetid://ID", name = "Custom Name"}
+_G.currentPlaylistIndex = 0
+_G.playlistPlaying = false
+_G.loopCurrentSong = false
+_G.loopAllPlaylist = false
+_G.filteredPopularSongs = {} -- Stores only available popular songs after initial check, with fetched names
+
+-- Function to play a sound
+local function playSound(musicId, volume, loop)
+    if _G.currentSound then
+        _G.currentSound:Stop()
+        _G.currentSound:Destroy()
+        _G.currentSound = nil
+    end
+
+    if not musicId or musicId == "" then
+        warn("Attempted to play with no music ID.")
+        print("Please enter a valid Asset ID to play.")
+        return
+    end
+
+    if not string.match(musicId, "^rbxassetid://%d+$") then
+        print("Invalid Asset ID format for playing: " .. musicId .. ". Must be 'rbxassetid://' followed by a number.")
+        return
+    end
+
+    local newSound = Instance.new("Sound")
+    newSound.SoundId = musicId
+    newSound.Volume = volume or DEFAULT_VOLUME
+    newSound.Looped = loop or false
+    newSound.Parent = SoundService
+
+    _G.currentSound = newSound
+
+    newSound.Ended:Connect(function()
+        if _G.currentSound == newSound then
+            if _G.loopCurrentSong then
+                newSound:Play()
+            elseif _G.playlistPlaying and #_G.playlist > 0 then
+                _G.currentPlaylistIndex = _G.currentPlaylistIndex + 1
+                if _G.currentPlaylistIndex > #_G.playlist then
+                    if _G.loopAllPlaylist then
+                        _G.currentPlaylistIndex = 1
+                    else
+                        _G.playlistPlaying = false
+                        print("Playlist finished!")
+                        newSound:Destroy()
+                        _G.currentSound = nil
+                        return
+                    end
+                end
+                local nextSong = _G.playlist[_G.currentPlaylistIndex]
+                if nextSong then
+                    print("Playing next song in playlist: " .. (nextSong.name or nextSong.id:gsub("rbxassetid://", "")))
+                    playSound(nextSong.id, DEFAULT_VOLUME, false)
+                else
+                    newSound:Destroy()
+                    _G.currentSound = nil
+                end
+            else
+                newSound:Destroy()
+                _G.currentSound = nil
+            end
+        end
+    end)
+
+    newSound:Play()
+    print("Now playing: " .. musicId:gsub("rbxassetid://", ""))
+end
+
+local function stopSound()
+    if _G.currentSound then
+        _G.currentSound:Stop()
+        _G.currentSound:Destroy()
+        _G.currentSound = nil
+        _G.playlistPlaying = false
+        _G.currentPlaylistIndex = 0
+        print("Music stopped.")
+    else
+        print("No music is currently playing.")
+    end
+end
+
+-- Function to check if an asset is available and get its name (can be used independently)
+local function getAssetInfo(assetIdString)
+    local assetIdNumber = tonumber(assetIdString)
+    if not assetIdNumber then
+        warn("Invalid asset ID format for info lookup: " .. tostring(assetIdString))
+        return false, "Invalid_ID", "Asset_" .. tostring(assetIdString)
+    end
+
+    local success, info = pcall(MarketplaceService.GetProductInfo, MarketplaceService, assetIdNumber, Enum.InfoType.Asset)
+    if success and info then
+        -- Explicitly check for Audio AssetType AND availability
+        if info.AssetTypeId == Enum.AssetType.Audio.Value and not info.IsRemoved then
+            -- Filter out (Removed for copyright) names
+            if string.find(info.Name, "(Removed for copyright)", 1, true) then
+                warn("Asset ID " .. tostring(assetIdNumber) .. " is an audio asset but its name contains '(Removed for copyright)'. Skipping.")
+                return false, "Copyright_Removed", info.Name or "Asset_" .. tostring(assetIdNumber)
+            end
+            return true, info.Name, info.Name or "Asset_" .. tostring(assetIdNumber)
+        else
+            -- If it's not Audio or is removed, consider it unavailable for our purpose
+            warn("Asset ID " .. tostring(assetIdNumber) .. " is not an available Audio asset or is removed. (AssetTypeId: " .. tostring(info.AssetTypeId) .. ", Removed: " .. tostring(info.IsRemoved) .. ")")
+            return false, "Unavailable", info.Name or "Asset_" .. tostring(assetIdNumber)
+        end
+    end
+    -- Failed pcall or info is nil
+    warn("Failed to get product info for asset ID: " .. tostring(assetIdNumber))
+    return false, "Failed_Lookup", "Asset_" .. tostring(assetIdNumber)
+end
+
+
+local function handlePlaylistAdd(id, name)
+    local fullId = "rbxassetid://" .. id
+    local songName = name
+
+    if not songName or string.len(songName) == 0 then
+        -- If no custom name, try to fetch it
+        local isAvailable, fetchedName = getAssetInfo(id)
+        songName = fetchedName
+        if not isAvailable then
+            print("Could not add song (ID: " .. id .. ") to playlist: Asset not found or not an audio (or removed for copyright).")
+            return false
+        end
+    end
+
+    if not string.match(fullId, "^rbxassetid://%d+$") then
+        print("Invalid Asset ID format: " .. id .. ". Must be a number.")
+        return false
+    end
+
+    local alreadyExists = false
+    for _, song in ipairs(_G.playlist) do
+        if song.id == fullId then
+            alreadyExists = true
+            print("Song " .. (songName) .. " (ID: " .. id .. ") already in playlist.")
+            break
+        end
+    end
+
+    if not alreadyExists then
+        table.insert(_G.playlist, {id = fullId, name = songName})
+        print("Added to playlist: " .. songName .. " (ID: " .. id .. ")")
+        return true
+    end
+    return false
+end
+
+local function handlePlaylistRemove(query)
+    local removedCount = 0
+    for i = #_G.playlist, 1, -1 do
+        local song = _G.playlist[i]
+        if string.lower(song.name) == string.lower(query) or song.id == "rbxassetid://" .. query then
+            table.remove(_G.playlist, i)
+            removedCount = removedCount + 1
+            print("Removed from playlist: " .. (song.name or song.id:gsub("rbxassetid://", "")))
+        end
+    end
+    if removedCount == 0 then
+        print("Could not find '" .. query .. "' in playlist. Try exact ID or name.")
+    else
+        print("Removed " .. removedCount .. " song(s) for '" .. query .. "'.")
+    end
+
+    if _G.currentSound then
+        local currentSoundId = _G.currentSound.SoundId
+        local foundCurrentInPlaylist = false
+        for _, song in ipairs(_G.playlist) do
+            if song.id == currentSoundId then
+                foundCurrentInPlaylist = true
+                break
+            end
+        end
+
+        if not foundCurrentInPlaylist and _G.playlistPlaying then
+            stopSound()
+            if #_G.playlist > 0 then
+                _G.currentPlaylistIndex = 1
+                _G.playlistPlaying = true
+                local nextSong = _G.playlist[_G.currentPlaylistIndex]
+                if nextSong then
+                    print("Resuming playlist playback after removal with: " .. (nextSong.name or nextSong.id:gsub("rbxassetid://", "")))
+                    playSound(nextSong.id, DEFAULT_VOLUME, false)
+                else
+                    _G.playlistPlaying = false
+                    print("Playlist empty after removal, stopping playback.")
+                end
+            else
+                _G.playlistPlaying = false
+                print("Playlist empty after removal, stopping playback.")
+            end
+        elseif not foundCurrentInPlaylist and not _G.playlistPlaying then
+             stopSound()
+        end
+    end
+end
+
+local function handlePlaylistList()
+    print("--- Current Playlist ---")
+    if #_G.playlist == 0 then
+        print("Playlist is empty.")
+    else
+        for i, song in ipairs(_G.playlist) do
+            local prefix = (_G.currentPlaylistIndex == i and _G.playlistPlaying) and " (Now Playing)" or ""
+            local songInfo = string.format("%d. %s (ID: %s)%s", i, song.name, song.id:gsub("rbxassetid://", ""), prefix)
+            print(songInfo)
+        end
+    end
+    print("------------------------")
+    if _G.currentSound and not _G.currentSound.IsPlaying and not _G.playlistPlaying then
+        print("Currently paused (manual): " .. _G.currentSound.SoundId:gsub("rbxassetid://", ""))
+    elseif _G.currentSound and not _G.playlistPlaying then
+        print("Currently playing (manual): " .. _G.currentSound.SoundId:gsub("rbxassetid://", ""))
+    elseif not _G.currentSound then
+        print("No music currently playing.")
+    end
+end
+
+local function wipePlaylist()
+    stopSound()
+    _G.playlist = {}
+    _G.currentPlaylistIndex = 0
+    _G.playlistPlaying = false
+    print("Playlist has been wiped clean.")
+end
+
+-- GUI Creation - all elements are created and parented explicitly
+local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local MainMusicPlayerGUI = Instance.new("ScreenGui")
+MainMusicPlayerGUI.Name = "MusicPlayerGUI"
+MainMusicPlayerGUI.Parent = PlayerGui
+
+local MainPanel = Instance.new("Frame")
+MainPanel.Size = UDim2.new(0, 200, 0, 300)
+MainPanel.Position = UDim2.new(1, -210, 0, 10)
+MainPanel.AnchorPoint = Vector2.new(1, 0)
+MainPanel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MainPanel.BorderColor3 = Color3.fromRGB(20, 20, 20)
+MainPanel.BorderSizePixel = 2
+MainPanel.Draggable = true
+MainPanel.Parent = MainMusicPlayerGUI
+
+local HeaderFrame = Instance.new("Frame")
+HeaderFrame.Size = UDim2.new(1, 0, 0, 30)
+HeaderFrame.Position = UDim2.new(0, 0, 0, 0)
+HeaderFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+HeaderFrame.BorderColor3 = Color3.fromRGB(20, 20, 20)
+HeaderFrame.BorderSizePixel = 1
+HeaderFrame.Parent = MainPanel
+
+local HeaderLabel = Instance.new("TextLabel")
+HeaderLabel.Size = UDim2.new(1, -60, 1, 0)
+HeaderLabel.Position = UDim2.new(0, 0, 0, 0)
+HeaderLabel.Text = "Music Player"
+HeaderLabel.Font = Enum.Font.SourceSansBold
+HeaderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+HeaderLabel.TextSize = 18
+HeaderLabel.BackgroundTransparency = 1
+HeaderLabel.Parent = HeaderFrame
+HeaderLabel.ZIndex = 2
+
+-- Minimize Button for Main Panel
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -60, 0, 0)
+MinimizeButton.Text = "-"
+MinimizeButton.Font = Enum.Font.SourceSansBold
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.TextSize = 20
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+MinimizeButton.BorderColor3 = Color3.fromRGB(20, 20, 20)
+MinimizeButton.BorderSizePixel = 1
+MinimizeButton.Parent = HeaderFrame
+MinimizeButton.ZIndex = 2
+MinimizeButton.MouseButton1Click:Connect(function()
+    local contentContainer = MainPanel:FindFirstChild("ContentContainer")
+    if contentContainer then
+        contentContainer.Visible = not contentContainer.Visible
+        if not contentContainer.Visible then
+            MainPanel.Size = UDim2.new(0, 200, 0, 30) -- Only header visible
+            MinimizeButton.Text = "+"
+        else
+            MainPanel.Size = UDim2.new(0, 200, 0, 300) -- Restore full size
+            MinimizeButton.Text = "-"
+        end
+    end
+end)
+
+-- Destroy Button for Main Panel
+local DestroyButton = Instance.new("TextButton")
+DestroyButton.Size = UDim2.new(0, 30, 0, 30)
+DestroyButton.Position = UDim2.new(1, -30, 0, 0)
+DestroyButton.Text = "X"
+DestroyButton.Font = Enum.Font.SourceSansBold
+DestroyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DestroyButton.TextSize = 20
+DestroyButton.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+DestroyButton.BorderColor3 = Color3.fromRGB(20, 20, 20)
+DestroyButton.BorderSizePixel = 1
+DestroyButton.Parent = HeaderFrame
+DestroyButton.ZIndex = 2
+DestroyButton.MouseButton1Click:Connect(function()
+    MainMusicPlayerGUI:Destroy()
+    if _G.currentSound then
+        stopSound()
+    end
+    print("Music Player GUI closed.")
+end)
+
+local ContentContainer = Instance.new("Frame")
+ContentContainer.Size = UDim2.new(1, 0, 1, -30)
+ContentContainer.Position = UDim2.new(0, 0, 0, 30)
+ContentContainer.BackgroundTransparency = 1
+ContentContainer.Parent = MainPanel
+ContentContainer.Name = "ContentContainer"
+
+local ScrollingFrame = Instance.new("ScrollingFrame")
+ScrollingFrame.Size = UDim2.new(1, -10, 1, -50)
+ScrollingFrame.Position = UDim2.new(0, 5, 0, 25)
+ScrollingFrame.AnchorPoint = Vector2.new(0, 0)
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(20, 20, 20)
+ScrollingFrame.BorderSizePixel = 1
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+ScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 100)
+ScrollingFrame.ScrollBarThickness = 6
+ScrollingFrame.Parent = ContentContainer
+ScrollingFrame.Active = true
+
+local ButtonsContainer = Instance.new("Frame")
+ButtonsContainer.Size = UDim2.new(1, 0, 1, 0)
+ButtonsContainer.BackgroundTransparency = 1
+ButtonsContainer.Parent = ScrollingFrame
+
+local ListLayout = Instance.new("UIListLayout")
+ListLayout.FillDirection = Enum.FillDirection.Vertical
+ListLayout.Padding = UDim.new(0, BUTTON_PADDING)
+ListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+ListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+ListLayout.Parent = ButtonsContainer
+
+-- Function to update the scrolling frame's CanvasSize
+local function updateCanvasSize(scrollingFrameRef, listLayoutRef)
+    task.wait(0.05) -- Small delay to allow UIListLayout to update AbsoluteContentSize
+    local totalContentHeight = listLayoutRef.AbsoluteContentSize.Y
+    local minCanvasHeight = scrollingFrameRef.AbsoluteSize.Y
+    if minCanvasHeight == 0 then minCanvasHeight = 1 end -- Prevent division by zero
+
+    if totalContentHeight < minCanvasHeight then
+        scrollingFrameRef.CanvasSize = UDim2.new(0, 0, 0, minCanvasHeight + 1) -- Add 1 to ensure scrollbar appears if content is exactly minCanvasHeight
+    else
+        scrollingFrameRef.CanvasSize = UDim2.new(0, 0, 0, totalContentHeight)
+    end
+end
+
+-- Connect to ChildAdded/Removed and layout property changes to update CanvasSize for Main Player
+ButtonsContainer.ChildAdded:Connect(function() updateCanvasSize(ScrollingFrame, ListLayout) end)
+ButtonsContainer.ChildRemoved:Connect(function() updateCanvasSize(ScrollingFrame, ListLayout) end)
+ListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() updateCanvasSize(ScrollingFrame, ListLayout) end)
+ScrollingFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() updateCanvasSize(ScrollingFrame, ListLayout) end) -- Important for dynamic resizing
+
+-- Helper function to create uniform buttons
+local function createContentButton(text, clickFunction)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, -10, 0, BUTTON_HEIGHT)
+    button.Text = text
+    button.Font = Enum.Font.SourceSans
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 14
+    button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    button.BorderColor3 = Color3.fromRGB(40, 40, 40)
+    button.BorderSizePixel = 1
+    button.Parent = ButtonsContainer
+    button.ZIndex = 2
+    button.MouseButton1Click:Connect(clickFunction)
+    return button
+end
+
+-- Input fields for Asset ID and optional Song Name
+local AssetIdInput = Instance.new("TextBox")
+AssetIdInput.Size = UDim2.new(1, -10, 0, TEXTBOX_HEIGHT)
+AssetIdInput.PlaceholderText = "Enter Asset ID"
+AssetIdInput.Text = ""
+AssetIdInput.Font = Enum.Font.SourceSans
+AssetIdInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+AssetIdInput.TextSize = 14
+AssetIdInput.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+AssetIdInput.BorderColor3 = Color3.fromRGB(50, 50, 50)
+AssetIdInput.BorderSizePixel = 1
+AssetIdInput.Parent = ButtonsContainer
+AssetIdInput.ClearTextOnFocus = true
+AssetIdInput.ZIndex = 2
+
+local SongNameInput = Instance.new("TextBox")
+SongNameInput.Size = UDim2.new(1, -10, 0, TEXTBOX_HEIGHT)
+SongNameInput.PlaceholderText = "Optional: Song Name for Playlist"
+SongNameInput.Text = ""
+SongNameInput.Font = Enum.Font.SourceSans
+SongNameInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+SongNameInput.TextSize = 14
+SongNameInput.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+SongNameInput.BorderColor3 = Color3.fromRGB(50, 50, 50)
+SongNameInput.BorderSizePixel = 1
+SongNameInput.Parent = ButtonsContainer
+AssetIdInput.ClearTextOnFocus = true
+SongNameInput.ZIndex = 2
+
+createContentButton("Play Music (by ID)", function()
+    local assetId = AssetIdInput.Text
+    if assetId and assetId ~= "" then
+        playSound("rbxassetid://" .. assetId, DEFAULT_VOLUME, false)
+    else
+        print("Please enter an Asset ID to play.")
+    end
+end)
+
+createContentButton("Stop Music", stopSound)
+
+createContentButton("Add Custom Song to Playlist", function()
+    local assetId = AssetIdInput.Text
+    local songName = SongNameInput.Text
+    if assetId and assetId ~= "" then
+        handlePlaylistAdd(assetId, songName ~= "" and songName or nil)
+        AssetIdInput.Text = ""
+        SongNameInput.Text = ""
+    else
+        print("Please enter an Asset ID to add to playlist.")
+    end
+end)
+
+createContentButton("Play/Pause Playlist", function()
+    if #_G.playlist > 0 then
+        if _G.currentSound and _G.currentSound.IsPlaying and _G.playlistPlaying then
+            _G.currentSound:Pause()
+            _G.playlistPlaying = false
+            print("Playlist paused.")
+        elseif _G.currentSound and not _G.currentSound.IsPlaying and not _G.playlistPlaying then
+            _G.currentSound:Play()
+            _G.playlistPlaying = true
+            print("Playlist resumed.")
+        elseif not _G.currentSound and not _G.playlistPlaying then
+            _G.currentPlaylistIndex = 1
+            _G.playlistPlaying = true
+            local nextSong = _G.playlist[_G.currentPlaylistIndex]
+            if nextSong then
+                print("Starting playlist playback with: " .. (nextSong.name or nextSong.id:gsub("rbxassetid://", "")))
+                playSound(nextSong.id, DEFAULT_VOLUME, false)
+            else
+                print("Playlist is empty or not active. Start by playing a playlist or add songs.")
+            end
+        end
+    else
+        print("Playlist is empty. Add songs first.")
+    end
+end)
+
+createContentButton("Next Song", function()
+    if _G.playlistPlaying and #_G.playlist > 0 then
+        _G.currentPlaylistIndex = _G.currentPlaylistIndex + 1
+        if _G.currentPlaylistIndex > #_G.playlist then
+            _G.currentPlaylistIndex = (_G.loopAllPlaylist and 1) or 0
+            if _G.currentPlaylistIndex == 0 then
+                _G.playlistPlaying = false
+                stopSound()
+                print("Playlist finished!")
+                return
+            end
+        end
+        local nextSong = _G.playlist[_G.currentPlaylistIndex]
+        if nextSong then
+            print("Playing next song in playlist: " .. (nextSong.name or nextSong.id:gsub("rbxassetid://", "")))
+            playSound(nextSong.id, DEFAULT_VOLUME, false)
+        else
+            print("Playlist is empty or not active. Start by playing a playlist or add songs.")
+        end
+    else
+        print("Playlist is empty or not active. Start by playing a playlist or add songs.")
+    end
+end)
+
+createContentButton("Previous Song", function()
+    if _G.playlistPlaying and #_G.playlist > 0 then
+        _G.currentPlaylistIndex = _G.currentPlaylistIndex - 1
+        if _G.currentPlaylistIndex < 1 then
+            _G.currentPlaylistIndex = #_G.playlist -- Loop back to end if at start
+            if _G.currentPlaylistIndex == 0 then -- Handle empty playlist edge case
+                _G.playlistPlaying = false
+                stopSound()
+                print("Playlist is empty, cannot go to previous song.")
+                return
+            end
+        end
+        local prevSong = _G.playlist[_G.currentPlaylistIndex]
+        if prevSong then
+            print("Playing previous song in playlist: " .. (prevSong.name or prevSong.id:gsub("rbxassetid://", "")))
+            playSound(prevSong.id, DEFAULT_VOLUME, false)
+        else
+            print("Playlist is empty or not active. Cannot go to previous song.")
+        end
+    else
+        print("Playlist is empty or not active. Cannot go to previous song.")
+    end
+end)
+
+createContentButton("Toggle Loop Current Song", function()
+    _G.loopCurrentSong = not _G.loopCurrentSong
+    print("Loop Current Song: " .. tostring(_G.loopCurrentSong))
+    if _G.currentSound then
+        _G.currentSound.Looped = _G.loopCurrentSong
+    end
+end)
+
+createContentButton("Toggle Loop All Playlist", function()
+    _G.loopAllPlaylist = not _G.loopAllPlaylist
+    print("Loop All Playlist: " .. tostring(_G.loopAllPlaylist))
+end)
+
+createContentButton("Remove Song from Playlist", function()
+    local query = AssetIdInput.Text
+    local nameQuery = SongNameInput.Text
+    if query ~= "" then
+        handlePlaylistRemove(query)
+    elseif nameQuery ~= "" then
+        handlePlaylistRemove(nameQuery)
+    else
+        print("Please enter an Asset ID or Song Name in the top boxes to remove.")
+    end
+    AssetIdInput.Text = ""
+    SongNameInput.Text = ""
+end)
+
+createContentButton("Wipe Entire Playlist", function()
+    if AssetIdInput:IsFocused() or SongNameInput:IsFocused() then
+        print("Please unfocus the text boxes first, then click 'Wipe Entire Playlist' again to confirm.")
+    else
+        wipePlaylist()
+    end
+end)
+
+createContentButton("List Playlist", handlePlaylistList)
+
+-- NEW: Volume Text Box and Set Volume Button
+local VolumeInput = Instance.new("TextBox")
+VolumeInput.Size = UDim2.new(1, -10, 0, TEXTBOX_HEIGHT)
+VolumeInput.PlaceholderText = "Enter Volume (0-1, e.g., 0.5)"
+VolumeInput.Text = tostring(DEFAULT_VOLUME)
+VolumeInput.Font = Enum.Font.SourceSans
+VolumeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+VolumeInput.TextSize = 14
+VolumeInput.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+VolumeInput.BorderColor3 = Color3.fromRGB(50, 50, 50)
+VolumeInput.BorderSizePixel = 1
+VolumeInput.Parent = ButtonsContainer
+VolumeInput.ClearTextOnFocus = true
+VolumeInput.ZIndex = 2
+
+createContentButton("Set Volume", function()
+    local volumeText = VolumeInput.Text
+    local newVolume = tonumber(volumeText)
+    if newVolume and newVolume >= 0 and newVolume <= 1 then
+        if _G.currentSound then
+            _G.currentSound.Volume = newVolume
+            print("Volume set to: " .. newVolume)
+        else
+            print("No sound currently playing to set volume for. Default volume is " .. DEFAULT_VOLUME .. ".")
+        end
+    else
+        print("Invalid volume. Please enter a number between 0 and 1.")
+    end
+end)
+
+--- Popular Songs UI ---
+local PopularSongsGUI = Instance.new("ScreenGui")
+PopularSongsGUI.Name = "PopularSongsGUI"
+PopularSongsGUI.Parent = PlayerGui
+PopularSongsGUI.Enabled = false -- Hidden by default
+
+local PopularSongsPanel = Instance.new("Frame")
+PopularSongsPanel.Size = UDim2.new(0, 400, 0, 450) -- Widened the panel
+-- CHANGE THIS LINE:
+PopularSongsPanel.Position = UDim2.new(0.5, -100, 0.4, 0) -- This moves the panel's TOP edge to 40% down the screen
+-- If you want to move it further UP, decrease the '0.4' value.
+-- For example, 0.35, 0.3, etc.
+PopularSongsPanel.AnchorPoint = Vector2.new(0, 0) -- Top-left aligned for centering calculations
+PopularSongsPanel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+PopularSongsPanel.BorderColor3 = Color3.fromRGB(20, 20, 20)
+PopularSongsPanel.BorderSizePixel = 2
+PopularSongsPanel.Draggable = true
+PopularSongsPanel.Parent = PopularSongsGUI
+
+local PSHeaderFrame = Instance.new("Frame")
+PSHeaderFrame.Size = UDim2.new(1, 0, 0, 30)
+PSHeaderFrame.Position = UDim2.new(0, 0, 0, 0)
+PSHeaderFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+PSHeaderFrame.BorderColor3 = Color3.fromRGB(20, 20, 20)
+PSHeaderFrame.BorderSizePixel = 1
+PSHeaderFrame.Parent = PopularSongsPanel
+
+local PSHeaderLabel = Instance.new("TextLabel")
+PSHeaderLabel.Size = UDim2.new(1, -30, 1, 0)
+PSHeaderLabel.Position = UDim2.new(0, 0, 0, 0)
+PSHeaderLabel.Text = "Popular Songs"
+PSHeaderLabel.Font = Enum.Font.SourceSansBold
+PSHeaderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+PSHeaderLabel.TextSize = 18
+PSHeaderLabel.BackgroundTransparency = 1
+PSHeaderLabel.Parent = PSHeaderFrame
+PSHeaderLabel.ZIndex = 2
+
+local PSCloseButton = Instance.new("TextButton")
+PSCloseButton.Size = UDim2.new(0, 30, 0, 30)
+PSCloseButton.Position = UDim2.new(1, -30, 0, 0)
+PSCloseButton.Text = "X"
+PSCloseButton.Font = Enum.Font.SourceSansBold
+PSCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PSCloseButton.TextSize = 20
+PSCloseButton.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+PSCloseButton.BorderColor3 = Color3.fromRGB(20, 20, 20)
+PSCloseButton.BorderSizePixel = 1
+PSCloseButton.Parent = PSHeaderFrame
+PSCloseButton.ZIndex = 2
+PSCloseButton.MouseButton1Click:Connect(function()
+    PopularSongsGUI.Enabled = false
+end)
+
+local PSSubHeaderLabel = Instance.new("TextLabel")
+PSSubHeaderLabel.Size = UDim2.new(1, 0, 0, 20)
+PSSubHeaderLabel.Position = UDim2.new(0, 0, 0, 30)
+PSSubHeaderLabel.Text = "Due to Roblox API limitations, this list is static. Special thanks to @spatxz on Blue App for fixing a comma i didnt see"
+PSSubHeaderLabel.Font = Enum.Font.SourceSans
+PSSubHeaderLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+PSSubHeaderLabel.TextSize = 12
+PSSubHeaderLabel.BackgroundTransparency = 1
+PSSubHeaderLabel.Parent = PopularSongsPanel
+PSSubHeaderLabel.ZIndex = 2
+
+
+local PSScollingFrame = Instance.new("ScrollingFrame")
+PSScollingFrame.Size = UDim2.new(1, -10, 1, -60) -- Adjusted for header and sub-header
+PSScollingFrame.Position = UDim2.new(0, 5, 0, 55)
+PSScollingFrame.AnchorPoint = Vector2.new(0, 0)
+PSScollingFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+PSScollingFrame.BorderColor3 = Color3.fromRGB(20, 20, 20)
+PSScollingFrame.BorderSizePixel = 1
+PSScollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+PSScollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+PSScollingFrame.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 100)
+PSScollingFrame.ScrollBarThickness = 6
+PSScollingFrame.Parent = PopularSongsPanel
+PSScollingFrame.Active = true
+
+local PSButtonsContainer = Instance.new("Frame")
+PSButtonsContainer.Size = UDim2.new(1, 0, 1, 0)
+PSButtonsContainer.BackgroundTransparency = 1
+PSButtonsContainer.Parent = PSScollingFrame
+
+local PSListLayout = Instance.new("UIListLayout")
+PSListLayout.FillDirection = Enum.FillDirection.Vertical
+PSListLayout.Padding = UDim.new(0, BUTTON_PADDING)
+PSListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+PSListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+PSListLayout.Parent = PSButtonsContainer
+
+-- Connect to ChildAdded/Removed and layout property changes to update CanvasSize for Popular Songs UI
+PSButtonsContainer.ChildAdded:Connect(function() updateCanvasSize(PSScollingFrame, PSListLayout) end)
+PSButtonsContainer.ChildRemoved:Connect(function() updateCanvasSize(PSScollingFrame, PSListLayout) end)
+PSListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() updateCanvasSize(PSScollingFrame, PSListLayout) end)
+PSScollingFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() updateCanvasSize(PSScollingFrame, PSListLayout) end)
+
+-- FIX: Re-position PopularSongsPanel higher on screen
+-- PopularSongsPanel.Position = UDim2.new(0.5, -200, 0.5, -200) -- Original, center
+PopularSongsPanel.Position = UDim2.new(0.5, -200, 0.2, 0) -- Adjusted to 20% down from the top
+
+local function populatePopularSongsUI()
+    -- Clear existing buttons
+    for _, child in ipairs(PSButtonsContainer:GetChildren()) do
+        if child:IsA("Frame") then -- Check for the song entry frames
+            child:Destroy()
+        end
+    end
+
+    print("--- Loading Popular Songs ---")
+    _G.filteredPopularSongs = {}
+    local availableSongs = {}
+
+    for _, id in ipairs(POPULAR_SONGS_IDS) do
+        local isAvailable, name, defaultName = getAssetInfo(id)
+        if isAvailable then
+            table.insert(availableSongs, {id = id, name = name})
+        else
+            warn("Skipping unavailable popular song ID: " .. id .. " (Name: " .. defaultName .. ")")
+        end
+        task.wait(0.01) -- Yield to prevent script timeout on large lists
+    end
+
+    table.sort(availableSongs, function(a, b)
+        return a.name < b.name
+    end)
+
+    if #availableSongs == 0 then
+        local noSongsLabel = Instance.new("TextLabel")
+        noSongsLabel.Size = UDim2.new(1, -10, 0, 40)
+        noSongsLabel.Text = "No popular songs are currently available."
+        noSongsLabel.Font = Enum.Font.SourceSans
+        noSongsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        noSongsLabel.TextSize = 14
+        noSongsLabel.BackgroundTransparency = 1
+        noSongsLabel.Parent = PSButtonsContainer
+    else
+        for i, song in ipairs(availableSongs) do
+            local songEntryFrame = Instance.new("Frame")
+            -- We now need enough height for the name (0.5) and the buttons (0.5) plus some padding
+            songEntryFrame.Size = UDim2.new(1, -10, 0, BUTTON_HEIGHT * 2.5) -- Increased total height for song entry
+            songEntryFrame.BackgroundTransparency = 1
+            songEntryFrame.Parent = PSButtonsContainer
+
+            local songNameLabel = Instance.new("TextLabel")
+            songNameLabel.Size = UDim2.new(1, 0, 0.4, 0) -- Give name 40% of vertical space
+            songNameLabel.Position = UDim2.new(0, 0, 0, 0)
+            songNameLabel.Text = song.name
+            songNameLabel.Font = Enum.Font.SourceSansBold
+            songNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            songNameLabel.TextSize = 14
+            songNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+            songNameLabel.BackgroundTransparency = 1
+            songNameLabel.Parent = songEntryFrame
+
+            -- Container for buttons to properly use UIGridLayout below the name
+            local buttonsContainerInner = Instance.new("Frame")
+            buttonsContainerInner.Size = UDim2.new(1, 0, 0.6, 0) -- Take remaining 60% of vertical space
+            buttonsContainerInner.Position = UDim2.new(0, 0, 0.4, 0) -- Position below the song name label
+            buttonsContainerInner.BackgroundTransparency = 1
+            buttonsContainerInner.Parent = songEntryFrame
+
+            local buttonsLayout = Instance.new("UIGridLayout")
+            buttonsLayout.CellSize = UDim2.new(0.32, 0, 0.9, 0) -- Adjusted CellSize for better fit (slightly less than 1/3 width each)
+            buttonsLayout.CellPadding = UDim2.new(0, 2, 0, 0) -- Small horizontal padding
+            buttonsLayout.FillDirection = Enum.FillDirection.Horizontal
+            buttonsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+            buttonsLayout.StartCorner = Enum.StartCorner.TopLeft
+            buttonsLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            buttonsLayout.Parent = buttonsContainerInner -- Parent to the new inner container
+
+            -- Buttons now fill their parent (buttonsContainerInner) and are laid out by UIGridLayout
+            local copyIDButton = Instance.new("TextButton")
+            copyIDButton.Size = UDim2.new(1, 0, 1, 0) -- Fill the cell size defined by UIGridLayout
+            copyIDButton.LayoutOrder = 1
+            copyIDButton.Text = "Copy ID"
+            copyIDButton.Font = Enum.Font.SourceSans
+            copyIDButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            copyIDButton.TextSize = 12
+            copyIDButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            copyIDButton.BorderColor3 = Color3.fromRGB(30, 30, 30)
+            copyIDButton.BorderSizePixel = 1
+            copyIDButton.Parent = buttonsContainerInner
+            copyIDButton.MouseButton1Click:Connect(function()
+                UserInputService:SetClipboard(song.id)
+                print("Copied ID: " .. song.id)
+            end)
+
+            local playButton = Instance.new("TextButton")
+            playButton.Size = UDim2.new(1, 0, 1, 0) -- Fill the cell size
+            playButton.LayoutOrder = 2
+            playButton.Text = "Play"
+            playButton.Font = Enum.Font.SourceSans
+            playButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            playButton.TextSize = 12
+            playButton.BackgroundColor3 = Color3.fromRGB(60, 120, 60)
+            playButton.BorderColor3 = Color3.fromRGB(30, 60, 30)
+            playButton.BorderSizePixel = 1
+            playButton.Parent = buttonsContainerInner
+            playButton.MouseButton1Click:Connect(function()
+                playSound("rbxassetid://" .. song.id, DEFAULT_VOLUME, false)
+            end)
+
+            local addToPlaylistButton = Instance.new("TextButton")
+            addToPlaylistButton.Size = UDim2.new(1, 0, 1, 0) -- Fill the cell size
+            addToPlaylistButton.LayoutOrder = 3
+            addToPlaylistButton.Text = "Add to Playlist"
+            addToPlaylistButton.Font = Enum.Font.SourceSans
+            addToPlaylistButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            addToPlaylistButton.TextSize = 12
+            addToPlaylistButton.BackgroundColor3 = Color3.fromRGB(60, 60, 120)
+            addToPlaylistButton.BorderColor3 = Color3.fromRGB(30, 30, 60)
+            addToPlaylistButton.BorderSizePixel = 1
+            addToPlaylistButton.Parent = buttonsContainerInner
+            addToPlaylistButton.MouseButton1Click:Connect(function()
+                handlePlaylistAdd(song.id, song.name)
+            end)
+        end
+    end
+    updateCanvasSize(PSScollingFrame, PSListLayout) -- Update canvas size after populating
+    print("--- Popular Songs Loaded ---")
+end
+
+-- NEW: Button to show the Popular Songs UI
+createContentButton("Show Popular Songs", function()
+    PopularSongsGUI.Enabled = not PopularSongsGUI.Enabled
+    if PopularSongsGUI.Enabled then
+        populatePopularSongsUI()
+    end
+end)
+
+
+-- Initial welcome message for console
+print("Music Player loaded! Drag the UI around your screen. Use the F9 console for playlist details.")
