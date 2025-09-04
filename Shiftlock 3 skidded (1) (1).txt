@@ -1,0 +1,314 @@
+local ref = cloneref or function(x) return x end
+local S = function(n) return ref(game:GetService(n)) end
+
+local Plrs, Tw, UIS, RS, Wk, CG =
+	S("Players"), S("TweenService"), S("UserInputService"), S("RunService"), S("Workspace"), S("CoreGui")
+
+local plr = Plrs.LocalPlayer
+
+local function NA(i)
+	if not i then return end
+	i.Name = "\0"
+	i.Archivable = false
+end
+
+local function parentUI(g)
+	if gethui then
+		NA(g); g.Parent = gethui(); return g
+	elseif CG and CG:FindFirstChild("RobloxGui") then
+		NA(g); g.Parent = CG:FindFirstChild("RobloxGui"); return g
+	elseif CG then
+		NA(g); g.Parent = CG; return g
+	elseif plr and plr:FindFirstChildWhichIsA("PlayerGui") then
+		NA(g); g.Parent = plr:FindFirstChildWhichIsA("PlayerGui"); g.ResetOnSpawn = false; return g
+	end
+	return g
+end
+
+local function getParts()
+	local c = plr.Character or plr.CharacterAdded:Wait()
+	local hum, hrp
+	for _,d in ipairs(c:GetDescendants()) do
+		if not hum and d:IsA("Humanoid") then hum = d end
+		if not hrp and d:IsA("BasePart") and d.Name == "HumanoidRootPart" then hrp = d end
+		if hum and hrp then break end
+	end
+	hum = hum or c:WaitForChild("Humanoid")
+	hrp = hrp or c:WaitForChild("HumanoidRootPart")
+	return c, hum, hrp
+end
+
+local function lockMouse(v)
+	if UIS.MouseEnabled then
+		UIS.MouseBehavior = v and Enum.MouseBehavior.LockCenter or Enum.MouseBehavior.Default
+	end
+end
+
+local rotCon, oldAR
+local function faceCam(h, hrp, v)
+	if rotCon then rotCon:Disconnect() rotCon = nil end
+	if v then
+		oldAR = h.AutoRotate
+		h.AutoRotate = false
+		rotCon = RS.RenderStepped:Connect(function()
+			local cam = Wk.CurrentCamera
+			if not (hrp and cam) then return end
+			local lv = cam.CFrame.LookVector
+			local flat = Vector3.new(lv.X, 0, lv.Z)
+			if flat.Magnitude > 1e-4 then
+				hrp.CFrame = CFrame.lookAt(hrp.Position, hrp.Position + flat.Unit, Vector3.yAxis)
+			end
+		end)
+	else
+		if oldAR ~= nil then h.AutoRotate = oldAR end
+	end
+end
+
+local function reapply(v)
+	task.defer(function()
+		local _, h, r = getParts()
+		lockMouse(v)
+		faceCam(h, r, v)
+	end)
+end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "ShiftLockUI"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+gui.DisplayOrder = 10000
+parentUI(gui)
+
+local btn = Instance.new("ImageButton")
+btn.Name = "LockBtn"
+btn.AnchorPoint = Vector2.new(0.5, 0.5)
+btn.Size = UDim2.fromOffset(64, 64)
+btn.Position = UDim2.new(1, -96, 1, -96)
+btn.BackgroundColor3 = Color3.fromRGB(34, 34, 38)
+btn.AutoButtonColor = false
+btn.Image = ""
+btn.Active = true
+btn.Parent = gui
+
+local cr = Instance.new("UICorner")
+cr.CornerRadius = UDim.new(1, 0)
+cr.Parent = btn
+
+local strk = Instance.new("UIStroke")
+strk.Thickness = 2
+strk.Color = Color3.fromRGB(0, 140, 255)
+strk.Transparency = 0.25
+strk.Parent = btn
+
+local grd = Instance.new("UIGradient")
+grd.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(45,45,50)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(27,27,30))
+}
+grd.Rotation = 45
+grd.Parent = btn
+
+local icn = Instance.new("ImageLabel")
+icn.Name = "Icn"
+icn.BackgroundTransparency = 1
+icn.AnchorPoint = Vector2.new(0.5, 0.5)
+icn.Position = UDim2.fromScale(0.5, 0.5)
+icn.Size = UDim2.fromScale(0.62, 0.62)
+icn.Image = "rbxasset://textures/ui/mouseLock_off.png"
+icn.ImageColor3 = Color3.fromRGB(255,255,255)
+icn.ScaleType = Enum.ScaleType.Fit
+icn.Parent = btn
+
+local shd = Instance.new("Frame")
+shd.Name = "Shd"
+shd.AnchorPoint = Vector2.new(0.5, 0.5)
+shd.Position = UDim2.new(btn.Position.X.Scale, btn.Position.X.Offset, btn.Position.Y.Scale, btn.Position.Y.Offset + 6)
+shd.Size = UDim2.new(btn.Size.X.Scale, btn.Size.X.Offset + 12, btn.Size.Y.Scale, btn.Size.Y.Offset + 12)
+shd.BackgroundColor3 = Color3.new(0,0,0)
+shd.BackgroundTransparency = 0.8
+shd.ZIndex = 0
+shd.Parent = gui
+
+local shdC = Instance.new("UICorner")
+shdC.CornerRadius = UDim.new(1, 0)
+shdC.Parent = shd
+
+local xBtn = Instance.new("TextButton")
+xBtn.Name = "Close"
+xBtn.AnchorPoint = Vector2.new(1, 0)
+xBtn.Position = UDim2.new(1, 6, 0, -6)
+xBtn.Size = UDim2.fromOffset(22, 22)
+xBtn.BackgroundColor3 = Color3.fromRGB(230, 60, 60)
+xBtn.AutoButtonColor = true
+xBtn.Text = "×"
+xBtn.TextScaled = true
+xBtn.TextColor3 = Color3.new(1,1,1)
+xBtn.Parent = btn
+
+local xC = Instance.new("UICorner")
+xC.CornerRadius = UDim.new(1,0)
+xC.Parent = xBtn
+
+local xS = Instance.new("UIStroke")
+xS.Thickness = 1
+xS.Transparency = 0.3
+xS.Parent = xBtn
+
+local sc = Instance.new("UIScale")
+sc.Scale = 0.9
+sc.Parent = btn
+Tw:Create(sc, TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Scale = 1}):Play()
+
+local tH = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local tP = TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local tT = TweenInfo.new(0.18, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+local tLoop = TweenInfo.new(1.2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true, 0)
+
+Tw:Create(strk, tLoop, {Transparency = 0.4}):Play()
+
+local over = false
+btn.MouseEnter:Connect(function()
+	over = true
+	Tw:Create(btn, tH, {Size = UDim2.fromOffset(70, 70)}):Play()
+end)
+btn.MouseLeave:Connect(function()
+	over = false
+	Tw:Create(btn, tH, {Size = UDim2.fromOffset(64, 64)}):Play()
+end)
+
+local function pulse()
+	local p = Instance.new("Frame")
+	p.Name = "Pulse"
+	p.AnchorPoint = Vector2.new(0.5,0.5)
+	p.Position = UDim2.fromScale(0.5,0.5)
+	p.Size = UDim2.fromOffset(0,0)
+	p.BackgroundColor3 = Color3.new(1,1,1)
+	p.BackgroundTransparency = 0.65
+	p.ZIndex = btn.ZIndex + 1
+	local pc = Instance.new("UICorner"); pc.CornerRadius = UDim.new(1,0); pc.Parent = p
+	p.Parent = btn
+	local m = math.max(btn.AbsoluteSize.X, btn.AbsoluteSize.Y) * 1.15
+	Tw:Create(p, TweenInfo.new(0.22, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(m,m), BackgroundTransparency = 1}):Play()
+	task.delay(0.24, function() p:Destroy() end)
+end
+
+btn.MouseButton1Down:Connect(function()
+	Tw:Create(btn, tP, {Size = UDim2.fromOffset(58,58)}):Play()
+	Tw:Create(strk, tP, {Thickness = 3, Transparency = 0.1}):Play()
+	pulse()
+end)
+btn.MouseButton1Up:Connect(function()
+	Tw:Create(btn, tP, {Size = over and UDim2.fromOffset(70,70) or UDim2.fromOffset(64,64)}):Play()
+	Tw:Create(strk, tP, {Thickness = 2, Transparency = 0.25}):Play()
+end)
+
+local function shn()
+	local s = Instance.new("Frame")
+	s.Name = "Shn"
+	s.BackgroundTransparency = 1
+	s.Size = UDim2.fromScale(1,1)
+	s.ClipsDescendants = true
+	s.Parent = btn
+
+	local b = Instance.new("Frame")
+	b.AnchorPoint = Vector2.new(0.5,0.5)
+	b.Position = UDim2.fromScale(-0.2, 0.5)
+	b.Size = UDim2.new(0, 10, 1.4, 0)
+	b.BackgroundColor3 = Color3.fromRGB(255,255,255)
+	b.BackgroundTransparency = 0.85
+	local g = Instance.new("UIGradient")
+	g.Transparency = NumberSequence.new{
+		NumberSequenceKeypoint.new(0, 1),
+		NumberSequenceKeypoint.new(0.5, 0.5),
+		NumberSequenceKeypoint.new(1, 1)
+	}
+	g.Rotation = 20
+	g.Parent = b
+	b.Parent = s
+
+	local tw = Tw:Create(b, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.fromScale(1.2, 0.5)})
+	tw:Play()
+	tw.Completed:Connect(function() s:Destroy() end)
+end
+
+local drag = false
+local dStart, pStart
+
+local function clampUD(pos)
+	local scr = gui.AbsoluteSize
+	local half = btn.AbsoluteSize/2
+	local absX = pos.X.Scale * scr.X + pos.X.Offset
+	local absY = pos.Y.Scale * scr.Y + pos.Y.Offset
+	local x = math.clamp(absX, half.X + 8, scr.X - half.X - 8)
+	local y = math.clamp(absY, half.Y + 8, scr.Y - half.Y - 8)
+	return UDim2.new(pos.X.Scale, x - pos.X.Scale * scr.X, pos.Y.Scale, y - pos.Y.Scale * scr.Y)
+end
+
+btn.InputBegan:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+		drag = true
+		dStart = i.Position
+		pStart = btn.Position
+		i.Changed:Connect(function()
+			if i.UserInputState == Enum.UserInputState.End then
+				drag = false
+			end
+		end)
+	end
+end)
+
+btn.InputChanged:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch then
+		if drag and dStart and pStart then
+			local d = i.Position - dStart
+			local np = UDim2.new(pStart.X.Scale, pStart.X.Offset + d.X, pStart.Y.Scale, pStart.Y.Offset + d.Y)
+			btn.Position = clampUD(np)
+		end
+	end
+end)
+
+RS.RenderStepped:Connect(function()
+	shd.Position = UDim2.new(btn.Position.X.Scale, btn.Position.X.Offset, btn.Position.Y.Scale, btn.Position.Y.Offset + 6)
+	shd.Size = UDim2.new(btn.Size.X.Scale, btn.Size.X.Offset + 12, btn.Size.Y.Scale, btn.Size.Y.Offset + 12)
+end)
+
+local on = false
+local icOn, icOff = "rbxasset://textures/ui/mouseLock_on.png", "rbxasset://textures/ui/mouseLock_off.png"
+
+local function apply(v)
+	local _, h, r = getParts()
+	on = v
+	lockMouse(v)
+	faceCam(h, r, v)
+	Tw:Create(strk, tT, {Color = v and Color3.fromRGB(0, 200, 255) or Color3.fromRGB(0, 140, 255), Thickness = v and 3 or 2}):Play()
+	Tw:Create(btn, tT, {BackgroundColor3 = v and Color3.fromRGB(38, 48, 60) or Color3.fromRGB(34, 34, 38)}):Play()
+	Tw:Create(icn, tT, {ImageColor3 = v and Color3.fromRGB(0, 200, 255) or Color3.fromRGB(255,255,255)}):Play()
+	icn.Image = v and icOn or icOff
+	shn()
+end
+
+btn.Activated:Connect(function()
+	apply(not on)
+end)
+
+xBtn.Activated:Connect(function()
+	if on then apply(false) end
+	Tw:Create(sc, TweenInfo.new(0.18, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Scale = 0.8}):Play()
+	Tw:Create(btn, TweenInfo.new(0.18, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {BackgroundTransparency = 1}):Play()
+	Tw:Create(strk, TweenInfo.new(0.12), {Transparency = 1}):Play()
+	task.delay(0.2, function() gui:Destroy() end)
+end)
+
+plr.CharacterAdded:Connect(function()
+	reapply(on)
+end)
+
+local lastCam = Wk.CurrentCamera
+Wk:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	local c = Wk.CurrentCamera
+	if c ~= lastCam then
+		lastCam = c
+		reapply(on)
+	end
+end)
