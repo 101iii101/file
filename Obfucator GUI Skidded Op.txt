@@ -1,0 +1,351 @@
+local G2L = {};
+
+-- Workspace.Obfuscator
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[Obfuscator]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+
+
+-- Workspace.Obfuscator.Frame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["2"]["Size"] = UDim2.new(0, 629, 0, 545);
+G2L["2"]["Position"] = UDim2.new(0.22754, 0, 0.08166, 0);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+
+
+-- Workspace.Obfuscator.Frame.UICorner
+G2L["3"] = Instance.new("UICorner", G2L["2"]);
+
+
+
+-- Workspace.Obfuscator.Frame.TextBox
+G2L["4"] = Instance.new("TextBox", G2L["2"]);
+G2L["4"]["CursorPosition"] = -1;
+G2L["4"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["4"]["PlaceholderColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["4"]["BorderSizePixel"] = 0;
+G2L["4"]["TextWrapped"] = true;
+G2L["4"]["TextSize"] = 14;
+G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["4"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+G2L["4"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["4"]["MultiLine"] = true;
+G2L["4"]["PlaceholderText"] = [[Put ur code here.]];
+G2L["4"]["Size"] = UDim2.new(0, 567, 0, 113);
+G2L["4"]["Position"] = UDim2.new(0.04769, 0, 0.08969, 0);
+G2L["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4"]["Text"] = [[]];
+
+
+-- Workspace.Obfuscator.Frame.TextBox2
+G2L["5"] = Instance.new("TextBox", G2L["2"]);
+G2L["5"]["CursorPosition"] = -1;
+G2L["5"]["Name"] = [[TextBox2]];
+G2L["5"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["5"]["PlaceholderColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5"]["BorderSizePixel"] = 0;
+G2L["5"]["TextEditable"] = false;
+G2L["5"]["TextWrapped"] = true;
+G2L["5"]["TextSize"] = 14;
+G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5"]["TextYAlignment"] = Enum.TextYAlignment.Top;
+G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5"]["MultiLine"] = true;
+G2L["5"]["ClearTextOnFocus"] = false;
+G2L["5"]["Size"] = UDim2.new(0, 567, 0, 279);
+G2L["5"]["Position"] = UDim2.new(0.04928, 0, 0.30652, 0);
+G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5"]["Text"] = [[Get it here.]];
+
+
+-- Workspace.Obfuscator.Frame.TextButton
+G2L["6"] = Instance.new("TextButton", G2L["2"]);
+G2L["6"]["BorderSizePixel"] = 0;
+G2L["6"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["TextSize"] = 30;
+G2L["6"]["BackgroundColor3"] = Color3.fromRGB(42, 255, 42);
+G2L["6"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["6"]["Size"] = UDim2.new(0, 200, 0, 50);
+G2L["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["Text"] = [[Obfuscate]];
+G2L["6"]["Position"] = UDim2.new(0.34022, 0, 0.86088, 0);
+
+
+-- Workspace.Obfuscator.Frame.TextButton.UICorner
+G2L["7"] = Instance.new("UICorner", G2L["6"]);
+
+
+
+-- Workspace.Obfuscator.Frame.TextButton.Execute
+G2L["8"] = Instance.new("LocalScript", G2L["6"]);
+G2L["8"]["Name"] = [[Execute]];
+
+
+-- Workspace.Obfuscator.Frame.TextButton.Execute.LuaY
+G2L["9"] = Instance.new("ModuleScript", G2L["8"]);
+G2L["9"]["Name"] = [[LuaY]];
+
+
+-- Workspace.Obfuscator.Frame.TextButto
+G2L["a"] = Instance.new("TextButton", G2L["2"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["TextSize"] = 30;
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(255, 57, 60);
+G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["a"]["Size"] = UDim2.new(0, 30, 0, 30);
+G2L["a"]["Name"] = [[TextButto]];
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Text"] = [[X]];
+G2L["a"]["Position"] = UDim2.new(0.938, 0, 0.01923, 0);
+
+
+-- Workspace.Obfuscator.Frame.TextButto.LocalScript
+G2L["b"] = Instance.new("LocalScript", G2L["a"]);
+
+
+
+-- Workspace.Obfuscator.Frame.TextButto.UICorner
+G2L["c"] = Instance.new("UICorner", G2L["a"]);
+
+
+
+-- Workspace.Obfuscator.Frame.TextLabel
+G2L["d"] = Instance.new("TextLabel", G2L["2"]);
+G2L["d"]["BorderSizePixel"] = 0;
+G2L["d"]["TextSize"] = 30;
+G2L["d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["d"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["d"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["d"]["BackgroundTransparency"] = 1;
+G2L["d"]["Size"] = UDim2.new(0, 579, 0, 37);
+G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["d"]["Text"] = [[Obfuscator]];
+
+
+-- Workspace.Obfuscator.Frame.UIDrag
+G2L["e"] = Instance.new("LocalScript", G2L["2"]);
+G2L["e"]["Name"] = [[UIDrag]];
+
+
+-- Require G2L wrapper
+local G2L_REQUIRE = require;
+local G2L_MODULES = {};
+local function require(Module:ModuleScript)
+    local ModuleState = G2L_MODULES[Module];
+    if ModuleState then
+        if not ModuleState.Required then
+            ModuleState.Required = true;
+            ModuleState.Value = ModuleState.Closure();
+        end
+        return ModuleState.Value;
+    end;
+    return G2L_REQUIRE(Module);
+end
+
+G2L_MODULES[G2L["9"]] = {
+Closure = function()
+    local script = G2L["9"];---------------------------------------------------------------------------------------------------------------
+-- * // LuaY \\
+-- * LuaY is a module to obfuscate scripts that is made on 22/02/2025
+--   protect your scripts with LuaY!
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- ██╗     ██╗   ██╗ █████╗     ██╗   ██╗
+-- ██║     ██║   ██║██╔══██╗    ╚██╗ ██╔╝
+-- ██║     ██║   ██║███████║     ╚████╔╝ 
+-- ██║     ██║   ██║██╔══██║      ╚██╔╝  
+-- ███████╗╚██████╔╝██║  ██║       ██║   
+-- ╚══════╝ ╚═════╝ ╚═╝  ╚═╝       ╚═╝   
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- * // What is Obfuscation? \\
+-- * Obfuscation is a technique used to protect the code from being easily read or copied, especially in
+--   environments where scripts might be exposed to users (like Roblox).
+--   This method is particularly useful for developers who want to prevent others from easily stealing their
+--   code or modifying it without permission.
+--   It’s worth noting that while obfuscation can make it harder to understand the code, it can still be
+--   reverse-engineered by someone determined enough. It’s just one layer of protection.
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- * // How Obfuscation Work? \\
+-- * Obfuscation is a technique used to make code difficult to understand, read, or reverse-engineer while
+--   preserving its functionality. It’s often used to protect intellectual property or prevent unauthorized
+--   modification or exploitation of code.
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- * // Its possible to deobfuscate it? \\
+-- * Yes. Its possible, every obfuscator have their own weakness.
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- * // Credits \\
+-- * Made with the help of https://onecompiler.com/lua/3wvx5uv9z
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+--  * // Update Logs \\
+-- | More readable
+-- | Added TextBox
+---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-- * // Notes \\
+-- * 22/02/2025
+--   LuaY
+--   ModuleScript
+--   TextButton
+--   Lua
+--   Roblox
+--   StarterGui
+--   Execute, UICorner
+---------------------------------------------------------------------------------------------------------------
+
+while true do
+	wait(0.01)
+	local Obf = {}
+	function Obf:Obfuscator()
+		local Text = script.Parent.Parent.Parent.TextBox.Text
+		local a = Text
+		a = "--// Decompiled Code. \n" .. a
+		function Obfuscate(b)
+			local c =
+				"function IllIlllIllIlllIlllIlllIll(IllIlllIllIllIll) if (IllIlllIllIllIll==(((((919 + 636)-636)*3147)/3147)+919)) then return not true end if (IllIlllIllIllIll==(((((968 + 670)-670)*3315)/3315)+968)) then return not false end end; "
+			local d = c
+			local e = ""
+			local f = {"IllIllIllIllI", "IIlllIIlllIIlllIIlllII", "IIllllIIllll"}
+			local g = [[local IlIlIlIlIlIlIlIlII = {]]
+			local h = [[local IllIIllIIllIII = loadstring]]
+			local i = [[local IllIIIllIIIIllI = table.concat]]
+			local j = [[local IIIIIIIIllllllllIIIIIIII = "''"]]
+			local k = "local " .. f[math.random(1, #f)] .. " = (7*3-9/9+3*2/0+3*3);"
+			local l = "local " .. f[math.random(1, #f)] .. " = (3*4-7/7+6*4/3+9*9);"
+			local m = ""
+			for n = 1, string.len(b) do
+				e = e .. "'\\" .. string.byte(b, n) .. "',"
+			end
+			local o = "function IllIIIIllIIIIIl(" .. f[math.random(1, #f)] .. ")"
+			local p = "function " .. f[math.random(1, #f)] .. "(" .. f[math.random(1, #f)] .. ")"
+			local q = "local " .. f[math.random(1, #f)] .. " = (5*3-2/8+9*2/9+8*3)"
+			local r = "end"
+			local s = "IllIIIIllIIIIIl(900283)"
+			local t = "function IllIlllIllIlllIlllIlllIllIlllIIIlll(" .. f[math.random(1, #f)] .. ")"
+			local q = "function " .. f[math.random(1, #f)] .. "(" .. f[math.random(1, #f)] .. ")"
+			local u = "local " .. f[math.random(1, #f)] .. " = (9*0-7/5+3*1/3+8*2)"
+			local v = "end"
+			local w = "IllIlllIllIlllIlllIlllIllIlllIIIlll(9083)"
+			local x =
+				m ..
+				d ..
+				k ..
+				l ..
+				i ..
+				";" ..
+				o ..
+				" " ..
+				p ..
+				" " ..
+				q ..
+				" " ..
+				r ..
+				" " ..
+				r ..
+				" " ..
+				r ..
+				";" ..
+				s ..
+				";" ..
+				t ..
+				" " ..
+				q ..
+				" " ..
+				u ..
+				" " ..
+				v ..
+				" " ..
+				v ..
+				";" ..
+				w ..
+				";" ..
+				h ..
+				";" ..
+				g ..
+				e ..
+				"}" ..
+				"IllIIllIIllIII(IllIIIllIIIIllI(IlIlIlIlIlIlIlIlII,IIIIIIIIllllllllIIIIIIII))()"
+			script.Parent.Parent.Parent.TextBox2.Text = x
+		end
+		do
+			Obfuscate(a)
+		end
+	end
+	return Obf
+end
+end;
+};
+-- Workspace.Obfuscator.Frame.TextButton.Execute
+local function C_8()
+local script = G2L["8"];
+	script.Parent.MouseButton1Click:Connect(function() local Obf = require(script.LuaY) Obf:Obfuscator() end)
+end;
+task.spawn(C_8);
+-- Workspace.Obfuscator.Frame.TextButto.LocalScript
+local function C_b()
+local script = G2L["b"];
+	script.Parent.MouseButton1Click:Connect(function()
+	script.Parent.Parent.Parent.Parent.Obfuscator:Destroy()
+	end)
+end;
+task.spawn(C_b);
+-- Workspace.Obfuscator.Frame.UIDrag
+local function C_e()
+local script = G2L["e"];
+	-- Made by Real_IceyDev (@lceyDex) --
+	-- Simple UI dragger (PC Only/Any device that has a mouse) --
+	
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent.Parent.Frame
+	local dragToggle = nil
+	local dragSpeed = 0.30 --0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end;
+task.spawn(C_e);
+
+return G2L["1"], require;
