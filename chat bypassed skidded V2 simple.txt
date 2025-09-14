@@ -1,0 +1,501 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[
+
+    RSPlus GUI + Simple Chat Bypasser V2
+
+
+    Original Author: Jordan
+
+    Cracked by: waterXjuice
+
+    Script info: Chatgpt ahh script
+
+]]
+
+local Players = game:GetService("Players")
+
+local TweenService = game:GetService("TweenService")
+
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+--[[
+
+CRACK LOGIC IS JUST SKIPPING KEY SYSTEM GUI AND MAKING THE REAL AHH GUI VISIBLE
+
+---------------------------------------------------------------------
+
+-- 🔑 Key System GUI (cracked nigga)
+
+---------------------------------------------------------------------
+
+local KeyGui = Instance.new("ScreenGui")
+
+KeyGui.Name = "RSPlusGUI"
+
+KeyGui.Parent = PlayerGui
+
+local KeyFrame = Instance.new("Frame")
+
+KeyFrame.Size = UDim2.new(0, 340, 0, 180)
+
+KeyFrame.Position = UDim2.new(0.5, -170, 0.5, -90)
+
+KeyFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+
+KeyFrame.BackgroundTransparency = 0.08
+
+KeyFrame.BorderSizePixel = 0
+
+KeyFrame.Parent = KeyGui
+
+Instance.new("UICorner", KeyFrame).CornerRadius = UDim.new(0, 12)
+
+-- Title
+
+local Title = Instance.new("TextLabel")
+
+Title.Size = UDim2.new(1, 0, 0, 40)
+
+Title.BackgroundTransparency = 1
+
+Title.Text = "Enter Key"
+
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+Title.TextSize = 20
+
+Title.Font = Enum.Font.GothamBold
+
+Title.Parent = KeyFrame
+
+-- Key TextBox
+
+local KeyBox = Instance.new("TextBox")
+
+KeyBox.Size = UDim2.new(0.9, 0, 0, 38)
+
+KeyBox.Position = UDim2.new(0.05, 0, 0.3, 0)
+
+KeyBox.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+
+KeyBox.PlaceholderText = "Enter your key"
+
+KeyBox.Text = "JordansKey"
+
+KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+KeyBox.Font = Enum.Font.Gotham
+
+KeyBox.TextSize = 16
+
+KeyBox.BorderSizePixel = 0
+
+KeyBox.ClearTextOnFocus = false
+
+KeyBox.Parent = KeyFrame
+
+Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0, 8)
+
+-- Buttons Container
+
+local ButtonFrame = Instance.new("Frame")
+
+ButtonFrame.Size = UDim2.new(1, -20, 0, 40)
+
+ButtonFrame.Position = UDim2.new(0, 10, 0.62, 0)
+
+ButtonFrame.BackgroundTransparency = 1
+
+ButtonFrame.Parent = KeyFrame
+
+-- Submit Button
+
+local SubmitButton = Instance.new("TextButton")
+
+SubmitButton.Size = UDim2.new(0.48, 0, 1, 0)
+
+SubmitButton.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+
+SubmitButton.Text = "Submit"
+
+SubmitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+SubmitButton.Font = Enum.Font.GothamBold
+
+SubmitButton.TextSize = 16
+
+SubmitButton.AutoButtonColor = false
+
+SubmitButton.BorderSizePixel = 0
+
+SubmitButton.Parent = ButtonFrame
+
+Instance.new("UICorner", SubmitButton).CornerRadius = UDim.new(0, 8)
+
+-- Get Key Button
+
+local GetKeyButton = SubmitButton:Clone()
+
+GetKeyButton.Position = UDim2.new(0.52, 0, 0, 0)
+
+GetKeyButton.Text = "Get Key"
+
+GetKeyButton.Parent = ButtonFrame
+
+-- Button Animations
+
+local function AnimateButton(button, hoverColor, clickColor, defaultColor)
+
+    button.MouseEnter:Connect(function()
+
+        TweenService:Create(button, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+
+            {BackgroundColor3 = hoverColor}):Play()
+
+    end)
+
+    button.MouseLeave:Connect(function()
+
+        TweenService:Create(button, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+
+            {BackgroundColor3 = defaultColor}):Play()
+
+    end)
+
+    button.MouseButton1Down:Connect(function()
+
+        TweenService:Create(button, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+
+            {BackgroundColor3 = clickColor}):Play()
+
+    end)
+
+    button.MouseButton1Up:Connect(function()
+
+        TweenService:Create(button, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+
+            {BackgroundColor3 = hoverColor}):Play()
+
+    end)
+
+end
+
+AnimateButton(SubmitButton, Color3.fromRGB(45, 45, 45), Color3.fromRGB(55, 55, 55), Color3.fromRGB(32, 32, 32))
+
+AnimateButton(GetKeyButton, Color3.fromRGB(45, 45, 45), Color3.fromRGB(55, 55, 55), Color3.fromRGB(32, 32, 32))
+
+-- Button Logic
+
+SubmitButton.MouseButton1Click:Connect(function()
+
+    KeyBox.Text = ""
+
+    KeyBox.PlaceholderText = "Invalid key!"
+
+end)
+
+GetKeyButton.MouseButton1Click:Connect(function()
+
+    setclipboard("nuh uh")
+
+    GetKeyButton.Text = "Copied!"
+
+    task.wait(1.2)
+
+    GetKeyButton.Text = "Get Key"
+
+end)
+
+]]--
+
+---------------------------------------------------------------------
+
+-- 💬 Simple Chat Bypass GUI
+
+---------------------------------------------------------------------
+
+local BypassGui = Instance.new("ScreenGui")
+
+BypassGui.Name = "ChatBypassGUI_FE"
+
+BypassGui.Parent = PlayerGui
+
+local BypassFrame = Instance.new("Frame")
+
+BypassFrame.Size = UDim2.new(0, 260, 0, 150)
+
+BypassFrame.Position = UDim2.new(0.5, -130, 0.5, -75)
+
+BypassFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+
+BypassFrame.BorderSizePixel = 0
+
+BypassFrame.Parent = BypassGui
+
+Instance.new("UICorner", BypassFrame).CornerRadius = UDim.new(0, 12)
+
+-- Title
+
+local BypassTitle = Instance.new("TextLabel")
+
+BypassTitle.Size = UDim2.new(1, 0, 0, 30)
+
+BypassTitle.BackgroundTransparency = 1
+
+BypassTitle.Text = "Simple Bypasser V2 Cracked"
+
+BypassTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+BypassTitle.Font = Enum.Font.GothamBold
+
+BypassTitle.TextSize = 16
+
+BypassTitle.Parent = BypassFrame
+
+-- Input Box
+
+local MessageBox = Instance.new("TextBox")
+
+MessageBox.Size = UDim2.new(0.9, 0, 0, 28)
+
+MessageBox.Position = UDim2.new(0.05, 0, 0, 35)
+
+MessageBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+MessageBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+MessageBox.PlaceholderText = "Type message..."
+
+MessageBox.Font = Enum.Font.Gotham
+
+MessageBox.TextSize = 14
+
+MessageBox.ClearTextOnFocus = false
+
+MessageBox.Parent = BypassFrame
+
+Instance.new("UICorner", MessageBox).CornerRadius = UDim.new(0, 6)
+
+-- Copy Button
+
+local CopyButton = Instance.new("TextButton")
+
+CopyButton.Size = UDim2.new(0.9, 0, 0, 28)
+
+CopyButton.Position = UDim2.new(0.05, 0, 0, 70)
+
+CopyButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+
+CopyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+CopyButton.Text = "Copy Bypass"
+
+CopyButton.Font = Enum.Font.GothamBold
+
+CopyButton.TextSize = 14
+
+CopyButton.Parent = BypassFrame
+
+Instance.new("UICorner", CopyButton).CornerRadius = UDim.new(0, 6)
+
+-- Footer
+
+local Footer = Instance.new("TextLabel")
+
+Footer.Size = UDim2.new(1, -10, 0, 20)
+
+Footer.Position = UDim2.new(0, 5, 0, 110)
+
+Footer.BackgroundTransparency = 1
+
+Footer.Text = "Made by Jordan Crack and leak by: waterXjuice | Set language to: Қазақ Тілі"
+
+Footer.TextColor3 = Color3.fromRGB(200, 200, 200)
+
+Footer.Font = Enum.Font.Gotham
+
+Footer.TextSize = 10
+
+Footer.TextXAlignment = Enum.TextXAlignment.Left
+
+Footer.Parent = BypassFrame
+
+-- did this thing myself cuz deobfusucated version had errors and skipped this part
+
+local function reverseString(str)
+
+    local reversed = ""
+
+    for i = #str, 1, -1 do
+
+        reversed = reversed .. string.sub(str, i, i)
+
+    end
+
+    return reversed
+
+end
+
+CopyButton.MouseButton1Click:Connect(function()
+
+    local inputText = MessageBox.Text
+
+    if inputText == "" then
+
+        Footer.Text = "Please type something first!"
+
+        task.wait(1.2)
+
+        Footer.Text = "Made by Jordan | Crack by waterXjuice | Set language to: Қазақ Тілі"
+
+        return
+
+    end
+
+    local reversed = reverseString(inputText)
+
+    local symbol = "٭٭"
+
+    local bypassText = ""
+
+    for i = 1, #reversed do
+
+        bypassText = bypassText .. symbol .. string.sub(reversed, i, i)
+
+    end
+
+    setclipboard(bypassText)
+
+    Footer.Text = "Copied bypassed text!"
+
+    task.wait(1.2)
+
+    Footer.Text = "Made by Jordan | Crack by waterXjuice | Set language to: Қазақ Тілі"
+
+end)
+
+-- end of my changes of coping the bypassed text here
+
+-- Minimize Button
+
+local MinimizeButton = Instance.new("TextButton")
+
+MinimizeButton.Size = UDim2.new(0, 30, 0, 20)
+
+MinimizeButton.Position = UDim2.new(1, -35, 0, 5)
+
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+MinimizeButton.Text = "-"
+
+MinimizeButton.Font = Enum.Font.GothamBold
+
+MinimizeButton.TextSize = 16
+
+MinimizeButton.Parent = BypassFrame
+
+Instance.new("UICorner", MinimizeButton).CornerRadius = UDim.new(0, 6)
+
+MinimizeButton.MouseButton1Click:Connect(function()
+
+    BypassFrame.Size = UDim2.new(0, 260, 0, 30)
+
+    MessageBox.Visible = false
+
+    CopyButton.Visible = false
+
+    Footer.Visible = false
+
+end)
+
+-- added drag logic cuz deobfusucated version was buggy
+
+local UserInputService = game:GetService("UserInputService")
+
+local RunService = game:GetService("RunService")
+
+local dragging
+
+local dragInput
+
+local dragStart
+
+local startPos
+
+local function update(input)
+
+    local delta = input.Position - dragStart
+
+    BypassFrame.Position = UDim2.new(
+
+        startPos.X.Scale, startPos.X.Offset + delta.X,
+
+        startPos.Y.Scale, startPos.Y.Offset + delta.Y
+
+    )
+
+end
+
+BypassFrame.InputBegan:Connect(function(input)
+
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+
+        dragging = true
+
+        dragStart = input.Position
+
+        startPos = BypassFrame.Position
+
+        input.Changed:Connect(function()
+
+            if input.UserInputState == Enum.UserInputState.End then
+
+                dragging = false
+
+            end
+
+        end)
+
+    end
+
+end)
+
+BypassFrame.InputChanged:Connect(function(input)
+
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+
+        dragInput = input
+
+    end
+
+end)
+
+RunService.RenderStepped:Connect(function()
+
+    if dragging and dragInput then
+
+        update(dragInput)
+
+    end
+
+end)
+
+-- end of my edits
+
+---------------------------------------------------------------------
+
+-- Show Key GUI first, hide bypass until unlocked
+
+---------------------------------------------------------------------
+
+-- KeyFrame.Visible = true  (we dont need this)
+
+BypassFrame.Visible = true
