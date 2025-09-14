@@ -1,0 +1,2099 @@
+if game:GetService("CoreGui"):FindFirstChild("UIGui") then
+game:GetService("CoreGui"):FindFirstChild("UIGui"):Destroy()
+end
+HttpService = game:GetService("HttpService")
+UIGui = Instance.new("ScreenGui")
+UserInputService = game:GetService("UserInputService")
+UserInputService_2 = game:GetService("UserInputService")
+MainFrame = Instance.new("ImageLabel")
+UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+UICorner = Instance.new("UICorner")
+SearchBox = Instance.new("TextBox")
+UICorner_3 = Instance.new("UICorner")
+UICorner_4 = Instance.new("UICorner")
+UICorner_5 = Instance.new("UICorner")
+ScriptAuthor = Instance.new("TextLabel")
+ScriptListFrame = Instance.new("ScrollingFrame")
+UIPadding = Instance.new("UIPadding")
+Scripts = Instance.new("Folder")
+UIGridLayout = Instance.new("UIGridLayout")
+ScriptFrame = Instance.new("Frame")
+UICorner_6 = Instance.new("UICorner")
+ScriptTitle = Instance.new("TextLabel")
+ExecuteButton = Instance.new("TextButton")
+UICorner_7 = Instance.new("UICorner")
+ScriptGame = Instance.new("TextLabel")
+VerifiedScriptFrame = Instance.new("Frame")
+UICorner_9 = Instance.new("UICorner")
+ScriptTitle_2 = Instance.new("TextLabel")
+ExecuteButton_2 = Instance.new("TextButton")
+UICorner_10 = Instance.new("UICorner")
+UICorner_11 = Instance.new("UICorner")
+ScriptAuthor_2 = Instance.new("TextLabel")
+ScriptGame_2 = Instance.new("TextLabel")
+ScriptListBackgroundFrame = Instance.new("ScrollingFrame")
+UICorner_12 = Instance.new("UICorner")
+InfoBoxDescription = Instance.new("TextButton")
+Author_2 = Instance.new("TextLabel")
+UICorner_22 = Instance.new("UICorner")
+UIListLayout_3 = Instance.new("UIListLayout")
+UIClick = Instance.new("Sound") 
+OpenCloseSearcherButton = Instance.new("ImageButton")
+OpenCloseSearcherButtonUICorner = Instance.new("UICorner")
+PlayerIcon = Instance.new("ImageButton")
+PlayerIconUICorner = Instance.new("UICorner")
+MenuBarFrame = Instance.new("Frame")
+MenuBarFrameUICorner = Instance.new("UICorner")
+SearcherMenuButton = Instance.new("ImageButton")
+SearcherMenuButtonUICorner = Instance.new("UICorner")
+ExecutorMenuButton = Instance.new("TextButton")
+ExecutorMenuButtonUICorner = Instance.new("UICorner")
+ExecutorMenuScrollingFrame = Instance.new("ScrollingFrame")
+UINoScriptsFound = Instance.new("Sound")
+ScriptsButtonFrame = Instance.new("Frame")
+ExecutorTextBox = Instance.new("TextBox")
+ExecutorTextBoxUICorner = Instance.new("UICorner")
+ExecuteTextBoxButton = Instance.new("TextButton")
+ExecuteTextBoxButtonUICorner = Instance.new("UICorner")
+ClearTextBoxButton = Instance.new("TextButton")
+ClearTextBoxButtonUICorner = Instance.new("UICorner")
+CopyTextBoxButton = Instance.new("TextButton")
+CopyTextBoxButtonUICorner = Instance.new("UICorner")
+CopyScriptsButton = Instance.new("TextButton")
+CopyScriptsButtonUICorner = Instance.new("UICorner")
+CopyScriptsButton_2 = Instance.new("TextButton")
+CopyScriptsButtonUICorner_2 = Instance.new("UICorner")
+DevelopersButton = Instance.new("TextButton")
+DevelopersButtonUICorner = Instance.new("UICorner")
+DevelopersFrame = Instance.new("Frame")
+DevIcon = Instance.new("ImageLabel")
+DevIconUI = Instance.new("UICorner")
+DevDesc = Instance.new("TextLabel")
+DevDescUICorner = Instance.new("UICorner")
+ExecutorMenuScrollingFrameUICorner = Instance.new("UICorner")
+CloseUIButton = Instance.new("TextButton")
+CloseUIButtonUICorner = Instance.new("UICorner")
+CopyLinkButton = Instance.new("TextButton")
+CopyLinkButtonUICorner = Instance.new("UICorner")
+CopyLinkButton_2 = Instance.new("TextButton")
+CopyLinkButtonUICorner_2 = Instance.new("UICorner")
+DescScriptButton = Instance.new("TextButton")
+DescScriptButtonUICorner = Instance.new("UICorner")
+DescScriptButton_2 = Instance.new("TextButton")
+DescScriptButtonUICorner_2 = Instance.new("UICorner")
+DescUICorner = Instance.new("UICorner")
+UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+OpenInExecutorButton = Instance.new("TextButton")
+OpenInExecutorButtonUICorner = Instance.new("UICorner")
+OpenInExecutorButton_2 = Instance.new("TextButton")
+OpenInExecutorButtonUICorner_2 = Instance.new("UICorner")
+PasteScriptButton = Instance.new("TextButton")
+PasteScriptButtonUICorner = Instance.new("UICorner")
+AutoExecuteButton = Instance.new("TextButton")
+AutoExecuteButtonUICorner = Instance.new("UICorner")
+AutoExecuteButton_2 = Instance.new("TextButton")
+AutoExecuteButtonUICorner_2 = Instance.new("UICorner")
+Hint = Instance.new("TextButton")
+HintUICorner = Instance.new("UICorner")
+ChatButton = Instance.new("ImageButton")
+ChatButtonUICorner = Instance.new("UICorner")
+ChatButton_2 = Instance.new("ImageButton")
+ChatButtonUICorner_2 = Instance.new("UICorner")
+ChatButton2 = Instance.new("ImageLabel")
+ChatButton_22 = Instance.new("ImageLabel")
+InfoBox = Instance.new("Frame")
+InfoBoxUICorner = Instance.new("UICorner")
+Info = Instance.new("Frame")
+Author = Instance.new("Frame")
+InfoBoxAuthor = Instance.new("TextLabel")
+ProfilePicture = Instance.new("ImageLabel")
+Comments = Instance.new("Frame")
+Inner = Instance.new("Frame")
+UICorner_21 = Instance.new("UICorner")
+Line = Instance.new("Frame")
+CommentsText = Instance.new("TextLabel")
+Comments_2 = Instance.new("ScrollingFrame")
+Comment = Instance.new("Frame")
+Content = Instance.new("TextLabel")
+Author_2 = Instance.new("TextLabel")
+ProfilePicture_2 = Instance.new("ImageLabel")
+UICorner_22 = Instance.new("UICorner")
+UIListLayout_3 = Instance.new("UIListLayout")
+NoComments = Instance.new("TextLabel")
+BackButtonInfoBox = Instance.new("TextButton")
+BackButtonInfoBoxUICorner = Instance.new("UICorner")
+DescFrame = Instance.new("Frame")
+ScriptImg = Instance.new("ImageLabel")
+ScriptImgUICorner = Instance.new("UICorner")
+PushFlingButton = Instance.new("TextButton")
+PushFlingButtonUICorner = Instance.new("UICorner")
+ShadersButton = Instance.new("TextButton")
+ShadersButtonUICorner = Instance.new("UICorner")
+RejoinButton = Instance.new("TextButton")
+RejoinButtonUICorner = Instance.new("UICorner")
+AntiAfkButton = Instance.new("TextButton")
+AntiAfkButtonUICorner = Instance.new("UICorner")
+TouchFlingButton = Instance.new("TextButton")
+TouchFlingButtonUICorner = Instance.new("UICorner")
+AntiFlingButton = Instance.new("TextButton")
+AntiFlingButtonUICorner = Instance.new("UICorner")
+LikeCount = Instance.new("TextLabel")
+DislikeCount = Instance.new("TextLabel")
+LikeImg = Instance.new("ImageLabel")
+DislikeImg = Instance.new("ImageLabel")
+HeadFrame = Instance.new("Frame")
+ScriptListBackgroundFrame_2 = Instance.new("Frame")
+Light = game:GetService("Lighting")
+players = game:GetService("Players")
+plr = players.LocalPlayer
+TeleportService = game:GetService("TeleportService")
+RunService = game:GetService("RunService")
+TabsLine = Instance.new("Frame")
+TabsLineUICorner = Instance.new("UICorner")
+mouse = plr:GetMouse()
+HintBackground = Instance.new("ImageLabel")
+HintBackgroundUICorner = Instance.new("UICorner")
+
+local function GetPing()
+return (game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())/1000
+end
+
+local function GetCharacter(Player)
+if Player.Character then
+return Player.Character
+end
+end
+
+local function GetRoot(Player)
+if GetCharacter(Player):FindFirstChild("HumanoidRootPart") then
+return GetCharacter(Player).HumanoidRootPart
+end
+end
+
+UIClick.Parent = game.Workspace
+UIClick.SoundId = "rbxassetid://3623733749"
+UIClick.Playing = true
+UIClick.Looped = false
+UIClick.Volume = 1
+UIClick:Stop()
+
+UINoScriptsFound.Parent = game.Workspace
+UINoScriptsFound.SoundId = "rbxassetid://6243040798"
+UINoScriptsFound.Playing = true
+UINoScriptsFound.Looped = false
+UINoScriptsFound.Volume = 1
+UINoScriptsFound:Stop()
+
+UIGui.Name = "UIGui"
+UIGui.Parent = game.CoreGui
+UIGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+game.CoreGui.UIGui.Enabled = true
+
+OpenCloseSearcherButton.Parent = UIGui
+OpenCloseSearcherButton.Size = UDim2.new(0, 80, 0, 80)
+OpenCloseSearcherButton.Position = UDim2.new(0.89, 0, 0.5, 0)
+OpenCloseSearcherButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OpenCloseSearcherButton.AnchorPoint = Vector2.new(0.5, 0.5)
+OpenCloseSearcherButton.BackgroundTransparency = 0.6
+OpenCloseSearcherButton.Image = "rbxassetid://98412029303005"
+OpenCloseSearcherButton.AutoButtonColor = false
+
+OpenCloseSearcherButtonUICorner.Parent = OpenCloseSearcherButton
+OpenCloseSearcherButtonUICorner.CornerRadius = UDim.new(1, 0)
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = UIGui
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0, 0, 0, 0)
+MainFrame.ZIndex = 2
+MainFrame.Image = "rbxassetid://128894131728959"
+
+ScriptListBackgroundFrame_2.Name = "HeadFrame"
+ScriptListBackgroundFrame_2.Parent = MainFrame
+ScriptListBackgroundFrame_2.Position = UDim2.new(0, 80, 0.1, 10)
+ScriptListBackgroundFrame_2.BackgroundTransparency = 0.8
+ScriptListBackgroundFrame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScriptListBackgroundFrame_2.Size = UDim2.new(0, 360, 0, 200)
+
+UICorner_12.CornerRadius = UDim.new(0, 12)
+UICorner_12.Parent = ScriptListBackgroundFrame_2
+
+ScriptListBackgroundFrame.Name = "ScriptListBackgroundFrame"
+ScriptListBackgroundFrame.Parent = MainFrame
+ScriptListBackgroundFrame.Active = true
+ScriptListBackgroundFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScriptListBackgroundFrame.BackgroundTransparency = 1
+ScriptListBackgroundFrame.BorderSizePixel = 0
+ScriptListBackgroundFrame.Position = UDim2.new(0, 80, 0.1, 10)
+ScriptListBackgroundFrame.Size = UDim2.new(0, 360, 0, 200)
+ScriptListBackgroundFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+HeadFrame.Name = "HeadFrame"
+HeadFrame.Parent = ScriptListBackgroundFrame
+HeadFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+HeadFrame.BackgroundTransparency = 1
+HeadFrame.Position = UDim2.new(0.5, 0, 0, 0)
+HeadFrame.Size = UDim2.new(0, 360, 0, 1000)
+
+UIAspectRatioConstraint.Parent = MainFrame
+UIAspectRatioConstraint.AspectRatio = 1.778
+
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = MainFrame
+
+DescFrame.Name = "DescFrame"
+DescFrame.Parent = HeadFrame
+DescFrame.BackgroundTransparency = 1
+DescFrame.Size = UDim2.new(0, 360, 0, 200)
+DescFrame.Position = UDim2.new(1, 0, 0.5, 0)
+DescFrame.ZIndex = 2
+
+ScriptImg.Name = "ScriptImg"
+ScriptImg.Parent = DescFrame
+ScriptImg.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScriptImg.BackgroundTransparency = 1
+ScriptImg.AnchorPoint = Vector2.new(0.5, 0.5)
+ScriptImg.Position = UDim2.new(0.5, 0, 0.49, 0)
+ScriptImg.Size = UDim2.new(0, 345, 0, 180)
+ScriptImg.Image = "rbxassetid://81389429212499"
+
+ScriptImgUICorner.CornerRadius = UDim.new(0, 12)
+ScriptImgUICorner.Parent = ScriptImg
+
+InfoBoxDescription.Name = "InfoBoxDescription"
+InfoBoxDescription.Parent = DescFrame
+InfoBoxDescription.AnchorPoint = Vector2.new(0.5, 0.5)
+InfoBoxDescription.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+InfoBoxDescription.BackgroundTransparency = 0.5
+InfoBoxDescription.Position = UDim2.new(0.5, 0, 0.49, 0)
+InfoBoxDescription.Size = UDim2.new(0, 345, 0, 180)
+InfoBoxDescription.Font = Enum.Font.ArimoBold
+InfoBoxDescription.TextSize = 30
+InfoBoxDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
+InfoBoxDescription.Text = "This is a description!"
+InfoBoxDescription.TextWrapped = true
+InfoBoxDescription.TextScaled = true
+InfoBoxDescription.TextXAlignment = Enum.TextXAlignment.Center
+InfoBoxDescription.TextYAlignment = Enum.TextYAlignment.Center
+
+DescUICorner.CornerRadius = UDim.new(0, 12)
+DescUICorner.Parent = InfoBoxDescription
+
+InfoBox.Name = "InfoBox"
+InfoBox.Parent = HeadFrame
+InfoBox.BackgroundTransparency = 0.6
+InfoBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+InfoBox.BorderSizePixel = 0
+InfoBox.Position = UDim2.new(-1, 0, 0.5, 0)
+InfoBox.Size = UDim2.new(0, 360, 0, 200)
+InfoBox.ZIndex = 3
+
+InfoBoxUICorner.CornerRadius = UDim.new(0, 12)
+InfoBoxUICorner.Parent = InfoBox
+
+HintBackground.Name = "HintBackground"
+HintBackground.Parent = UIGui
+HintBackground.AnchorPoint = Vector2.new(0.5, 0.5)
+HintBackground.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HintBackground.BackgroundTransparency = 0.6
+HintBackground.Position = UDim2.new(2, 0, 0.85, 0)
+HintBackground.Size = UDim2.new(0, 250, 0, 90)
+HintBackground.Image = "rbxassetid://92924365001144"
+
+HintBackgroundUICorner.CornerRadius = UDim.new(0, 12)
+HintBackgroundUICorner.Parent = HintBackground
+
+Hint.Name = "Hint"
+Hint.Parent = HintBackground
+Hint.AnchorPoint = Vector2.new(0.5, 0.5)
+Hint.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Hint.BackgroundTransparency = 0.3
+Hint.Position = UDim2.new(0.5, 0, 0.5, 0)
+Hint.Size = UDim2.new(0, 250, 0, 90)
+Hint.ZIndex = 2
+Hint.AutoButtonColor = false
+Hint.Font = Enum.Font.ArimoBold
+Hint.TextSize = 30
+Hint.TextColor3 = Color3.fromRGB(255, 255, 255)
+Hint.Text = "Welcome"
+Hint.TextWrapped = true
+Hint.TextScaled = true
+
+HintUICorner.CornerRadius = UDim.new(0, 12)
+HintUICorner.Parent = Hint
+
+OpenCloseSearcherButton.MouseButton1Click:Connect(function()
+writefile("ES.ECCS", ""..ExecutorTextBox.Text)
+OpenCloseSearcherButton:TweenSize(UDim2.new(0, 0, 0, 0),"InOut","Sine",0.3)
+MainFrame:TweenSize(UDim2.new(0, 450, 0, 400),"InOut","Sine",0.3)
+end)
+
+spawn(function()
+while wait() do
+if OpenCloseSearcherButton.Size == UDim2.new(0, 0, 0, 0) then
+OpenCloseSearcherButton.Visible = false
+else
+OpenCloseSearcherButton.Visible = true
+end
+end
+end)
+
+MenuBarFrame.Name = "MenuBarFrame"
+MenuBarFrame.Parent = MainFrame
+MenuBarFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MenuBarFrame.BackgroundTransparency = 0.8
+MenuBarFrame.Position = UDim2.new(0, 10, 0.1, 10)
+MenuBarFrame.Size = UDim2.new(0, 60, 0, 200)
+
+MenuBarFrameUICorner.CornerRadius = UDim.new(0, 12)
+MenuBarFrameUICorner.Parent = MenuBarFrame
+
+SearchBox.Name = "SearchBox"
+SearchBox.Parent = MainFrame
+SearchBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SearchBox.BackgroundTransparency = 0.6
+SearchBox.Position = UDim2.new(0, 9, 0, 5)
+SearchBox.Size = UDim2.new(0, 380, 0, 25)
+SearchBox.ClearTextOnFocus = false
+SearchBox.Font = Enum.Font.ArimoBold
+SearchBox.PlaceholderText = "Search..."
+SearchBox.Text = ""
+SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBox.TextScaled = true
+SearchBox.TextSize = 14.000
+SearchBox.TextWrapped = true
+SearchBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+
+UICorner_3.CornerRadius = UDim.new(0, 12)
+UICorner_3.Parent = SearchBox
+
+local Frame = ({
+["01 01"] = "rbxassetid://16779094159",
+[(function(Year)
+local A = math.floor(Year/100)
+local B = math.floor((13+8*A)/25)
+local C = (15-B+A-math.floor(A/4))%30
+local D = (4+A-math.floor(A/4))%7
+local E = (19*(Year%19)+C)%30
+local F = (2*(Year%4)+4*(Year%7)+6*E+D)%7
+local G = (22+E+F)
+if E == 29 and F == 6 then
+return "04 19"
+elseif E == 28 and F == 6 then
+return "04 18"
+elseif 31 < G then
+return ("04 %02d"):format(G-31)
+end
+return ("03 %02d"):format(G)
+end)(tonumber(os.date"%Y"))] = "rbxassetid://16779090090",
+["10 31"] = "rbxassetid://16779133028",
+["12 25"] = "rbxassetid://16779174392"
+})[os.date("%m %d")]
+if Frame then
+MainFrame.Image = Frame
+end
+
+CloseUIButton.Name = "CloseUIButton"
+CloseUIButton.Parent = MainFrame
+CloseUIButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CloseUIButton.Position = UDim2.new(0, 393, 0, 5)
+CloseUIButton.Size = UDim2.new(0, 50, 0, 25)
+CloseUIButton.AutoButtonColor = false
+CloseUIButton.Font = Enum.Font.ArimoBold
+CloseUIButton.Text = "X"
+CloseUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseUIButton.TextSize = 20
+CloseUIButton.BackgroundTransparency = 0.6
+
+CloseUIButtonUICorner.CornerRadius = UDim.new(0, 12)
+CloseUIButtonUICorner.Parent = CloseUIButton
+
+MenuBarFrame.Visible = false
+ScriptListBackgroundFrame.Visible = false
+SearchBox.Visible = false
+ScriptListBackgroundFrame_2.Visible = false
+CloseUIButton.Visible = false
+
+spawn(function()
+while wait() do
+if MainFrame.Size == UDim2.new(0, 450, 0, 400) then
+MenuBarFrame.Visible = true
+ScriptListBackgroundFrame.Visible = true
+SearchBox.Visible = true
+ScriptListBackgroundFrame_2.Visible = true
+CloseUIButton.Visible = true
+else
+MenuBarFrame.Visible = false
+ScriptListBackgroundFrame.Visible = false
+SearchBox.Visible = false
+ScriptListBackgroundFrame_2.Visible = false
+CloseUIButton.Visible = false
+end
+end
+end)
+
+TabsLine.Name = "TabsLine"
+TabsLine.Parent = MenuBarFrame
+TabsLine.AnchorPoint = Vector2.new(0.5, 0.5)
+TabsLine.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+TabsLine.Position = UDim2.new(0.1, 0, 0.61, 0)
+TabsLine.Size = UDim2.new(0, 7, 0, 35)
+
+TabsLineUICorner.Parent = TabsLine
+TabsLineUICorner.CornerRadius = UDim.new(0, 12)
+
+DevelopersButton.Name = "DevelopersButton"
+DevelopersButton.Position = UDim2.new(0.5, 0, 0.13, 0)
+DevelopersButton.Parent = MenuBarFrame
+DevelopersButton.AnchorPoint = Vector2.new(0.5, 0.5)
+DevelopersButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DevelopersButton.BackgroundTransparency = 0.6
+DevelopersButton.LayoutOrder = 1
+DevelopersButton.Size = UDim2.new(0, 40, 0, 40)
+DevelopersButton.AutoButtonColor = false
+DevelopersButton.Font = Enum.Font.ArimoBold
+DevelopersButton.Text = "i"
+DevelopersButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DevelopersButton.TextSize = 25
+
+DevelopersButtonUICorner.Parent = DevelopersButton
+DevelopersButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+DevelopersButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if HeadFrame.Position == UDim2.new(-0.5, 0, 0, 0) or HeadFrame.Position == UDim2.new(1.5, 0, 0, 0) then
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+wait(0.35)
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 2.49, 0),"InOut","Sine",0.3)
+else
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 2.49, 0),"InOut","Sine",0.3)
+end
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+end)
+
+DevelopersFrame.Name = "DevelopersFrame"
+DevelopersFrame.Parent = HeadFrame
+DevelopersFrame.BackgroundTransparency = 1
+DevelopersFrame.Position = UDim2.new(0, 0, 0, 0)
+DevelopersFrame.Size = UDim2.new(0, 360, 0, 199)
+DevelopersFrame.ZIndex = 2
+
+DevIcon.Name = "DevIcon"
+DevIcon.Parent = DevelopersFrame
+DevIcon.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DevIcon.BackgroundTransparency = 0.6
+DevIcon.Position = UDim2.new(0, 10, 0.01, 10)
+DevIcon.Size = UDim2.new(0, 180, 0, 180)
+DevIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=3323558881&width=999&height=999&format=png"
+
+DevIconUI.Parent = DevIcon
+DevIconUI.CornerRadius = UDim.new(0, 12)
+
+DevDesc.Name = "DevDesc"
+DevDesc.Parent = DevelopersFrame
+DevDesc.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DevDesc.Position = UDim2.new(0, 200, 0.01, 10)
+DevDesc.Size = UDim2.new(0, 150, 0, 180)
+DevDesc.Font = Enum.Font.ArimoBold
+DevDesc.Text = "SHON \n\n\nH.Programmer \n H.Designer \n H.Developer"
+DevDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+DevDesc.TextSize = 20
+DevDesc.BackgroundTransparency = 0.6
+
+DevDescUICorner.CornerRadius = UDim.new(0, 12)
+DevDescUICorner.Parent = DevDesc
+
+ExecutorMenuButton.Name = "ExecutorMenuButton"
+ExecutorMenuButton.Position = UDim2.new(0.5, 0, 0.37, 0)
+ExecutorMenuButton.Parent = MenuBarFrame
+ExecutorMenuButton.AnchorPoint = Vector2.new(0.5, 0.5)
+ExecutorMenuButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExecutorMenuButton.BackgroundTransparency = 0.6
+ExecutorMenuButton.LayoutOrder = 1
+ExecutorMenuButton.Size = UDim2.new(0, 40, 0, 40)
+ExecutorMenuButton.AutoButtonColor = false
+ExecutorMenuButton.Font = Enum.Font.ArimoBold
+ExecutorMenuButton.Text = "</>"
+ExecutorMenuButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecutorMenuButton.TextSize = 25
+
+ExecutorMenuButtonUICorner.Parent = ExecutorMenuButton
+ExecutorMenuButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+ExecutorMenuButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if HeadFrame.Position == UDim2.new(-0.5, 0, 0, 0) or HeadFrame.Position == UDim2.new(1.5, 0, 0, 0) then
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+wait(0.35)
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 1.32, 0),"InOut","Sine",0.3)
+else
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 1.32, 0),"InOut","Sine",0.3)
+end
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+end)
+
+ExecutorMenuScrollingFrame.CanvasSize = UDim2.new(0, 0, 4, 0)
+ExecutorMenuScrollingFrame.ScrollBarImageColor3 = Color3.new(0, 0, 0)
+ExecutorMenuScrollingFrame.ScrollBarThickness = 8
+ExecutorMenuScrollingFrame.Active = true
+ExecutorMenuScrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+ExecutorMenuScrollingFrame.BackgroundTransparency = 1
+ExecutorMenuScrollingFrame.BorderSizePixel = 0
+ExecutorMenuScrollingFrame.Position = UDim2.new(-0.028, 0, 0.24, 0)
+ExecutorMenuScrollingFrame.Size = UDim2.new(0, 380, 0, 150)
+ExecutorMenuScrollingFrame.Name = "ExecutorMenuScrollingFrame"
+ExecutorMenuScrollingFrame.Parent = HeadFrame
+
+ExecutorMenuScrollingFrameUICorner.Parent = ExecutorMenuScrollingFrame
+
+ExecutorTextBox.Name = "ExecutorTextBox"
+ExecutorTextBox.Parent = ExecutorMenuScrollingFrame
+ExecutorTextBox.BackgroundColor3 = Color3.new(0, 0, 0)
+ExecutorTextBox.BackgroundTransparency = 0.6
+ExecutorTextBox.Position = UDim2.new(0.06, 0, 0, 0)
+ExecutorTextBox.Size = UDim2.new(0, 335, 0, 4000)
+ExecutorTextBox.Font = Enum.Font.Code
+ExecutorTextBox.ClearTextOnFocus = false
+ExecutorTextBox.FontSize = Enum.FontSize.Size18
+ExecutorTextBox.Text = "print(\"ECCS•Searcher V2.5\")"
+ExecutorTextBox.PlaceholderText = "print(\"ECCS•Searcher V2.5\")"
+ExecutorTextBox.TextColor3 = Color3.new(0, 255, 0)
+ExecutorTextBox.TextTransparency = 0
+ExecutorTextBox.TextSize = 15
+ExecutorTextBox.TextXAlignment = Enum.TextXAlignment.Left
+ExecutorTextBox.TextYAlignment = Enum.TextYAlignment.Top
+ExecutorTextBox.TextWrapped = true
+ 
+ExecutorTextBoxUICorner.Parent = ExecutorTextBox
+
+ClearTextBoxButton.Name = "ClearTextBoxButton"
+ClearTextBoxButton.Parent = HeadFrame
+ClearTextBoxButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ClearTextBoxButton.Position = UDim2.new(0.03, 0, 0.4, 0)
+ClearTextBoxButton.Size = UDim2.new(0, 80, 0, 30)
+ClearTextBoxButton.AutoButtonColor = false
+ClearTextBoxButton.Font = Enum.Font.ArimoBold
+ClearTextBoxButton.Text = "Clear"
+ClearTextBoxButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClearTextBoxButton.TextSize = 20
+ClearTextBoxButton.BackgroundTransparency = 0.6
+
+ClearTextBoxButtonUICorner.CornerRadius = UDim.new(0, 12)
+ClearTextBoxButtonUICorner.Parent = ClearTextBoxButton
+
+ClearTextBoxButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+ExecutorTextBox.Text = ""
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Executor is clear!"
+end)
+
+CopyTextBoxButton.Name = "CopyTextBoxButton"
+CopyTextBoxButton.Parent = HeadFrame
+CopyTextBoxButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CopyTextBoxButton.Position = UDim2.new(0.27, 0, 0.4, 0)
+CopyTextBoxButton.Size = UDim2.new(0, 80, 0, 30)
+CopyTextBoxButton.AutoButtonColor = false
+CopyTextBoxButton.Font = Enum.Font.ArimoBold
+CopyTextBoxButton.Text = "Copy"
+CopyTextBoxButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyTextBoxButton.TextSize = 20
+CopyTextBoxButton.BackgroundTransparency = 0.6
+
+CopyTextBoxButtonUICorner.CornerRadius = UDim.new(0, 12)
+CopyTextBoxButtonUICorner.Parent = CopyTextBoxButton
+
+CopyTextBoxButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+setclipboard(ExecutorTextBox.Text)
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Copied into your clipboard!"
+end)
+
+ExecuteTextBoxButton.Name = "ExecuteTextBoxButton"
+ExecuteTextBoxButton.Parent = HeadFrame
+ExecuteTextBoxButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExecuteTextBoxButton.Position = UDim2.new(0.75, 0, 0.4, 0)
+ExecuteTextBoxButton.Size = UDim2.new(0, 80, 0, 30)
+ExecuteTextBoxButton.AutoButtonColor = false
+ExecuteTextBoxButton.Font = Enum.Font.ArimoBold
+ExecuteTextBoxButton.Text = "Execute"
+ExecuteTextBoxButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteTextBoxButton.TextSize = 20
+ExecuteTextBoxButton.BackgroundTransparency = 0.6
+
+ExecuteTextBoxButtonUICorner.CornerRadius = UDim.new(0, 12)
+ExecuteTextBoxButtonUICorner.Parent = ExecuteTextBoxButton
+
+PasteScriptButton.Name = "PasteScriptButton"
+PasteScriptButton.Parent = HeadFrame
+PasteScriptButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PasteScriptButton.Position = UDim2.new(0.51, 0, 0.4, 0)
+PasteScriptButton.Size = UDim2.new(0, 80, 0, 30)
+PasteScriptButton.AutoButtonColor = false
+PasteScriptButton.Font = Enum.Font.ArimoBold
+PasteScriptButton.Text = "Paste"
+PasteScriptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PasteScriptButton.TextSize = 20
+PasteScriptButton.BackgroundTransparency = 0.6
+PasteScriptButtonUICorner.CornerRadius = UDim.new(0, 12)
+PasteScriptButtonUICorner.Parent = PasteScriptButton
+
+ExecuteTextBoxButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+loadstring(ExecutorTextBox.Text)()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Script executed!"
+end)
+
+PasteScriptButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+ExecutorTextBox.Text = getclipboard()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Script pasted!"
+end)
+
+ExecutorTextBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+       UIClick:Play()
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+loadstring(ExecutorTextBox.Text)()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Script executed!"
+    end
+end)
+
+PlayerIcon.Name = "PlayerIcon"
+PlayerIcon.Parent = MenuBarFrame
+PlayerIcon.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PlayerIcon.BackgroundTransparency = 0.6
+PlayerIcon.AnchorPoint = Vector2.new(0.5, 0.5)
+PlayerIcon.Position = UDim2.new(0.5, 0, 0.87, 0)
+PlayerIcon.Size = UDim2.new(0, 40, 0, 40)
+PlayerIcon.AutoButtonColor = false
+PlayerIcon.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=999&height=999&format=png"
+
+PlayerIconUICorner.Parent = PlayerIcon
+PlayerIconUICorner.CornerRadius = UDim.new(0, 12)
+
+PlayerIcon.MouseButton1Click:Connect(function()
+UIClick:Play()
+if HeadFrame.Position == UDim2.new(-0.5, 0, 0, 0) or HeadFrame.Position == UDim2.new(1.5, 0, 0, 0) then
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+wait(0.35)
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, -1.2, 0),"InOut","Sine",0.3)
+else
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, -1.2, 0),"InOut","Sine",0.3)
+end
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+end)
+
+SearcherMenuButton.Name = "SearcherMenuButton"
+SearcherMenuButton.Position = UDim2.new(0.5, 0, 0.61, 0)
+SearcherMenuButton.Parent = MenuBarFrame
+SearcherMenuButton.AnchorPoint = Vector2.new(0.5, 0.5)
+SearcherMenuButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SearcherMenuButton.BackgroundTransparency = 0.6
+SearcherMenuButton.LayoutOrder = 1
+SearcherMenuButton.Size = UDim2.new(0, 40, 0, 40)
+SearcherMenuButton.AutoButtonColor = false
+SearcherMenuButton.Image = "rbxassetid://119784725955851"
+
+SearcherMenuButtonUICorner.Parent = SearcherMenuButton
+SearcherMenuButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+SearcherMenuButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if HeadFrame.Position == UDim2.new(-0.5, 0, 0, 0) or HeadFrame.Position == UDim2.new(1.5, 0, 0, 0) then
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+wait(0.35)
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+else
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+end
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+end)
+
+spawn(function()
+while wait() do
+if HeadFrame.Position == UDim2.new(0.5, 0, 0, 0) then
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.61, 0),"InOut","Sine",0.3)
+end
+if HeadFrame.Position == UDim2.new(0.5, 0, -1.2, 0) then
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.87, 0),"InOut","Sine",0.3)
+end
+if HeadFrame.Position == UDim2.new(0.5, 0, 1.32, 0) then
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.37, 0),"InOut","Sine",0.3)
+end
+if HeadFrame.Position == UDim2.new(0.5, 0, 2.49, 0) then
+TabsLine:TweenPosition(UDim2.new(0.1, 0, 0.13, 0),"InOut","Sine",0.3)
+end
+end
+end)
+
+ScriptsButtonFrame.Name = "ScriptsButtonFrame"
+ScriptsButtonFrame.Parent = HeadFrame
+ScriptsButtonFrame.BackgroundTransparency = 1
+ScriptsButtonFrame.Position = UDim2.new(0, 0, 0.74, 0)
+ScriptsButtonFrame.Size = UDim2.new(0, 360, 0, 200)
+ScriptsButtonFrame.ZIndex = 2
+ 
+PushFlingButton.Name = "PushFlingButton"
+PushFlingButton.Position = UDim2.new(0, 10, 0, 75)
+PushFlingButton.Parent = ScriptsButtonFrame
+PushFlingButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PushFlingButton.BackgroundTransparency = 0.6
+PushFlingButton.Size = UDim2.new(0, 165, 0, 50)
+PushFlingButton.AutoButtonColor = false
+PushFlingButton.Font = Enum.Font.ArimoBold
+PushFlingButton.Text = "Push Fling"
+PushFlingButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PushFlingButton.TextSize = 25
+
+PushFlingButtonUICorner.Parent = PushFlingButton
+PushFlingButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+ShadersButton.Name = "ShadersButton"
+ShadersButton.Position = UDim2.new(0, 185.2, 0, 12)
+ShadersButton.Parent = ScriptsButtonFrame
+ShadersButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ShadersButton.BackgroundTransparency = 0.6
+ShadersButton.Size = UDim2.new(0, 165, 0, 50)
+ShadersButton.AutoButtonColor = false
+ShadersButton.Font = Enum.Font.ArimoBold
+ShadersButton.Text = "Shaders"
+ShadersButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+ShadersButton.TextSize = 25
+
+ShadersButtonUICorner.Parent = ShadersButton
+ShadersButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+RejoinButton.Name = "RejoinButton"
+RejoinButton.Position = UDim2.new(0, 10, 0, 12)
+RejoinButton.Parent = ScriptsButtonFrame
+RejoinButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+RejoinButton.BackgroundTransparency = 0.6
+RejoinButton.Size = UDim2.new(0, 165, 0, 50)
+RejoinButton.AutoButtonColor = false
+RejoinButton.Font = Enum.Font.ArimoBold
+RejoinButton.Text = "Rejoin"
+RejoinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+RejoinButton.TextSize = 25
+
+RejoinButtonUICorner.Parent = RejoinButton
+RejoinButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+AntiAfkButton.Name = "AntiAfkButton"
+AntiAfkButton.Position = UDim2.new(0, 185.2, 0, 75)
+AntiAfkButton.Parent = ScriptsButtonFrame
+AntiAfkButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiAfkButton.BackgroundTransparency = 0.6
+AntiAfkButton.Size = UDim2.new(0, 165, 0, 50)
+AntiAfkButton.AutoButtonColor = false
+AntiAfkButton.Font = Enum.Font.ArimoBold
+AntiAfkButton.Text = "Anti Afk"
+AntiAfkButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+AntiAfkButton.TextSize = 25
+
+AntiAfkButtonUICorner.Parent = AntiAfkButton
+AntiAfkButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+TouchFlingButton.Name = "TouchFlingButton"
+TouchFlingButton.Position = UDim2.new(0, 10, 0, 138)
+TouchFlingButton.Parent = ScriptsButtonFrame
+TouchFlingButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TouchFlingButton.BackgroundTransparency = 0.6
+TouchFlingButton.Size = UDim2.new(0, 165, 0, 50)
+TouchFlingButton.AutoButtonColor = false
+TouchFlingButton.Font = Enum.Font.ArimoBold
+TouchFlingButton.Text = "Touch Fling"
+TouchFlingButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+TouchFlingButton.TextSize = 25
+
+TouchFlingButtonUICorner.Parent = TouchFlingButton
+TouchFlingButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+AntiFlingButton.Name = "AntiFlingButton"
+AntiFlingButton.Position = UDim2.new(0, 185.2, 0, 138)
+AntiFlingButton.Parent = ScriptsButtonFrame
+AntiFlingButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AntiFlingButton.BackgroundTransparency = 0.6
+AntiFlingButton.Size = UDim2.new(0, 165, 0, 50)
+AntiFlingButton.AutoButtonColor = false
+AntiFlingButton.Font = Enum.Font.ArimoBold
+AntiFlingButton.Text = "Anti Fling"
+AntiFlingButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+AntiFlingButton.TextSize = 25
+
+AntiFlingButtonUICorner.Parent = AntiFlingButton
+AntiFlingButtonUICorner.CornerRadius = UDim.new(0, 12)
+
+ScriptListFrame.Name = "ScriptListFrame"
+ScriptListFrame.Parent = HeadFrame
+ScriptListFrame.Active = true
+ScriptListFrame.BackgroundTransparency = 1
+ScriptListFrame.Position = UDim2.new(0, 0, 0.5, 0)
+ScriptListFrame.Size = UDim2.new(0, 365, 0, 199)
+ScriptListFrame.ZIndex = 2
+ScriptListFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+ScriptAuthor.Name = "ScriptAuthor"
+ScriptAuthor.Parent = ScriptFrame
+ScriptAuthor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptAuthor.BackgroundTransparency = 1.000
+ScriptAuthor.Position = UDim2.new(0, 10, 0, 65)
+ScriptAuthor.Size = UDim2.new(0, 280, 0, 25)
+ScriptAuthor.Font = Enum.Font.ArimoBold
+ScriptAuthor.Text = "By ScriptAuthor"
+ScriptAuthor.TextColor3 = Color3.fromRGB(192, 192, 192)
+ScriptAuthor.TextSize = 20
+ScriptAuthor.TextWrapped = true
+ScriptAuthor.TextXAlignment = Enum.TextXAlignment.Left
+
+UIPadding.Parent = ScriptListFrame
+UIPadding.PaddingBottom = UDim.new(0, 0)
+UIPadding.PaddingLeft = UDim.new(0, 7.5)
+UIPadding.PaddingRight = UDim.new(0, 0)
+UIPadding.PaddingTop = UDim.new(0, 5)
+
+Scripts.Name = "Scripts"
+Scripts.Parent = ScriptListFrame
+
+UIGridLayout.Parent = Scripts
+UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
+UIGridLayout.CellSize = UDim2.new(0, 345, 0, 190)
+
+ScriptFrame.Name = "ScriptFrame"
+ScriptFrame.Parent = Scripts
+ScriptFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScriptFrame.BackgroundTransparency = 0.6
+ScriptFrame.Size = UDim2.new(0, 345, 0, 190)
+ScriptFrame.Position = UDim2.new(0, 0, 0, 0)
+
+UICorner_6.CornerRadius = UDim.new(0, 12)
+UICorner_6.Parent = ScriptFrame
+
+ScriptTitle.Name = "ScriptTitle"
+ScriptTitle.Parent = ScriptFrame
+ScriptTitle.BackgroundTransparency = 1
+ScriptTitle.Position = UDim2.new(0, 10, 0, 10)
+ScriptTitle.Size = UDim2.new(0, 280, 0, 40)
+ScriptTitle.Font = Enum.Font.ArimoBold
+ScriptTitle.Text = "Script Title"
+ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScriptTitle.TextScaled = true
+ScriptTitle.TextSize = 14.000
+ScriptTitle.TextWrapped = true
+ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+ExecuteButton.Name = "ExecuteButton"
+ExecuteButton.Parent = ScriptFrame
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExecuteButton.Position = UDim2.new(0.75, 0, 0.75, 0)
+ExecuteButton.Size = UDim2.new(0, 75, 0, 30)
+ExecuteButton.AutoButtonColor = false
+ExecuteButton.Font = Enum.Font.ArimoBold
+ExecuteButton.Text = "Execute"
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.TextSize = 18
+ExecuteButton.BackgroundTransparency = 0.6
+
+UICorner_7.CornerRadius = UDim.new(0, 12)
+UICorner_7.Parent = ExecuteButton
+
+DescScriptButton.Name = "DescScriptButton"
+DescScriptButton.Parent = ScriptFrame
+DescScriptButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DescScriptButton.Position = UDim2.new(0.885, 0, 0.02, 0)
+DescScriptButton.Size = UDim2.new(0, 35, 0, 35)
+DescScriptButton.AutoButtonColor = false
+DescScriptButton.Font = Enum.Font.ArimoBold
+DescScriptButton.Text = "︙"
+DescScriptButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DescScriptButton.TextSize = 32
+DescScriptButton.BackgroundTransparency = 0.6
+
+DescScriptButtonUICorner.CornerRadius = UDim.new(0, 12)
+DescScriptButtonUICorner.Parent = DescScriptButton
+
+DescScriptButton_2.Name = "DescScriptButton"
+DescScriptButton_2.Parent = VerifiedScriptFrame
+DescScriptButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DescScriptButton_2.Position = UDim2.new(0.885, 0, 0.02, 0)
+DescScriptButton_2.Size = UDim2.new(0, 35, 0, 35)
+DescScriptButton_2.AutoButtonColor = false
+DescScriptButton_2.Font = Enum.Font.ArimoBold
+DescScriptButton_2.Text = "︙"
+DescScriptButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+DescScriptButton_2.TextSize = 32
+DescScriptButton_2.BackgroundTransparency = 0.6
+
+DescScriptButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+DescScriptButtonUICorner_2.Parent = DescScriptButton_2
+
+AutoExecuteButton.Name = "AutoExecuteButton"
+AutoExecuteButton.Parent = ScriptFrame
+AutoExecuteButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AutoExecuteButton.Position = UDim2.new(0.885, 0, 0.22, 0)
+AutoExecuteButton.Size = UDim2.new(0, 35, 0, 35)
+AutoExecuteButton.AutoButtonColor = false
+AutoExecuteButton.Font = Enum.Font.ArimoBold
+AutoExecuteButton.Text = "★"
+AutoExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoExecuteButton.TextSize = 30
+AutoExecuteButton.BackgroundTransparency = 0.6
+
+AutoExecuteButtonUICorner.CornerRadius = UDim.new(0, 12)
+AutoExecuteButtonUICorner.Parent = AutoExecuteButton
+
+AutoExecuteButton_2.Name = "AutoExecuteButton"
+AutoExecuteButton_2.Parent = VerifiedScriptFrame
+AutoExecuteButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AutoExecuteButton_2.Position = UDim2.new(0.885, 0, 0.22, 0)
+AutoExecuteButton_2.Size = UDim2.new(0, 35, 0, 35)
+AutoExecuteButton_2.AutoButtonColor = false
+AutoExecuteButton_2.Font = Enum.Font.ArimoBold
+AutoExecuteButton_2.Text = "★"
+AutoExecuteButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoExecuteButton_2.TextSize = 30
+AutoExecuteButton_2.BackgroundTransparency = 0.6
+
+AutoExecuteButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+AutoExecuteButtonUICorner_2.Parent = AutoExecuteButton_2
+
+ChatButton.Name = "ChatButton"
+ChatButton.Parent = ScriptFrame
+ChatButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ChatButton.Position = UDim2.new(0.885, 0, 0.42, 0)
+ChatButton.Size = UDim2.new(0, 35, 0, 35)
+ChatButton.AutoButtonColor = false
+ChatButton.BackgroundTransparency = 0.6
+
+ChatButton2.Name = "ChatButton2"
+ChatButton2.Parent = ChatButton
+ChatButton2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ChatButton2.Position = UDim2.new(0.5, 0, 0.5, 0)
+ChatButton2.Size = UDim2.new(0, 20, 0, 20)
+ChatButton2.AnchorPoint = Vector2.new(0.5, 0.5)
+ChatButton2.BorderSizePixel = 0
+ChatButton2.Image = "rbxassetid://18132342746"
+ChatButton2.BackgroundTransparency = 1
+
+ChatButtonUICorner.CornerRadius = UDim.new(0, 12)
+ChatButtonUICorner.Parent = ChatButton
+
+ChatButton_2.Name = "ChatButton"
+ChatButton_2.Parent = VerifiedScriptFrame
+ChatButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ChatButton_2.Position = UDim2.new(0.885, 0, 0.42, 0)
+ChatButton_2.Size = UDim2.new(0, 35, 0, 35)
+ChatButton_2.AutoButtonColor = false
+ChatButton_2.BackgroundTransparency = 0.6
+
+ChatButton_22.Name = "ChatButton_22"
+ChatButton_22.Parent = ChatButton_2
+ChatButton_22.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ChatButton_22.Position = UDim2.new(0.5, 0, 0.5, 0)
+ChatButton_22.Size = UDim2.new(0, 20, 0, 20)
+ChatButton_22.AnchorPoint = Vector2.new(0.5, 0.5)
+ChatButton_22.BorderSizePixel = 0
+ChatButton_22.Image = "rbxassetid://18132342746"
+ChatButton_22.BackgroundTransparency = 1
+
+ChatButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+ChatButtonUICorner_2.Parent = ChatButton_2
+
+OpenInExecutorButton.Name = "OpenInExecutorButton"
+OpenInExecutorButton.Parent = ScriptFrame
+OpenInExecutorButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OpenInExecutorButton.Position = UDim2.new(0.265, 0, 0.75, 0)
+OpenInExecutorButton.Size = UDim2.new(0, 75, 0, 30)
+OpenInExecutorButton.AutoButtonColor = false
+OpenInExecutorButton.Font = Enum.Font.ArimoBold
+OpenInExecutorButton.Text = "OIE"
+OpenInExecutorButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenInExecutorButton.TextSize = 18
+OpenInExecutorButton.BackgroundTransparency = 0.6
+
+OpenInExecutorButtonUICorner.CornerRadius = UDim.new(0, 12)
+OpenInExecutorButtonUICorner.Parent = OpenInExecutorButton
+
+OpenInExecutorButton_2.Name = "OpenInExecutorButton"
+OpenInExecutorButton_2.Parent = VerifiedScriptFrame
+OpenInExecutorButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OpenInExecutorButton_2.Position = UDim2.new(0.265, 0, 0.75, 0)
+OpenInExecutorButton_2.Size = UDim2.new(0, 75, 0, 30)
+OpenInExecutorButton_2.AutoButtonColor = false
+OpenInExecutorButton_2.Font = Enum.Font.ArimoBold
+OpenInExecutorButton_2.Text = "OIE"
+OpenInExecutorButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenInExecutorButton_2.TextSize = 18
+OpenInExecutorButton_2.BackgroundTransparency = 0.6
+
+OpenInExecutorButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+OpenInExecutorButtonUICorner_2.Parent = OpenInExecutorButton_2
+
+ScriptGame.Name = "ScriptGame"
+ScriptGame.Parent = ScriptFrame
+ScriptGame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptGame.BackgroundTransparency = 1
+ScriptGame.Position = UDim2.new(0, 10, 0, 100)
+ScriptGame.Size = UDim2.new(0, 280, 0, 25)
+ScriptGame.Font = Enum.Font.ArimoBold
+ScriptGame.Text = "Game"
+ScriptGame.TextColor3 = Color3.fromRGB(192, 192, 192)
+ScriptGame.TextSize = 20
+ScriptGame.TextWrapped = true
+ScriptGame.TextXAlignment = Enum.TextXAlignment.Left
+
+VerifiedScriptFrame.Name = "VerifiedScriptFrame"
+VerifiedScriptFrame.Parent = Scripts
+VerifiedScriptFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+VerifiedScriptFrame.Size = UDim2.new(0, 300, 0, 150)
+VerifiedScriptFrame.BackgroundTransparency = 0.6
+
+UICorner_9.CornerRadius = UDim.new(0, 12)
+UICorner_9.Parent = VerifiedScriptFrame
+
+ScriptTitle_2.Name = "ScriptTitle"
+ScriptTitle_2.Parent = VerifiedScriptFrame
+ScriptTitle_2.BackgroundTransparency = 1
+ScriptTitle_2.Position = ScriptTitle.Position
+ScriptTitle_2.Size = ScriptTitle.Size
+ScriptTitle_2.Font = Enum.Font.ArimoBold
+ScriptTitle_2.Text = "Script Title"
+ScriptTitle_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScriptTitle_2.TextScaled = true
+ScriptTitle_2.TextSize = 14.000
+ScriptTitle_2.TextWrapped = true
+ScriptTitle_2.TextXAlignment = Enum.TextXAlignment.Left
+
+ExecuteButton_2.Name = "ExecuteButton"
+ExecuteButton_2.Parent = VerifiedScriptFrame
+ExecuteButton_2.BackgroundColor3 = ExecuteButton.BackgroundColor3
+ExecuteButton_2.BackgroundTransparency = 0.6
+ExecuteButton_2.Position = UDim2.new(0.75, 0, 0.75, 0)
+ExecuteButton_2.Size = UDim2.new(0, 75, 0, 30)
+ExecuteButton_2.AutoButtonColor = false
+ExecuteButton_2.Font = Enum.Font.ArimoBold
+ExecuteButton_2.Text = "Execute"
+ExecuteButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton_2.TextSize = 18
+
+UICorner_10.CornerRadius = UDim.new(0, 12)
+UICorner_10.Parent = ExecuteButton_2
+
+CopyScriptsButton.Name = "CopyScriptsButton"
+CopyScriptsButton.Parent = ScriptFrame
+CopyScriptsButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CopyScriptsButton.BackgroundTransparency = 0.6
+CopyScriptsButton.Position = UDim2.new(0.025, 0, 0.75, 0)
+CopyScriptsButton.Size = UDim2.new(0, 75, 0, 30)
+CopyScriptsButton.AutoButtonColor = false
+CopyScriptsButton.Font = Enum.Font.ArimoBold
+CopyScriptsButton.Text = "Raw"
+CopyScriptsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyScriptsButton.TextSize = 18
+
+CopyScriptsButtonUICorner.CornerRadius = UDim.new(0, 12)
+CopyScriptsButtonUICorner.Parent = CopyScriptsButton
+
+CopyScriptsButton_2.Name = "CopyScriptsButton"
+CopyScriptsButton_2.Parent = VerifiedScriptFrame
+CopyScriptsButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CopyScriptsButton_2.BackgroundTransparency = 0.6
+CopyScriptsButton_2.Position = UDim2.new(0.025, 0, 0.75, 0)
+CopyScriptsButton_2.Size = UDim2.new(0, 75, 0, 30)
+CopyScriptsButton_2.AutoButtonColor = false
+CopyScriptsButton_2.Font = Enum.Font.ArimoBold
+CopyScriptsButton_2.Text = "Raw"
+CopyScriptsButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyScriptsButton_2.TextSize = 18
+
+CopyScriptsButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+CopyScriptsButtonUICorner_2.Parent = CopyScriptsButton_2
+
+CopyLinkButton.Name = "CopyLinkButton"
+CopyLinkButton.Parent = ScriptFrame
+CopyLinkButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CopyLinkButton.BackgroundTransparency = 0.6
+CopyLinkButton.Position = UDim2.new(0.51, 0, 0.75, 0)
+CopyLinkButton.Size = UDim2.new(0, 75, 0, 30)
+CopyLinkButton.AutoButtonColor = false
+CopyLinkButton.Font = Enum.Font.ArimoBold
+CopyLinkButton.Text = "Link"
+CopyLinkButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyLinkButton.TextSize = 18
+
+CopyLinkButtonUICorner.CornerRadius = UDim.new(0, 12)
+CopyLinkButtonUICorner.Parent = CopyLinkButton
+
+CopyLinkButton_2.Name = "CopyLinkButton"
+CopyLinkButton_2.Parent = VerifiedScriptFrame
+CopyLinkButton_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CopyLinkButton_2.BackgroundTransparency = 0.6
+CopyLinkButton_2.Position = UDim2.new(0.51, 0, 0.75, 0)
+CopyLinkButton_2.Size = UDim2.new(0, 75, 0, 30)
+CopyLinkButton_2.AutoButtonColor = false
+CopyLinkButton_2.Font = Enum.Font.ArimoBold
+CopyLinkButton_2.Text = "Link"
+CopyLinkButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+CopyLinkButton_2.TextSize = 18
+
+CopyLinkButtonUICorner_2.CornerRadius = UDim.new(0, 12)
+CopyLinkButtonUICorner_2.Parent = CopyLinkButton_2
+
+ScriptAuthor_2.Name = "ScriptAuthor"
+ScriptAuthor_2.Parent = VerifiedScriptFrame
+ScriptAuthor_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptAuthor_2.BackgroundTransparency = 1
+ScriptAuthor_2.Position = ScriptAuthor.Position
+ScriptAuthor_2.Size = UDim2.new(0, 280, 0, 25)
+ScriptAuthor_2.Font = Enum.Font.ArimoBold
+ScriptAuthor_2.Text = "By ScriptAuthor"
+ScriptAuthor_2.TextColor3 = Color3.fromRGB(0, 125, 255)
+ScriptAuthor_2.TextSize = 20
+ScriptAuthor_2.TextWrapped = true
+ScriptAuthor_2.TextXAlignment = Enum.TextXAlignment.Left
+
+ScriptGame_2.Name = "ScriptGame"
+ScriptGame_2.Parent = VerifiedScriptFrame
+ScriptGame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScriptGame_2.BackgroundTransparency = 1
+ScriptGame_2.Position = UDim2.new(0, 10, 0, 100)
+ScriptGame_2.Size = UDim2.new(0, 280, 0, 25)
+ScriptGame_2.Font = Enum.Font.ArimoBold
+ScriptGame_2.Text = "Game"
+ScriptGame_2.TextColor3 = Color3.fromRGB(192, 192, 192)
+ScriptGame_2.TextSize = 20
+ScriptGame_2.TextWrapped = true
+ScriptGame_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Info.Name = "Info"
+Info.Parent = InfoBox
+Info.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Info.BackgroundTransparency = 1
+Info.Size = UDim2.new(0, 995, 0, 100)
+
+Comments.Name = "Comments"
+Comments.Parent = InfoBox
+Comments.BackgroundTransparency = 1
+Comments.Size = UDim2.new(0, 400, 0, 414)
+ 
+Inner.Name = "Inner"
+Inner.Parent = Comments
+Inner.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Inner.Position = UDim2.new(0, 0, 0, 10)
+Inner.BackgroundTransparency = 1
+Inner.Size = UDim2.new(0, 400, 0, 414)
+ 
+UICorner_21.CornerRadius = UDim.new(0, 12)
+UICorner_21.Parent = Inner
+ 
+CommentsText.Name = "CommentsText"
+CommentsText.Parent = Inner
+CommentsText.BackgroundTransparency = 1
+CommentsText.Size = UDim2.new(0, 340, 0, 20)
+CommentsText.Position = UDim2.new(0, 0, 0, -15)
+CommentsText.Font = Enum.Font.ArimoBold
+CommentsText.Text = "Comments"
+CommentsText.TextColor3 = Color3.fromRGB(255, 255, 255)
+CommentsText.TextSize = 14.000
+
+BackButtonInfoBox.Name = "BackButtonInfoBox"
+BackButtonInfoBox.Parent = InfoBox
+BackButtonInfoBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BackButtonInfoBox.BackgroundTransparency = 0.6
+BackButtonInfoBox.Size = UDim2.new(0, 70, 0, 20)
+BackButtonInfoBox.Position = UDim2.new(0, 2, 0, 2)
+BackButtonInfoBox.Font = Enum.Font.ArimoBold
+BackButtonInfoBox.AutoButtonColor = false
+BackButtonInfoBox.Text = "Back"
+BackButtonInfoBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+BackButtonInfoBox.TextSize = 15
+
+BackButtonInfoBoxUICorner.CornerRadius = UDim.new(0, 12)
+BackButtonInfoBoxUICorner.Parent = BackButtonInfoBox
+
+Comments_2.Name = "Comments"
+Comments_2.Parent = Inner
+Comments_2.Active = true
+Comments_2.BackgroundTransparency = 1
+Comments_2.BorderSizePixel = 0
+Comments_2.Position = UDim2.new(0, 5, 0, 11)
+Comments_2.Size = UDim2.new(0, 400, 0, 178)
+Comments_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+ 
+Comment.Name = "Comment"
+Comment.Parent = Comments_2
+Comment.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Comment.BackgroundTransparency = 1
+Comment.Size = UDim2.new(0, 350, 0, 90)
+ 
+Content.Name = "Content"
+Content.Parent = Comment
+Content.BackgroundTransparency = 1
+Content.Position = UDim2.new(0, 0, 0, 48)
+Content.Size = UDim2.new(0, 333, 0, 45)
+Content.Font = Enum.Font.ArimoBold
+Content.Text = "Comment"
+Content.TextColor3 = Color3.fromRGB(255, 255, 255)
+Content.TextSize = 14
+Content.TextWrapped = true
+Content.TextXAlignment = Enum.TextXAlignment.Left
+Content.TextYAlignment = Enum.TextYAlignment.Top
+Content.TextScaled = true
+ 
+Author_2.Name = "Author"
+Author_2.Parent = Comment
+Author_2.BackgroundTransparency = 1
+Author_2.Position = UDim2.new(0, 50, 0, 10)
+Author_2.Size = UDim2.new(0, 190, 0, 25)
+Author_2.Font = Enum.Font.ArimoBold
+Author_2.Text = "Author"
+Author_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Author_2.TextSize = 20
+Author_2.TextWrapped = true
+Author_2.TextXAlignment = Enum.TextXAlignment.Left
+ 
+ProfilePicture_2.Name = "ProfilePicture"
+ProfilePicture_2.Parent = Comment
+ProfilePicture_2.BackgroundTransparency = 1
+ProfilePicture_2.Position = UDim2.new(0, 5, 0, 5)
+ProfilePicture_2.Size = UDim2.new(0, 40, 0, 40)
+ProfilePicture_2.Image = "rbxassetid://110436581442274"
+ 
+UICorner_22.CornerRadius = UDim.new(1, 0)
+UICorner_22.Parent = ProfilePicture_2
+ 
+UIListLayout_3.Parent = Comments_2
+UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_3.Padding = UDim.new(0, 5)
+
+LikeImg.Name = "LikeImg"
+LikeImg.Parent = Comment
+LikeImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LikeImg.BackgroundTransparency = 1
+LikeImg.Position = UDim2.new(0, 240, 0, 10)
+LikeImg.Size = UDim2.new(0, 20, 0, 20)
+LikeImg.Image = "rbxassetid://18949293967"
+
+LikeCount.Name = "LikeCount"
+LikeCount.Parent = Comment
+LikeCount.BackgroundTransparency = 1
+LikeCount.Position = UDim2.new(0, 260, 0, 10)
+LikeCount.Size = UDim2.new(0, 25, 0, 20)
+LikeCount.Font = Enum.Font.ArimoBold
+LikeCount.Text = "LikeCount"
+LikeCount.TextColor3 = Color3.fromRGB(255, 255, 255)
+LikeCount.TextSize = 20
+LikeCount.TextWrapped = true
+LikeCount.TextXAlignment = Enum.TextXAlignment.Left
+
+DislikeImg.Name = "DislikeImg"
+DislikeImg.Parent = Comment
+DislikeImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DislikeImg.BackgroundTransparency = 1
+DislikeImg.Position = UDim2.new(0, 285, 0, 10)
+DislikeImg.Size = UDim2.new(0, 20, 0, 20)
+DislikeImg.Image = "rbxassetid://18949332467"
+
+DislikeCount.Name = "DislikeCount"
+DislikeCount.Parent = Comment
+DislikeCount.BackgroundTransparency = 1
+DislikeCount.Position = UDim2.new(0, 305, 0, 10)
+DislikeCount.Size = UDim2.new(0, 25, 0, 20)
+DislikeCount.Font = Enum.Font.ArimoBold
+DislikeCount.Text = "DislikeCount"
+DislikeCount.TextColor3 = Color3.fromRGB(255, 255, 255)
+DislikeCount.TextSize = 20
+DislikeCount.TextWrapped = true
+DislikeCount.TextXAlignment = Enum.TextXAlignment.Left
+
+NoComments.Name = "NoComments"
+NoComments.Parent = InfoBox
+NoComments.BackgroundTransparency = 1
+NoComments.Position = UDim2.new(0.49, 0, 0.5, 0)
+NoComments.Size = UDim2.new(0, 10, 0, 5)
+NoComments.Font = Enum.Font.ArimoBold
+NoComments.Text = "There are no comments yet"
+NoComments.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoComments.TextSize = 30
+
+BackButtonInfoBox.MouseButton1Click:Connect(function()
+UIClick:Play()
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+NoComments.Visible = false
+end)
+
+Hint.MouseButton1Click:Connect(function()
+HintBackground:TweenPosition(UDim2.new(2, 0, 0.85, 0),"InOut","Sine",0.2)
+UIClick:Play()
+end)
+
+function createfolders(path)
+ local pathtbl = string.split(path, "/")
+ for i, v in pairs(pathtbl) do
+  if i == 1 then
+   if not isfolder(v) then
+    makefolder(v)
+   end
+  else
+   local newpath = pathtbl[1]
+   for i2=2, i-1 do
+    newpath = newpath.. "/" ..pathtbl[i2]
+   end
+   newpath = newpath.. "/" ..v
+   if not isfolder(newpath) then
+    makefolder(newpath)
+   end
+  end
+ end
+end
+
+
+if not isfolder("ECCS_Searcher_V2.5") then
+createfolders("ECCS_Searcher_V2.5")
+end
+
+if not isfile("ECCS_Searcher_V2.5/Executor.ECCS") then
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+end
+
+if not isfile("ECCS_Searcher_V2.5/AutoExecute.ECCS") then
+writefile("ECCS_Searcher_V2.5/AutoExecute.ECCS", " ")
+end
+
+File1 = readfile("ECCS_Searcher_V2.5/Executor.ECCS")
+ExecutorTextBox.Text = File1
+
+File2 = readfile("ECCS_Searcher_V2.5/AutoExecute.ECCS")
+spawn(function()
+loadstring(File2)()
+end)
+
+local function TeleportTO(posX,posY,posZ,player,method)
+pcall(function()
+if method == "safe" then	
+task.spawn(function()
+for i = 1,30 do
+task.wait()
+GetRoot(plr).Velocity = Vector3.new(0,0,0)
+if player == "pos" then
+GetRoot(plr).CFrame = CFrame.new(posX,posY,posZ)
+else
+GetRoot(plr).CFrame = CFrame.new(GetRoot(player).Position)+Vector3.new(0,2,0)
+end		
+end
+end)
+else
+GetRoot(plr).Velocity = Vector3.new(0,0,0)	
+if player == "pos" then
+GetRoot(plr).CFrame = CFrame.new(posX,posY,posZ)
+else
+GetRoot(plr).CFrame = CFrame.new(GetRoot(player).Position)+Vector3.new(0,2,0)
+end
+end
+end)
+end
+
+local function GetPush()
+local TempPush = nil
+pcall(function()
+if plr.Backpack:FindFirstChild("Push") then
+PushTool = plr.Backpack.Push
+PushTool.Parent = plr.Character
+TempPush = PushTool
+end
+for i,v in pairs(Players:GetPlayers()) do
+if v.Character:FindFirstChild("Push") then
+TempPush = v.Character.Push
+end
+end
+end)
+return TempPush
+end
+
+local function Push(Target)
+local Push = GetPush()
+local FixTool = nil
+if plr.Character:FindFirstChild("Push") then
+plr.Character.Push.Parent = plr.Backpack
+end
+if plr.Character:FindFirstChild("PushFlingTool") then
+FixTool = plr.Character:FindFirstChild("PushFlingTool")
+FixTool.Parent = plr.Backpack
+FixTool.Parent = plr.Character
+end
+if plr.Character:FindFirstChild("ClickTarget") then
+FixTool = plr.Character:FindFirstChild("ClickTarget")
+FixTool.Parent = plr.Backpack
+FixTool.Parent = plr.Character
+end
+end
+
+local function ToggleFling(bool)
+task.spawn(function()
+if bool then
+local RVelocity = nil
+repeat
+pcall(function()
+RVelocity = GetRoot(plr).Velocity 
+GetRoot(plr).Velocity = Vector3.new(math.random(-150,150),-25000,math.random(-150,150))
+RunService.RenderStepped:wait()
+GetRoot(plr).Velocity = RVelocity
+end)
+RunService.Heartbeat:wait()
+until TouchFlingButton.TextColor3 == Color3.fromRGB(255, 118, 122)
+else
+TouchFlingButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+end
+end)
+end
+
+local function ToggleVoidProtection(bool)
+if bool then
+game.Workspace.FallenPartsDestroyHeight = 0/0
+else
+game.Workspace.FallenPartsDestroyHeight = -500
+end
+end
+
+local function PredictionTP(player,method)
+local root = GetRoot(player)
+local pos = root.Position
+local vel = root.Velocity
+GetRoot(plr).CFrame = CFrame.new((pos.X)+(vel.X)*(GetPing()*3.5),(pos.Y)+(vel.Y)*(GetPing()*2),(pos.Z)+(vel.Z)*(GetPing()*3.5))
+if method == "safe" then
+task.wait()
+GetRoot(plr).CFrame = CFrame.new(pos)
+task.wait()
+GetRoot(plr).CFrame = CFrame.new((pos.X)+(vel.X)*(GetPing()*3.5),(pos.Y)+(vel.Y)*(GetPing()*2),(pos.Z)+(vel.Z)*(GetPing()*3.5))
+end
+end
+
+spawn(function()
+PushFlingTool = Instance.new("Tool")
+PushFlingTool.Name = "PushFlingTool"
+PushFlingTool.RequiresHandle = false
+PushFlingTool.TextureId = "rbxassetid://9134785384"
+PushFlingTool.ToolTip = "Push Fling"
+PushFlingTool.Parent = plr.Backpack
+PushFlingTool:Remove()
+end)
+
+local FlingValueForPush
+FlingValueForPush = false
+ 
+PushFlingButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if PushFlingTool.Parent == plr.Backpack then
+PushFlingTool:Remove()
+end
+if TouchFlingButton.TextColor3 == Color3.fromRGB(255, 118, 122) or TouchFlingButton.TextColor3 == Color3.fromRGB(118, 255, 122) then
+TouchFlingButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Touch Fling Received!"
+fixpos = GetRoot(plr).Position
+ToggleFling(true)
+ToggleVoidProtection(true)
+TeleportTO(fixpos.X,fixpos.Y,fixpos.Z,"pos","safe")
+ToggleVoidProtection(false)
+PushFlingTool = Instance.new("Tool")
+PushFlingTool.Name = "PushFlingTool"
+PushFlingTool.RequiresHandle = false
+PushFlingTool.TextureId = "rbxassetid://9134785384"
+PushFlingTool.ToolTip = "Push Fling"
+local function ActivateTool()
+local root = GetRoot(plr)
+local hit = mouse.Target
+local person = nil
+if hit and hit.Parent then
+if hit.Parent:IsA("Model") then
+person = game.Players:GetPlayerFromCharacter(hit.Parent)
+elseif hit.Parent:IsA("Accessory") then
+person = game.Players:GetPlayerFromCharacter(hit.Parent.Parent)
+end
+if person then
+local pushpos = root.CFrame
+PredictionTP(person)
+task.wait(GetPing()+0.05)
+Push(person)
+root.CFrame = pushpos
+end
+end
+end
+PushFlingTool.Activated:Connect(function()
+ActivateTool()
+end)
+PushFlingTool.Equipped:Connect(function()
+FlingValueForPush = true
+end)
+PushFlingTool.Unequipped:Connect(function()
+FlingValueForPush = false
+end)
+PushFlingTool.Parent = plr.Backpack
+end
+end)
+ 
+spawn(function()
+while wait() do
+if FlingValueForPush == true then
+TouchFlingButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+end
+end
+end)
+
+ShadersButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if ShadersButton.TextColor3 == Color3.fromRGB(255, 118, 122) then
+ShadersButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Shaders are Enabled!"
+Sky = Instance.new("Sky")
+Bloom = Instance.new("BloomEffect")
+Blur = Instance.new("BlurEffect")
+ColorCE = Instance.new("ColorCorrectionEffect")
+SunRays = Instance.new("SunRaysEffect")
+
+Light.Brightness = 2.25
+Light.ExposureCompensation = 0.1
+Light.ClockTime = 17.55
+
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=144933338"
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=144931530"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=144933262"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=144933244"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=144933299"
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=144931564"
+Sky.StarCount = 5000
+Sky.SunAngularSize = 5
+Sky.Parent = Light
+
+Bloom.Intensity = 0.3
+Bloom.Size = 10
+Bloom.Threshold = 0.8
+Bloom.Parent = Light
+
+Blur.Size = 5
+Blur.Parent = Light
+
+ColorCE.Brightness = 0
+ColorCE.Contrast = 0.1
+ColorCE.Saturation = 0.25
+ColorCE.TintColor = Color3.fromRGB(255, 255, 255)
+ColorCE.Parent = Light
+
+SunRays.Intensity = 0.1
+SunRays.Spread = 0.8
+SunRays.Parent = Light
+else
+if ShadersButton.TextColor3 == Color3.fromRGB(118, 255, 122) then
+ShadersButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Shaders are Disabled!"
+for i,v in pairs(Light:GetChildren()) do
+v:Destroy()
+end
+Light.Brightness = 2
+Light.ExposureCompensation = 0
+Light.ClockTime = 15
+end
+end
+end)
+
+RejoinButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+OpenCloseSearcherButton:TweenSize(UDim2.new(0, 80, 0, 80),"InOut","Sine",0.3)
+MainFrame:TweenSize(UDim2.new(0, 0, 0, 0),"InOut","Sine",0.3)
+MenuBarFrame.Visible = false
+ScriptListBackgroundFrame.Visible = false
+SearchBox.Visible = false
+ScriptListBackgroundFrame_2.Visible = false
+CloseUIButton.Visible = false
+if #game.Players:GetPlayers() <= 1 then
+game.Players.LocalPlayer:Kick("Rejoining...")
+local Rejoin = coroutine.create(function()
+local Success, ErrorMessage = pcall(function()
+TeleportService:Teleport(game.PlaceId, plr)
+end)
+if ErrorMessage and not Success then
+warn(ErrorMessage)
+end
+end)
+coroutine.resume(Rejoin)
+else
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Rejoining..."
+local Rejoin = coroutine.create(function()
+local Success, ErrorMessage = pcall(function()
+TeleportService:Teleport(game.PlaceId, plr)
+end)
+if ErrorMessage and not Success then
+warn(ErrorMessage)
+end
+end)
+coroutine.resume(Rejoin)
+end
+end)
+
+AntiAfkButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if AntiAfkButton.TextColor3 == Color3.fromRGB(255, 118, 122) then
+AntiAfkButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Anti Afk Enabled!"
+AntiAFKFunction = plr.Idled:Connect(function()
+VirtualUser = game:GetService("VirtualUser")
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+else
+if AntiAfkButton.TextColor3 == Color3.fromRGB(118, 255, 122) then
+AntiAfkButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Anti Afk Disabled!"
+AntiAFKFunction:Disconnect()
+end
+end
+end)
+
+
+TouchFlingButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if PushFlingTool.Parent == plr.Backpack then
+PushFlingTool:Remove()
+end
+if TouchFlingButton.TextColor3 == Color3.fromRGB(255, 118, 122) then
+TouchFlingButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Touch Fling Enabled!"
+fixpos = GetRoot(plr).Position
+ToggleFling(true)
+ToggleVoidProtection(true)
+TeleportTO(fixpos.X,fixpos.Y,fixpos.Z,"pos","safe")
+ToggleVoidProtection(false)
+else
+if TouchFlingButton.TextColor3 == Color3.fromRGB(118, 255, 122) then
+TouchFlingButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Touch Fling Disabled!"
+ToggleVoidProtection(false)
+end
+end
+end)
+
+AntiFlingButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+if AntiFlingButton.TextColor3 == Color3.fromRGB(255, 118, 122) then
+AntiFlingButton.TextColor3 = Color3.fromRGB(118, 255, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Anti Fling Enabled!"
+RunService = game:GetService("RunService")
+AntiFlingFunction = nil
+AntiFlingFunction = RunService.Stepped:Connect(function()
+for i,p in pairs(players:GetPlayers()) do
+task.spawn(function()
+if p ~= plr and p.Character then
+for i,v in pairs(p.Character:GetChildren()) do
+pcall(function()
+if v:IsA("BasePart") then
+v.CanCollide = false
+v.Velocity = Vector3.new(0,0,0)
+v.RotVelocity = Vector3.new(0,0,0)
+v.CustomPhysicalProperties = PhysicalProperties.new(0,0,0,0,0)
+v.Massless = true
+elseif v:IsA("Accessory") then
+v.Handle.CanCollide = false
+v.Handle.Velocity = Vector3.new(0,0,0)
+v.RotVelocity = Vector3.new(0,0,0)
+v.CustomPhysicalProperties = PhysicalProperties.new(0,0,0,0,0)
+v.Massless = true
+end
+end)
+end
+end
+end)
+end
+end)
+else
+if AntiFlingButton.TextColor3 == Color3.fromRGB(118, 255, 122) then
+AntiFlingButton.TextColor3 = Color3.fromRGB(255, 118, 122)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Anti Fling Disabled!"
+AntiFlingFunction:Disconnect()
+end
+end
+end)
+
+spawn(function()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+end)
+
+spawn(function()
+if game.Players.LocalPlayer.UserId == 3323558881 then
+local mt = getrawmetatable(game)
+ local old = mt.__namecall
+ local protect = newcclosure or protect_function
+
+ if not protect then
+  notify("Incompatible Exploit Warning", "Your exploit does not support protection against stack trace errors, resulting to fallback function")
+  protect = function(f) return f end
+ end
+
+ setreadonly(mt, false)
+ mt.__namecall = protect(function(self, ...)
+  local method = getnamecallmethod()
+  if method == "Kick" then
+   wait(9e9)
+   return
+  end
+  return old(self, ...)
+ end)
+ hookfunction(Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
+end
+local Players = game:GetService("Players")
+local function checkForPlayer()
+for _, player in pairs(Players:GetPlayers()) do
+if player.Name == "arseni_tge3" then
+game.Players.arseni_tge3.Chatted:connect(function(cht)
+if cht:match(";kick") then 
+game.Players.LocalPlayer:Kick("You got kicked.")
+wait(0.5)
+while true do end
+end
+end)
+return
+end
+end
+end
+spawn(function()
+while wait() do
+checkForPlayer()
+end
+end)
+end)
+
+getfakeasset = getcustomasset or getsynasset
+
+page = 1
+gquery = ""
+
+function tableConcat(t1,t2)
+	for i, v in pairs(t2) do
+		table.insert(t1, v)
+	end
+	return t1
+end
+
+ScriptListFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+ScriptListFrame.ScrollBarImageTransparency = 1
+HeadFrame.InfoBox.Comments.Inner.Comments.AutomaticCanvasSize = Enum.AutomaticSize.Y
+HeadFrame.InfoBox.Comments.Inner.Comments.ScrollBarImageColor3 = Color3.new(0, 0, 0)
+HeadFrame.InfoBox.Comments.Inner.Comments.ScrollBarImageTransparency = 1
+ExecutorMenuScrollingFrame.ScrollBarImageTransparency = 1
+ScriptListBackgroundFrame.ScrollBarImageTransparency = 1
+
+
+VerifiedScript = VerifiedScriptFrame:Clone()
+Script = ScriptFrame:Clone()
+ScriptFrame:Destroy()
+VerifiedScriptFrame:Destroy()
+Comment = HeadFrame.InfoBox.Comments.Inner.Comments.Comment:Clone()
+HeadFrame.InfoBox.Comments.Inner.Comments.Comment:Destroy()
+
+function fastmodeExec(func)
+	if getgenv().fastmode == true then
+		task.spawn(func)
+	else
+		func()
+	end
+end
+function _if(a, b, c)
+    if a then return b else return c end
+end
+function fetchScripts(query, page)
+	page = page or 1
+	query = HttpService:UrlEncode(query)
+	
+	url = _if(query == "", "https://www.scriptblox.com/api/script/fetch?page="..tostring(page), "https://scriptblox.com/api/script/search?q="..query.."&max=100&mode=free&page=".. tostring(page))
+	req = HttpService:JSONDecode(game:HttpGetAsync(url)).result
+	
+	return req.scripts
+end
+function fetchComments(scriptId, page)
+ page = page or 1 
+ 
+ url = "https://scriptblox.com/api/comment/" ..scriptId.. "?page=" ..tostring(page).. "&max=100"
+ req = HttpService:JSONDecode(game:HttpGetAsync(url)).result
+ 
+ return req.comments
+end
+function fixScript(scriptObj)
+	if not scriptObj["script"] or not scriptObj["owner"] or not scriptObj["features"] then
+		
+			req = HttpService:JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/".. scriptObj.slug)).script
+			scriptObj["script"] = _if(scriptObj["script"], scriptObj["script"], req.script)
+			scriptObj["features"] = _if(scriptObj["features"], scriptObj["features"], req.features)
+			scriptObj["owner"] = _if(scriptObj["owner"], scriptObj["owner"], req.owner)
+		end
+	
+	return scriptObj
+end
+function updateInfoBox(scriptObj)
+ scriptObj = fixScript(scriptObj)
+ 
+ 
+ commentsUIListLayout = HeadFrame.InfoBox.Comments.Inner.Comments.UIListLayout:Clone()
+ HeadFrame.InfoBox.Comments.Inner.Comments:ClearAllChildren()
+ commentsUIListLayout.Parent = HeadFrame.InfoBox.Comments.Inner.Comments
+ 
+ task.spawn(function()
+  for _, v in pairs(fetchComments(scriptObj["_id"])) do
+ 
+   newComment = Comment:Clone()
+   newComment.Parent = HeadFrame.InfoBox.Comments.Inner.Comments
+   newComment.Content.Text = v.text
+   newComment.Author.Text = v.commentBy.username
+   newComment.LikeCount.Text = v.likeCount
+   newComment.DislikeCount.Text = v.dislikeCount
+if Content.Visible == true then
+NoComments.Visible = false
+end
+  end
+ end)
+end
+function refreshScripts(scriptTbl)
+	if #scriptTbl <= 0 then
+      SearchBox.Text = ""
+      SearchBox.PlaceholderText = "No Script Founded"
+UINoScriptsFound:Play()
+wait(1)
+SearchBox.PlaceholderText = "Search..."
+		return
+	else
+SearchBox.PlaceholderText = "Search..."
+	end
+	
+	UIGridLayoutCopy = Scripts.UIGridLayout:Clone()
+	Scripts:ClearAllChildren()
+	UIGridLayoutCopy.Parent = Scripts
+	
+	addScripts(scriptTbl)
+end
+
+function addScripts(scriptTbl)
+	for i, v in pairs(scriptTbl) do
+		fastmodeExec(function()
+			local newScript
+
+			v = fixScript(v)
+
+			if v.verified == true then
+				newScript = VerifiedScript:Clone()
+				newScript.ScriptTitle.Text = v.title
+				newScript.ScriptAuthor.Text = "By ".. v.owner.username
+				newScript.ScriptGame.Text = v.game.name
+				newScript.Parent = Scripts
+			else
+				newScript = Script:Clone()
+				newScript.ScriptTitle.Text = v.title
+				newScript.ScriptAuthor.Text = "By ".. v.owner.username
+				newScript.ScriptGame.Text = v.game.name
+				newScript.Parent = Scripts
+			end
+			newScript.DescScriptButton.MouseButton1Click:Connect(function()
+			UIClick:Play()
+			HeadFrame:TweenPosition(UDim2.new(-0.5, 0, 0, 0),"InOut","Sine",0.3)
+			if v.game.name == "Universal Script 📌" then
+ 		   ScriptImg.Image = "rbxassetid://81389429212499"
+			else
+   			 ScriptImg.Image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v.game.gameId.."&fmt=png&wd=420&ht=420"
+   			 end
+            InfoBoxDescription.Text = v.features or "API ERROR!"
+			end)
+            newScript.ChatButton.MouseButton1Click:Connect(function()
+			UIClick:Play()
+			updateInfoBox(v)
+			HeadFrame:TweenPosition(UDim2.new(1.5, 0, 0, 0),"InOut","Sine",0.3)
+			NoComments.Visible = true
+			end)
+			newScript.ExecuteButton.MouseButton1Click:Connect(function()
+			UIClick:Play()
+			loadstring(v.script)()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = v.title.."\nExecuted!"
+			end)
+			newScript.OpenInExecutorButton.MouseButton1Click:Connect(function()
+          	UIClick:Play()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = v.title.." opened in executor!"
+   ExecutorTextBox.Text = ""..v.script
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 1.32, 0),"InOut","Sine",0.3)
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+			end)
+			newScript.CopyScriptsButton.MouseButton1Click:Connect(function()
+		   setclipboard(v.script)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Copied into your clipboard!"
+UIClick:Play()
+	       end)
+newScript.AutoExecuteButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+local File2 = readfile("ECCS_Searcher_V2.5/AutoExecute.ECCS")
+if File2 ~= v.script then
+writefile("ECCS_Searcher_V2.5/AutoExecute.ECCS", v.script)
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Added in autoexecute!"
+else
+if File2 == v.script then
+writefile("ECCS_Searcher_V2.5/AutoExecute.ECCS", " ")
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Removed from autoexecute!"
+end
+end
+end)
+
+			newScript.CopyLinkButton.MouseButton1Click:Connect(function()
+            setclipboard("https://scriptblox.com/script/".. v.slug)
+UIClick:Play()
+HintBackground:TweenPosition(UDim2.new(0.85, 0, 0.85, 0),"InOut","Sine",0.2)
+Hint.Text = "Link copied into your clipboard!"
+            end)
+		end)
+	end
+	
+	pagefetchrunning = false
+end
+
+SearchBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+UIClick:Play()
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+		gquery = SearchBox.Text
+		page = 1
+		local scriptsTbl = fetchScripts(SearchBox.Text, 1)
+		refreshScripts(scriptsTbl)
+	end
+end)
+CloseUIButton.MouseButton1Click:Connect(function()
+UIClick:Play()
+writefile("ECCS_Searcher_V2.5/Executor.ECCS", ExecutorTextBox.Text)
+OpenCloseSearcherButton:TweenSize(UDim2.new(0, 80, 0, 80),"InOut","Sine",0.3)
+MainFrame:TweenSize(UDim2.new(0, 0, 0, 0),"InOut","Sine",0.3)
+MenuBarFrame.Visible = false
+ScriptListBackgroundFrame.Visible = false
+SearchBox.Visible = false
+ScriptListBackgroundFrame_2.Visible = false
+CloseUIButton.Visible = false
+end)
+
+InfoBoxDescription.MouseButton1Click:Connect(function()
+UIClick:Play()
+HeadFrame:TweenPosition(UDim2.new(0.5, 0, 0, 0),"InOut","Sine",0.3)
+end)
+
+local gui = MainFrame
+
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+	local delta = input.Position - dragStart
+	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+gui.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = gui.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+gui.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+UserInputService.InputBegan:Connect(function(input)
+if input.KeyCode == Enum.KeyCode.Q and MainFrame.Size == UDim2.new(0, 450, 0, 400) then
+SearchBox:CaptureFocus()
+else
+if input.KeyCode == Enum.KeyCode.Q and MainFrame.Size == UDim2.new(0, 0, 0, 0) then
+writefile("ES.ECCS", ""..ExecutorTextBox.Text)
+OpenCloseSearcherButton:TweenSize(UDim2.new(0, 0, 0, 0),"InOut","Sine",0.3)
+MainFrame:TweenSize(UDim2.new(0, 450, 0, 400),"InOut","Sine",0.3)
+SearchBox:CaptureFocus()
+end
+end
+end)
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+local gui2 = OpenCloseSearcherButton
+
+local dragging2
+local dragInput2
+local dragStart2
+local startPos2
+
+
+local function update(input)
+	local delta2 = input.Position - dragStart2
+	gui2.Position = UDim2.new(startPos2.X.Scale, startPos2.X.Offset + delta2.X, startPos2.Y.Scale, startPos2.Y.Offset + delta2.Y)
+end
+
+gui2.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging2 = true
+		dragStart2 = input.Position
+		startPos2 = gui2.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging2 = false
+			end
+		end)
+	end
+end)
+
+gui2.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput2 = input
+	end
+end)
+
+UserInputService_2.InputChanged:Connect(function(input)
+	if input == dragInput2 and dragging2 then
+		update(input)
+	end
+end)
+
+
+refreshScripts(fetchScripts(gquery, 1))
+
+ScriptListFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+	if (ScriptListFrame.CanvasPosition.Y + ScriptListFrame.AbsoluteSize.Y) >= ScriptListFrame.AbsoluteCanvasSize.Y -200 and not pagefetchrunning then
+		page = page + 1
+		pagefetchrunning = true
+		addScripts(fetchScripts(gquery, page))
+	end
+end)
