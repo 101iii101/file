@@ -1,0 +1,123 @@
+function RequestAskDialog(title,message,button1,button2,script1,script2)
+ local DialogGui = Instance.new("ScreenGui")
+ local DialogFrame = Instance.new("Frame")
+ local DialogFrame2 = Instance.new("Frame")
+ local DialogLine = Instance.new("Frame")
+ local DialogTitle = Instance.new("TextLabel")
+ local DialogMessage = Instance.new("TextLabel")
+ local DialogButton1 = Instance.new("TextButton")
+ local DialogButton2 = Instance.new("TextButton")
+ local DialogUICorner = Instance.new("UICorner")
+ local DialogUIStroke = Instance.new("UIStroke")
+
+ DialogGui.Parent = game.CoreGui
+
+ DialogFrame.Parent = DialogGui
+ DialogFrame.BackgroundColor3 = Color3.new(0,0,0)
+ DialogFrame.Transparency = 0.5
+ DialogFrame.BorderColor3 = Color3.new(1,1,1)
+ DialogFrame.BorderSizePixel = 0
+ DialogFrame.Position = UDim2.new(0,0,-0.2)
+ DialogFrame.Size = UDim2.new(1,0,1.2)
+ DialogFrame.Active = true
+ DialogFrame.Draggable = false
+
+ DialogFrame2.Parent = DialogFrame
+ DialogFrame2.BackgroundColor3 = Color3.new(0,0,0)
+ DialogFrame2.BorderColor3 = Color3.new(1,1,1)
+ DialogFrame2.BorderSizePixel = 0
+ DialogFrame2.Position = UDim2.new(0.35,0,0.35)
+ DialogFrame2.Size = UDim2.new(0.33,0,0.35)
+ DialogFrame2.Active = true
+ DialogFrame2.Draggable = false
+
+ DialogUICorner.CornerRadius = UDim.new(0.05, 0)
+ DialogUICorner.Parent = DialogFrame2
+ 
+ DialogUIStroke.Parent = DialogFrame2
+ DialogUIStroke.Color = Color3.fromRGB(242,243,243)
+ DialogUIStroke.Thickness = 1
+
+ DialogLine.Parent = DialogFrame2
+ DialogLine.BackgroundColor3 = Color3.new(1,1,1)
+ DialogLine.BorderColor3 = Color3.new(1,1,1)
+ DialogLine.BorderSizePixel = 2
+ DialogLine.Position = UDim2.new(0.1,0,0.26)
+ DialogLine.Size = UDim2.new(0.78,0,0.0000001)
+ DialogLine.Active = true
+
+ DialogTitle.Parent = DialogFrame2
+ DialogTitle.BackgroundColor3 = Color3.fromRGB(35,35,35)
+ DialogTitle.BackgroundTransparency = 1
+ DialogTitle.Position = UDim2.new(0.1,0,0.05)
+ DialogTitle.Text = ""
+ DialogTitle.TextColor3 = Color3.new(1,1,1)
+ DialogTitle.Size = UDim2.new(0.8,0,0.15)
+ DialogTitle.FontSize = Enum.FontSize.Size14
+ DialogTitle.TextScaled = true
+ DialogTitle.TextSize = 16
+ DialogTitle.TextWrapped = true
+
+ DialogMessage.Parent = DialogFrame2
+ DialogMessage.BackgroundColor3 = Color3.new(1,1,1)
+ DialogMessage.BackgroundTransparency = 1
+ DialogMessage.Position = UDim2.new(0.1,0,0.25)
+ DialogMessage.Text = ""
+ DialogMessage.TextColor3 = Color3.new(1,1,1)
+ DialogMessage.Size = UDim2.new(0.79,0,0.4)
+ DialogMessage.FontSize = Enum.FontSize.Size14
+ DialogMessage.TextScaled = false
+ DialogMessage.TextSize = 10
+ DialogMessage.TextWrapped = true
+
+ DialogButton1.Parent = DialogFrame2
+ DialogButton1.BackgroundColor3 = Color3.new(0,0,0)
+ DialogButton1.BorderColor3 = Color3.new(1,1,1)
+ DialogButton1.BorderSizePixel = 1
+ DialogButton1.BackgroundTransparency = 0
+ DialogButton1.Position = UDim2.new(0.1,0,0.65)
+ DialogButton1.Text = ""
+ DialogButton1.TextColor3 = Color3.new(1,1,1)
+ DialogButton1.Size = UDim2.new(0.37,0,0.2)
+ DialogButton1.FontSize = Enum.FontSize.Size14
+ DialogButton1.TextScaled = false
+ DialogButton1.TextSize = 12
+ DialogButton1.TextWrapped = true
+
+ DialogButton2.Parent = DialogFrame2
+ DialogButton2.BackgroundColor3 = Color3.new(0,0,0)
+ DialogButton2.BorderColor3 = Color3.new(1,1,1)
+ DialogButton2.BorderSizePixel = 1
+ DialogButton2.BackgroundTransparency = 0
+ DialogButton2.Position = UDim2.new(0.52,0,0.65)
+ DialogButton2.Text = ""
+ DialogButton2.TextColor3 = Color3.new(1,1,1)
+ DialogButton2.Size = UDim2.new(0.37,0,0.2)
+ DialogButton2.FontSize = Enum.FontSize.Size14
+ DialogButton2.TextScaled = false
+ DialogButton2.TextSize = 12
+ DialogButton2.TextWrapped = true
+
+ DialogButton1.MouseButton1Click:connect(function()
+ DialogGui:Destroy()
+ loadstring(script1)()
+ end)
+
+ DialogButton2.MouseButton1Click:connect(function()
+ DialogGui:Destroy()
+ loadstring(script2)()
+ end)
+ 
+ if title then
+   DialogTitle.Text = ""..title
+ end
+ if message then
+   DialogMessage.Text = ""..message
+ end
+ if button1 then
+   DialogButton1.Text = ""..button1
+ end
+ if button2 then
+   DialogButton2.Text = ""..button2
+ end
+end
