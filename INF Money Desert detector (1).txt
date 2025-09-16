@@ -1,0 +1,29 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+local giveQuestEvent = replicatedStorage:WaitForChild("Give_Quest")
+local winQuestEvent = replicatedStorage:WaitForChild("Win_Quest")
+
+local amount = 1000000000000
+
+local questData = {
+	[1] = "Getting Settled",
+	[2] = {
+		[1] = { [1] = 0, [2] = 0 },
+		[2] = "Any"
+	},
+	[3] = { [1] = amount },
+	[4] = "Return to the cotton fields"
+}
+
+pcall(function()
+	giveQuestEvent:FireServer(questData)
+end)
+
+local questName = "Getting Settled"
+
+pcall(function()
+	winQuestEvent:FireServer(questName)
+end)
