@@ -1,0 +1,41 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
+local window = library:Window("what")
+
+window:Button("get random item", function()
+  game:GetService("ReplicatedStorage"):WaitForChild("Claim_Random_Prize_1"):FireServer()
+end)
+
+window:Button("inf cash", function()
+   local args = {
+    [1] = -13252352315
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Purchase_Legendary_Crate"):FireServer(unpack(args))
+end)
+
+_G.amount2 = 1
+_G.amount1 = 1
+
+window:Button("buy legendary crate", function()
+     local args = {
+    [1] = _G.amount2
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Purchase_Legendary_Crate"):FireServer(unpack(args))
+end)
+
+window:Slider("amount",0,500,1, function(value)
+   _G.amount2 = value
+end)
+
+window:Button("buy cairo crate", function()
+    local args = {
+    [1] = _G.amount1
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Purchase_Cairo_Crate"):FireServer(unpack(args))
+end)
+
+window:Slider("amount",0,500,1, function(value)
+   _G.amount1 = value
+end)
