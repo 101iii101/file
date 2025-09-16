@@ -1,0 +1,65 @@
+_G.ShowLootNames = true -- Toggle for Loot Names
+
+local nameFolder = Instance.new("Folder")
+nameFolder.Name = "0x" .. tostring(math.random(10000, 99999))
+nameFolder.Parent = workspace
+
+local function createNameDisplay(loot)
+    local billboard = Instance.new("BillboardGui")
+    billboard.Adornee = loot
+    billboard.Size = UDim2.new(4, 0, 1, 0)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    billboard.Parent = loot
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Text = loot.Name
+    textLabel.TextColor3 = Color3.new(1, 1, 1) -- White text
+    textLabel.TextStrokeTransparency = 0.5
+    textLabel.TextScaled = true
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.Parent = billboard
+end
+
+local function clearAll()
+    for _, loot in ipairs(workspace.Loot:GetChildren()) do
+        local billboard = loot:FindFirstChildWhichIsA("BillboardGui")
+        if billboard then
+            billboard:Destroy()
+        end
+    end
+end
+
+local function updateNameDisplays()
+    for _, loot in ipairs(workspace.Loot:GetChildren()) do
+        if loot:IsA("Model") and not loot:FindFirstChildWhichIsA("BillboardGui") then
+            createNameDisplay(loot)
+        end
+    end
+end
+
+local debounce = false
+
+local connection
+if _G.ShowLootNames then
+    connection = game:GetService("RunService").Heartbeat:Connect(function()
+        if not debounce then
+            debounce = true
+            updateNameDisplays()
+            task.wait(0.5) -- Adjust delay for performance
+            debounce = false
+        end
+    end)
+end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    if not _G.ShowLootNames then
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+        clearAll()
+    end
+end)
