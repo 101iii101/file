@@ -15,7 +15,7 @@ if _G.EmotesGUIRunning then
 end
 _G.EmotesGUIRunning = true
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/Open%20wod%20(1).txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/GUIS%20Load%20R15%20anim%201.txt"))()
 
 getgenv().Notify({
     Title = '7yd7 | Emote',
@@ -1866,7 +1866,7 @@ task.spawn(function()
 end)
 
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/GUIS%20Load%20R15%20anim%201.txt"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/Open%20wod%20(1).txt"))()
     getgenv().Notify({
         Title = '7yd7 | Emote Mobile',
         Content = '📱 Added emote open button for ease of use',
