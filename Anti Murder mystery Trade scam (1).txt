@@ -1,0 +1,240 @@
+-- If you have bought this you have been SCAMMED, this is a free OPENSORUCE script | by KirkaTMrus
+function SetConstants()
+	Player = game.Players.LocalPlayer
+	SendRequestF = game.ReplicatedStorage.Trade.SendRequest
+	OfferItemE = game.ReplicatedStorage.Trade.OfferItem
+	AcceptTradeE = game.ReplicatedStorage.Trade.AcceptTrade
+	DeclineTradeE = game.ReplicatedStorage.Trade.DeclineTrade
+	DeclineRequestE = game.ReplicatedStorage.Trade.DeclineRequest
+	GetItemDataF = game.ReplicatedStorage.Remotes.Extras.GetItemData
+	GetFullInventory = game.ReplicatedStorage.Remotes.Extras.GetFullInventory
+	AcceptTradeRequest = game.ReplicatedStorage.Trade.AcceptRequest
+	StartTrade = game.ReplicatedStorage.Trade.StartTrade
+	UserInputService = game:GetService("UserInputService")
+end
+
+TradeAllowed = false
+
+InDragg = false
+function SetDraggable(gui)
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	gui.InputBegan:Connect(function(input)
+		if InDragg then return end
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			InDragg = true
+			dragStart = input.Position
+			startPos = gui.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+					InDragg = false
+				end
+			end)
+		end
+	end)
+
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+
+function RandomName()
+	local cs1 = math.random(12,24)
+	local cs2 = {}
+	for a = 1, cs1 do
+		cs2[a] = string.char(math.random(32, 126))
+	end
+	return table.concat(cs2)
+end
+
+function EndGame(typetext)
+	pcall(writefile, "Detected - "..tostring(math.random(0, 826462))..".txt", typetext)
+	spawn(function() DeclineTradeE:FireServer() end)
+	spawn(function() game:shutdown() end)
+	spawn(function() while true do end end)
+end
+
+etest = pcall(SetConstants)
+if not etest then
+	EndGame("Error when set constants")
+end
+
+if not game.StarterGui:FindFirstChild("TradeGUI") or not game.StarterGui:FindFirstChild("TradeGUI_Phone") then
+	EndGame("Trade GUI deleted")
+end
+
+TradeWindowCheck1 = game.StarterGui.TradeGUI
+TradeWindowCheck2 = game.StarterGui["TradeGUI_Phone"]
+
+if not Player.PlayerGui:FindFirstChild("TradeGUI") or not Player.PlayerGui:FindFirstChild("TradeGUI_Phone") then
+	EndGame("Trade GUI deleted")
+end
+
+function CheckTradeWindow1()
+	local r = Instance.new("Part")
+	r:Clone().Parent = Player.PlayerGui.TradeGUI.Container.Items.Main.Weapons.Items.Container.Current.Container
+	r:Clone().Parent = Player.PlayerGui["TradeGUI_Phone"].Container.Items.Main.Weapons.Items.Container.Current.Container
+end
+
+positionsgui = {
+	TradeGUI = {
+		BG = UDim2.new(0, 0, 0, 0),
+		Container = UDim2.new(0.5, 0, 0.5, 0),
+		Processing = UDim2.new(0.5, 0, 0.5, 0),
+		ClickBlocker = UDim2.new(0, 0, 0, 0)
+	},
+	TradeGUI_Phone = {
+		Container = UDim2.new(0.5, 0, 0.5, 0),
+		ClickBlocker = UDim2.new(0, 0, 0, 0)
+	}
+}
+CurrentTradeWindows = {Player.PlayerGui.TradeGUI, Player.PlayerGui["TradeGUI_Phone"]}
+function CheckTradeWindow()
+	if CurrentTradeWindows[1].Parent == nil or CurrentTradeWindows[2].Parent == nil then
+		EndGame("Trade GUI deleted")
+	end
+	if table.maxn(CurrentTradeWindows[1]:GetChildren()) ~= table.maxn(TradeWindowCheck1:GetChildren()) then
+		EndGame("Trade GUI changed")
+	end
+	if table.maxn(CurrentTradeWindows[2]:GetChildren()) ~= table.maxn(TradeWindowCheck2:GetChildren()) then
+		EndGame("Trade GUI changed")
+	end
+	if not pcall(CheckTradeWindow1) then
+		EndGame("Trade GUI changed")
+	end
+	for k1, v1 in pairs(CurrentTradeWindows[1]:GetChildren()) do
+		if v1.Position ~= positionsgui["TradeGUI"][v1.Name] then
+			EndGame("Trade GUI changed")
+			break
+		end
+	end
+	for k2, v2 in pairs(CurrentTradeWindows[2]:GetChildren()) do
+		if v2.ClassName ~= "Folder" then
+			if v2.Position ~= positionsgui["TradeGUI_Phone"][v2.Name] then
+				EndGame("Trade GUI changed")
+				break
+			end
+		end
+	end
+end
+
+targeteventstable = {OfferItemE, AcceptTradeE, AcceptTradeRequest}
+events = hookmetamethod(game, "__namecall", function(self, ...)
+	if table.find(targeteventstable, self) and getnamecallmethod():lower() == "fireserver" then
+		if TradeAllowed then
+			return events(self, ...)
+		else
+			return
+		end
+	end
+	return events(self, ...)
+end)
+
+currentAllowWindow = nil
+function CreateAllowWindow(targ)
+	local e1 = Instance.new("ScreenGui")
+	e1.ResetOnSpawn = false
+	e1.Name = RandomName()
+	e1.Parent = game.CoreGui
+	currentAllowWindow = e1
+	local e2 = Instance.new("Frame")
+	e2.Name = RandomName()
+	e2.BackgroundColor3 = Color3.new(0.392157, 0.392157, 0.392157)
+	e2.BackgroundTransparency = 0.4
+	e2.BorderSizePixel = 3
+	e2.BorderColor3 = Color3.new(1, 1, 1)
+	e2.BorderMode = Enum.BorderMode.Outline
+	e2.Position = UDim2.new(0.422, 0, 0.417, 0)
+	e2.Size = UDim2.new(0.157, 0, 0.221, 0)
+	SetDraggable(e2)
+	e2.Parent = e1
+	local e3 = Instance.new("TextLabel")
+	e3.Name = RandomName()
+	e3.BackgroundTransparency = 1
+	e3.Font = Enum.Font.DenkOne
+	e3.Position = UDim2.new(0, 0, 0, 0)
+	e3.Size = UDim2.new(1, 0, 0.25, 0)
+	e3.TextScaled = true
+	e3.TextColor3 = Color3.new(1, 1, 1)
+	e3.Text = "Trade started"
+	e3.Parent = e2
+	local e4 = Instance.new("TextLabel")
+	e4.Name = RandomName()
+	e4.BackgroundTransparency = 1
+	e4.Font = Enum.Font.DenkOne
+	e4.Position = UDim2.new(0, 0, 0.25, 0)
+	e4.Size = UDim2.new(1, 0, 0.5, 0)
+	e4.TextScaled = true
+	e4.TextColor3 = Color3.new(1, 1, 1)
+	e4.Text = 'Trade started with '..targ..', if you allow this trade click "yes", if no - click "no" for block your client'
+	e4.Parent = e2
+	local e5 = Instance.new("TextButton")
+	e5.Name = RandomName()
+	e5.BorderColor3 = Color3.new(1, 1, 1)
+	e5.BackgroundColor3 = Color3.new(0, 1, 0)
+	e5.BorderMode = Enum.BorderMode.Inset
+	e5.BorderSizePixel = 3
+	e5.Position = UDim2.new(0, 0, 0.75, 0)
+	e5.Size = UDim2.new(0.5, 0, 0.25, 0)
+	e5.Font = Enum.Font.DenkOne
+	e5.TextScaled = true
+	e5.Text = "YES"
+	e5.TextColor3 = Color3.new(1, 1, 1)
+	e5.Parent = e2
+	e5.MouseButton1Click:Connect(function()
+		TradeAllowed = true
+		e1:Destroy()
+		currentAllowWindow:Destroy()
+	end)
+	local e6 = Instance.new("TextButton")
+	e6.Name = RandomName()
+	e6.BorderColor3 = Color3.new(1, 1, 1)
+	e6.BackgroundColor3 = Color3.new(1, 0, 0)
+	e6.BorderMode = Enum.BorderMode.Inset
+	e6.BorderSizePixel = 3
+	e6.Position = UDim2.new(0.5, 0, 0.75, 0)
+	e6.Size = UDim2.new(0.5, 0, 0.25, 0)
+	e6.Font = Enum.Font.DenkOne
+	e6.TextScaled = true
+	e6.Text = "NO"
+	e6.TextColor3 = Color3.new(1, 1, 1)
+	e6.Parent = e2
+	e6.MouseButton1Click:Connect(function()
+		TradeAllowed = false
+		EndGame("Client request")
+		e1:Destroy()
+		currentAllowWindow:Destroy()
+	end)
+end
+
+StartTrade.OnClientEvent:Connect(function(info, plr)
+	TradeAllowed = false
+	CheckTradeWindow()
+	CreateAllowWindow(tostring(plr))
+end)
+
+ereq = hookfunction(hookfunction, function(ftarg, checkfunc, ...)
+	if ftarg == EndGame or ftarg == CreateAllowWindow or ftarg == CheckTradeWindow then
+		EndGame("Anti stealer function hooked")
+	end
+	return ereq(ftarg, checkfunc, ...)
+end
