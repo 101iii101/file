@@ -1,0 +1,190 @@
+--[[
+      Universal Open Source Anti Stealer
+Made By Rwal
+Version v1
+License: MIT
+
+📌 Features:
+- Blocks any loadstring execution if blacklisted terms are found (e.g., webhook, IP grabbers, token sniffers)
+- Detects and patches MoonSec V3 obfuscation payloads (injects runtime keyword filters)
+- Kicks player immediately if malicious code is detected with risk level info
+- Sends clean, in-game notifications before actions
+- Hooks and disables commonly abused dangerous functions (getgc, getsenv, getconnections, etc.)
+
+🔍 How It Works:
+1. Hooks `loadstring()` to scan any code before execution.
+2. Compares the code to a blacklist of known malicious strings (webhooks, IP loggers, token dumpers, etc.).
+3. Assigns a risk level based on keyword severity.
+4. If found, shows a warning and **instantly kicks the user**, preventing execution, displaying the risk level.
+5. If the code is MoonSec V3 encrypted, it dynamically **injects string filters** into it before running.
+6. Hooks and overrides dangerous debugging/exploiting functions to prevent runtime abuse.
+7. Sends user-friendly notifications using `StarterGui:SetCore('SendNotification')`.
+
+✅ Safe to use on any Roblox executor with `hookfunction` support.
+🔒 Protects you from losing in-game items, accounts, or session tokens.
+]]--
+
+getgenv().notif = getgenv().notif or newcclosure(function(title, text, dur)
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = dur or 5,
+        })
+    end)
+end)
+
+task.delay(1, function()
+    getgenv().notif("AntiStealer 🛡️", "- Made By Rwal | More Advanced Features Soon", 8)
+    wait(1)
+    getgenv().notif("Warning ⚠️ | AntiStealer 🛡️", "- This Can Sometimes Kick You By Wrongly...\nWe Try To Improve More Soon", 10)
+end)
+
+local string_blacklist = {
+    ["stealer"] = "High",
+    ["stolen"] = "High",
+    ["tobi's"] = "Low",
+    ["cmd.exe"] = "Medium",
+    ["linkingservice"] = "Medium",
+    ["messagebusservice"] = "Medium",
+    ["trade"] = "Medium",
+    ["gift"] = "Low",
+    ["ratt"] = "High",
+    ["all your items"] = "Super Dangerous",
+    ["getdiscuser"] = "Medium",
+    [":5000/"] = "High",
+    ["canihazip"] = "Super Dangerous",
+    ["ipify"] = "High",
+    ["grabify"] = "Super Dangerous",
+    ["ipinfo"] = "High",
+    ["ipconfig"] = "Medium",
+    ["myip"] = "High",
+    ["externalip"] = "High",
+    ["checkip"] = "High",
+    ["mailbox"] = "Medium",
+    ["webhook"] = "Super Dangerous",
+    ["discord.com/api/webhooks"] = "Super Dangerous",
+    ["token"] = "Super Dangerous",
+    ["cookie"] = "High"
+}
+
+local function getRiskLevel(keyword)
+    return string_blacklist[keyword] or "Low"
+end
+
+local function contains_blacklisted(str)
+    local lower = str:lower()
+    for keyword, risk in pairs(string_blacklist) do
+        if lower:find(keyword, 1, true) then
+            return keyword, risk
+        end
+    end
+    return nil, nil
+end
+
+local function patch_moonsec(code)
+    if not code:find("This file was protected with MoonSec V3") then return code end
+
+    local function find_getter_name(code)
+        local section = code:sub(1, (code:find("return'';") or 0))
+        for name in section:gmatch("function%s+([%w_%.]+)%s*%(") do return name end
+        for name in section:gmatch("local%s+function%s+([%w_%.]+)%s*%(") do return name end
+    end
+
+    local function insert_at(s, pos, insert)
+        return s:sub(1, pos - 1) .. insert .. s:sub(pos)
+    end
+
+    local getter = find_getter_name(code)
+    if not getter then return code end
+
+    local from, to = code:find("={" .. getter .. "%(%)%}")
+    if not from then return code end
+
+    local var_name = code:sub(from - 1, from - 1)
+    local inserted_check = ([[
+        local string_blacklist = {
+            "stealer", "stolen", "tobi's", "cmd.exe", "linkingservice", "messagebusservice",
+            "trade", "gift", "ratt", "all your items", "getdiscuser", ":5000/",
+            "canihazip", "ipify", "grabify", "ipinfo", "ipconfig", "myip",
+            "externalip", "checkip", "mailbox", "webhook", "discord.com/api/webhooks",
+            "token", "cookie"
+        };
+        for _,v in string_blacklist do
+            if tostring(VAR):lower():find(v, 1, true) then
+                local risk = ({
+                    stealer = "High",
+                    stolen = "High",
+                    ["tobi's"] = "Low",
+                    ["cmd.exe"] = "Medium",
+                    linkingservice = "Medium",
+                    messagebusservice = "Medium",
+                    trade = "Medium",
+                    gift = "Low",
+                    ratt = "High",
+                    ["all your items"] = "Super Dangerous",
+                    getdiscuser = "Medium",
+                    [":5000/"] = "High",
+                    canihazip = "Super Dangerous",
+                    ipify = "High",
+                    grabify = "Super Dangerous",
+                    ipinfo = "High",
+                    ipconfig = "Medium",
+                    myip = "High",
+                    externalip = "High",
+                    checkip = "High",
+                    mailbox = "Medium",
+                    webhook = "Super Dangerous",
+                    ["discord.com/api/webhooks"] = "Super Dangerous",
+                    token = "Super Dangerous",
+                    cookie = "High"
+                })[v] or "Low"
+                getgenv().notif("🚨 MoonSec Stealer Detected", "Blocked: "..v.." | Risk: "..risk, 5)
+                wait(0.5)
+                game.Players.LocalPlayer:Kick("Reason: The script is a stealer and it can steal in-game items...\nRisk Level: "..risk.."\nLucky for you, you used our AntiStealer.\nYour items are safe!")
+            end
+        end;
+    ]]):gsub("VAR", var_name)
+
+    return insert_at(code, to + 4, inserted_check)
+end
+
+local original_loadstring = loadstring
+hookfunction(loadstring, newcclosure(function(code, ...)
+    if type(code) ~= "string" then return original_loadstring(code, ...) end
+
+    local keyword, risk = contains_blacklisted(code)
+    if keyword then
+        getgenv().notif("🚨 Stealer Detected", "Blocked keyword: " .. keyword .. " | Risk: " .. risk, 5)
+        wait(0.5)
+        game.Players.LocalPlayer:Kick("Reason: The script is a stealer and it can steal in-game items...\nRisk Level: " .. risk .. "\nLucky for you, you used our AntiStealer.\nYour items are safe!")
+        return
+    end
+
+    if code:find("This file was protected with MoonSec V3") then
+        code = patch_moonsec(code)
+    end
+
+    return original_loadstring(code, ...)
+end))
+
+local function hook_dangerous_function(name)
+    local func = rawget(_G, name)
+    if typeof(func) == "function" then
+        rawset(_G, name, newcclosure(function(...)
+            getgenv().notif("⚠️ AntiStealer Warning", "Blocked dangerous function: " .. name, 5)
+            wait(0.5)
+            game.Players.LocalPlayer:Kick("Reason: The script tried to use " .. name .. " which is often used to steal data.\nRisk Level: Super Dangerous\nAntiStealer protected your items.")
+            return nil
+        end))
+    end
+end
+
+local dangerous_functions = {
+    "getconnections", "getgc", "getupvalue", "getreg", "getsenv",
+    "getenv", "hookmetamethod", "hookfunction", "setreadonly", "debug.getinfo"
+}
+
+for _, fn in ipairs(dangerous_functions) do
+    pcall(function() hook_dangerous_function(fn) end)
+end
