@@ -30,7 +30,7 @@ if getconnections then
 end
 
 if IY_LOADED and not _G.IY_DEBUG == true then
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/mxsynry/infiniteyield-reborn/refs/heads/master/alreadyexecuted' or 'https://mxsynry.github.io/storage/iyrbackup/legacy/master/uselessscriptthatexistsinthisrepoiwin')))()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/101iii101/file/refs/heads/main/Already%20executed.txt' or 'https://raw.githubusercontent.com/101iii101/file/refs/heads/main/Fully%20skidded%20sourced%20ARB%202.txt')))()
     return
 end
 
