@@ -1,0 +1,75 @@
+-- classic gaze getgenv stuff
+wait(0.1)
+if getgenv().TiltForCar == true then
+warn("Already On")
+    return
+end
+
+getgenv().TiltForCar = true
+
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+-- SETTINGS
+local predictionTime = 0.25
+local tiltSmoothness = 5
+local pitchStrength = 0.4          -- prediction-based pitch strength (vertical tilt)
+local classicPitchStrength = 0.1  -- classic pitch strength (vertical tilt)
+local verticalDeadzone = 0.05
+local maxTiltSide = 15
+local sideSmoothness = 5
+
+local currentPitch = 0
+local currentSide = 0
+
+RunService.RenderStepped:Connect(function(dt)
+    if not character or not hrp then return end
+
+    local moveDir = humanoid.MoveDirection
+    local targetSide = 0
+
+    -- Side tilt from classic method
+    if moveDir.Magnitude > 0 then
+        local localMove = hrp.CFrame:VectorToObjectSpace(moveDir)
+        targetSide = -localMove.X * maxTiltSide
+    end
+    currentSide += (targetSide - currentSide) * math.min(dt * sideSmoothness, 1)
+
+    local targetPitch = 0
+
+    if moveDir.Magnitude > 0 then
+        -- PREDICTION-BASED PITCH
+        local currentPos = hrp.Position
+        local velocity = hrp.Velocity
+        local predictedPos = currentPos + (velocity * predictionTime)
+
+        local dy = predictedPos.Y - currentPos.Y
+        if math.abs(dy) > verticalDeadzone then
+            local flatLook = hrp.CFrame.LookVector
+            flatLook = Vector3.new(flatLook.X, 0, flatLook.Z).Unit
+            local flatDist = Vector3.new(predictedPos.X, currentPos.Y, predictedPos.Z) - currentPos
+            local predictedPitch = math.atan2(dy, flatDist.Magnitude) * pitchStrength
+            targetPitch += predictedPitch
+        end
+
+        -- CLASSIC PITCH (inverted so moving up tilts down, moving down tilts up)
+        local localMove = hrp.CFrame:VectorToObjectSpace(moveDir)
+        targetPitch += (localMove.Z) * classicPitchStrength
+    end
+
+    -- Smooth pitch blend
+    currentPitch += (targetPitch - currentPitch) * math.clamp(dt * tiltSmoothness, 0, 1)
+
+    -- Apply combined tilt
+    local yaw = math.rad(hrp.Orientation.Y)
+    local finalCF = CFrame.new(hrp.Position) *
+        CFrame.Angles(0, yaw, 0) *
+        CFrame.Angles(currentPitch, 0, math.rad(currentSide))
+
+    hrp.CFrame = finalCF
+end)
