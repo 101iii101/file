@@ -1,0 +1,2987 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+
+-- Instances:
+
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_READ ME XD"] = Instance.new("Script");
+	["_LocalScript"] = Instance.new("LocalScript");
+	["_aLocalScript"] = Instance.new("LocalScript");
+	["_sch op cl"] = Instance.new("LocalScript");
+	["_Whitelist"] = Instance.new("LocalScript");
+	["_open"] = Instance.new("TextButton");
+	["_LocalScript1"] = Instance.new("LocalScript");
+	["_spin"] = Instance.new("LocalScript");
+	["_open1"] = Instance.new("LocalScript");
+	["_ImageLabel"] = Instance.new("ImageLabel");
+	["_LocalScript2"] = Instance.new("LocalScript");
+	["_TextLabel"] = Instance.new("TextLabel");
+	["_UICorner"] = Instance.new("UICorner");
+	["_ResizableFrame"] = Instance.new("Frame");
+	["_LocalScript3"] = Instance.new("LocalScript");
+	["_drag"] = Instance.new("LocalScript");
+	["_LocalScript4"] = Instance.new("LocalScript");
+	["_LocalScript5"] = Instance.new("LocalScript");
+	["_ex"] = Instance.new("TextButton");
+	["_sdf"] = Instance.new("Script");
+	["_lolxd"] = Instance.new("ModuleScript");
+	["_LuaZ"] = Instance.new("ModuleScript");
+	["_LuaX"] = Instance.new("ModuleScript");
+	["_LuaY"] = Instance.new("ModuleScript");
+	["_LuaK"] = Instance.new("ModuleScript");
+	["_LuaU"] = Instance.new("ModuleScript");
+	["_LuaP"] = Instance.new("ModuleScript");
+	["_Rerubi"] = Instance.new("ModuleScript");
+	["_waitwhat"] = Instance.new("LocalScript");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_Lol"] = Instance.new("RemoteEvent");
+	["_UIStroke"] = Instance.new("UIStroke");
+	["_Respawn"] = Instance.new("TextButton");
+	["_LocalScript6"] = Instance.new("LocalScript");
+	["_Script"] = Instance.new("Script");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_Respawn1"] = Instance.new("RemoteEvent");
+	["_UIStroke1"] = Instance.new("UIStroke");
+	["_TextBox"] = Instance.new("TextBox");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_UIStroke2"] = Instance.new("UIStroke");
+	["_R6"] = Instance.new("TextButton");
+	["_Script1"] = Instance.new("Script");
+	["_LocalScript7"] = Instance.new("LocalScript");
+	["_UICorner4"] = Instance.new("UICorner");
+	["_UIStroke3"] = Instance.new("UIStroke");
+	["_RemoteEvent"] = Instance.new("RemoteEvent");
+	["_UICorner5"] = Instance.new("UICorner");
+	["_UIStroke4"] = Instance.new("UIStroke");
+	["_ResizeHandle"] = Instance.new("Frame");
+	["_UICorner6"] = Instance.new("UICorner");
+	["_UIGradient"] = Instance.new("UIGradient");
+	["_TextLabel1"] = Instance.new("TextLabel");
+	["_UIGradient1"] = Instance.new("UIGradient");
+	["_Script2"] = Instance.new("TextButton");
+	["_open2"] = Instance.new("LocalScript");
+	["_UICorner7"] = Instance.new("UICorner");
+	["_UIStroke5"] = Instance.new("UIStroke");
+	["_ohwow"] = Instance.new("ScrollingFrame");
+	["_drag1"] = Instance.new("LocalScript");
+	["_ScriptHub"] = Instance.new("Frame");
+	["_UIStroke6"] = Instance.new("UIStroke");
+	["_UIGradient2"] = Instance.new("UIGradient");
+	["_UICorner8"] = Instance.new("UICorner");
+	["_TextLabel2"] = Instance.new("TextLabel");
+	["_TextLabel3"] = Instance.new("TextLabel");
+	["_Frame"] = Instance.new("Frame");
+	["_greab4pre"] = Instance.new("TextButton");
+	["_Script3"] = Instance.new("Script");
+	["_LocalScript8"] = Instance.new("LocalScript");
+	["_UICorner9"] = Instance.new("UICorner");
+	["_UIStroke7"] = Instance.new("UIStroke");
+	["_RemoteEvent1"] = Instance.new("RemoteEvent");
+	["_F3x"] = Instance.new("TextButton");
+	["_Script4"] = Instance.new("Script");
+	["_LocalScript9"] = Instance.new("LocalScript");
+	["_UICorner10"] = Instance.new("UICorner");
+	["_UIStroke8"] = Instance.new("UIStroke");
+	["_RemoteEvent2"] = Instance.new("RemoteEvent");
+	["_china"] = Instance.new("TextButton");
+	["_Script5"] = Instance.new("Script");
+	["_LocalScript10"] = Instance.new("LocalScript");
+	["_UICorner11"] = Instance.new("UICorner");
+	["_UIStroke9"] = Instance.new("UIStroke");
+	["_RemoteEvent3"] = Instance.new("RemoteEvent");
+	["_mr bean admin"] = Instance.new("TextButton");
+	["_Script6"] = Instance.new("Script");
+	["_LocalScript11"] = Instance.new("LocalScript");
+	["_UICorner12"] = Instance.new("UICorner");
+	["_UIStroke10"] = Instance.new("UIStroke");
+	["_RemoteEvent4"] = Instance.new("RemoteEvent");
+	["_doge sum"] = Instance.new("TextButton");
+	["_Script7"] = Instance.new("Script");
+	["_LocalScript12"] = Instance.new("LocalScript");
+	["_UICorner13"] = Instance.new("UICorner");
+	["_UIStroke11"] = Instance.new("UIStroke");
+	["_RemoteEvent5"] = Instance.new("RemoteEvent");
+	["_csgo guns"] = Instance.new("TextButton");
+	["_Script8"] = Instance.new("Script");
+	["_LocalScript13"] = Instance.new("LocalScript");
+	["_UICorner14"] = Instance.new("UICorner");
+	["_UIStroke12"] = Instance.new("UIStroke");
+	["_RemoteEvent6"] = Instance.new("RemoteEvent");
+	["_other gun"] = Instance.new("TextButton");
+	["_Script9"] = Instance.new("Script");
+	["_LocalScript14"] = Instance.new("LocalScript");
+	["_UICorner15"] = Instance.new("UICorner");
+	["_UIStroke13"] = Instance.new("UIStroke");
+	["_RemoteEvent7"] = Instance.new("RemoteEvent");
+	["_Mystic"] = Instance.new("TextButton");
+	["_Script10"] = Instance.new("Script");
+	["_LocalScript15"] = Instance.new("LocalScript");
+	["_UICorner16"] = Instance.new("UICorner");
+	["_UIStroke14"] = Instance.new("UIStroke");
+	["_RemoteEvent8"] = Instance.new("RemoteEvent");
+	["_pee WHY"] = Instance.new("TextButton");
+	["_Script11"] = Instance.new("Script");
+	["_LocalScript16"] = Instance.new("LocalScript");
+	["_UICorner17"] = Instance.new("UICorner");
+	["_UIStroke15"] = Instance.new("UIStroke");
+	["_RemoteEvent9"] = Instance.new("RemoteEvent");
+	["_ssp v/"] = Instance.new("TextButton");
+	["_Script12"] = Instance.new("Script");
+	["_LocalScript17"] = Instance.new("LocalScript");
+	["_UICorner18"] = Instance.new("UICorner");
+	["_UIStroke16"] = Instance.new("UIStroke");
+	["_RemoteEvent10"] = Instance.new("RemoteEvent");
+	["_mario"] = Instance.new("TextButton");
+	["_Script13"] = Instance.new("Script");
+	["_LocalScript18"] = Instance.new("LocalScript");
+	["_UICorner19"] = Instance.new("UICorner");
+	["_UIStroke17"] = Instance.new("UIStroke");
+	["_RemoteEvent11"] = Instance.new("RemoteEvent");
+	["_Steve"] = Instance.new("TextButton");
+	["_Script14"] = Instance.new("Script");
+	["_LocalScript19"] = Instance.new("LocalScript");
+	["_UICorner20"] = Instance.new("UICorner");
+	["_UIStroke18"] = Instance.new("UIStroke");
+	["_RemoteEvent12"] = Instance.new("RemoteEvent");
+	["_hammer"] = Instance.new("TextButton");
+	["_Script15"] = Instance.new("Script");
+	["_LocalScript20"] = Instance.new("LocalScript");
+	["_UICorner21"] = Instance.new("UICorner");
+	["_UIStroke19"] = Instance.new("UIStroke");
+	["_RemoteEvent13"] = Instance.new("RemoteEvent");
+	["_primadon"] = Instance.new("TextButton");
+	["_Script16"] = Instance.new("Script");
+	["_LocalScript21"] = Instance.new("LocalScript");
+	["_UICorner22"] = Instance.new("UICorner");
+	["_UIStroke20"] = Instance.new("UIStroke");
+	["_RemoteEvent14"] = Instance.new("RemoteEvent");
+	["_Xester"] = Instance.new("TextButton");
+	["_Script17"] = Instance.new("Script");
+	["_LocalScript22"] = Instance.new("LocalScript");
+	["_UICorner23"] = Instance.new("UICorner");
+	["_UIStroke21"] = Instance.new("UIStroke");
+	["_RemoteEvent15"] = Instance.new("RemoteEvent");
+	["_citizen virusfrfrfrf"] = Instance.new("TextButton");
+	["_Script18"] = Instance.new("Script");
+	["_LocalScript23"] = Instance.new("LocalScript");
+	["_UICorner24"] = Instance.new("UICorner");
+	["_UIStroke22"] = Instance.new("UIStroke");
+	["_RemoteEvent16"] = Instance.new("RemoteEvent");
+	["_kill mc"] = Instance.new("TextButton");
+	["_Script19"] = Instance.new("Script");
+	["_LocalScript24"] = Instance.new("LocalScript");
+	["_UICorner25"] = Instance.new("UICorner");
+	["_UIStroke23"] = Instance.new("UIStroke");
+	["_RemoteEvent17"] = Instance.new("RemoteEvent");
+	["_grandsolar"] = Instance.new("TextButton");
+	["_Script20"] = Instance.new("Script");
+	["_LocalScript25"] = Instance.new("LocalScript");
+	["_UICorner26"] = Instance.new("UICorner");
+	["_UIStroke24"] = Instance.new("UIStroke");
+	["_RemoteEvent18"] = Instance.new("RemoteEvent");
+	["_ssp dex"] = Instance.new("TextButton");
+	["_Script21"] = Instance.new("Script");
+	["_LocalScript26"] = Instance.new("LocalScript");
+	["_UICorner27"] = Instance.new("UICorner");
+	["_UIStroke25"] = Instance.new("UIStroke");
+	["_RemoteEvent19"] = Instance.new("RemoteEvent");
+	["_jihad"] = Instance.new("TextButton");
+	["_Script22"] = Instance.new("Script");
+	["_LocalScript27"] = Instance.new("LocalScript");
+	["_UICorner28"] = Instance.new("UICorner");
+	["_UIStroke26"] = Instance.new("UIStroke");
+	["_RemoteEvent20"] = Instance.new("RemoteEvent");
+	["_gonber"] = Instance.new("TextButton");
+	["_Script23"] = Instance.new("Script");
+	["_LocalScript28"] = Instance.new("LocalScript");
+	["_UICorner29"] = Instance.new("UICorner");
+	["_UIStroke27"] = Instance.new("UIStroke");
+	["_RemoteEvent21"] = Instance.new("RemoteEvent");
+	["_hq"] = Instance.new("TextButton");
+	["_Script24"] = Instance.new("Script");
+	["_LocalScript29"] = Instance.new("LocalScript");
+	["_UICorner30"] = Instance.new("UICorner");
+	["_UIStroke28"] = Instance.new("UIStroke");
+	["_RemoteEvent22"] = Instance.new("RemoteEvent");
+	["_kfc"] = Instance.new("TextButton");
+	["_Script25"] = Instance.new("Script");
+	["_LocalScript30"] = Instance.new("LocalScript");
+	["_UICorner31"] = Instance.new("UICorner");
+	["_UIStroke29"] = Instance.new("UIStroke");
+	["_RemoteEvent23"] = Instance.new("RemoteEvent");
+	["_OmegaFlowey"] = Instance.new("TextButton");
+	["_Script26"] = Instance.new("Script");
+	["_LocalScript31"] = Instance.new("LocalScript");
+	["_UICorner32"] = Instance.new("UICorner");
+	["_UIStroke30"] = Instance.new("UIStroke");
+	["_RemoteEvent24"] = Instance.new("RemoteEvent");
+	["_thomas"] = Instance.new("TextButton");
+	["_Script27"] = Instance.new("Script");
+	["_LocalScript32"] = Instance.new("LocalScript");
+	["_UICorner33"] = Instance.new("UICorner");
+	["_UIStroke31"] = Instance.new("UIStroke");
+	["_RemoteEvent25"] = Instance.new("RemoteEvent");
+	["_polish cow"] = Instance.new("TextButton");
+	["_Script28"] = Instance.new("Script");
+	["_LocalScript33"] = Instance.new("LocalScript");
+	["_UICorner34"] = Instance.new("UICorner");
+	["_UIStroke32"] = Instance.new("UIStroke");
+	["_RemoteEvent26"] = Instance.new("RemoteEvent");
+	["_john"] = Instance.new("TextButton");
+	["_Script29"] = Instance.new("Script");
+	["_LocalScript34"] = Instance.new("LocalScript");
+	["_UICorner35"] = Instance.new("UICorner");
+	["_UIStroke33"] = Instance.new("UIStroke");
+	["_RemoteEvent27"] = Instance.new("RemoteEvent");
+	["_snoop"] = Instance.new("TextButton");
+	["_Script30"] = Instance.new("Script");
+	["_LocalScript35"] = Instance.new("LocalScript");
+	["_UICorner36"] = Instance.new("UICorner");
+	["_UIStroke34"] = Instance.new("UIStroke");
+	["_RemoteEvent28"] = Instance.new("RemoteEvent");
+	["_c7"] = Instance.new("TextButton");
+	["_Script31"] = Instance.new("Script");
+	["_LocalScript36"] = Instance.new("LocalScript");
+	["_UICorner37"] = Instance.new("UICorner");
+	["_UIStroke35"] = Instance.new("UIStroke");
+	["_RemoteEvent29"] = Instance.new("RemoteEvent");
+	["_stummygun"] = Instance.new("TextButton");
+	["_Script32"] = Instance.new("Script");
+	["_LocalScript37"] = Instance.new("LocalScript");
+	["_UICorner38"] = Instance.new("UICorner");
+	["_UIStroke36"] = Instance.new("UIStroke");
+	["_RemoteEvent30"] = Instance.new("RemoteEvent");
+	["_ssafe"] = Instance.new("TextButton");
+	["_Script33"] = Instance.new("Script");
+	["_LocalScript38"] = Instance.new("LocalScript");
+	["_UICorner39"] = Instance.new("UICorner");
+	["_UIStroke37"] = Instance.new("UIStroke");
+	["_RemoteEvent31"] = Instance.new("RemoteEvent");
+	["_shed"] = Instance.new("TextButton");
+	["_Script34"] = Instance.new("Script");
+	["_LocalScript39"] = Instance.new("LocalScript");
+	["_UICorner40"] = Instance.new("UICorner");
+	["_UIStroke38"] = Instance.new("UIStroke");
+	["_RemoteEvent32"] = Instance.new("RemoteEvent");
+	["_shel"] = Instance.new("TextButton");
+	["_Script35"] = Instance.new("Script");
+	["_LocalScript40"] = Instance.new("LocalScript");
+	["_UICorner41"] = Instance.new("UICorner");
+	["_UIStroke39"] = Instance.new("UIStroke");
+	["_RemoteEvent33"] = Instance.new("RemoteEvent");
+	["_1xhead"] = Instance.new("TextButton");
+	["_Script36"] = Instance.new("Script");
+	["_LocalScript41"] = Instance.new("LocalScript");
+	["_UICorner42"] = Instance.new("UICorner");
+	["_UIStroke40"] = Instance.new("UIStroke");
+	["_RemoteEvent34"] = Instance.new("RemoteEvent");
+	["_UIStroke41"] = Instance.new("UIStroke");
+	["_UIGradient3"] = Instance.new("UIGradient");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].Enabled = false
+Converted["_ScreenGui"].ResetOnSpawn = false
+Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_ScreenGui"].Parent = game.Workspace.lol.MainModule
+
+Converted["_READ ME XD"].Source = "--[[this gui was skidded by 07n7z and zer0exe modified by pldeternity
+if you try to nuke there is no logs script:)
+               MIT LICENSE
+you can copy this gui and make other version BUT type anywhere in gui or place holder textbox that "Unofficial Version"
+thank you for reading:)]]"
+Converted["_READ ME XD"].Disabled = true
+Converted["_READ ME XD"].Enabled = false
+Converted["_READ ME XD"].Name = "READ ME XD"
+Converted["_READ ME XD"].Parent = Converted["_ScreenGui"]
+
+Converted["_open"].Font = Enum.Font.SourceSans
+Converted["_open"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_open"].TextSize = 14
+Converted["_open"].TextTransparency = 1
+Converted["_open"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_open"].BackgroundTransparency = 1
+Converted["_open"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_open"].BorderSizePixel = 0
+Converted["_open"].Position = UDim2.new(0.438823521, 0, 0.396341473, 0)
+Converted["_open"].Size = UDim2.new(0, 103, 0, 102)
+Converted["_open"].Name = "open"
+Converted["_open"].Parent = Converted["_ScreenGui"]
+
+Converted["_ImageLabel"].Image = "rbxassetid://114001238182919"
+Converted["_ImageLabel"].ImageContent = Content
+Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel"].BackgroundTransparency = 1
+Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel"].BorderSizePixel = 0
+Converted["_ImageLabel"].Position = UDim2.new(0.0107869273, 0, 0.017982034, 0)
+Converted["_ImageLabel"].Size = UDim2.new(0, 100, 0, 100)
+Converted["_ImageLabel"].Parent = Converted["_open"]
+
+Converted["_TextLabel"].Font = Enum.Font.SourceSans
+Converted["_TextLabel"].Text = "Project LuaCore Made By Zer0EXE & 7n8z & Codiei2722 | Click To Open/Close"
+Converted["_TextLabel"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].TextSize = 19
+Converted["_TextLabel"].TextWrapped = true
+Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderSizePixel = 0
+Converted["_TextLabel"].Position = UDim2.new(1.14999998, 0, 0.119999997, 0)
+Converted["_TextLabel"].Size = UDim2.new(0, 274, 0, 75)
+Converted["_TextLabel"].Visible = false
+Converted["_TextLabel"].Parent = Converted["_ImageLabel"]
+
+Converted["_UICorner"].Parent = Converted["_TextLabel"]
+
+Converted["_ResizableFrame"].BackgroundColor3 = Color3.fromRGB(248.00001561641693, 248.00001561641693, 255)
+Converted["_ResizableFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ResizableFrame"].BorderSizePixel = 0
+Converted["_ResizableFrame"].Position = UDim2.new(0.264021724, 0, 0.021144921, 0)
+Converted["_ResizableFrame"].Size = UDim2.new(0.50076437, 0, 0.100000009, 0)
+Converted["_ResizableFrame"].Name = "ResizableFrame"
+Converted["_ResizableFrame"].Parent = Converted["_ScreenGui"]
+
+Converted["_ex"].Font = Enum.Font.Gotham
+Converted["_ex"].Text = "Exec"
+Converted["_ex"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ex"].TextSize = 14
+Converted["_ex"].TextWrapped = true
+Converted["_ex"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_ex"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ex"].BorderSizePixel = 0
+Converted["_ex"].Position = UDim2.new(0.650045872, 0, 0.103049129, 0)
+Converted["_ex"].Size = UDim2.new(0.133013889, 0, 0.790954649, 0)
+Converted["_ex"].Name = "ex"
+Converted["_ex"].Parent = Converted["_ResizableFrame"]
+
+Converted["_sdf"].Source = "-- //Scripted by Sochi\\
+local executor = script.Parent.Lol
+executor.OnServerEvent:Connect(function(skid, input)
+	print("get")
+	require(script.lolxd)(input)()
+end)"
+Converted["_sdf"].Name = "sdf"
+Converted["_sdf"].Parent = Converted["_ex"]
+
+Converted["_UICorner1"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner1"].Parent = Converted["_ex"]
+
+Converted["_Lol"].Name = "Lol"
+Converted["_Lol"].Parent = Converted["_ex"]
+
+Converted["_UIStroke"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke"].Parent = Converted["_ex"]
+
+Converted["_Respawn"].Font = Enum.Font.Gotham
+Converted["_Respawn"].Text = "RE"
+Converted["_Respawn"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Respawn"].TextSize = 14
+Converted["_Respawn"].TextWrapped = true
+Converted["_Respawn"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_Respawn"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Respawn"].BorderSizePixel = 0
+Converted["_Respawn"].Position = UDim2.new(0.899216831, 0, 0.103049032, 0)
+Converted["_Respawn"].Size = UDim2.new(0.0851689875, 0, 0.790954292, 0)
+Converted["_Respawn"].Name = "Respawn"
+Converted["_Respawn"].Parent = Converted["_ResizableFrame"]
+
+Converted["_Script"].Source = "script.Parent.Respawn.OnServerEvent:connect(function(plr)plr:LoadCharacter()end)"
+Converted["_Script"].Parent = Converted["_Respawn"]
+
+Converted["_UICorner2"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner2"].Parent = Converted["_Respawn"]
+
+Converted["_Respawn1"].Name = "Respawn"
+Converted["_Respawn1"].Parent = Converted["_Respawn"]
+
+Converted["_UIStroke1"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke1"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke1"].Parent = Converted["_Respawn"]
+
+Converted["_TextBox"].ClearTextOnFocus = false
+Converted["_TextBox"].Font = Enum.Font.Code
+Converted["_TextBox"].MultiLine = true
+Converted["_TextBox"].PlaceholderColor3 = Color3.fromRGB(158.00000578165054, 158.00000578165054, 158.00000578165054)
+Converted["_TextBox"].PlaceholderText = "Project LuaCore"
+Converted["_TextBox"].RichText = true
+Converted["_TextBox"].Text = ""
+Converted["_TextBox"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextBox"].TextSize = 14
+Converted["_TextBox"].TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextBox"].TextWrapped = true
+Converted["_TextBox"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_TextBox"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_TextBox"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextBox"].BorderSizePixel = 0
+Converted["_TextBox"].Position = UDim2.new(0.0191753507, 0, 0.103049077, 0)
+Converted["_TextBox"].Size = UDim2.new(0.615227938, 0, 0.790954769, 0)
+Converted["_TextBox"].Parent = Converted["_ResizableFrame"]
+
+Converted["_UICorner3"].CornerRadius = UDim.new(0, 5)
+Converted["_UICorner3"].Parent = Converted["_TextBox"]
+
+Converted["_UIStroke2"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke2"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke2"].Parent = Converted["_TextBox"]
+
+Converted["_R6"].Font = Enum.Font.Gotham
+Converted["_R6"].RichText = true
+Converted["_R6"].Text = "R6"
+Converted["_R6"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_R6"].TextSize = 14
+Converted["_R6"].TextWrapped = true
+Converted["_R6"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_R6"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_R6"].BorderSizePixel = 0
+Converted["_R6"].Position = UDim2.new(0.79867363, 0, 0.103049152, 0)
+Converted["_R6"].Size = UDim2.new(0.0843508095, 0, 0.790954292, 0)
+Converted["_R6"].Name = "R6"
+Converted["_R6"].Parent = Converted["_ResizableFrame"]
+
+Converted["_Script1"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(3436957371):r6(plr.Name)
+end)"
+Converted["_Script1"].Parent = Converted["_R6"]
+
+Converted["_UICorner4"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner4"].Parent = Converted["_R6"]
+
+Converted["_UIStroke3"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke3"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke3"].Parent = Converted["_R6"]
+
+Converted["_RemoteEvent"].Parent = Converted["_R6"]
+
+Converted["_UICorner5"].CornerRadius = UDim.new(0, 5)
+Converted["_UICorner5"].Parent = Converted["_ResizableFrame"]
+
+Converted["_UIStroke4"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke4"].Thickness = 5
+Converted["_UIStroke4"].Parent = Converted["_ResizableFrame"]
+
+Converted["_ResizeHandle"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ResizeHandle"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ResizeHandle"].BorderSizePixel = 0
+Converted["_ResizeHandle"].Position = UDim2.new(0.372186869, 0, 0.99999994, 0)
+Converted["_ResizeHandle"].Size = UDim2.new(0, 100, 0, 11)
+Converted["_ResizeHandle"].Name = "ResizeHandle"
+Converted["_ResizeHandle"].Parent = Converted["_ResizableFrame"]
+
+Converted["_UICorner6"].CornerRadius = UDim.new(0, 2)
+Converted["_UICorner6"].Parent = Converted["_ResizeHandle"]
+
+Converted["_UIGradient"].Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425)),
+	ColorSequenceKeypoint.new(0.4982699155807495, Color3.fromRGB(60.00000022351742, 60.00000022351742, 62.00000010430813)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425))
+}
+Converted["_UIGradient"].Parent = Converted["_ResizeHandle"]
+
+Converted["_TextLabel1"].Font = Enum.Font.SourceSans
+Converted["_TextLabel1"].Text = "Drag to Resize"
+Converted["_TextLabel1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].TextSize = 14
+Converted["_TextLabel1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].BackgroundTransparency = 1
+Converted["_TextLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel1"].BorderSizePixel = 0
+Converted["_TextLabel1"].Size = UDim2.new(0, 100, 0, 9)
+Converted["_TextLabel1"].Parent = Converted["_ResizeHandle"]
+
+Converted["_UIGradient1"].Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425)),
+	ColorSequenceKeypoint.new(0.4982699155807495, Color3.fromRGB(60.00000022351742, 60.00000022351742, 62.00000010430813)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425))
+}
+Converted["_UIGradient1"].Parent = Converted["_ResizableFrame"]
+
+Converted["_Script2"].Font = Enum.Font.Gotham
+Converted["_Script2"].RichText = true
+Converted["_Script2"].Text = "Script Hub"
+Converted["_Script2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Script2"].TextSize = 14
+Converted["_Script2"].TextWrapped = true
+Converted["_Script2"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_Script2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Script2"].BorderSizePixel = 0
+Converted["_Script2"].Position = UDim2.new(1.03463292, 0, 0.0420737043, 0)
+Converted["_Script2"].Size = UDim2.new(0.117042936, 0, 0.953555882, 0)
+Converted["_Script2"].Name = "Script"
+Converted["_Script2"].Parent = Converted["_ResizableFrame"]
+
+Converted["_UICorner7"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner7"].Parent = Converted["_Script2"]
+
+Converted["_UIStroke5"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke5"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke5"].Parent = Converted["_Script2"]
+
+Converted["_ohwow"].CanvasSize = UDim2.new(0, 0, 4, 0)
+Converted["_ohwow"].ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ohwow"].Active = true
+Converted["_ohwow"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ohwow"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ohwow"].BorderSizePixel = 0
+Converted["_ohwow"].Position = UDim2.new(0.0988235325, 0, 0.219512194, 0)
+Converted["_ohwow"].Size = UDim2.new(0, 215, 0, 213)
+Converted["_ohwow"].Visible = false
+Converted["_ohwow"].Name = "ohwow"
+Converted["_ohwow"].Parent = Converted["_ScreenGui"]
+
+Converted["_ScriptHub"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ScriptHub"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ScriptHub"].BorderSizePixel = 0
+Converted["_ScriptHub"].Position = UDim2.new(0, 0, -0.00172761013, 0)
+Converted["_ScriptHub"].Size = UDim2.new(0, 215, 0, 1000)
+Converted["_ScriptHub"].Name = "ScriptHub"
+Converted["_ScriptHub"].Parent = Converted["_ohwow"]
+
+Converted["_UIStroke6"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke6"].Thickness = 5
+Converted["_UIStroke6"].Parent = Converted["_ScriptHub"]
+
+Converted["_UIGradient2"].Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425)),
+	ColorSequenceKeypoint.new(0.4982699155807495, Color3.fromRGB(60.00000022351742, 60.00000022351742, 62.00000010430813)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425))
+}
+Converted["_UIGradient2"].Parent = Converted["_ScriptHub"]
+
+Converted["_UICorner8"].CornerRadius = UDim.new(0, 5)
+Converted["_UICorner8"].Parent = Converted["_ScriptHub"]
+
+Converted["_TextLabel2"].Font = Enum.Font.SourceSans
+Converted["_TextLabel2"].Text = "Script Hub"
+Converted["_TextLabel2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel2"].TextScaled = true
+Converted["_TextLabel2"].TextSize = 14
+Converted["_TextLabel2"].TextWrapped = true
+Converted["_TextLabel2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel2"].BackgroundTransparency = 1
+Converted["_TextLabel2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel2"].BorderSizePixel = 0
+Converted["_TextLabel2"].Size = UDim2.new(0, 215, 0, 23)
+Converted["_TextLabel2"].Parent = Converted["_ScriptHub"]
+
+Converted["_TextLabel3"].Font = Enum.Font.SourceSans
+Converted["_TextLabel3"].Text = "Standard Plan Based"
+Converted["_TextLabel3"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel3"].TextScaled = true
+Converted["_TextLabel3"].TextSize = 14
+Converted["_TextLabel3"].TextWrapped = true
+Converted["_TextLabel3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel3"].BackgroundTransparency = 1
+Converted["_TextLabel3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel3"].BorderSizePixel = 0
+Converted["_TextLabel3"].Position = UDim2.new(0, 0, 0.0229812171, 0)
+Converted["_TextLabel3"].Size = UDim2.new(0, 215, 0, 12)
+Converted["_TextLabel3"].Parent = Converted["_ScriptHub"]
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderSizePixel = 0
+Converted["_Frame"].Position = UDim2.new(0, 0, 0, 35)
+Converted["_Frame"].Size = UDim2.new(0, 215, 0, 1)
+Converted["_Frame"].Parent = Converted["_ScriptHub"]
+
+Converted["_greab4pre"].Font = Enum.Font.Gotham
+Converted["_greab4pre"].RichText = true
+Converted["_greab4pre"].Text = "Grab Knife V4 Premium"
+Converted["_greab4pre"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_greab4pre"].TextSize = 12
+Converted["_greab4pre"].TextWrapped = true
+Converted["_greab4pre"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_greab4pre"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_greab4pre"].BorderSizePixel = 0
+Converted["_greab4pre"].Position = UDim2.new(0.0279069766, 0, 0.0430000015, 0)
+Converted["_greab4pre"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_greab4pre"].Name = "greab4pre"
+Converted["_greab4pre"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script3"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(74444736936643)(plr.Name, "Grab Knife V4 Premium")
+end)"
+Converted["_Script3"].Parent = Converted["_greab4pre"]
+
+Converted["_UICorner9"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner9"].Parent = Converted["_greab4pre"]
+
+Converted["_UIStroke7"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke7"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke7"].Parent = Converted["_greab4pre"]
+
+Converted["_RemoteEvent1"].Parent = Converted["_greab4pre"]
+
+Converted["_F3x"].Font = Enum.Font.Gotham
+Converted["_F3x"].RichText = true
+Converted["_F3x"].Text = "F3X"
+Converted["_F3x"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_F3x"].TextSize = 12
+Converted["_F3x"].TextWrapped = true
+Converted["_F3x"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_F3x"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_F3x"].BorderSizePixel = 0
+Converted["_F3x"].Position = UDim2.new(0.506976724, 0, 0.0430000015, 0)
+Converted["_F3x"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_F3x"].Name = "F3x"
+Converted["_F3x"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script4"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16662897769).load(plr.Name)
+end)"
+Converted["_Script4"].Parent = Converted["_F3x"]
+
+Converted["_UICorner10"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner10"].Parent = Converted["_F3x"]
+
+Converted["_UIStroke8"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke8"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke8"].Parent = Converted["_F3x"]
+
+Converted["_RemoteEvent2"].Parent = Converted["_F3x"]
+
+Converted["_china"].Font = Enum.Font.Gotham
+Converted["_china"].RichText = true
+Converted["_china"].Text = "Citizen China Remake"
+Converted["_china"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_china"].TextSize = 12
+Converted["_china"].TextWrapped = true
+Converted["_china"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_china"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_china"].BorderSizePixel = 0
+Converted["_china"].Position = UDim2.new(0.0279069766, 0, 0.0729999989, 0)
+Converted["_china"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_china"].Name = "china"
+Converted["_china"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script5"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(78479855259811)(plr.Name)
+end)"
+Converted["_Script5"].Parent = Converted["_china"]
+
+Converted["_UICorner11"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner11"].Parent = Converted["_china"]
+
+Converted["_UIStroke9"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke9"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke9"].Parent = Converted["_china"]
+
+Converted["_RemoteEvent3"].Parent = Converted["_china"]
+
+Converted["_mr bean admin"].Font = Enum.Font.Gotham
+Converted["_mr bean admin"].RichText = true
+Converted["_mr bean admin"].Text = "Mr.Bean Admin"
+Converted["_mr bean admin"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_mr bean admin"].TextSize = 12
+Converted["_mr bean admin"].TextWrapped = true
+Converted["_mr bean admin"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_mr bean admin"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_mr bean admin"].BorderSizePixel = 0
+Converted["_mr bean admin"].Position = UDim2.new(0.506976724, 0, 0.0729999989, 0)
+Converted["_mr bean admin"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_mr bean admin"].Name = "mr bean admin"
+Converted["_mr bean admin"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script6"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16638501761){Owners={plr.Name},Prefix=';'}
+end)"
+Converted["_Script6"].Parent = Converted["_mr bean admin"]
+
+Converted["_UICorner12"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner12"].Parent = Converted["_mr bean admin"]
+
+Converted["_UIStroke10"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke10"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke10"].Parent = Converted["_mr bean admin"]
+
+Converted["_RemoteEvent4"].Parent = Converted["_mr bean admin"]
+
+Converted["_doge sum"].Font = Enum.Font.Gotham
+Converted["_doge sum"].RichText = true
+Converted["_doge sum"].Text = "Doge Summoner"
+Converted["_doge sum"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_doge sum"].TextSize = 12
+Converted["_doge sum"].TextWrapped = true
+Converted["_doge sum"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_doge sum"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_doge sum"].BorderSizePixel = 0
+Converted["_doge sum"].Position = UDim2.new(0.0279069766, 0, 0.103, 0)
+Converted["_doge sum"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_doge sum"].Name = "doge sum"
+Converted["_doge sum"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script7"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16662812199).fehack(plr.Name)
+end)"
+Converted["_Script7"].Parent = Converted["_doge sum"]
+
+Converted["_UICorner13"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner13"].Parent = Converted["_doge sum"]
+
+Converted["_UIStroke11"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke11"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke11"].Parent = Converted["_doge sum"]
+
+Converted["_RemoteEvent5"].Parent = Converted["_doge sum"]
+
+Converted["_csgo guns"].Font = Enum.Font.Gotham
+Converted["_csgo guns"].RichText = true
+Converted["_csgo guns"].Text = "CSGO Gun"
+Converted["_csgo guns"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_csgo guns"].TextSize = 12
+Converted["_csgo guns"].TextWrapped = true
+Converted["_csgo guns"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_csgo guns"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_csgo guns"].BorderSizePixel = 0
+Converted["_csgo guns"].Position = UDim2.new(0.506976724, 0, 0.103, 0)
+Converted["_csgo guns"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_csgo guns"].Name = "csgo guns"
+Converted["_csgo guns"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script8"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(4207271766).load(plr.Name)
+end)"
+Converted["_Script8"].Parent = Converted["_csgo guns"]
+
+Converted["_UICorner14"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner14"].Parent = Converted["_csgo guns"]
+
+Converted["_UIStroke12"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke12"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke12"].Parent = Converted["_csgo guns"]
+
+Converted["_RemoteEvent6"].Parent = Converted["_csgo guns"]
+
+Converted["_other gun"].Font = Enum.Font.Gotham
+Converted["_other gun"].RichText = true
+Converted["_other gun"].Text = "Other Gun"
+Converted["_other gun"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_other gun"].TextSize = 12
+Converted["_other gun"].TextWrapped = true
+Converted["_other gun"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_other gun"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_other gun"].BorderSizePixel = 0
+Converted["_other gun"].Position = UDim2.new(0.506976724, 0, 0.133000001, 0)
+Converted["_other gun"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_other gun"].Name = "other gun"
+Converted["_other gun"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script9"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16668739839).load(plr.Name)
+end)"
+Converted["_Script9"].Parent = Converted["_other gun"]
+
+Converted["_UICorner15"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner15"].Parent = Converted["_other gun"]
+
+Converted["_UIStroke13"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke13"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke13"].Parent = Converted["_other gun"]
+
+Converted["_RemoteEvent7"].Parent = Converted["_other gun"]
+
+Converted["_Mystic"].Font = Enum.Font.Gotham
+Converted["_Mystic"].RichText = true
+Converted["_Mystic"].Text = "Mystic"
+Converted["_Mystic"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Mystic"].TextSize = 12
+Converted["_Mystic"].TextWrapped = true
+Converted["_Mystic"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_Mystic"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Mystic"].BorderSizePixel = 0
+Converted["_Mystic"].Position = UDim2.new(0.0279069766, 0, 0.133000001, 0)
+Converted["_Mystic"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_Mystic"].Name = "Mystic"
+Converted["_Mystic"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script10"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16571960080)(plr.Name)
+end)"
+Converted["_Script10"].Parent = Converted["_Mystic"]
+
+Converted["_UICorner16"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner16"].Parent = Converted["_Mystic"]
+
+Converted["_UIStroke14"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke14"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke14"].Parent = Converted["_Mystic"]
+
+Converted["_RemoteEvent8"].Parent = Converted["_Mystic"]
+
+Converted["_pee WHY"].Font = Enum.Font.Gotham
+Converted["_pee WHY"].RichText = true
+Converted["_pee WHY"].Text = "Pee, WHY?"
+Converted["_pee WHY"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_pee WHY"].TextSize = 12
+Converted["_pee WHY"].TextWrapped = true
+Converted["_pee WHY"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_pee WHY"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_pee WHY"].BorderSizePixel = 0
+Converted["_pee WHY"].Position = UDim2.new(0.0279069766, 0, 0.163000003, 0)
+Converted["_pee WHY"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_pee WHY"].Name = "pee WHY"
+Converted["_pee WHY"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script11"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(4709753802).load(plr.Name)
+end)"
+Converted["_Script11"].Parent = Converted["_pee WHY"]
+
+Converted["_UICorner17"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner17"].Parent = Converted["_pee WHY"]
+
+Converted["_UIStroke15"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke15"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke15"].Parent = Converted["_pee WHY"]
+
+Converted["_RemoteEvent9"].Parent = Converted["_pee WHY"]
+
+Converted["_ssp v/"].Font = Enum.Font.Gotham
+Converted["_ssp v/"].RichText = true
+Converted["_ssp v/"].Text = "SSP V2.0.0"
+Converted["_ssp v/"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ssp v/"].TextSize = 12
+Converted["_ssp v/"].TextWrapped = true
+Converted["_ssp v/"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_ssp v/"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ssp v/"].BorderSizePixel = 0
+Converted["_ssp v/"].Position = UDim2.new(0.506976724, 0, 0.312000006, 0)
+Converted["_ssp v/"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_ssp v/"].Name = "ssp v/"
+Converted["_ssp v/"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script12"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16920033857)(plr.Name)
+end)"
+Converted["_Script12"].Parent = Converted["_ssp v/"]
+
+Converted["_UICorner18"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner18"].Parent = Converted["_ssp v/"]
+
+Converted["_UIStroke16"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke16"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke16"].Parent = Converted["_ssp v/"]
+
+Converted["_RemoteEvent10"].Parent = Converted["_ssp v/"]
+
+Converted["_mario"].Font = Enum.Font.Gotham
+Converted["_mario"].RichText = true
+Converted["_mario"].Text = "Mario.EXE (No sound, have jumpscare)"
+Converted["_mario"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_mario"].TextScaled = true
+Converted["_mario"].TextSize = 12
+Converted["_mario"].TextWrapped = true
+Converted["_mario"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_mario"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_mario"].BorderSizePixel = 0
+Converted["_mario"].Position = UDim2.new(0.0279069766, 0, 0.193000004, 0)
+Converted["_mario"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_mario"].Name = "mario"
+Converted["_mario"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script13"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16991126811)(plr.Name)
+end)"
+Converted["_Script13"].Parent = Converted["_mario"]
+
+Converted["_UICorner19"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner19"].Parent = Converted["_mario"]
+
+Converted["_UIStroke17"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke17"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke17"].Parent = Converted["_mario"]
+
+Converted["_RemoteEvent11"].Parent = Converted["_mario"]
+
+Converted["_Steve"].Font = Enum.Font.Gotham
+Converted["_Steve"].RichText = true
+Converted["_Steve"].Text = "Steve"
+Converted["_Steve"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Steve"].TextSize = 12
+Converted["_Steve"].TextWrapped = true
+Converted["_Steve"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_Steve"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Steve"].BorderSizePixel = 0
+Converted["_Steve"].Position = UDim2.new(0.506976724, 0, 0.193000004, 0)
+Converted["_Steve"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_Steve"].Name = "Steve"
+Converted["_Steve"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script14"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16756009191).mc(plr.Name)
+end)"
+Converted["_Script14"].Parent = Converted["_Steve"]
+
+Converted["_UICorner20"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner20"].Parent = Converted["_Steve"]
+
+Converted["_UIStroke18"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke18"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke18"].Parent = Converted["_Steve"]
+
+Converted["_RemoteEvent12"].Parent = Converted["_Steve"]
+
+Converted["_hammer"].Font = Enum.Font.Gotham
+Converted["_hammer"].RichText = true
+Converted["_hammer"].Text = "Hammer"
+Converted["_hammer"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_hammer"].TextSize = 12
+Converted["_hammer"].TextWrapped = true
+Converted["_hammer"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_hammer"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_hammer"].BorderSizePixel = 0
+Converted["_hammer"].Position = UDim2.new(0.506976724, 0, 0.223000005, 0)
+Converted["_hammer"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_hammer"].Name = "hammer"
+Converted["_hammer"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script15"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(8038037940).CLoad(plr.Name)
+end)"
+Converted["_Script15"].Parent = Converted["_hammer"]
+
+Converted["_UICorner21"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner21"].Parent = Converted["_hammer"]
+
+Converted["_UIStroke19"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke19"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke19"].Parent = Converted["_hammer"]
+
+Converted["_RemoteEvent13"].Parent = Converted["_hammer"]
+
+Converted["_primadon"].Font = Enum.Font.Gotham
+Converted["_primadon"].RichText = true
+Converted["_primadon"].Text = "Primadon"
+Converted["_primadon"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_primadon"].TextSize = 12
+Converted["_primadon"].TextWrapped = true
+Converted["_primadon"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_primadon"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_primadon"].BorderSizePixel = 0
+Converted["_primadon"].Position = UDim2.new(0.0279069766, 0, 0.223000005, 0)
+Converted["_primadon"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_primadon"].Name = "primadon"
+Converted["_primadon"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script16"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(101651158399890)(plr.Name)
+end)"
+Converted["_Script16"].Parent = Converted["_primadon"]
+
+Converted["_UICorner22"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner22"].Parent = Converted["_primadon"]
+
+Converted["_UIStroke20"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke20"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke20"].Parent = Converted["_primadon"]
+
+Converted["_RemoteEvent14"].Parent = Converted["_primadon"]
+
+Converted["_Xester"].Font = Enum.Font.Gotham
+Converted["_Xester"].RichText = true
+Converted["_Xester"].Text = "Xester"
+Converted["_Xester"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Xester"].TextSize = 12
+Converted["_Xester"].TextWrapped = true
+Converted["_Xester"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_Xester"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Xester"].BorderSizePixel = 0
+Converted["_Xester"].Position = UDim2.new(0.506976724, 0, 0.252999991, 0)
+Converted["_Xester"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_Xester"].Name = "Xester"
+Converted["_Xester"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script17"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(2918747265).load(plr.Name)
+end)"
+Converted["_Script17"].Parent = Converted["_Xester"]
+
+Converted["_UICorner23"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner23"].Parent = Converted["_Xester"]
+
+Converted["_UIStroke21"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke21"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke21"].Parent = Converted["_Xester"]
+
+Converted["_RemoteEvent15"].Parent = Converted["_Xester"]
+
+Converted["_citizen virusfrfrfrf"].Font = Enum.Font.Gotham
+Converted["_citizen virusfrfrfrf"].RichText = true
+Converted["_citizen virusfrfrfrf"].Text = "Infection Virus"
+Converted["_citizen virusfrfrfrf"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_citizen virusfrfrfrf"].TextSize = 12
+Converted["_citizen virusfrfrfrf"].TextWrapped = true
+Converted["_citizen virusfrfrfrf"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_citizen virusfrfrfrf"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_citizen virusfrfrfrf"].BorderSizePixel = 0
+Converted["_citizen virusfrfrfrf"].Position = UDim2.new(0.0279069766, 0, 0.252999991, 0)
+Converted["_citizen virusfrfrfrf"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_citizen virusfrfrfrf"].Name = "citizen virusfrfrfrf"
+Converted["_citizen virusfrfrfrf"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script18"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(8317917339).Infection(plr.Name)
+end)"
+Converted["_Script18"].Parent = Converted["_citizen virusfrfrfrf"]
+
+Converted["_UICorner24"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner24"].Parent = Converted["_citizen virusfrfrfrf"]
+
+Converted["_UIStroke22"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke22"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke22"].Parent = Converted["_citizen virusfrfrfrf"]
+
+Converted["_RemoteEvent16"].Parent = Converted["_citizen virusfrfrfrf"]
+
+Converted["_kill mc"].Font = Enum.Font.Gotham
+Converted["_kill mc"].RichText = true
+Converted["_kill mc"].Text = "Kill Robot IDK"
+Converted["_kill mc"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_kill mc"].TextSize = 12
+Converted["_kill mc"].TextWrapped = true
+Converted["_kill mc"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_kill mc"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_kill mc"].BorderSizePixel = 0
+Converted["_kill mc"].Position = UDim2.new(0.0279069766, 0, 0.282000005, 0)
+Converted["_kill mc"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_kill mc"].Name = "kill mc"
+Converted["_kill mc"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script19"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(6375409514).load(plr.Name)
+end)"
+Converted["_Script19"].Parent = Converted["_kill mc"]
+
+Converted["_UICorner25"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner25"].Parent = Converted["_kill mc"]
+
+Converted["_UIStroke23"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke23"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke23"].Parent = Converted["_kill mc"]
+
+Converted["_RemoteEvent17"].Parent = Converted["_kill mc"]
+
+Converted["_grandsolar"].Font = Enum.Font.Gotham
+Converted["_grandsolar"].RichText = true
+Converted["_grandsolar"].Text = "Grandsola"
+Converted["_grandsolar"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_grandsolar"].TextSize = 12
+Converted["_grandsolar"].TextWrapped = true
+Converted["_grandsolar"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_grandsolar"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_grandsolar"].BorderSizePixel = 0
+Converted["_grandsolar"].Position = UDim2.new(0.506976724, 0, 0.282000005, 0)
+Converted["_grandsolar"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_grandsolar"].Name = "grandsolar"
+Converted["_grandsolar"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script20"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16492539574)(plr.Name)
+end)"
+Converted["_Script20"].Parent = Converted["_grandsolar"]
+
+Converted["_UICorner26"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner26"].Parent = Converted["_grandsolar"]
+
+Converted["_UIStroke24"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke24"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke24"].Parent = Converted["_grandsolar"]
+
+Converted["_RemoteEvent18"].Parent = Converted["_grandsolar"]
+
+Converted["_ssp dex"].Font = Enum.Font.Gotham
+Converted["_ssp dex"].RichText = true
+Converted["_ssp dex"].Text = "SSP + Dex"
+Converted["_ssp dex"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ssp dex"].TextSize = 12
+Converted["_ssp dex"].TextWrapped = true
+Converted["_ssp dex"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_ssp dex"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ssp dex"].BorderSizePixel = 0
+Converted["_ssp dex"].Position = UDim2.new(0.0279069766, 0, 0.312000006, 0)
+Converted["_ssp dex"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_ssp dex"].Name = "ssp dex"
+Converted["_ssp dex"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script21"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16977144399)(plr.Name)
+end)"
+Converted["_Script21"].Parent = Converted["_ssp dex"]
+
+Converted["_UICorner27"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner27"].Parent = Converted["_ssp dex"]
+
+Converted["_UIStroke25"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke25"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke25"].Parent = Converted["_ssp dex"]
+
+Converted["_RemoteEvent19"].Parent = Converted["_ssp dex"]
+
+Converted["_jihad"].Font = Enum.Font.Gotham
+Converted["_jihad"].RichText = true
+Converted["_jihad"].Text = "Jihad (Not Safe For Muslim)"
+Converted["_jihad"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_jihad"].TextSize = 12
+Converted["_jihad"].TextWrapped = true
+Converted["_jihad"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_jihad"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_jihad"].BorderSizePixel = 0
+Converted["_jihad"].Position = UDim2.new(0.506976724, 0, 0.163000003, 0)
+Converted["_jihad"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_jihad"].Name = "jihad"
+Converted["_jihad"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script22"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(2971552917).load(plr.Name)
+end)"
+Converted["_Script22"].Parent = Converted["_jihad"]
+
+Converted["_UICorner28"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner28"].Parent = Converted["_jihad"]
+
+Converted["_UIStroke26"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke26"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke26"].Parent = Converted["_jihad"]
+
+Converted["_RemoteEvent20"].Parent = Converted["_jihad"]
+
+Converted["_gonber"].Font = Enum.Font.Gotham
+Converted["_gonber"].RichText = true
+Converted["_gonber"].Text = "Goner"
+Converted["_gonber"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_gonber"].TextSize = 12
+Converted["_gonber"].TextWrapped = true
+Converted["_gonber"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_gonber"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_gonber"].BorderSizePixel = 0
+Converted["_gonber"].Position = UDim2.new(0.0279069766, 0, 0.340999991, 0)
+Converted["_gonber"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_gonber"].Name = "gonber"
+Converted["_gonber"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script23"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(4513235536).G(plr.Name)
+end)"
+Converted["_Script23"].Parent = Converted["_gonber"]
+
+Converted["_UICorner29"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner29"].Parent = Converted["_gonber"]
+
+Converted["_UIStroke27"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke27"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke27"].Parent = Converted["_gonber"]
+
+Converted["_RemoteEvent21"].Parent = Converted["_gonber"]
+
+Converted["_hq"].Font = Enum.Font.Gotham
+Converted["_hq"].RichText = true
+Converted["_hq"].Text = "Roblox HQ"
+Converted["_hq"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_hq"].TextSize = 12
+Converted["_hq"].TextWrapped = true
+Converted["_hq"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_hq"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_hq"].BorderSizePixel = 0
+Converted["_hq"].Position = UDim2.new(0.506976724, 0, 0.340999991, 0)
+Converted["_hq"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_hq"].Name = "hq"
+Converted["_hq"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script24"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(17110658137).asd()
+end)"
+Converted["_Script24"].Parent = Converted["_hq"]
+
+Converted["_UICorner30"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner30"].Parent = Converted["_hq"]
+
+Converted["_UIStroke28"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke28"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke28"].Parent = Converted["_hq"]
+
+Converted["_RemoteEvent22"].Parent = Converted["_hq"]
+
+Converted["_kfc"].Font = Enum.Font.Gotham
+Converted["_kfc"].RichText = true
+Converted["_kfc"].Text = "KFC"
+Converted["_kfc"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_kfc"].TextSize = 12
+Converted["_kfc"].TextWrapped = true
+Converted["_kfc"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_kfc"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_kfc"].BorderSizePixel = 0
+Converted["_kfc"].Position = UDim2.new(0.0279069766, 0, 0.368000001, 0)
+Converted["_kfc"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_kfc"].Name = "kfc"
+Converted["_kfc"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script25"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(16662863386).kfc()
+end)"
+Converted["_Script25"].Parent = Converted["_kfc"]
+
+Converted["_UICorner31"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner31"].Parent = Converted["_kfc"]
+
+Converted["_UIStroke29"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke29"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke29"].Parent = Converted["_kfc"]
+
+Converted["_RemoteEvent23"].Parent = Converted["_kfc"]
+
+Converted["_OmegaFlowey"].Font = Enum.Font.Gotham
+Converted["_OmegaFlowey"].RichText = true
+Converted["_OmegaFlowey"].Text = "Omega Flowey"
+Converted["_OmegaFlowey"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_OmegaFlowey"].TextSize = 12
+Converted["_OmegaFlowey"].TextWrapped = true
+Converted["_OmegaFlowey"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_OmegaFlowey"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_OmegaFlowey"].BorderSizePixel = 0
+Converted["_OmegaFlowey"].Position = UDim2.new(0.506976724, 0, 0.368000001, 0)
+Converted["_OmegaFlowey"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_OmegaFlowey"].Name = "OmegaFlowey"
+Converted["_OmegaFlowey"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script26"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(5621190626).OmegaFlower(plr.Name)
+end)"
+Converted["_Script26"].Parent = Converted["_OmegaFlowey"]
+
+Converted["_UICorner32"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner32"].Parent = Converted["_OmegaFlowey"]
+
+Converted["_UIStroke30"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke30"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke30"].Parent = Converted["_OmegaFlowey"]
+
+Converted["_RemoteEvent24"].Parent = Converted["_OmegaFlowey"]
+
+Converted["_thomas"].Font = Enum.Font.Gotham
+Converted["_thomas"].RichText = true
+Converted["_thomas"].Text = "Thomas The Dank Engine"
+Converted["_thomas"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_thomas"].TextSize = 12
+Converted["_thomas"].TextWrapped = true
+Converted["_thomas"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_thomas"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_thomas"].BorderSizePixel = 0
+Converted["_thomas"].Position = UDim2.new(0.0279069766, 0, 0.397000015, 0)
+Converted["_thomas"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_thomas"].Name = "thomas"
+Converted["_thomas"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script27"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(86802942686656).Thomas(plr.Name)
+end)"
+Converted["_Script27"].Parent = Converted["_thomas"]
+
+Converted["_UICorner33"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner33"].Parent = Converted["_thomas"]
+
+Converted["_UIStroke31"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke31"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke31"].Parent = Converted["_thomas"]
+
+Converted["_RemoteEvent25"].Parent = Converted["_thomas"]
+
+Converted["_polish cow"].Font = Enum.Font.Gotham
+Converted["_polish cow"].RichText = true
+Converted["_polish cow"].Text = "Polish cow Destroyer"
+Converted["_polish cow"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_polish cow"].TextSize = 12
+Converted["_polish cow"].TextWrapped = true
+Converted["_polish cow"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_polish cow"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_polish cow"].BorderSizePixel = 0
+Converted["_polish cow"].Position = UDim2.new(0.506976724, 0, 0.397000015, 0)
+Converted["_polish cow"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_polish cow"].Name = "polish cow"
+Converted["_polish cow"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script28"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(7881477181).Polish_Cow()
+end)"
+Converted["_Script28"].Parent = Converted["_polish cow"]
+
+Converted["_UICorner34"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner34"].Parent = Converted["_polish cow"]
+
+Converted["_UIStroke32"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke32"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke32"].Parent = Converted["_polish cow"]
+
+Converted["_RemoteEvent26"].Parent = Converted["_polish cow"]
+
+Converted["_john"].Font = Enum.Font.Gotham
+Converted["_john"].RichText = true
+Converted["_john"].Text = "Cool JohnDoe Edt"
+Converted["_john"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_john"].TextSize = 12
+Converted["_john"].TextWrapped = true
+Converted["_john"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_john"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_john"].BorderSizePixel = 0
+Converted["_john"].Position = UDim2.new(0.0279069766, 0, 0.425999999, 0)
+Converted["_john"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_john"].Name = "john"
+Converted["_john"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script29"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(14077781382).JohnDoe(plr.Name)
+end)"
+Converted["_Script29"].Parent = Converted["_john"]
+
+Converted["_UICorner35"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner35"].Parent = Converted["_john"]
+
+Converted["_UIStroke33"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke33"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke33"].Parent = Converted["_john"]
+
+Converted["_RemoteEvent27"].Parent = Converted["_john"]
+
+Converted["_snoop"].Font = Enum.Font.Gotham
+Converted["_snoop"].RichText = true
+Converted["_snoop"].Text = "Snoop Doge Skybox"
+Converted["_snoop"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_snoop"].TextSize = 12
+Converted["_snoop"].TextWrapped = true
+Converted["_snoop"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_snoop"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_snoop"].BorderSizePixel = 0
+Converted["_snoop"].Position = UDim2.new(0.506976724, 0, 0.425999999, 0)
+Converted["_snoop"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_snoop"].Name = "snoop"
+Converted["_snoop"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script30"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	snoop = Instance.new("Sound", game.Workspace)
+	snoop.Name = "snoop dugg?"
+	snoop.SoundId = "rbxassetid://5300345098"
+	snoop.Volume = 1500
+	snoop.Looped = true
+	snoop:Play()
+
+	if game.Lighting:FindFirstChild("AnimatedSky") then return end
+
+	local imageIds = {
+		131395838,131395847,131395855,131395860,131395868,131395884,131395891,
+		131395897,131395901,131395946,131395957,131395966,131395972,131395979,
+		131395986,131395989,131395993,131395997,131396003,131396007,131396012,
+		131396016,131396019,131396024,131396029,131396037,131396042,131396044,
+		131396046,131396054,131396063,131396068,131396072,131396078,131396091,
+		131396098,131396102,131396108,131396110,131396113,131396116,131396121,
+		131396125,131396133,131396137,131396142,131396146,131396156,131396162,
+		131396164,131396169,131396173,131396176,131396181,131396185,131396188,
+		131396192
+	}
+
+	local sky = Instance.new("Sky")
+	sky.Name = "AnimatedSky"
+	sky.Parent = game.Lighting
+
+	while true do
+		for _, id in ipairs(imageIds) do
+			local url = "http://www.roblox.com/asset/?id=" .. id
+			sky.SkyboxBk = url
+			sky.SkyboxDn = url
+			sky.SkyboxFt = url
+			sky.SkyboxLf = url
+			sky.SkyboxRt = url
+			sky.SkyboxUp = url
+			wait(0.04)
+
+		end
+	end
+end)"
+Converted["_Script30"].Parent = Converted["_snoop"]
+
+Converted["_UICorner36"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner36"].Parent = Converted["_snoop"]
+
+Converted["_UIStroke34"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke34"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke34"].Parent = Converted["_snoop"]
+
+Converted["_RemoteEvent28"].Parent = Converted["_snoop"]
+
+Converted["_c7"].Font = Enum.Font.Gotham
+Converted["_c7"].RichText = true
+Converted["_c7"].Text = "RC7 (PASSWORD AND USERNAME IS A)"
+Converted["_c7"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_c7"].TextSize = 12
+Converted["_c7"].TextWrapped = true
+Converted["_c7"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_c7"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_c7"].BorderSizePixel = 0
+Converted["_c7"].Position = UDim2.new(0.0279069766, 0, 0.456, 0)
+Converted["_c7"].Size = UDim2.new(0, 194, 0, 23)
+Converted["_c7"].Name = "c7"
+Converted["_c7"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script31"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(12350030542).RC7(plr.Name)
+end)"
+Converted["_Script31"].Parent = Converted["_c7"]
+
+Converted["_UICorner37"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner37"].Parent = Converted["_c7"]
+
+Converted["_UIStroke35"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke35"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke35"].Parent = Converted["_c7"]
+
+Converted["_RemoteEvent29"].Parent = Converted["_c7"]
+
+Converted["_stummygun"].Font = Enum.Font.Gotham
+Converted["_stummygun"].RichText = true
+Converted["_stummygun"].Text = "Stummy Gun (Fixed)"
+Converted["_stummygun"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_stummygun"].TextSize = 12
+Converted["_stummygun"].TextWrapped = true
+Converted["_stummygun"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_stummygun"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_stummygun"].BorderSizePixel = 0
+Converted["_stummygun"].Position = UDim2.new(0.0279069766, 0, 0.488000005, 0)
+Converted["_stummygun"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_stummygun"].Name = "stummygun"
+Converted["_stummygun"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script32"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(85641071395989)(plr.Name)
+end)"
+Converted["_Script32"].Parent = Converted["_stummygun"]
+
+Converted["_UICorner38"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner38"].Parent = Converted["_stummygun"]
+
+Converted["_UIStroke36"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke36"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke36"].Parent = Converted["_stummygun"]
+
+Converted["_RemoteEvent30"].Parent = Converted["_stummygun"]
+
+Converted["_ssafe"].Font = Enum.Font.Gotham
+Converted["_ssafe"].RichText = true
+Converted["_ssafe"].Text = "Sensation Hub (Safe Version)"
+Converted["_ssafe"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ssafe"].TextSize = 12
+Converted["_ssafe"].TextWrapped = true
+Converted["_ssafe"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_ssafe"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ssafe"].BorderSizePixel = 0
+Converted["_ssafe"].Position = UDim2.new(0.506976724, 0, 0.488999993, 0)
+Converted["_ssafe"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_ssafe"].Name = "ssafe"
+Converted["_ssafe"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script33"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(85380043749737)(plr.Name)
+end)"
+Converted["_Script33"].Parent = Converted["_ssafe"]
+
+Converted["_UICorner39"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner39"].Parent = Converted["_ssafe"]
+
+Converted["_UIStroke37"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke37"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke37"].Parent = Converted["_ssafe"]
+
+Converted["_RemoteEvent31"].Parent = Converted["_ssafe"]
+
+Converted["_shed"].Font = Enum.Font.Gotham
+Converted["_shed"].RichText = true
+Converted["_shed"].Text = "Shedletsky"
+Converted["_shed"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_shed"].TextSize = 12
+Converted["_shed"].TextWrapped = true
+Converted["_shed"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_shed"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_shed"].BorderSizePixel = 0
+Converted["_shed"].Position = UDim2.new(0.0279069766, 0, 0.518000007, 0)
+Converted["_shed"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_shed"].Name = "shed"
+Converted["_shed"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script34"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	s = Instance.new("Sky")
+	s.Name = "SKY"
+	s.SkyboxBk = "http://www.roblox.com/asset/?id=172423468"
+	s.SkyboxDn = "http://www.roblox.com/asset/?id=172423468"
+	s.SkyboxFt = "http://www.roblox.com/asset/?id=172423468"
+	s.SkyboxLf = "http://www.roblox.com/asset/?id=172423468"
+	s.SkyboxRt = "http://www.roblox.com/asset/?id=172423468"
+	s.SkyboxUp = "http://www.roblox.com/asset/?id=172423468"
+	s.Parent = game.Lighting
+	Spooky = Instance.new("Sound", game.Workspace)
+	Spooky.Name = "Spooky"
+	Spooky.SoundId = "rbxassetid://78154888193339"
+	Spooky.Volume = 1000
+	Spooky.Looped = true
+	Spooky.Pitch = 0.385
+	Spooky:Play()
+	local ID =18889618673 --id here
+	t1 = "http://www.roblox.com/asset/?id=18343405871"
+	t2 = "http://www.roblox.com/asset/?id=18343405871"
+	t3 = "http://www.roblox.com/asset/?id=18343405871"
+
+	local p = game.Players:GetChildren()
+	local w = game.Workspace:GetChildren()
+
+	for i,v in pairs(p) do
+		pe = Instance.new("ParticleEmitter", v.Character.Head)
+		pe.Texture = t3
+		pe.VelocitySpread = 5
+	end
+end)"
+Converted["_Script34"].Parent = Converted["_shed"]
+
+Converted["_UICorner40"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner40"].Parent = Converted["_shed"]
+
+Converted["_UIStroke38"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke38"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke38"].Parent = Converted["_shed"]
+
+Converted["_RemoteEvent32"].Parent = Converted["_shed"]
+
+Converted["_shel"].Font = Enum.Font.Gotham
+Converted["_shel"].RichText = true
+Converted["_shel"].Text = "Sheldoni GUI"
+Converted["_shel"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_shel"].TextSize = 12
+Converted["_shel"].TextWrapped = true
+Converted["_shel"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_shel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_shel"].BorderSizePixel = 0
+Converted["_shel"].Position = UDim2.new(0.506976724, 0, 0.518000007, 0)
+Converted["_shel"].Size = UDim2.new(0, 91, 0, 23)
+Converted["_shel"].Name = "shel"
+Converted["_shel"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script35"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	require(15629007042)(plr.Name)
+end)"
+Converted["_Script35"].Parent = Converted["_shel"]
+
+Converted["_UICorner41"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner41"].Parent = Converted["_shel"]
+
+Converted["_UIStroke39"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke39"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke39"].Parent = Converted["_shel"]
+
+Converted["_RemoteEvent33"].Parent = Converted["_shel"]
+
+Converted["_1xhead"].Font = Enum.Font.Gotham
+Converted["_1xhead"].RichText = true
+Converted["_1xhead"].Text = "1x1x1x1 Head"
+Converted["_1xhead"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_1xhead"].TextSize = 12
+Converted["_1xhead"].TextWrapped = true
+Converted["_1xhead"].BackgroundColor3 = Color3.fromRGB(60.00000022351742, 60.00000022351742, 60.00000022351742)
+Converted["_1xhead"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_1xhead"].BorderSizePixel = 0
+Converted["_1xhead"].Position = UDim2.new(0.0279069766, 0, 0.549000025, 0)
+Converted["_1xhead"].Size = UDim2.new(0, 97, 0, 23)
+Converted["_1xhead"].Name = "1xhead"
+Converted["_1xhead"].Parent = Converted["_ScriptHub"]
+
+Converted["_Script36"].Source = "script.Parent.RemoteEvent.OnServerEvent:Connect(function(plr)
+	local ServerStorage = game:GetService("ServerStorage")
+	local Debris = game:GetService("Debris")
+
+	local function createHead()
+		local head = Instance.new("Part")
+		head.Size = Vector3.new(2, 2, 2)
+		head.Shape = Enum.PartType.Ball
+		head.Material = Enum.Material.SmoothPlastic
+		head.BrickColor = BrickColor.new("Bright red")
+		head.TopSurface = Enum.SurfaceType.Smooth
+		head.BottomSurface = Enum.SurfaceType.Smooth
+
+		local mesh = Instance.new("SpecialMesh")
+		mesh.MeshType = Enum.MeshType.Head
+		mesh.Scale = Vector3.new(1.2, 1.2, 1.2)
+		mesh.Parent = head
+
+		local face = Instance.new("Decal")
+		face.Texture = "rbxasset://textures/face.png"
+		face.Parent = head
+
+		return head
+	end
+
+	local function rainHeads()
+		while true do
+			wait(0.5)
+
+			local head = createHead()
+			head.Position = Vector3.new(math.random(-100, 100), 100, math.random(-100, 100))
+			head.Parent = game.Workspace
+
+			local velocity = Instance.new("BodyVelocity")
+			velocity.Velocity = Vector3.new(0, -50, 0)
+			velocity.MaxForce = Vector3.new(1000, 1000, 1000)
+			velocity.Parent = head
+
+			Debris:AddItem(head, 10)
+		end
+	end
+
+	spawn(rainHeads)
+end)"
+Converted["_Script36"].Parent = Converted["_1xhead"]
+
+Converted["_UICorner42"].CornerRadius = UDim.new(0, 3)
+Converted["_UICorner42"].Parent = Converted["_1xhead"]
+
+Converted["_UIStroke40"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke40"].Color = Color3.fromRGB(104.00000900030136, 104.00000900030136, 104.00000900030136)
+Converted["_UIStroke40"].Parent = Converted["_1xhead"]
+
+Converted["_RemoteEvent34"].Parent = Converted["_1xhead"]
+
+Converted["_UIStroke41"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke41"].Thickness = 5
+Converted["_UIStroke41"].Parent = Converted["_ohwow"]
+
+Converted["_UIGradient3"].Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425)),
+	ColorSequenceKeypoint.new(0.4982699155807495, Color3.fromRGB(60.00000022351742, 60.00000022351742, 62.00000010430813)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(36.00000165402889, 36.00000165402889, 37.00000159442425))
+}
+Converted["_UIGradient3"].Parent = Converted["_ohwow"]
+
+-- Fake Module Scripts:
+
+local fake_module_scripts = {}
+
+do -- Fake Module: Workspace.lol.MainModule.ScreenGui.ResizableFrame.ex.sdf.lolxd
+    local script = Instance.new("ModuleScript")
+    script.Name = "lolxd"
+    script.Parent = Converted["_sdf"]
+    local function module_script()
+		--[[
+			Credit to einsteinK.
+			Credit to Stravant for LBI.
+			
+			Credit to the creators of all the other modules used in this.
+			
+			Sceleratis was here and decided modify some things.
+			
+			einsteinK was here again to fix a bug in LBI for if-statements
+		--]]
+		
+		local waitDeps = {
+			'Rerubi';
+			'LuaK';
+			'LuaP';
+			'LuaU';
+			'LuaX';
+			'LuaY';
+			'LuaZ';
+		}
+		
+		for i,v in pairs(waitDeps) do script:WaitForChild(v) end
+		
+		local luaX = require(script.LuaX)
+		local luaY = require(script.LuaY)
+		local luaZ = require(script.LuaZ)
+		local luaU = require(script.LuaU)
+		local rerubi = require(script.Rerubi)
+		
+		luaX:init()
+		local LuaState = {}
+		
+		getfenv().script = nil
+		
+		return function(str,env)
+			local f,writer,buff,name
+			local env = env or getfenv(2)
+			local name = (env.script and env.script:GetFullName())
+			local ran,error = pcall(function()
+				local zio = luaZ:init(luaZ:make_getS(str), nil)
+				if not zio then return error() end
+				local func = luaY:parser(LuaState, zio, nil, name or "nil")
+				writer, buff = luaU:make_setS()
+				luaU:dump(LuaState, func, writer, buff)
+				f = rerubi(buff.data, env)
+			end)
+			
+			if ran then
+				return f,buff.data
+			else
+				return nil,error
+			end
+		end
+    end
+    fake_module_scripts[script] = module_script
+end
+
+-- Fake Local Scripts:
+
+local function SOZR_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ScreenGui"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local screenGui = script.Parent
+	local frame = screenGui:WaitForChild("yes")
+	local openButton = screenGui:WaitForChild("Open")
+	local closeButton = frame:WaitForChild("Close")
+	local textBox = frame:WaitForChild("TextBox")
+	local r6Button = frame:WaitForChild("R6")
+	local player = game.Players.LocalPlayer
+	
+	-- Hide the frame on start, and show the open button
+	frame.Visible = false
+	openButton.Visible = true
+	
+	-- Open button
+	openButton.MouseButton1Click:Connect(function()
+		frame.Visible = true
+		openButton.Visible = false  -- Hide Open button when GUI opens
+	end)
+	
+	-- Close button
+	closeButton.MouseButton1Click:Connect(function()
+		frame.Visible = false
+		openButton.Visible = true  -- Show Open button again when frame is closed
+	end)
+	
+	-- R6 button sets TextBox text
+	r6Button.MouseButton1Click:Connect(function()
+		textBox.Text = 'require(9635947635).load("' .. player.Name .. '")'
+	end)
+end
+local function CALWC_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.aLocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "aLocalScript"
+    script.Parent = Converted["_ScreenGui"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	
+	-- Fake Lalol Hub error message
+	local fakeError = "Lalol Hub | [Module: Scanner.lua:114] attempt to index nil with 'Children'"
+	
+	local function kick(reason)
+		LocalPlayer:Kick(reason or fakeError)
+	end
+	
+	-- Detect getgc usage (exploiter scanning for remotes/modules)
+	local success, result = pcall(function()
+		if getgc then
+			for i, v in pairs(getgc()) do
+				if typeof(v) == "table" and rawget(v, "FireServer") then
+					kick()
+				end
+			end
+		end
+	end)
+	
+	-- Detect suspicious usage of GetDescendants (used by scanners)
+	local getDescendantsCount = 0
+	local originalGetDescendants = game.GetDescendants
+	
+	game.GetDescendants = function(self)
+		getDescendantsCount += 1
+		if getDescendantsCount > 3 then
+			kick()
+		end
+		return originalGetDescendants(self)
+	end
+	
+	-- Detect access to too many Remotes (backdoor scanners try to index all of them)
+	local remoteAccessCount = 0
+	for _, v in pairs(game:GetDescendants()) do
+		if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
+			remoteAccessCount += 1
+		end
+	end
+	
+	if remoteAccessCount > 20 then
+		kick()
+	end
+	
+end
+local function MVMYX_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.sch op cl
+    local script = Instance.new("LocalScript")
+    script.Name = "sch op cl"
+    script.Parent = Converted["_ScreenGui"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local playerGui = player:WaitForChild("PlayerGui")
+	
+	local screenGui = playerGui:WaitForChild("ScreenGui")
+	
+	local button = screenGui:WaitForChild("ResizableFrame"):WaitForChild("Script")
+	local ohwow = screenGui:WaitForChild("ohwow") -- Not inside ResizableFrame
+	
+	button.MouseButton1Click:Connect(function()
+		ohwow.Visible = not ohwow.Visible
+	end)
+	
+end
+local function HKRKNGP_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.Whitelist
+    local script = Instance.new("LocalScript")
+    script.Name = "Whitelist"
+    script.Parent = Converted["_ScreenGui"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	
+	local groupId = 33523662
+	
+	if player:IsInGroup(groupId) then
+		script.Parent.Enabled = true
+	else
+		script.Parent.Enabled = false
+	end
+end
+local function EWIPRWJ_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.open.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_open"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local imageLabel = script.Parent
+	local TweenService = game:GetService("TweenService")
+	
+	
+	imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+	
+	
+	imageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+	
+	
+	wait(3)
+	
+	
+	local targetPosition = UDim2.new(0, 60, 1, -60) -- มุมล่างซ้าย + ขอบห่างนิดหน่อย
+	local tweenInfo = TweenInfo.new(
+		1.5, 
+		Enum.EasingStyle.Quad,
+		Enum.EasingDirection.Out
+	)
+	
+	local moveTween = TweenService:Create(imageLabel, tweenInfo, {
+		Position = targetPosition
+	})
+	
+	moveTween:Play()
+	
+end
+local function RYQUKHF_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.open.spin
+    local script = Instance.new("LocalScript")
+    script.Name = "spin"
+    script.Parent = Converted["_open"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local TweenService = game:GetService("TweenService")
+	local frame = script.Parent
+	
+	local rotating = false
+	
+	local function startRotation()
+		rotating = true
+		while rotating do
+			local tweenLeft = TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+				Rotation = -5
+			})
+			tweenLeft:Play()
+			tweenLeft.Completed:Wait()
+	
+			if not rotating then break end
+	
+			local tweenRight = TweenService:Create(frame, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+				Rotation = 5
+			})
+			tweenRight:Play()
+			tweenRight.Completed:Wait()
+		end
+	
+	    local reset = TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {
+			Rotation = 0
+		})
+		reset:Play()
+	end
+	
+	
+	frame.MouseEnter:Connect(function()
+		if not rotating then
+			task.spawn(startRotation) -- ใช้ task.spawn เพื่อไม่บล็อก thread หลัก
+		end
+	end)
+	
+	
+	frame.MouseLeave:Connect(function()
+		rotating = false
+	end)
+	
+end
+local function YBXGFU_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.open.open
+    local script = Instance.new("LocalScript")
+    script.Name = "open"
+    script.Parent = Converted["_open"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local button = script.Parent
+	local frame = button.Parent:WaitForChild("ResizableFrame")
+	local tweenService = game:GetService("TweenService")
+	
+	
+	frame.Visible = false
+	frame.BackgroundTransparency = 1 
+	
+	
+	local tweenInfo = TweenInfo.new(
+		0.5,
+		Enum.EasingStyle.Quad,
+		Enum.EasingDirection.Out
+	)
+	
+	local goalVisible = {BackgroundTransparency = 0} 
+	local goalInvisible = {BackgroundTransparency = 1} 
+	
+	button.MouseButton1Click:Connect(function()
+		if frame.Visible then
+	
+			local tween = tweenService:Create(frame, tweenInfo, goalInvisible)
+			tween:Play()
+			frame.Visible = false
+		else
+	
+			frame.Visible = true
+	
+			local tween = tweenService:Create(frame, tweenInfo, goalVisible)
+			tween:Play()
+		end
+	end)
+	
+end
+local function KULCCSA_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.open.ImageLabel.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ImageLabel"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	-- สมมุติว่าอยู่ใน ScreenGui ที่มี ImageLabel และ TextLabel
+	
+	local imageLabel = script.Parent.Parent:WaitForChild("ImageLabel")
+	local textLabel = script.Parent:WaitForChild("TextLabel")
+	
+	-- ซ่อนข้อความไว้ก่อน
+	textLabel.Visible = false
+	
+	-- เมื่อเมาส์เข้าไปโดน ImageLabel
+	imageLabel.MouseEnter:Connect(function()
+		textLabel.Visible = true
+	end)
+	
+	-- เมื่อเมาส์ออกจาก ImageLabel
+	imageLabel.MouseLeave:Connect(function()
+		textLabel.Visible = false
+	end)
+	
+end
+local function PSOEONB_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ResizableFrame"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.Open.MouseButton1Click:Connect(function()
+		script.Parent.yes.Visible = true
+	end)
+	
+	script.Parent.Close.MouseButton1Click:Connect(function()
+		script.Parent.yes.Visible = false
+	end)
+end
+local function MWNH_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.drag
+    local script = Instance.new("LocalScript")
+    script.Name = "drag"
+    script.Parent = Converted["_ResizableFrame"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local UIS = game:GetService("UserInputService")
+	function dragify(Frame)
+	    dragToggle = nil
+	    local dragSpeed = 0
+	    dragInput = nil
+	    dragStart = nil
+	    local dragPos = nil
+	    function updateInput(input)
+	        local Delta = input.Position - dragStart
+	        local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+	        game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
+	    end
+	    Frame.InputBegan:Connect(function(input)
+	        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+	            dragToggle = true
+	            dragStart = input.Position
+	            startPos = Frame.Position
+	            input.Changed:Connect(function()
+	                if input.UserInputState == Enum.UserInputState.End then
+	                    dragToggle = false
+	                end
+	            end)
+	        end
+	    end)
+	    Frame.InputChanged:Connect(function(input)
+	        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	            dragInput = input
+	        end
+	    end)
+	    game:GetService("UserInputService").InputChanged:Connect(function(input)
+	        if input == dragInput and dragToggle then
+	            updateInput(input)
+	        end
+	    end)
+	end
+	
+	dragify(script.Parent)
+end
+local function MJKJX_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ResizableFrame"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local frame = script.Parent
+	local handle = frame:WaitForChild("ResizeHandle")
+	local UIS = game:GetService("UserInputService")
+	
+	local resizing = false
+	local startMouseY
+	local startHeight
+	
+	-- เริ่มลากเมื่อคลิกที่ handle
+	handle.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			resizing = true
+			startMouseY = UIS:GetMouseLocation().Y
+			startHeight = frame.Size.Y.Offset
+		end
+	end)
+	
+	-- ตอนลากเมาส์
+	UIS.InputChanged:Connect(function(input)
+		if resizing and input.UserInputType == Enum.UserInputType.MouseMovement then
+			local currentY = UIS:GetMouseLocation().Y
+			local deltaY = currentY - startMouseY
+	
+			local newHeight = math.max(50, startHeight + deltaY)
+			frame.Size = UDim2.new(frame.Size.X.Scale, frame.Size.X.Offset, 0, newHeight)
+		end
+	end)
+	
+	-- ปล่อยเมาส์เมื่อไหร่ หยุดลาก
+	UIS.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			resizing = false
+		end
+	end)
+	
+end
+local function AGPCVHC_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ResizableFrame"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local imageLabel = script.Parent
+	local textLabel = ResizableFrame:WaitForChild("ResizeHandle")
+	
+	-- ซ่อนไว้ก่อน
+	textLabel.Visible = false
+	
+	-- เมื่อเมาส์เข้า
+	imageLabel.MouseEnter:Connect(function()
+		textLabel.Visible = true
+	end)
+	
+	-- เมื่อเมาส์ออก
+	imageLabel.MouseLeave:Connect(function()
+		textLabel.Visible = false
+	end)
+	
+end
+local function ECOVRSH_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.ex.waitwhat
+    local script = Instance.new("LocalScript")
+    script.Name = "waitwhat"
+    script.Parent = Converted["_ex"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	-- //Scripted by Sochi | Skidded by 07n7z\\
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Lol:FireServer(script.Parent.Parent.TextBox.Text)
+		script.Parent.Parent.TextBox:ReleaseFocus()
+	end)
+end
+local function LSCXKWI_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.Respawn.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Respawn"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:connect(function()
+			script.Parent.Respawn:FireServer()
+	end)
+end
+local function HJKAWVK_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.R6.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_R6"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function KOUPE_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ResizableFrame.Script.open
+    local script = Instance.new("LocalScript")
+    script.Name = "open"
+    script.Parent = Converted["_Script2"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local button = script.Parent.Parent.Parent.ohwow.ScriptHub
+	local frame = script.Parent.Parent.Parent.ohwow
+	local tweenService = game:GetService("TweenService")
+	
+	
+	frame.Visible = false
+	frame.BackgroundTransparency = 1 
+	
+	
+	local tweenInfo = TweenInfo.new(
+		0.5,
+		Enum.EasingStyle.Quad,
+		Enum.EasingDirection.Out
+	)
+	
+	local goalVisible = {BackgroundTransparency = 0} 
+	local goalInvisible = {BackgroundTransparency = 1} 
+	
+	button.MouseButton1Click:Connect(function()
+		if frame.Visible then
+	
+			local tween = tweenService:Create(frame, tweenInfo, goalInvisible)
+			tween:Play()
+			frame.Visible = false
+		else
+	
+			frame.Visible = true
+	
+			local tween = tweenService:Create(frame, tweenInfo, goalVisible)
+			tween:Play()
+		end
+	end)
+	
+end
+local function VVLXUI_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.drag
+    local script = Instance.new("LocalScript")
+    script.Name = "drag"
+    script.Parent = Converted["_ohwow"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local UIS = game:GetService("UserInputService")
+	function dragify(Frame)
+	    dragToggle = nil
+	    local dragSpeed = 0
+	    dragInput = nil
+	    dragStart = nil
+	    local dragPos = nil
+	    function updateInput(input)
+	        local Delta = input.Position - dragStart
+	        local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+	        game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
+	    end
+	    Frame.InputBegan:Connect(function(input)
+	        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+	            dragToggle = true
+	            dragStart = input.Position
+	            startPos = Frame.Position
+	            input.Changed:Connect(function()
+	                if input.UserInputState == Enum.UserInputState.End then
+	                    dragToggle = false
+	                end
+	            end)
+	        end
+	    end)
+	    Frame.InputChanged:Connect(function(input)
+	        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	            dragInput = input
+	        end
+	    end)
+	    game:GetService("UserInputService").InputChanged:Connect(function(input)
+	        if input == dragInput and dragToggle then
+	            updateInput(input)
+	        end
+	    end)
+	end
+	
+	dragify(script.Parent)
+end
+local function ICLKQT_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.greab4pre.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_greab4pre"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function IHEFHYH_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.F3x.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_F3x"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function OYKVM_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.china.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_china"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function DTCB_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.mr bean admin.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_mr bean admin"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function FXTUNI_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.doge sum.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_doge sum"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function JPIBL_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.csgo guns.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_csgo guns"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function IPEFQN_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.other gun.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_other gun"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function YMDWYUE_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.Mystic.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Mystic"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function BZCMHS_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.pee WHY.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_pee WHY"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function GIZDR_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.ssp v/.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ssp v/"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function YGHY_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.mario.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_mario"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function RQYKL_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.Steve.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Steve"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function YEIGNKV_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.hammer.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_hammer"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function PQOHV_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.primadon.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_primadon"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function DFYEUG_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.Xester.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Xester"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function LAXP_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.citizen virusfrfrfrf.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_citizen virusfrfrfrf"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function WPQIPON_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.kill mc.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_kill mc"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function JJDRJXY_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.grandsolar.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_grandsolar"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function TUNI_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.ssp dex.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ssp dex"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function KIGNQLJ_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.jihad.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_jihad"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function TSNLEM_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.gonber.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_gonber"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function JQZT_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.hq.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_hq"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function STWT_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.kfc.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_kfc"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function GQRB_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.OmegaFlowey.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_OmegaFlowey"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function TBOA_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.thomas.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_thomas"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function ONCX_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.polish cow.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_polish cow"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function BAEKOZ_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.john.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_john"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function GVJBYV_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.snoop.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_snoop"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function YZCCZJ_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.c7.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_c7"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function NCISC_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.stummygun.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_stummygun"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function KTEFXBL_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.ssafe.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_ssafe"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function UWJVNJ_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.shed.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_shed"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function YIKKWM_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.shel.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_shel"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+local function DAEKL_fake_script() -- Fake Script: Workspace.lol.MainModule.ScreenGui.ohwow.ScriptHub.1xhead.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_1xhead"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.RemoteEvent:FireServer()
+	end)
+end
+
+coroutine.wrap(SOZR_fake_script)()
+coroutine.wrap(CALWC_fake_script)()
+coroutine.wrap(MVMYX_fake_script)()
+coroutine.wrap(HKRKNGP_fake_script)()
+coroutine.wrap(EWIPRWJ_fake_script)()
+coroutine.wrap(RYQUKHF_fake_script)()
+coroutine.wrap(YBXGFU_fake_script)()
+coroutine.wrap(KULCCSA_fake_script)()
+coroutine.wrap(PSOEONB_fake_script)()
+coroutine.wrap(MWNH_fake_script)()
+coroutine.wrap(MJKJX_fake_script)()
+coroutine.wrap(AGPCVHC_fake_script)()
+coroutine.wrap(ECOVRSH_fake_script)()
+coroutine.wrap(LSCXKWI_fake_script)()
+coroutine.wrap(HJKAWVK_fake_script)()
+coroutine.wrap(KOUPE_fake_script)()
+coroutine.wrap(VVLXUI_fake_script)()
+coroutine.wrap(ICLKQT_fake_script)()
+coroutine.wrap(IHEFHYH_fake_script)()
+coroutine.wrap(OYKVM_fake_script)()
+coroutine.wrap(DTCB_fake_script)()
+coroutine.wrap(FXTUNI_fake_script)()
+coroutine.wrap(JPIBL_fake_script)()
+coroutine.wrap(IPEFQN_fake_script)()
+coroutine.wrap(YMDWYUE_fake_script)()
+coroutine.wrap(BZCMHS_fake_script)()
+coroutine.wrap(GIZDR_fake_script)()
+coroutine.wrap(YGHY_fake_script)()
+coroutine.wrap(RQYKL_fake_script)()
+coroutine.wrap(YEIGNKV_fake_script)()
+coroutine.wrap(PQOHV_fake_script)()
+coroutine.wrap(DFYEUG_fake_script)()
+coroutine.wrap(LAXP_fake_script)()
+coroutine.wrap(WPQIPON_fake_script)()
+coroutine.wrap(JJDRJXY_fake_script)()
+coroutine.wrap(TUNI_fake_script)()
+coroutine.wrap(KIGNQLJ_fake_script)()
+coroutine.wrap(TSNLEM_fake_script)()
+coroutine.wrap(JQZT_fake_script)()
+coroutine.wrap(STWT_fake_script)()
+coroutine.wrap(GQRB_fake_script)()
+coroutine.wrap(TBOA_fake_script)()
+coroutine.wrap(ONCX_fake_script)()
+coroutine.wrap(BAEKOZ_fake_script)()
+coroutine.wrap(GVJBYV_fake_script)()
+coroutine.wrap(YZCCZJ_fake_script)()
+coroutine.wrap(NCISC_fake_script)()
+coroutine.wrap(KTEFXBL_fake_script)()
+coroutine.wrap(UWJVNJ_fake_script)()
+coroutine.wrap(YIKKWM_fake_script)()
+coroutine.wrap(DAEKL_fake_script)()
