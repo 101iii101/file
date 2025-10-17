@@ -1,0 +1,221 @@
+local player = game.Players.LocalPlayer
+local CoreGui = player:WaitForChild("PlayerGui")
+
+local MorseCode = {
+    ["A"] = ".-", ["B"] = "-...", ["C"] = "-.-.", ["D"] = "-..",
+    ["E"] = ".", ["F"] = "..-.", ["G"] = "--.", ["H"] = "....",
+    ["I"] = "..", ["J"] = ".---", ["K"] = "-.-", ["L"] = ".-..",
+    ["M"] = "--", ["N"] = "-.", ["O"] = "---", ["P"] = ".--.",
+    ["Q"] = "--.-", ["R"] = ".-.", ["S"] = "...", ["T"] = "-",
+    ["U"] = "..-", ["V"] = "...-", ["W"] = ".--", ["X"] = "-..-",
+    ["Y"] = "-.--", ["Z"] = "--..",
+    ["0"] = "-----", ["1"] = ".----", ["2"] = "..---", ["3"] = "...--",
+    ["4"] = "....-", ["5"] = ".....", ["6"] = "-....", ["7"] = "--...",
+    ["8"] = "---..", ["9"] = "----.",
+    ["."] = ".-.-.-", [","] = "--..--", ["?"] = "..--..", ["'"] = ".----.",
+    ["!"] = "-.-.--", ["/"] = "-..-.", ["("] = "-.--.", [")"] = "-.--.-",
+    ["&"] = ".-...", [":"] = "---...", [";"] = "-.-.-.", ["="] = "-...-",
+    ["+"] = ".-.-.", ["-"] = "-....-", ["_"] = "..--.-", ['"'] = ".-..-.",
+    ["$"] = "...-..-", ["@"] = ".--.-.", [" "] = "/"
+}
+
+local MorseToText = {}
+for k,v in pairs(MorseCode) do MorseToText[v] = k end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "MorseCodeMaker"
+gui.Parent = CoreGui
+gui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0,700,0,400)
+frame.Position = UDim2.new(0.5,-350,0.5,-200)
+frame.BackgroundColor3 = Color3.fromRGB(35,35,35)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0,20)
+corner.Parent = frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1,-40,0,60)
+title.Position = UDim2.new(0,20,0,10)
+title.BackgroundTransparency = 1
+title.Text = "Morse Code Maker"
+title.TextColor3 = Color3.fromRGB(255,255,255)
+title.Font = Enum.Font.SourceSansBold
+title.TextScaled = true
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = frame
+
+local tabNames = {"Converter","Translator","Info"}
+local tabs = {}
+for i,name in ipairs(tabNames) do
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0,130,0,50)
+    btn.Position = UDim2.new(0,0,0,80 + (i-1)*65)
+    btn.Text = name
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextScaled = true
+    btn.TextColor3 = Color3.fromRGB(255,255,255)
+    btn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    btn.Parent = frame
+    tabs[name] = btn
+end
+
+local converterBox = Instance.new("TextBox")
+converterBox.Size = UDim2.new(0.7,0,0,40)
+converterBox.Position = UDim2.new(0,150,0,90)
+converterBox.PlaceholderText = "Enter text to convert"
+converterBox.BackgroundColor3 = Color3.fromRGB(50,50,50)
+converterBox.TextColor3 = Color3.fromRGB(255,255,255)
+converterBox.Font = Enum.Font.SourceSansBold
+converterBox.TextScaled = true
+converterBox.ClearTextOnFocus = false
+converterBox.Parent = frame
+
+local convertButton = Instance.new("TextButton")
+convertButton.Size = UDim2.new(0.55,0,0,50)
+convertButton.Position = UDim2.new(0,150,0,150)
+convertButton.Text = "Convert"
+convertButton.Font = Enum.Font.SourceSansBold
+convertButton.TextScaled = true
+convertButton.TextColor3 = Color3.fromRGB(255,255,255)
+convertButton.BackgroundColor3 = Color3.fromRGB(70,130,180)
+convertButton.Parent = frame
+
+local translatorBox = Instance.new("TextBox")
+translatorBox.Size = UDim2.new(0.7,0,0,40)
+translatorBox.Position = UDim2.new(0,150,0,90)
+translatorBox.PlaceholderText = "Enter Morse code"
+translatorBox.BackgroundColor3 = Color3.fromRGB(50,50,50)
+translatorBox.TextColor3 = Color3.fromRGB(255,255,255)
+translatorBox.Font = Enum.Font.SourceSansBold
+translatorBox.TextScaled = true
+translatorBox.ClearTextOnFocus = false
+translatorBox.Parent = frame
+translatorBox.Visible = false
+
+local translateButton = Instance.new("TextButton")
+translateButton.Size = UDim2.new(0.55,0,0,50)
+translateButton.Position = UDim2.new(0,150,0,150)
+translateButton.Text = "Translate"
+translateButton.Font = Enum.Font.SourceSansBold
+translateButton.TextScaled = true
+translateButton.TextColor3 = Color3.fromRGB(255,255,255)
+translateButton.BackgroundColor3 = Color3.fromRGB(180,130,70)
+translateButton.Parent = frame
+translateButton.Visible = false
+
+local translatorLabel = Instance.new("TextLabel")
+translatorLabel.Size = UDim2.new(0.7,0,0.25,0)
+translatorLabel.Position = UDim2.new(0,150,0,210)
+translatorLabel.Text = "Translation"
+translatorLabel.TextColor3 = Color3.fromRGB(200,255,200)
+translatorLabel.TextScaled = true
+translatorLabel.Font = Enum.Font.SourceSansBold
+translatorLabel.BackgroundTransparency = 1
+translatorLabel.TextWrapped = true
+translatorLabel.TextXAlignment = Enum.TextXAlignment.Left
+translatorLabel.TextYAlignment = Enum.TextYAlignment.Top
+translatorLabel.Parent = frame
+translatorLabel.Visible = false
+
+-- Info tab labels
+local infoTopLabel = Instance.new("TextLabel")
+infoTopLabel.Size = UDim2.new(0.85,0,0,120)
+infoTopLabel.Position = UDim2.new(0,150,0,80)
+infoTopLabel.Text = "Welcome to Morse Code Maker!\nConvert text: Text → Morse\nTranslation: Morse → Text"
+infoTopLabel.TextColor3 = Color3.fromRGB(255,255,255)
+infoTopLabel.Font = Enum.Font.SourceSansBold
+infoTopLabel.TextScaled = true
+infoTopLabel.BackgroundTransparency = 1
+infoTopLabel.TextWrapped = true
+infoTopLabel.TextXAlignment = Enum.TextXAlignment.Left
+infoTopLabel.TextYAlignment = Enum.TextYAlignment.Top
+infoTopLabel.Parent = frame
+infoTopLabel.Visible = false
+
+local infoBottomLabel = Instance.new("TextLabel")
+infoBottomLabel.Size = UDim2.new(0.85,0,0.3,0)
+infoBottomLabel.Position = UDim2.new(0,150,0,220)
+infoBottomLabel.Text = "Created by your friendly scripter. -SupeanFa1"
+infoBottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
+infoBottomLabel.Font = Enum.Font.SourceSansBold
+infoBottomLabel.TextScaled = true
+infoBottomLabel.BackgroundTransparency = 1
+infoBottomLabel.TextWrapped = true
+infoBottomLabel.Parent = frame
+infoBottomLabel.Visible = false
+
+local function switchTab(tab)
+    converterBox.Visible = false
+    convertButton.Visible = false
+    translatorBox.Visible = false
+    translateButton.Visible = false
+    translatorLabel.Visible = false
+    infoTopLabel.Visible = false
+    infoBottomLabel.Visible = false
+    for _, btn in pairs(tabs) do
+        btn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    end
+    tabs[tab].BackgroundColor3 = Color3.fromRGB(70,70,70)
+    if tab == "Converter" then
+        converterBox.Visible = true
+        convertButton.Visible = true
+    elseif tab == "Translator" then
+        translatorBox.Visible = true
+        translateButton.Visible = true
+        translatorLabel.Visible = true
+    elseif tab == "Info" then
+        infoTopLabel.Visible = true
+        infoBottomLabel.Visible = true
+    end
+end
+
+for name,btn in pairs(tabs) do
+    btn.MouseButton1Click:Connect(function()
+        switchTab(name)
+    end)
+end
+
+local function convertToMorse(text)
+    local morse = {}
+    text = text:upper()
+    for i=1,#text do
+        local c = text:sub(i,i)
+        if MorseCode[c] then table.insert(morse,MorseCode[c]) end
+    end
+    return table.concat(morse," / ")
+end
+
+local function translateMorse(morse)
+    local text = {}
+    for code in string.gmatch(morse,"[^/]+") do
+        code = code:match("^%s*(.-)%s*$")
+        if MorseToText[code] then table.insert(text,MorseToText[code]) else table.insert(text,"?") end
+    end
+    return table.concat(text,"")
+end
+
+convertButton.MouseButton1Click:Connect(function()
+    local input = converterBox.Text
+    if input~="" then
+        local morse = convertToMorse(input)
+        setclipboard(morse)
+        convertButton.Text = "Copied!"
+        task.delay(2,function() convertButton.Text = "Convert" end)
+    end
+end)
+
+translateButton.MouseButton1Click:Connect(function()
+    local input = translatorBox.Text
+    if input~="" then
+        translatorLabel.Text = "The Translation says: "..translateMorse(input)
+    end
+end)
+
+switchTab("Converter")
