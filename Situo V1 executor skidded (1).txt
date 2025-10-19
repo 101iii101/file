@@ -1,0 +1,204 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local SitouV1 = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local ImageLabel = Instance.new("ImageLabel")
+local TextLabel = Instance.new("TextLabel")
+local CodeBox = Instance.new("TextBox")
+local ExecuteButton = Instance.new("TextButton")
+local Close = Instance.new("TextButton")
+local Clear = Instance.new("TextButton")
+
+--Properties:
+
+SitouV1.Name = "Sitou V1"
+SitouV1.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+SitouV1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = SitouV1
+Frame.BackgroundColor3 = Color3.fromRGB(97, 97, 97)
+Frame.BackgroundTransparency = 0.450
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.518648565, 0, 0.216080397, 0)
+Frame.Size = UDim2.new(0, 473, 0, 236)
+Frame.ZIndex = 0
+
+ImageLabel.Parent = Frame
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.56580919, 0, -0.214330897, 0)
+ImageLabel.Rotation = 16.000
+ImageLabel.Size = UDim2.new(0, 158, 0, 156)
+ImageLabel.ZIndex = 0
+ImageLabel.Image = "rbxassetid://89632625453187"
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(-0.0697674453, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 465, 0, 41)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Team Sitou Join Today !!"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 40.000
+
+CodeBox.Name = "CodeBox"
+CodeBox.Parent = Frame
+CodeBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CodeBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CodeBox.BorderSizePixel = 0
+CodeBox.Position = UDim2.new(0.0486257933, 0, 0.173728809, 0)
+CodeBox.Size = UDim2.new(0, 426, 0, 162)
+CodeBox.Font = Enum.Font.SourceSans
+CodeBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+CodeBox.PlaceholderText = "Script Here"
+CodeBox.Text = ""
+CodeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+CodeBox.TextSize = 14.000
+CodeBox.TextWrapped = true
+CodeBox.TextXAlignment = Enum.TextXAlignment.Left
+CodeBox.TextYAlignment = Enum.TextYAlignment.Top
+
+ExecuteButton.Name = "ExecuteButton"
+ExecuteButton.Parent = Frame
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ExecuteButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ExecuteButton.BorderSizePixel = 0
+ExecuteButton.Position = UDim2.new(0.0697674453, 0, 0.885593235, 0)
+ExecuteButton.Size = UDim2.new(0, 69, 0, 21)
+ExecuteButton.Font = Enum.Font.SourceSans
+ExecuteButton.Text = "Execute"
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.TextSize = 14.000
+
+Close.Name = "Close"
+Close.Parent = Frame
+Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Close.BorderSizePixel = 0
+Close.Position = UDim2.new(0.401691318, 0, 0.885593235, 0)
+Close.Size = UDim2.new(0, 69, 0, 21)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "Close"
+Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close.TextSize = 14.000
+
+Clear.Name = "Clear"
+Clear.Parent = Frame
+Clear.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Clear.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Clear.BorderSizePixel = 0
+Clear.Position = UDim2.new(0.241014794, 0, 0.885593235, 0)
+Clear.Size = UDim2.new(0, 69, 0, 21)
+Clear.Font = Enum.Font.SourceSans
+Clear.Text = "Clear"
+Clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+Clear.TextSize = 14.000
+
+-- Scripts:
+
+local function TTEF_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	local UserInputService = game:GetService("UserInputService")
+	
+	local gui = script.Parent
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(TTEF_fake_script)()
+local function VYZFPE_fake_script() -- ExecuteButton.LocalScript 
+	local script = Instance.new('LocalScript', ExecuteButton)
+
+	local frame = script.Parent.Parent
+	local textBox = frame:WaitForChild("CodeBox")
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		local code = textBox.Text
+	
+		-- Tenter d'exécuter le code
+		local func, err = loadstring(code)
+		if func then
+			-- Exécute en environnement local
+			local success, result = pcall(func)
+			if not success then
+				warn("Erreur dans le script :", result)
+			end
+		else
+			warn("Code invalide :", err)
+		end
+	end)
+	
+end
+coroutine.wrap(VYZFPE_fake_script)()
+local function WDYLV_fake_script() -- Close.LocalScript 
+	local script = Instance.new('LocalScript', Close)
+
+	local button = script.Parent
+	local frame = button.Parent  -- ou une autre frame ciblée si besoin
+	
+	button.MouseButton1Click:Connect(function()
+		frame.Visible = false
+	end)
+	
+end
+coroutine.wrap(WDYLV_fake_script)()
+local function NHIUOO_fake_script() -- Clear.LocalScript 
+	local script = Instance.new('LocalScript', Clear)
+
+	local button = script.Parent
+	local frame = button.Parent
+	local textBox = frame:WaitForChild("TextBox") -- remplace "MonTexte" par le nom de ta TextBox
+	
+	button.MouseButton1Click:Connect(function()
+		textBox.Text = ""
+	end)
+	
+end
+coroutine.wrap(NHIUOO_fake_script)()
