@@ -1,0 +1,512 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TextService = game:GetService("TextService")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local translations = {
+    en = {
+        title = "Notes",
+        addNote = "Add Note",
+        copy = "Copy",
+        toChat = "To Chat",
+        delete = "Delete",
+        newNote = "New note...",
+        minimize = "Minimize",
+        createButton = "Create Button",
+        buttonName = "Button name...",
+        sendToChat = "Send to chat",
+        warning = "Notes will disappear after rejoin!"
+    },
+    ru = {
+        title = "Заметки",
+        addNote = "Добавить заметку",
+        copy = "Копировать",
+        toChat = "В чат",
+        delete = "Удалить",
+        newNote = "Новая заметка...",
+        minimize = "Свернуть",
+        createButton = "Создать кнопку",
+        buttonName = "Название кнопки...",
+        sendToChat = "Отправить в чат",
+        warning = "Заметки исчезнут после перезахода!"
+    }
+}
+
+local currentLanguage = "en"
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "NotesUI"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 350, 0, 400)
+mainFrame.Position = UDim2.new(0.5, -175, 0.5, -200)
+mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = screenGui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = mainFrame
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+titleLabel.Text = translations[currentLanguage].title
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.BorderSizePixel = 0
+titleLabel.Parent = mainFrame
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Name = "MinimizeButton"
+minimizeButton.Size = UDim2.new(0, 25, 0, 25)
+minimizeButton.Position = UDim2.new(1, -60, 0, 2)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+minimizeButton.Text = "×"
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.TextScaled = true
+minimizeButton.BorderSizePixel = 0
+minimizeButton.Parent = mainFrame
+
+local UICorner2 = Instance.new("UICorner")
+UICorner2.CornerRadius = UDim.new(0, 4)
+UICorner2.Parent = minimizeButton
+
+local languageButton = Instance.new("TextButton")
+languageButton.Name = "LanguageButton"
+languageButton.Size = UDim2.new(0, 25, 0, 25)
+languageButton.Position = UDim2.new(1, -30, 0, 2)
+languageButton.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+languageButton.Text = "EN"
+languageButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+languageButton.TextScaled = true
+languageButton.BorderSizePixel = 0
+languageButton.Parent = mainFrame
+
+local UICorner6 = Instance.new("UICorner")
+UICorner6.CornerRadius = UDim.new(0, 4)
+UICorner6.Parent = languageButton
+
+local notesContainer = Instance.new("ScrollingFrame")
+notesContainer.Name = "NotesContainer"
+notesContainer.Size = UDim2.new(1, -20, 1, -80)
+notesContainer.Position = UDim2.new(0, 10, 0, 40)
+notesContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+notesContainer.BorderSizePixel = 0
+notesContainer.ScrollBarThickness = 6
+notesContainer.AutomaticCanvasSize = Enum.AutomaticSize.Y
+notesContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
+notesContainer.Parent = mainFrame
+
+local UICorner3 = Instance.new("UICorner")
+UICorner3.CornerRadius = UDim.new(0, 6)
+UICorner3.Parent = notesContainer
+
+local warningLabel = Instance.new("TextLabel")
+warningLabel.Name = "WarningLabel"
+warningLabel.Size = UDim2.new(1, -20, 0, 60)
+warningLabel.Position = UDim2.new(0, 10, 0, 10)
+warningLabel.BackgroundColor3 = Color3.fromRGB(200, 100, 50)
+warningLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningLabel.Text = translations[currentLanguage].warning
+warningLabel.TextScaled = true
+warningLabel.TextWrapped = true
+warningLabel.BorderSizePixel = 0
+warningLabel.Visible = true
+warningLabel.Parent = notesContainer
+
+local warningUICorner = Instance.new("UICorner")
+warningUICorner.CornerRadius = UDim.new(0, 6)
+warningUICorner.Parent = warningLabel
+
+local addNoteButton = Instance.new("TextButton")
+addNoteButton.Name = "AddNoteButton"
+addNoteButton.Size = UDim2.new(0, 40, 0, 40)
+addNoteButton.Position = UDim2.new(0, 10, 1, -50)
+addNoteButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+addNoteButton.Text = "+"
+addNoteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+addNoteButton.TextScaled = true
+addNoteButton.Font = Enum.Font.GothamBold
+addNoteButton.BorderSizePixel = 0
+addNoteButton.Parent = mainFrame
+
+local UICorner4 = Instance.new("UICorner")
+UICorner4.CornerRadius = UDim.new(0, 20)
+UICorner4.Parent = addNoteButton
+
+local minimizedButton = Instance.new("TextButton")
+minimizedButton.Name = "MinimizedButton"
+minimizedButton.Size = UDim2.new(0, 40, 0, 40)
+minimizedButton.Position = UDim2.new(1, -50, 1, -50)
+minimizedButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+minimizedButton.Text = "📝"
+minimizedButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizedButton.TextScaled = true
+minimizedButton.BorderSizePixel = 0
+minimizedButton.Visible = false
+minimizedButton.Parent = screenGui
+
+local UICorner5 = Instance.new("UICorner")
+UICorner5.CornerRadius = UDim.new(0, 8)
+UICorner5.Parent = minimizedButton
+
+local notes = {}
+local isMinimized = false
+local quickButtons = {}
+
+local function makeDraggable(gui, handle)
+    local dragging = false
+    local dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+
+    handle.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = gui.Position
+            
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    handle.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+end
+
+local function createQuickButton(noteText)
+    local buttonText = string.sub(noteText, 1, 3)
+    if buttonText == "" then
+        buttonText = "Note"
+    end
+    
+    local quickButton = Instance.new("TextButton")
+    quickButton.Name = "QuickButton_" .. #quickButtons + 1
+    quickButton.Size = UDim2.new(0, 50, 0, 50)
+    quickButton.Position = UDim2.new(0, 10 + (#quickButtons * 60), 0, 10)
+    quickButton.BackgroundColor3 = Color3.fromRGB(85, 170, 85)
+    quickButton.Text = buttonText
+    quickButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    quickButton.TextScaled = true
+    quickButton.BorderSizePixel = 0
+    quickButton.Parent = screenGui
+    
+    local quickUICorner = Instance.new("UICorner")
+    quickUICorner.CornerRadius = UDim.new(0, 8)
+    quickUICorner.Parent = quickButton
+    
+    local buttonData = {
+        button = quickButton,
+        text = noteText,
+        size = 1
+    }
+    
+    table.insert(quickButtons, buttonData)
+    
+    local lastTapTime = 0
+    local tapCount = 0
+    local tapConnection = nil
+
+    local function processTap()
+        local currentTime = tick()
+        
+        if currentTime - lastTapTime > 0.5 then
+            tapCount = 0
+        end
+        
+        tapCount += 1
+        lastTapTime = currentTime
+        
+        if tapConnection then
+            tapConnection:Disconnect()
+        end
+        
+        tapConnection = RunService.Heartbeat:Connect(function()
+            local timePassed = tick() - lastTapTime
+            
+            if timePassed >= 0.3 then
+                tapConnection:Disconnect()
+                tapConnection = nil
+                
+                if tapCount == 1 then
+                    game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(noteText)
+                elseif tapCount == 2 then
+                    if buttonData.size == 1 then
+                        quickButton.Size = UDim2.new(0, 25, 0, 25)
+                        buttonData.size = 0.5
+                    else
+                        quickButton.Size = UDim2.new(0, 50, 0, 50)
+                        buttonData.size = 1
+                    end
+                elseif tapCount >= 3 then
+                    quickButton:Destroy()
+                    for i, btn in ipairs(quickButtons) do
+                        if btn == buttonData then
+                            table.remove(quickButtons, i)
+                            break
+                        end
+                    end
+                end
+                
+                tapCount = 0
+            end
+        end)
+    end
+    
+    quickButton.MouseButton1Click:Connect(processTap)
+    makeDraggable(quickButton, quickButton)
+end
+
+local function updateUI()
+    titleLabel.Text = translations[currentLanguage].title
+    warningLabel.Text = translations[currentLanguage].warning
+    
+    for _, child in ipairs(notesContainer:GetChildren()) do
+        if child:IsA("Frame") then
+            local buttonsFrame = child:FindFirstChild("ButtonsFrame")
+            local noteTextBox = child:FindFirstChild("NoteTextBox")
+            local createButtonBtn = child:FindFirstChild("CreateButton")
+            
+            if buttonsFrame then
+                local copyButton = buttonsFrame:FindFirstChild("CopyButton")
+                local chatButton = buttonsFrame:FindFirstChild("ChatButton")
+                local deleteButton = buttonsFrame:FindFirstChild("DeleteButton")
+                
+                if copyButton then
+                    copyButton.Text = translations[currentLanguage].copy
+                end
+                if chatButton then
+                    chatButton.Text = translations[currentLanguage].toChat
+                end
+                if deleteButton then
+                    deleteButton.Text = translations[currentLanguage].delete
+                end
+            end
+            
+            if noteTextBox and noteTextBox.PlaceholderText then
+                noteTextBox.PlaceholderText = translations[currentLanguage].newNote
+            end
+            
+            if createButtonBtn then
+                createButtonBtn.Text = translations[currentLanguage].createButton
+            end
+        end
+    end
+end
+
+local function switchLanguage()
+    if currentLanguage == "en" then
+        currentLanguage = "ru"
+        languageButton.Text = "RU"
+    else
+        currentLanguage = "en"
+        languageButton.Text = "EN"
+    end
+    updateUI()
+end
+
+local function updateNotesContainer()
+    for _, child in ipairs(notesContainer:GetChildren()) do
+        if child:IsA("Frame") then
+            child:Destroy()
+        end
+    end
+    
+    if #notes == 0 then
+        warningLabel.Visible = true
+    else
+        warningLabel.Visible = false
+    end
+    
+    local totalHeight = 0
+    for i = #notes, 1, -1 do
+        local noteData = notes[i]
+        local noteFrame = Instance.new("Frame")
+        noteFrame.Name = "NoteFrame_" .. i
+        noteFrame.Size = UDim2.new(1, 0, 0, 150)
+        noteFrame.Position = UDim2.new(0, 0, 0, totalHeight)
+        noteFrame.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+        noteFrame.BorderSizePixel = 0
+        noteFrame.Parent = notesContainer
+        
+        totalHeight = totalHeight + 155
+
+        local noteUICorner = Instance.new("UICorner")
+        noteUICorner.CornerRadius = UDim.new(0, 6)
+        noteUICorner.Parent = noteFrame
+
+        local noteTextBox = Instance.new("TextBox")
+        noteTextBox.Name = "NoteTextBox"
+        noteTextBox.Size = UDim2.new(1, -10, 0, 60)
+        noteTextBox.Position = UDim2.new(0, 5, 0, 5)
+        noteTextBox.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
+        noteTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+        noteTextBox.Text = noteData.text or ""
+        noteTextBox.PlaceholderText = translations[currentLanguage].newNote
+        noteTextBox.PlaceholderColor3 = Color3.fromRGB(180, 180, 180)
+        noteTextBox.TextScaled = true
+        noteTextBox.TextWrapped = true
+        noteTextBox.ClearTextOnFocus = false
+        noteTextBox.BorderSizePixel = 0
+        noteTextBox.Parent = noteFrame
+        
+        local textUICorner = Instance.new("UICorner")
+        textUICorner.CornerRadius = UDim.new(0, 4)
+        textUICorner.Parent = noteTextBox
+        
+        local buttonsFrame = Instance.new("Frame")
+        buttonsFrame.Name = "ButtonsFrame"
+        buttonsFrame.Size = UDim2.new(1, -10, 0, 25)
+        buttonsFrame.Position = UDim2.new(0, 5, 0, 70)
+        buttonsFrame.BackgroundTransparency = 1
+        buttonsFrame.Parent = noteFrame
+        
+        local copyButton = Instance.new("TextButton")
+        copyButton.Name = "CopyButton"
+        copyButton.Size = UDim2.new(0, 70, 1, 0)
+        copyButton.Position = UDim2.new(0, 0, 0, 0)
+        copyButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+        copyButton.Text = translations[currentLanguage].copy
+        copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        copyButton.TextScaled = true
+        copyButton.BorderSizePixel = 0
+        copyButton.Parent = buttonsFrame
+        
+        local copyUICorner = Instance.new("UICorner")
+        copyUICorner.CornerRadius = UDim.new(0, 4)
+        copyUICorner.Parent = copyButton
+        
+        local chatButton = Instance.new("TextButton")
+        chatButton.Name = "ChatButton"
+        chatButton.Size = UDim2.new(0, 50, 1, 0)
+        chatButton.Position = UDim2.new(0, 75, 0, 0)
+        chatButton.BackgroundColor3 = Color3.fromRGB(85, 170, 85)
+        chatButton.Text = translations[currentLanguage].toChat
+        chatButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        chatButton.TextScaled = true
+        chatButton.BorderSizePixel = 0
+        chatButton.Parent = buttonsFrame
+        
+        local chatUICorner = Instance.new("UICorner")
+        chatUICorner.CornerRadius = UDim.new(0, 4)
+        chatUICorner.Parent = chatButton
+        
+        local createButton = Instance.new("TextButton")
+        createButton.Name = "CreateButton"
+        createButton.Size = UDim2.new(0, 80, 1, 0)
+        createButton.Position = UDim2.new(0, 130, 0, 0)
+        createButton.BackgroundColor3 = Color3.fromRGB(170, 85, 255)
+        createButton.Text = translations[currentLanguage].createButton
+        createButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        createButton.TextScaled = true
+        createButton.BorderSizePixel = 0
+        createButton.Parent = buttonsFrame
+        
+        local createUICorner = Instance.new("UICorner")
+        createUICorner.CornerRadius = UDim.new(0, 4)
+        createUICorner.Parent = createButton
+        
+        local deleteButton = Instance.new("TextButton")
+        deleteButton.Name = "DeleteButton"
+        deleteButton.Size = UDim2.new(0, 50, 1, 0)
+        deleteButton.Position = UDim2.new(1, -50, 0, 0)
+        deleteButton.BackgroundColor3 = Color3.fromRGB(220, 85, 85)
+        deleteButton.Text = translations[currentLanguage].delete
+        deleteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        deleteButton.TextScaled = true
+        deleteButton.BorderSizePixel = 0
+        deleteButton.Parent = buttonsFrame
+        
+        local deleteUICorner = Instance.new("UICorner")
+        deleteUICorner.CornerRadius = UDim.new(0, 4)
+        deleteUICorner.Parent = deleteButton
+        
+        local noteIndex = i
+        
+        noteTextBox:GetPropertyChangedSignal("Text"):Connect(function()
+            notes[noteIndex].text = noteTextBox.Text
+        end)
+        
+        copyButton.MouseButton1Click:Connect(function()
+            if setclipboard then
+                setclipboard(noteTextBox.Text)
+            end
+        end)
+        
+        chatButton.MouseButton1Click:Connect(function()
+            local text = noteTextBox.Text
+            if text and text ~= "" then
+                game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(text)
+            end
+        end)
+        
+        createButton.MouseButton1Click:Connect(function()
+            createQuickButton(noteTextBox.Text)
+        end)
+        
+        deleteButton.MouseButton1Click:Connect(function()
+            table.remove(notes, noteIndex)
+            updateNotesContainer()
+        end)
+    end
+    
+    notesContainer.CanvasSize = UDim2.new(0, 0, 0, totalHeight)
+end
+
+local function addNewNote()
+    table.insert(notes, 1, {text = ""})
+    updateNotesContainer()
+end
+
+local function toggleMinimize()
+    isMinimized = not isMinimized
+    
+    if isMinimized then
+        mainFrame.Visible = false
+        minimizedButton.Visible = true
+    else
+        mainFrame.Visible = true
+        minimizedButton.Visible = false
+    end
+end
+
+addNoteButton.MouseButton1Click:Connect(addNewNote)
+minimizeButton.MouseButton1Click:Connect(toggleMinimize)
+minimizedButton.MouseButton1Click:Connect(toggleMinimize)
+languageButton.MouseButton1Click:Connect(switchLanguage)
+
+makeDraggable(mainFrame, titleLabel)
+makeDraggable(minimizedButton, minimizedButton)
+
+updateNotesContainer()
