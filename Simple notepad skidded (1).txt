@@ -1,0 +1,98 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local fileName = "NotepadBySheScripts.txt"
+if not isfile(fileName) then writefile(fileName, "") end
+getgenv().NoteText = readfile(fileName)
+
+pcall(function() player.PlayerGui.NotePad:Destroy() end)
+
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "NotePad"
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local main = Instance.new("Frame", gui)
+main.Size = UDim2.new(0, 400, 0, 280)
+main.Position = UDim2.new(0.5, 0, 0.5, 0)
+main.AnchorPoint = Vector2.new(0.5, 0.5)
+main.BackgroundColor3 = Color3.fromRGB(253, 253, 253)
+main.BorderColor3 = Color3.fromRGB(200, 200, 200)
+main.Visible = false
+main.Active = true
+main.Draggable = true
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 10)
+Instance.new("UIStroke", main).Color = Color3.fromRGB(150, 150, 150)
+
+local title = Instance.new("TextLabel", main)
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+title.Text = "Untitled - Notepad by SheScripts"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.GothamSemibold
+title.TextSize = 14
+title.TextXAlignment = Enum.TextXAlignment.Left
+Instance.new("UIPadding", title).PaddingLeft = UDim.new(0, 10)
+
+local scroll = Instance.new("ScrollingFrame", main)
+scroll.Size = UDim2.new(1, -20, 1, -70)
+scroll.Position = UDim2.new(0, 10, 0, 35)
+scroll.CanvasSize = UDim2.new(0, 0, 10, 0)
+scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+scroll.ScrollBarThickness = 6
+scroll.BackgroundTransparency = 1
+scroll.BorderSizePixel = 0
+
+local box = Instance.new("TextBox", scroll)
+box.Size = UDim2.new(1, -10, 0, 1000)
+box.Position = UDim2.new(0, 5, 0, 0)
+box.Text = getgenv().NoteText
+box.TextXAlignment = Enum.TextXAlignment.Left
+box.TextYAlignment = Enum.TextYAlignment.Top
+box.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+box.TextColor3 = Color3.fromRGB(0, 0, 0)
+box.Font = Enum.Font.Code
+box.TextSize = 14
+box.MultiLine = true
+box.TextWrapped = false
+box.ClearTextOnFocus = false
+box.TextEditable = true
+
+box:GetPropertyChangedSignal("Text"):Connect(function()
+	getgenv().NoteText = box.Text
+	writefile(fileName, box.Text)
+end)
+
+local clearBtn = Instance.new("TextButton", main)
+clearBtn.Size = UDim2.new(1, 0, 0, 30)
+clearBtn.Position = UDim2.new(0, 0, 1, -30)
+clearBtn.Text = "🗑️ Clear Text"
+clearBtn.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+clearBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+clearBtn.Font = Enum.Font.Gotham
+clearBtn.TextSize = 14
+clearBtn.BorderSizePixel = 0
+
+clearBtn.MouseButton1Click:Connect(function()
+	box.Text = ""
+	writefile(fileName, "")
+end)
+
+local toggleNote = Instance.new("TextButton", gui)
+toggleNote.Size = UDim2.new(0, 140, 0, 35)
+toggleNote.Position = UDim2.new(1, -160, 0, 80)
+toggleNote.Text = "📝 Open Notepad"
+toggleNote.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+toggleNote.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleNote.Font = Enum.Font.Gotham
+toggleNote.TextSize = 14
+Instance.new("UICorner", toggleNote).CornerRadius = UDim.new(0, 8)
+Instance.new("UIStroke", toggleNote).Color = Color3.fromRGB(60, 60, 60)
+
+toggleNote.MouseButton1Click:Connect(function()
+	main.Visible = not main.Visible
+	toggleNote.Text = main.Visible and "❌ Close Notepad" or "📝 Open Notepad"
+end)
