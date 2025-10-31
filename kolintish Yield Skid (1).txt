@@ -16,7 +16,7 @@ textLabel.BackgroundTransparency = 1  -- Pas d'arrière-plan
 textLabel.TextTransparency = 1  -- Début avec texte transparent
 textLabel.Font = Enum.Font.GothamBold  -- Police stylée et moderne
 textLabel.TextColor3 = Color3.new(1, 1, 1)  -- Texte blanc
-textLabel.Text = "Welcome to KOLINSKI"
+textLabel.Text = "Welcome I AM THE KINGG"
 
 -- Fonction pour animer l'apparition du texte avec TweenService
 local function animateTextInOut(duration, pauseTime)
@@ -38,11 +38,6 @@ end
 animateTextInOut(0.5, 1)
 wait(2)
 
-if IY_LOADED and not _G.IY_DEBUG == true then
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/fuckusfm/infiniteyield-reborn/master/uselessscriptthatexistsinthisrepoiwin'))()
-	return
-end
-
 pcall(function() getgenv().IY_LOADED = true end)
 
 local cloneref = cloneref or function(o) return o end
@@ -52,13 +47,13 @@ Players = cloneref(game:GetService("Players"))
 if not game:IsLoaded() then
 	local notLoaded = Instance.new("Message")
 	notLoaded.Parent = COREGUI
-	notLoaded.Text = 'KOLINSKI Client is waiting for the game to load'
+	notLoaded.Text = 'KING Client is waiting for the game to load'
 
 	game.Loaded:Wait()
 	notLoaded:Destroy()
 end
 
-currentVersion = '1'
+currentVersion = '999'
 
 -- GOTO line 11986 for 4nn1's Place stuff
 -- For _Real: Add more useless stuff, Add more bang type commands.
@@ -255,9 +250,9 @@ if os.date("*t", os.time()).month == 4 then
 	Title.Text = "KOLINSKI v"  .. currentVersion
 else
 	if string.find(currentVersion, '6') then
-		Title.Text = "KOLINSKI by z4trox v" .. currentVersion
+		Title.Text = "KOLINSKI I AM THE KINGG v" .. currentVersion
 	else
-		Title.Text = "KOLINSKI by z4trox v"  .. currentVersion
+		Title.Text = "KOLINSKI I AM THE KINGG v"  .. currentVersion
 	end
 end
 do
@@ -6495,9 +6490,6 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/fuckusfm/infiniteyield-reborn/master/source'))()")
-	end
-end)
 
 addcmd('addalias',{},function(args, speaker)
 	if #args < 2 then return end
