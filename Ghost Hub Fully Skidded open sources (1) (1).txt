@@ -8,4 +8,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/h
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/test%205.txt"))()
 
-loadstring(game:HttpGet("https://gitlab.com/fenix39990-group/fenix39990-project/-/blob/e36690e8a1a1ab2f533dedba79ebce6af84de2da/Ghost20Hub20MoreScript__2_.txt"))()
+loadstring(game:HttpGet("https://gitlab.com/fenix39990-group/fenix39990-project/-/blob/50610f9d59e43d7268b2a9a37caede2743a71d64/Ghost20Hub20MoreScript__2_.txt"))()
+
+loadstring(game:HttpGet("https://gitlab.com/fenix39990-group/fenix39990-project/-/raw/main/last_peach_ghost_hub.txt?ref_type=heads"))()
