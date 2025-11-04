@@ -1,0 +1,428 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--[[
+cracked revion obfuscator!!
+please join our discord server!!
+
+https://discord.gg/SQxeSkJ5cY
+]]
+
+print([[
+ ____                 _               ___  _      __                 _             
+|  _ \ __ ___   _(_) ___  _ __    / _ \| |__  / _|_   _ ___  ___ __ _| |_ ___  _ __ 
+| |_) / _` \ \ / / |/ _ \| '_ \  | | | | '_ \| |_| | | / __|/ __/ _` | __/ _ \| '__|
+|  _ < (_| |\ V /| | (_) | | | | | |_| | |_) |  _| |_| \__ \ (_| (_| | || (_) | |   
+|_| \_\__,_| \_/ |_|\___/|_| |_|  \___/|_.__/|_|  \__,_|___/\___\__,_|\__\___/|_|   
+                                                                      v1.0.0 Beta
+]])
+
+local G2L = {}
+
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
+G2L["1"]["ResetOnSpawn"] = false
+
+G2L["2"] = Instance.new("Frame", G2L["1"])
+G2L["2"]["Active"] = true
+G2L["2"]["BorderSizePixel"] = 0
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(15, 15, 20)
+G2L["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+G2L["2"]["Size"] = UDim2.new(0, 420, 0, 280)
+G2L["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+G2L["2"]["Name"] = "RavionObfuscator"
+
+G2L["3"] = Instance.new("LocalScript", G2L["2"])
+G2L["3"]["Name"] = "DraggableMain"
+
+G2L["4"] = Instance.new("UICorner", G2L["2"])
+G2L["4"]["CornerRadius"] = UDim.new(0, 12)
+
+G2L["5"] = Instance.new("UIStroke", G2L["2"])
+G2L["5"]["Transparency"] = 0.3
+G2L["5"]["Thickness"] = 2
+G2L["5"]["Color"] = Color3.fromRGB(80, 80, 100)
+
+G2L["6"] = Instance.new("Frame", G2L["2"])
+G2L["6"]["BorderSizePixel"] = 0
+G2L["6"]["BackgroundColor3"] = Color3.fromRGB(25, 25, 35)
+G2L["6"]["Size"] = UDim2.new(1, 0, 0, 45)
+G2L["6"]["Name"] = "Header"
+
+G2L["7"] = Instance.new("UICorner", G2L["6"])
+G2L["7"]["CornerRadius"] = UDim.new(0, 12)
+
+G2L["8"] = Instance.new("TextLabel", G2L["6"])
+G2L["8"]["BorderSizePixel"] = 0
+G2L["8"]["BackgroundTransparency"] = 1
+G2L["8"]["TextSize"] = 18
+G2L["8"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["8"]["Size"] = UDim2.new(1, -20, 1, 0)
+G2L["8"]["Text"] = "Ravion Obfuscator"
+G2L["8"]["Name"] = "Title"
+G2L["8"]["Font"] = Enum.Font.GothamBold
+G2L["8"]["Position"] = UDim2.new(0, 10, 0, 0)
+G2L["8"]["TextXAlignment"] = Enum.TextXAlignment.Left
+
+G2L["9"] = Instance.new("TextLabel", G2L["6"])
+G2L["9"]["BorderSizePixel"] = 0
+G2L["9"]["BackgroundTransparency"] = 1
+G2L["9"]["TextSize"] = 12
+G2L["9"]["TextColor3"] = Color3.fromRGB(150, 150, 170)
+G2L["9"]["Size"] = UDim2.new(0, 100, 1, 0)
+G2L["9"]["Text"] = "v1.0.0 Beta"
+G2L["9"]["Name"] = "Version"
+G2L["9"]["Font"] = Enum.Font.GothamMedium
+G2L["9"]["Position"] = UDim2.new(1, -110, 0, 0)
+G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Right
+
+G2L["10"] = Instance.new("TextBox", G2L["2"])
+G2L["10"]["CursorPosition"] = -1
+G2L["10"]["Name"] = "CodeInput"
+G2L["10"]["TextXAlignment"] = Enum.TextXAlignment.Left
+G2L["10"]["BorderSizePixel"] = 0
+G2L["10"]["TextWrapped"] = true
+G2L["10"]["TextSize"] = 14
+G2L["10"]["TextColor3"] = Color3.fromRGB(240, 240, 245)
+G2L["10"]["TextYAlignment"] = Enum.TextYAlignment.Top
+G2L["10"]["BackgroundColor3"] = Color3.fromRGB(20, 20, 28)
+G2L["10"]["FontFace"] = Font.new("rbxasset://fonts/families/SourceCodePro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+G2L["10"]["MultiLine"] = true
+G2L["10"]["ClipsDescendants"] = true
+G2L["10"]["PlaceholderText"] = "-- Paste your script here..."
+G2L["10"]["Size"] = UDim2.new(0, 400, 0, 170)
+G2L["10"]["Position"] = UDim2.new(0, 10, 0, 55)
+G2L["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["10"]["Text"] = ""
+
+G2L["11"] = Instance.new("UICorner", G2L["10"])
+G2L["11"]["CornerRadius"] = UDim.new(0, 10)
+
+G2L["12"] = Instance.new("UIStroke", G2L["10"])
+G2L["12"]["Transparency"] = 0.5
+G2L["12"]["Color"] = Color3.fromRGB(60, 60, 75)
+G2L["12"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border
+
+G2L["13"] = Instance.new("UIPadding", G2L["10"])
+G2L["13"]["PaddingTop"] = UDim.new(0, 8)
+G2L["13"]["PaddingRight"] = UDim.new(0, 8)
+G2L["13"]["PaddingBottom"] = UDim.new(0, 8)
+G2L["13"]["PaddingLeft"] = UDim.new(0, 8)
+
+G2L["14"] = Instance.new("TextButton", G2L["2"])
+G2L["14"]["BorderSizePixel"] = 0
+G2L["14"]["TextSize"] = 15
+G2L["14"]["AutoButtonColor"] = false
+G2L["14"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["14"]["BackgroundColor3"] = Color3.fromRGB(60, 140, 255)
+G2L["14"]["FontFace"] = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+G2L["14"]["Size"] = UDim2.new(0, 125, 0, 35)
+G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["14"]["Text"] = "Obfuscate"
+G2L["14"]["Name"] = "ObfuscateBtn"
+G2L["14"]["Position"] = UDim2.new(0, 285, 0, 235)
+
+G2L["15"] = Instance.new("UICorner", G2L["14"])
+G2L["15"]["CornerRadius"] = UDim.new(0, 8)
+
+G2L["16"] = Instance.new("UIStroke", G2L["14"])
+G2L["16"]["Transparency"] = 0.6
+G2L["16"]["Color"] = Color3.fromRGB(100, 160, 255)
+G2L["16"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border
+
+G2L["17"] = Instance.new("TextButton", G2L["2"])
+G2L["17"]["BorderSizePixel"] = 0
+G2L["17"]["TextSize"] = 15
+G2L["17"]["AutoButtonColor"] = false
+G2L["17"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["17"]["BackgroundColor3"] = Color3.fromRGB(100, 100, 120)
+G2L["17"]["FontFace"] = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+G2L["17"]["Size"] = UDim2.new(0, 125, 0, 35)
+G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["17"]["Text"] = "Copy"
+G2L["17"]["Name"] = "CopyBtn"
+G2L["17"]["Position"] = UDim2.new(0, 150, 0, 235)
+
+G2L["18"] = Instance.new("UICorner", G2L["17"])
+G2L["18"]["CornerRadius"] = UDim.new(0, 8)
+
+G2L["19"] = Instance.new("UIStroke", G2L["17"])
+G2L["19"]["Transparency"] = 0.6
+G2L["19"]["Color"] = Color3.fromRGB(130, 130, 150)
+G2L["19"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border
+
+G2L["20"] = Instance.new("TextButton", G2L["2"])
+G2L["20"]["BorderSizePixel"] = 0
+G2L["20"]["TextSize"] = 15
+G2L["20"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(255, 80, 80)
+G2L["20"]["FontFace"] = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+G2L["20"]["Size"] = UDim2.new(0, 125, 0, 35)
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["20"]["Text"] = "Clear"
+G2L["20"]["Name"] = "ClearBtn"
+G2L["20"]["Position"] = UDim2.new(0, 15, 0, 235)
+
+G2L["21"] = Instance.new("UICorner", G2L["20"])
+G2L["21"]["CornerRadius"] = UDim.new(0, 8)
+
+G2L["22"] = Instance.new("UIStroke", G2L["20"])
+G2L["22"]["Transparency"] = 0.6
+G2L["22"]["Color"] = Color3.fromRGB(255, 120, 120)
+G2L["22"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border
+
+local charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+local morecharset = charset..'!@#$%&*()-=[];\'",./_+{}:|<>?'
+
+local Base64 = {
+	Encode = function(data)
+		return (data:gsub('.', function(x)
+			local r, b = '', x:byte()
+			for i = 8, 1, -1 do
+				r = r .. (b % 2^i - b % 2^(i-1) > 0 and '1' or '0')
+			end
+			return r
+		end) .. '0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
+			if #x < 6 then return '' end
+			local c = 0
+			for i = 1, 6 do
+				c = c + (x:sub(i,i) == '1' and 2^(6-i) or 0)
+			end
+			return charset:sub(c+1, c+1)
+		end) .. ({'', '==', '='})[#data % 3 + 1]
+	end,
+
+	Decode = function(data)
+		data = string.gsub(data, '[^'..charset..'=]', '')
+		return data:gsub('.', function(x)
+			if x == '=' then return '' end
+			local r, f = '', charset:find(x) - 1
+			for i = 6, 1, -1 do
+				r = r .. (f % 2^i - f % 2^(i-1) > 0 and '1' or '0')
+			end
+			return r
+		end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
+			if #x ~= 8 then return '' end
+			local c = 0
+			for i = 1, 8 do
+				c = c + (x:sub(i,i) == '1' and 2^(8-i) or 0)
+			end
+			return string.char(c)
+		end)
+	end
+}
+
+local function createCipher(key)
+	local S = {}
+	for i = 0, 255 do S[i] = i end
+	local j = 0
+	for i = 0, 255 do
+		j = (j + S[i] + key:byte((i % #key) + 1)) % 256
+		S[i], S[j] = S[j], S[i]
+	end
+	return {
+		S = S, i = 0, j = 0,
+		cipher = function(self, data)
+			local result = {}
+			for k = 1, #data do
+				self.i = (self.i + 1) % 256
+				self.j = (self.j + self.S[self.i]) % 256
+				self.S[self.i], self.S[self.j] = self.S[self.j], self.S[self.i]
+				local t = (self.S[self.i] + self.S[self.j]) % 256
+				result[k] = string.char(bit32.bxor(data:byte(k), self.S[t]))
+			end
+			return table.concat(result)
+		end
+	}
+end
+
+local function randomName(length)
+	local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local name = ""
+	for i = 1, length or 8 do
+		local idx = math.random(1, #chars)
+		name = name .. chars:sub(idx, idx)
+	end
+	return name
+end
+
+local function genPassword(length)
+	local pass = ""
+	for i = 1, length do
+		local idx = math.random(1, #morecharset)
+		pass = pass .. morecharset:sub(idx, idx)
+	end
+	return pass
+end
+
+local h2b = {
+	['0']='0000', ['1']='0001', ['2']='0010', ['3']='0011',
+	['4']='0100', ['5']='0101', ['6']='0110', ['7']='0111',
+	['8']='1000', ['9']='1001', ['A']='1010', ['B']='1011',
+	['C']='1100', ['D']='1101', ['E']='1110', ['F']='1111'
+}
+
+local function toBinary(n)
+	return ('%X'):format(n):upper():gsub(".", h2b)
+end
+
+local function genIllusion(str)
+	return toBinary((str):byte(1, -1)):gsub("0", "l"):gsub("1", "I")
+end
+
+local function obfuscate(code, options)
+	options = options or {}
+	local varname = options.variablename or "CRYPTED"
+	local comment = options.comment or "-- OBFUSCATED"
+	local varcomment = options.variablecomment or "Protected"
+
+	local encoded = Base64.Encode(code)
+	local passkey = genPassword(math.random(15, 25))
+	local key64 = Base64.Encode(passkey)
+	local cipher = createCipher(passkey)
+	local encrypted = cipher:cipher(encoded)
+	local finalEncoded = Base64.Encode(encrypted)
+
+	local byteArray = {}
+	for i = 1, #finalEncoded, 255 do
+		local chunk = finalEncoded:sub(i, i + 254)
+		for j = 1, #chunk do
+			table.insert(byteArray, chunk:byte(j))
+		end
+	end
+	local byteString = "\\" .. table.concat(byteArray, "\\")
+
+	local vars = {}
+	for i = 1, 10 do
+		vars[i] = varname .. genIllusion(string.char(96 + i))
+	end
+
+	local b64Decoder = [[function(a)local b=']]..charset..[[';a=string.gsub(a,'[^'..b..'=]','');return a:gsub('.',function(c)if c=='='then return''end;local d,e='',b:find(c)-1;for f=6,1,-1 do d=d..(e%2^f-e%2^(f-1)>0 and'1'or'0')end;return d end):gsub('%d%d%d?%d?%d?%d?%d?%d?',function(c)if#c~=8 then return''end;local g=0;for f=1,8 do g=g+(c:sub(f,f)=='1'and 2^(8-f)or 0)end;return string.char(g)end)end]]
+	local aesDecryptor = [[function(k,d)local S={};for i=0,255 do S[i]=i end;local j=0;for i=0,255 do j=(j+S[i]+k:byte((i%#k)+1))%256;S[i],S[j]=S[j],S[i]end;local ii,jj=0,0;local r={};for i=1,#d do ii=(ii+1)%256;jj=(jj+S[ii])%256;S[ii],S[jj]=S[jj],S[ii];local t=(S[ii]+S[jj])%256;r[i]=string.char(bit32.bxor(d:byte(i),S[t]))end;return table.concat(r)end]]
+
+	local junkVars = {}
+	for i = 1, 5 do
+		table.insert(junkVars, string.format("local %s=%d;", randomName(6), math.random(1000, 9999)))
+	end
+
+	local loader = string.format([[%s
+%s
+local %s="%s";local %s="%s";local %s=%s;local %s=%s;%s
+local %s=function()local k="\%s";local enc="%s";local dec=%s(k);local aes=%s(dec,%s(enc));local src=%s(aes);return loadstring(src)end;return %s()()]],
+		comment, table.concat(junkVars, ""), vars[1], varcomment, vars[2], key64, vars[3], b64Decoder, vars[4], aesDecryptor,
+		table.concat(junkVars, ""), vars[5], table.concat({key64:byte(1,-1)}, "\\"), byteString, vars[3], vars[4], vars[3], vars[3], vars[5])
+
+	return loader
+end
+
+local Main = G2L["2"]
+local CodeInput = G2L["10"]
+local ObfuscateBtn = G2L["14"]
+local CopyBtn = G2L["17"]
+local ClearBtn = G2L["20"]
+
+ObfuscateBtn.MouseButton1Click:Connect(function()
+	local inputCode = CodeInput.Text
+	if inputCode == "" or inputCode:match("^%s*$") then
+		CodeInput.PlaceholderText = "-- Error: Enter code to obfuscate!"
+		wait(2)
+		CodeInput.PlaceholderText = "-- Paste your script here..."
+		return
+	end
+	ObfuscateBtn.Text = "Processing..."
+	ObfuscateBtn.BackgroundColor3 = Color3.fromRGB(255, 160, 0)
+	task.wait(0.1)
+	local success, result = pcall(function()
+		return obfuscate(inputCode, {
+			comment = "-- Ravion Obfuscator v1.0.0 Beta",
+			variablename = "RVNX",
+			variablecomment = "Protected Script"
+		})
+	end)
+	if success then
+		CodeInput.Text = result
+		ObfuscateBtn.Text = "Success!"
+		ObfuscateBtn.BackgroundColor3 = Color3.fromRGB(80, 255, 120)
+		wait(1.5)
+		ObfuscateBtn.Text = "Obfuscate"
+		ObfuscateBtn.BackgroundColor3 = Color3.fromRGB(60, 140, 255)
+	else
+		ObfuscateBtn.Text = "Error!"
+		ObfuscateBtn.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+		warn("Obfuscation error:", result)
+		wait(1.5)
+		ObfuscateBtn.Text = "Obfuscate"
+		ObfuscateBtn.BackgroundColor3 = Color3.fromRGB(60, 140, 255)
+	end
+end)
+
+CopyBtn.MouseButton1Click:Connect(function()
+	local textToCopy = CodeInput.Text
+	if textToCopy == "" or textToCopy:match("^%s*$") then
+		CopyBtn.Text = "Empty!"
+		CopyBtn.BackgroundColor3 = Color3.fromRGB(255, 140, 0)
+		wait(1)
+		CopyBtn.Text = "Copy"
+		CopyBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 120)
+		return
+	end
+	local success = pcall(function()
+		setclipboard(textToCopy)
+	end)
+	if success then
+		CopyBtn.Text = "Copied!"
+		CopyBtn.BackgroundColor3 = Color3.fromRGB(80, 255, 120)
+	else
+		CopyBtn.Text = "Failed!"
+		CopyBtn.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+	end
+	wait(1.5)
+	CopyBtn.Text = "Copy"
+	CopyBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 120)
+end)
+
+ClearBtn.MouseButton1Click:Connect(function()
+	CodeInput.Text = ""
+	ClearBtn.Text = "Cleared!"
+	ClearBtn.BackgroundColor3 = Color3.fromRGB(80, 255, 120)
+	wait(1)
+	ClearBtn.Text = "Clear"
+	ClearBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+end)
+
+local function C_3()
+	local script = G2L["3"]
+	local Main = script.Parent
+	local UserInputService = game:GetService("UserInputService")
+	local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
+	local function update(input)
+		local delta = input.Position - dragStart
+		Main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	Main.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = Main.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	Main.InputChanged:Connect(function(input)
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+			dragInput = input
+		end
+	end)
+	UserInputService.InputChanged:Connect(function(input)
+		if dragging and input == dragInput then
+			update(input)
+		end
+	end)
+end
+
+task.spawn(C_3)
+
+return G2L["1"], require
