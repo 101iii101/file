@@ -1,0 +1,128 @@
+-- Modified High Bright Rainbow Ball Faller Script (Clean Ground Seal, Follow Player, Extremely Bright)
+
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
+
+-- Configuration Variables 
+local MAX_BALLS = 60           
+local FALL_SPEED = 40          -- High speed for fast drop
+local SPAWN_HEIGHT = 300       -- Height above the Player's Y position
+local SPAWN_RADIUS = 200       -- Wide spread distance
+local BALL_SIZE = 4
+
+-- Variables for 1-by-1 fall timing and global color
+local SPAWN_INTERVAL = 0.1     -- Time (in seconds) between spawning each new ball
+local lastSpawnTime = 0
+
+-- A single hue variable for synchronized rainbow color across ALL balls
+local globalHue = 0 
+
+local balls = {}
+
+local function createRainbowColor(t)
+	return Color3.fromHSV(t % 1, 1, 1)
+end
+
+-- Helper function to get the current center of the effect (the player)
+local function getEffectCenter()
+    local player = Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        return player.Character.HumanoidRootPart.Position
+    end
+    -- Fallback to a fixed point if the player's character isn't ready
+    return Vector3.new(0, 5, 0) 
+end
+
+local function createBall(position)
+	local part = Instance.new("Part")
+	part.Shape = Enum.PartType.Ball
+	part.Size = Vector3.new(BALL_SIZE, BALL_SIZE, BALL_SIZE)
+	part.Position = position
+	part.Anchored = true         
+	part.CanCollide = false
+	part.Transparency = 0
+	part.Material = Enum.Material.Neon
+	part.CastShadow = false
+	part.Name = "RainbowBall"
+	part.Parent = Workspace
+
+	local light = Instance.new("PointLight", part)
+	-- EXTREME BRIGHTNESS:
+	light.Brightness = 30 
+	light.Range = 40      
+	light.Color = part.Color
+
+	return part, light
+end
+
+local function spawnBall()
+	if #balls >= MAX_BALLS then return end
+    
+    local center = getEffectCenter() -- Get the current center (player position)
+    
+    -- Calculates a random offset from the center
+	local angle = math.random() * math.pi * 2
+	local radius = math.random() * SPAWN_RADIUS
+	
+    -- X and Z are offset from the Player's X/Z
+	local x = center.X + math.cos(angle) * radius
+	local z = center.Z + math.sin(angle) * radius
+    
+    -- Y is SPAWN_HEIGHT added to the Player's Y
+	local y = center.Y + SPAWN_HEIGHT
+
+	local pos = Vector3.new(x, y, z)
+	local ball, light = createBall(pos)
+    
+    -- Store the part, light, and the calculated X/Z coordinates.
+    -- Store the player's Y position at the moment of creation for the ground check
+	table.insert(balls, {
+        part = ball, 
+        light = light, 
+        fixedX = x, 
+        fixedZ = z, 
+        y = y,
+        groundY = center.Y -- NEW: Store the ground Y at spawn time
+    })
+end
+
+-- Initialize one ball right away
+spawnBall() 
+lastSpawnTime = os.clock() 
+
+RunService.Heartbeat:Connect(function(dt)
+	local currentTime = os.clock()
+    
+	-- Update the single global hue for synchronized color
+	globalHue = (globalHue + dt * 0.2) % 1
+	local synchronizedColor = createRainbowColor(globalHue)
+    
+	-- Spawning logic for 1-by-1 drop
+	if #balls < MAX_BALLS and (currentTime - lastSpawnTime) >= SPAWN_INTERVAL then
+		spawnBall()
+		lastSpawnTime = currentTime 
+	end
+
+	-- Update position and color for all existing balls
+	for i = #balls, 1, -1 do
+		local ballData = balls[i]
+        
+		-- Move ball down using the fast FALL_SPEED
+		ballData.y = ballData.y - FALL_SPEED * dt
+        
+        -- Balls disappear when they sink 5 studs below the 'ground' position (groundY).
+		if ballData.y < ballData.groundY - 5 then
+			ballData.part:Destroy()
+			table.remove(balls, i)
+		else
+			-- Position update ensures X and Z are locked to the spawn location
+			ballData.part.Position = Vector3.new(ballData.fixedX, ballData.y, ballData.fixedZ)
+			
+			-- Apply the synchronized color to the part and light
+			ballData.part.Color = synchronizedColor
+			ballData.light.Color = synchronizedColor
+		end
+	end
+end)
