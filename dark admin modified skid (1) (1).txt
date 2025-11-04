@@ -1,0 +1,1098 @@
+--    ____  ___    ____  __ __ ___    ____  __  ________   __
+--   / __ \/   |  / __ \/ //_//   |  / __ \/  |/  /  _/ | / /
+--  / / / / /| | / /_/ / ,<  / /| | / / / / /|_/ // //  |/ / 
+-- / /_/ / ___ |/ _, _/ /| |/ ___ |/ /_/ / /  / // // /|  /  
+--/_____/_/  |_/_/ |_/_/ |_/_/  |_/_____/_/  /_/___/_/ |_/                        
+-- 𝘾𝙧𝙚𝙖𝙩𝙤𝙧 𝙗𝙮
+-- __   __   _         _ _       __  __
+-- \ \ / /__| |___  __(_) |_ _  _\ \/ /
+--  \ V / -$) / _ \/ _| |  _| || |>  < 
+--   \_/\___|_\___/\__|_|\__|\_, /_/\_\
+--                           |__/      
+
+local CollectionService = game:GetService("CollectionService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMinisterq/Notification-Library/Main/Library.lua"))()
+local InsertService = game:GetService("InsertService")
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local CommandSystem = {
+	commands = {}
+}
+
+function CommandSystem:AddCmd(data)
+	local command = {
+		Title = data.Title,
+		Alias = data.Alias or {},
+		Callback = data.Callback or function() end,
+		Syntax = data.Syntax or "" -- Added Syntax for better command explanation
+	}
+	table.insert(self.commands, command)
+end
+
+function CommandSystem:GetMatchingCommands(text)
+	if text == "" then
+		return self.commands
+	end
+	
+	local exactMatches = {}
+	local partialMatches = {}
+	local lowerText = text:lower()
+	
+	for _, cmd in ipairs(self.commands) do
+		local titleLower = cmd.Title:lower()
+		local addedToExact = false
+		
+		if titleLower:sub(1, #lowerText) == lowerText then
+			table.insert(exactMatches, cmd)
+			addedToExact = true
+		end
+		
+		if not addedToExact then
+			for _, alias in ipairs(cmd.Alias) do
+				local aliasLower = alias:lower()
+				if aliasLower:sub(1, #lowerText) == lowerText then
+					table.insert(exactMatches, cmd)
+					addedToExact = true
+					break
+				end
+			end
+		end
+		
+		if not addedToExact then
+			if titleLower:find(lowerText, 1, true) then
+				table.insert(partialMatches, cmd)
+			else
+				for _, alias in ipairs(cmd.Alias) do
+					local aliasLower = alias:lower()
+					if aliasLower:find(lowerText, 1, true) then
+						table.insert(partialMatches, cmd)
+						break
+					end
+				end
+			end
+		end
+	end
+	
+	local combinedMatches = {}
+	for _, cmd in ipairs(exactMatches) do
+		table.insert(combinedMatches, cmd)
+	end
+	for _, cmd in ipairs(partialMatches) do
+		table.insert(combinedMatches, cmd)
+	end
+	
+	return combinedMatches
+end
+
+function CommandSystem:ExecuteCommand(text)
+	local parts = {}
+	for word in text:gmatch("([^%s]+)") do
+		table.insert(parts, word)
+	end
+	
+	if #parts == 0 then return false end
+	
+	local commandName = parts[1]:lower()
+	local args = {}
+	for i = 2, #parts do
+		table.insert(args, parts[i])
+	end
+	
+	local foundCmd = nil
+	for _, cmd in ipairs(self.commands) do
+		if cmd.Title:lower() == commandName then
+			foundCmd = cmd
+			break
+		end
+		for _, alias in ipairs(cmd.Alias) do
+			if alias:lower() == commandName then
+				foundCmd = cmd
+				break
+			end
+			-- Check for aliases with syntax attached in the input text (e.g., 'ws 50')
+			if text:lower():sub(1, #alias + 1) == alias:lower() .. " " then
+				foundCmd = cmd
+				break
+			end
+		end
+	end
+	
+	if foundCmd then
+		pcall(foundCmd.Callback, args)
+		return true
+	end
+	
+	return false
+end
+
+local G2L = {}
+local ICON_SIZE = 40
+local FRAME_HEIGHT = 40
+local FRAME_WIDTH = 206
+local MARGIN = 5
+
+-- FIXED: Y position changed from 30 to 20 to be even higher up.
+local ACTIVE_ICON_POS = UDim2.new(0, 230, 0, 20) 
+
+
+G2L["DarkAdmin_1"] = Instance.new("ScreenGui", game:GetService("CoreGui"))
+G2L["DarkAdmin_1"]["Name"] = "DarkAdmin"
+G2L["DarkAdmin_1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
+G2L["DarkAdmin_1"]["ResetOnSpawn"] = false
+
+CollectionService:AddTag(G2L["DarkAdmin_1"], "main")
+
+G2L["CommandFrame_2"] = Instance.new("Frame", G2L["DarkAdmin_1"])
+G2L["CommandFrame_2"]["BorderSizePixel"] = 0
+G2L["CommandFrame_2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["CommandFrame_2"]["Size"] = UDim2.new(0, 0, 0, FRAME_HEIGHT) -- Start at 0 width
+G2L["CommandFrame_2"]["Position"] = UDim2.new(0, 0, 0, 0) -- Positioned by script
+G2L["CommandFrame_2"]["AnchorPoint"] = Vector2.new(0, 0.5) -- Anchor center left
+G2L["CommandFrame_2"]["Name"] = "CommandFrame"
+G2L["CommandFrame_2"]["BackgroundTransparency"] = 0.1
+G2L["CommandFrame_2"]["Visible"] = false
+G2L["CommandFrame_2"]["ClipsDescendants"] = false
+
+G2L["UICorner_3"] = Instance.new("UICorner", G2L["CommandFrame_2"])
+G2L["UICorner_3"]["CornerRadius"] = UDim.new(0, 20)
+
+G2L["UIGradient_4"] = Instance.new("UIGradient", G2L["CommandFrame_2"])
+G2L["UIGradient_4"]["Color"] = ColorSequence.new{
+	ColorSequenceKeypoint.new(0.000, Color3.fromRGB(5, 5, 5)),
+	ColorSequenceKeypoint.new(1.000, Color3.fromRGB(40, 40, 40))
+}
+
+G2L["UIStroke_CommandFrame"] = Instance.new("UIStroke", G2L["CommandFrame_2"])
+G2L["UIStroke_CommandFrame"]["Thickness"] = 0
+G2L["UIStroke_CommandFrame"]["Color"] = Color3.fromRGB(255, 255, 255)
+G2L["UIStroke_CommandFrame"]["Transparency"] = 1
+
+G2L["Frame_5"] = Instance.new("Frame", G2L["CommandFrame_2"])
+G2L["Frame_5"]["BorderSizePixel"] = 0
+G2L["Frame_5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["Frame_5"]["Size"] = UDim2.new(1, -16, 0, 28)
+G2L["Frame_5"]["Position"] = UDim2.new(0, 8, 0, 6)
+G2L["Frame_5"]["BackgroundTransparency"] = 1
+
+G2L["UICorner_6"] = Instance.new("UICorner", G2L["Frame_5"])
+G2L["UICorner_6"]["CornerRadius"] = UDim.new(0, 25)
+
+G2L["TextBox_7"] = Instance.new("TextBox", G2L["Frame_5"])
+G2L["TextBox_7"]["CursorPosition"] = -1
+G2L["TextBox_7"]["PlaceholderColor3"] = Color3.fromRGB(156, 156, 156)
+G2L["TextBox_7"]["BorderSizePixel"] = 0
+G2L["TextBox_7"]["TextSize"] = 20
+G2L["TextBox_7"]["TextColor3"] = Color3.fromRGB(211, 211, 211)
+G2L["TextBox_7"]["BackgroundColor3"] = Color3.fromRGB(142, 142, 142)
+G2L["TextBox_7"]["FontFace"] = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+G2L["TextBox_7"]["PlaceholderText"] = "Command Bar :"
+G2L["TextBox_7"]["Size"] = UDim2.new(1, 0, 1, 0)
+G2L["TextBox_7"]["Text"] = ""
+G2L["TextBox_7"]["BackgroundTransparency"] = 1
+G2L["TextBox_7"]["TextXAlignment"] = Enum.TextXAlignment.Center
+
+G2L["UICorner_8"] = Instance.new("UICorner", G2L["TextBox_7"])
+G2L["UICorner_8"]["CornerRadius"] = UDim.new(0, 20)
+
+G2L["UIStroke_a"] = Instance.new("UIStroke", G2L["TextBox_7"])
+G2L["UIStroke_a"]["Thickness"] = 0.5
+
+G2L["UIStroke_b"] = Instance.new("UIStroke", G2L["Frame_5"])
+G2L["UIStroke_b"]["Thickness"] = 0.3
+G2L["UIStroke_b"]["Color"] = Color3.fromRGB(99, 99, 99)
+
+G2L["AutocompleteFrame"] = Instance.new("Frame", G2L["CommandFrame_2"])
+G2L["AutocompleteFrame"]["BorderSizePixel"] = 0
+G2L["AutocompleteFrame"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["AutocompleteFrame"]["Size"] = UDim2.new(1, 0, 0, 0) -- Size 1, 0 means full width of parent
+G2L["AutocompleteFrame"]["Position"] = UDim2.new(0, 0, 1, 6)
+G2L["AutocompleteFrame"]["BackgroundTransparency"] = 0.3
+G2L["AutocompleteFrame"]["Visible"] = false
+G2L["AutocompleteFrame"]["ClipsDescendants"] = false
+G2L["AutocompleteFrame"]["ZIndex"] = 10
+
+G2L["UICorner_Auto"] = Instance.new("UICorner", G2L["AutocompleteFrame"])
+
+G2L["ScrollingFrame_Auto"] = Instance.new("ScrollingFrame", G2L["AutocompleteFrame"])
+G2L["ScrollingFrame_Auto"]["ScrollingDirection"] = Enum.ScrollingDirection.Y
+G2L["ScrollingFrame_Auto"]["BorderSizePixel"] = 0
+G2L["ScrollingFrame_Auto"]["CanvasSize"] = UDim2.new(0, 0, 0, 0)
+G2L["ScrollingFrame_Auto"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["ScrollingFrame_Auto"]["ScrollBarImageTransparency"] = 0.3
+G2L["ScrollingFrame_Auto"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y
+G2L["ScrollingFrame_Auto"]["Size"] = UDim2.new(1, -8, 1, -8)
+G2L["ScrollingFrame_Auto"]["ScrollBarImageColor3"] = Color3.fromRGB(21, 21, 21)
+G2L["ScrollingFrame_Auto"]["Position"] = UDim2.new(0, 4, 0, 4)
+G2L["ScrollingFrame_Auto"]["ScrollBarThickness"] = 2
+G2L["ScrollingFrame_Auto"]["BackgroundTransparency"] = 1
+
+G2L["UIListLayout_Auto"] = Instance.new("UIListLayout", G2L["ScrollingFrame_Auto"])
+G2L["UIListLayout_Auto"]["Padding"] = UDim.new(0, 2)
+
+G2L["UIPadding_Auto"] = Instance.new("UIPadding", G2L["ScrollingFrame_Auto"])
+G2L["UIPadding_Auto"]["PaddingLeft"] = UDim.new(0, 4)
+G2L["UIPadding_Auto"]["PaddingTop"] = UDim.new(0, 2)
+G2L["UIPadding_Auto"]["PaddingBottom"] = UDim.new(0, 2)
+
+G2L["Frame_c"] = Instance.new("Frame", G2L["DarkAdmin_1"])
+G2L["Frame_c"]["BorderSizePixel"] = 0
+G2L["Frame_c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0)
+G2L["Frame_c"]["Size"] = UDim2.new(0, ICON_SIZE, 0, ICON_SIZE)
+G2L["Frame_c"]["Position"] = UDim2.new(0, 230, 0, -150) -- Initial position for intro
+G2L["Frame_c"]["BackgroundTransparency"] = 0.2
+G2L["Frame_c"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+G2L["Frame_c"]["Active"] = true
+
+G2L["UICorner_d"] = Instance.new("UICorner", G2L["Frame_c"])
+G2L["UICorner_d"]["CornerRadius"] = UDim.new(0, 50)
+
+G2L["TextButton_e"] = Instance.new("TextButton", G2L["Frame_c"])
+G2L["TextButton_e"]["BorderSizePixel"] = 0
+G2L["TextButton_e"]["TextSize"] = 20
+G2L["TextButton_e"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["TextButton_e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["TextButton_e"]["FontFace"] = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+G2L["TextButton_e"]["BackgroundTransparency"] = 1
+G2L["TextButton_e"]["Size"] = UDim2.new(1, 0, 1, 0)
+G2L["TextButton_e"]["Text"] = "DA"
+G2L["TextButton_e"]["Active"] = false
+
+G2L["UICorner_f"] = Instance.new("UICorner", G2L["TextButton_e"])
+G2L["UICorner_f"]["CornerRadius"] = UDim.new(0, 50)
+
+G2L["UIStroke_10"] = Instance.new("UIStroke", G2L["TextButton_e"])
+G2L["UIStroke_10"]["Thickness"] = 0.5
+
+-- NEW COMMANDS GUI STRUCTURE
+G2L["Cmds_Frame"] = Instance.new("Frame", G2L["DarkAdmin_1"])
+G2L["Cmds_Frame"]["Name"] = "CommandsFrame"
+G2L["Cmds_Frame"]["Size"] = UDim2.new(0, 250, 0, 350)
+G2L["Cmds_Frame"]["Position"] = UDim2.new(0.5, -125, 0.5, -175) -- Centered
+G2L["Cmds_Frame"]["BackgroundColor3"] = Color3.fromRGB(15, 15, 15)
+G2L["Cmds_Frame"]["BackgroundTransparency"] = 0.1
+G2L["Cmds_Frame"]["BorderSizePixel"] = 0
+G2L["Cmds_Frame"]["Active"] = false -- Main frame doesn't need to be active
+G2L["Cmds_Frame"]["Visible"] = false
+G2L["Cmds_Frame"]["ClipsDescendants"] = true
+G2L["Cmds_Frame"]["ZIndex"] = 20
+
+G2L["Cmds_UICorner"] = Instance.new("UICorner", G2L["Cmds_Frame"])
+G2L["Cmds_UICorner"]["CornerRadius"] = UDim.new(0, 15)
+
+G2L["Cmds_TitleBar"] = Instance.new("Frame", G2L["Cmds_Frame"])
+G2L["Cmds_TitleBar"]["Size"] = UDim2.new(1, 0, 0, 30)
+G2L["Cmds_TitleBar"]["BackgroundColor3"] = Color3.fromRGB(40, 40, 40)
+G2L["Cmds_TitleBar"]["BorderSizePixel"] = 0
+G2L["Cmds_TitleBar"]["Active"] = true -- This is the part we drag
+
+G2L["Cmds_Title"] = Instance.new("TextLabel", G2L["Cmds_TitleBar"])
+G2L["Cmds_Title"]["Size"] = UDim2.new(1, -30, 1, 0)
+G2L["Cmds_Title"]["Text"] = "Commands"
+G2L["Cmds_Title"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["Cmds_Title"]["TextSize"] = 18
+G2L["Cmds_Title"]["FontFace"] = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+G2L["Cmds_Title"]["BackgroundTransparency"] = 1
+G2L["Cmds_Title"]["TextXAlignment"] = Enum.TextXAlignment.Center
+
+G2L["Cmds_CloseButton"] = Instance.new("TextButton", G2L["Cmds_TitleBar"])
+G2L["Cmds_CloseButton"]["Size"] = UDim2.new(0, 30, 1, 0)
+G2L["Cmds_CloseButton"]["Position"] = UDim2.new(1, -30, 0, 0)
+G2L["Cmds_CloseButton"]["Text"] = "X"
+G2L["Cmds_CloseButton"]["TextColor3"] = Color3.fromRGB(255, 50, 50)
+G2L["Cmds_CloseButton"]["TextSize"] = 20
+G2L["Cmds_CloseButton"]["BackgroundTransparency"] = 1
+G2L["Cmds_CloseButton"]["FontFace"] = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+
+G2L["Cmds_Scroll"] = Instance.new("ScrollingFrame", G2L["Cmds_Frame"])
+G2L["Cmds_Scroll"]["Size"] = UDim2.new(1, 0, 1, -30)
+G2L["Cmds_Scroll"]["Position"] = UDim2.new(0, 0, 0, 30)
+G2L["Cmds_Scroll"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+G2L["Cmds_Scroll"]["BackgroundTransparency"] = 1
+G2L["Cmds_Scroll"]["CanvasSize"] = UDim2.new(0, 0, 0, 0)
+G2L["Cmds_Scroll"]["AutomaticCanvasSize"] = Enum.AutomaticSize.Y
+G2L["Cmds_Scroll"]["ScrollBarImageColor3"] = Color3.fromRGB(90, 90, 90)
+G2L["Cmds_Scroll"]["ScrollBarThickness"] = 4
+G2L["Cmds_Scroll"]["BorderSizePixel"] = 0
+
+G2L["Cmds_ListLayout"] = Instance.new("UIListLayout", G2L["Cmds_Scroll"])
+G2L["Cmds_ListLayout"]["Padding"] = UDim.new(0, 5)
+G2L["Cmds_ListLayout"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center
+G2L["Cmds_ListLayout"]["SortOrder"] = Enum.SortOrder.LayoutOrder
+
+G2L["Cmds_UIPadding"] = Instance.new("UIPadding", G2L["Cmds_Scroll"])
+G2L["Cmds_UIPadding"]["PaddingTop"] = UDim.new(0, 5)
+G2L["Cmds_UIPadding"]["PaddingBottom"] = UDim.new(0, 5)
+
+
+local Settings = {
+	isCommandFrameOpen = false,
+	isDragging = false,
+	isTyping = false,
+	dragThreshold = 3,
+	selectedCommandIndex = 1,
+	currentMatches = {},
+}
+
+local toggleCommandFrame
+local updateCommandFramePosition
+local populateCommandsGUI
+local setupFrameDragging
+
+function createCommandLabel(text, index)
+	local label = Instance.new("TextLabel")
+	label.BorderSizePixel = 0
+	label.TextSize = 18
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	label.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+	label.TextColor3 = Color3.fromRGB(255, 255, 255)
+	label.BackgroundTransparency = 1
+	label.Size = UDim2.new(0, 184, 0, 32)
+	label.Text = text
+	label.Name = "CommandLabel_" .. index
+	label.ZIndex = 11
+	return label
+end
+
+function updateSelectionHighlight()
+	for i, child in ipairs(G2L["ScrollingFrame_Auto"]:GetChildren()) do
+		if child:IsA("TextLabel") then
+			if i == Settings.selectedCommandIndex then
+				child.TextColor3 = Color3.fromRGB(100, 200, 255)
+			else
+				child.TextColor3 = Color3.fromRGB(255, 255, 255)
+			end
+		end
+	end
+end
+
+function updateAutocomplete(text)
+	for _, child in ipairs(G2L["ScrollingFrame_Auto"]:GetChildren()) do
+		if child:IsA("TextLabel") then
+			child:Destroy()
+		end
+	end
+	
+	local matches = CommandSystem:GetMatchingCommands(text)
+	Settings.currentMatches = matches
+	
+	if #matches > 0 then
+		Settings.selectedCommandIndex = 1
+		
+		for i, cmd in ipairs(matches) do
+			local textToShow = cmd.Title
+			if cmd.Syntax and cmd.Syntax ~= "" then
+				textToShow = cmd.Title .. " " .. cmd.Syntax
+			end
+			local label = createCommandLabel(textToShow, i)
+			label.Parent = G2L["ScrollingFrame_Auto"]
+			
+			label.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+					G2L["TextBox_7"].Text = cmd.Title
+					local syntax = cmd.Syntax
+					if syntax and syntax ~= "" then
+						G2L["TextBox_7"].Text = G2L["TextBox_7"].Text .. " " .. syntax:gsub("[<>]", "")
+					end
+					-- Ensure focus is maintained/recaptured on mobile
+					G2L["TextBox_7"]:CaptureFocus()
+				end
+			end)
+		end
+		
+		updateSelectionHighlight()
+		
+		local targetHeight = math.min(#matches * 34, 266)
+		G2L["AutocompleteFrame"].Visible = true
+		TweenService:Create(
+			G2L["AutocompleteFrame"],
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{Size = UDim2.new(1, 0, 0, targetHeight)}
+		):Play()
+	else
+		-- Only start hiding if the frame is visible
+		if G2L["AutocompleteFrame"].Size.Y.Offset > 0 then
+			TweenService:Create(
+				G2L["AutocompleteFrame"],
+				TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+				{Size = UDim2.new(1, 0, 0, 0)}
+			):Play()
+		end
+	end
+end
+
+updateCommandFramePosition = function()
+	local iconXOffset = G2L["Frame_c"].Position.X.Offset
+	local iconYOffset = G2L["Frame_c"].Position.Y.Offset
+	
+	-- Position the command frame to the right of the icon, with a small margin
+	-- The icon's AnchorPoint is (0.5, 0.5)
+	-- The frame's AnchorPoint is (0, 0.5)
+	local frameX = iconXOffset + (ICON_SIZE / 2) + MARGIN
+	local frameY = iconYOffset -- This perfectly aligns the vertical centers
+	
+	G2L["CommandFrame_2"].Position = UDim2.new(0, frameX, 0, frameY)
+end
+
+toggleCommandFrame = function()
+	if Settings.isTyping then
+		return
+	end
+	
+	if Settings.isCommandFrameOpen then
+		Settings.isCommandFrameOpen = false
+		
+		-- Hide Autocomplete Frame (if visible)
+		TweenService:Create(
+			G2L["AutocompleteFrame"],
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+			{Size = UDim2.new(1, 0, 0, 0)}
+		):Play()
+		
+		-- Animate Command Frame Width to 0 (HIDING)
+		local commandHideTween = TweenService:Create(
+			G2L["CommandFrame_2"],
+			TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
+			{Size = UDim2.new(0, 0, 0, FRAME_HEIGHT)}
+		)
+		commandHideTween:Play()
+		
+		commandHideTween.Completed:Wait()
+		G2L["CommandFrame_2"].Visible = false
+		G2L["AutocompleteFrame"].Visible = false
+	else
+		Settings.isCommandFrameOpen = true
+		
+		-- Position must be correct before animating width
+		updateCommandFramePosition()
+		G2L["CommandFrame_2"].Visible = true
+		
+		-- Animate Command Frame Width to FRAME_WIDTH (SHOWING)
+		local commandShowTween = TweenService:Create(
+			G2L["CommandFrame_2"],
+			TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+			{Size = UDim2.new(0, FRAME_WIDTH, 0, FRAME_HEIGHT)}
+		)
+		commandShowTween:Play()
+		
+		commandShowTween.Completed:Wait()
+		G2L["TextBox_7"]:CaptureFocus()
+	end
+end
+
+-- FIXED: This function now correctly preserves the Scale of the target's position.
+setupFrameDragging = function(frame, target)
+	if not target then target = frame end -- Default to moving itself if no target is specified
+
+	local runService = game:GetService("RunService")
+	local renderConnection = nil
+	local inputConnection = nil
+	local dragStart = nil
+	local startPos = nil
+	local inputStartPos = nil
+	local dragThreshold = 3
+
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragStart = false
+			inputStartPos = input.Position
+			startPos = target.Position -- Get the position of the TARGET frame (e.g., UDim2.new(0.5, -125, 0.5, -175))
+			
+			if inputConnection then inputConnection:Disconnect() end
+			if renderConnection then renderConnection:Disconnect() end
+			
+			inputConnection = UserInputService.InputChanged:Connect(function(changedInput)
+				if changedInput.UserInputType == Enum.UserInputType.MouseMovement or changedInput.UserInputType == Enum.UserInputType.Touch then
+					local totalDelta = (changedInput.Position - inputStartPos).Magnitude
+					
+					if totalDelta >= dragThreshold then
+						dragStart = true
+					end
+					
+					if dragStart then
+						local delta = changedInput.Position - inputStartPos
+						
+						-- FIXED: Preserve the original Scale, only modify the Offset
+						target.Position = UDim2.new(
+							startPos.X.Scale, startPos.X.Offset + delta.X,
+							startPos.Y.Scale, startPos.Y.Offset + delta.Y
+						)
+					end
+				end
+			end)
+			
+			-- Renderstepped for icon update (only needed for the main icon frame)
+			if frame == G2L["Frame_c"] then
+				renderConnection = runService.RenderStepped:Connect(function()
+					if dragStart then
+						updateCommandFramePosition()
+					end
+				end)
+			end
+		end
+	end)
+	
+	frame.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			if inputConnection then inputConnection:Disconnect() end
+			if renderConnection then renderConnection:Disconnect() end
+			
+			-- Only handle click-to-toggle for the main icon
+			if frame == G2L["Frame_c"] and not dragStart and inputStartPos then
+				local totalDelta = (input.Position - inputStartPos).Magnitude
+				if totalDelta < dragThreshold then
+					toggleCommandFrame()
+				end
+			end
+			
+			dragStart = false
+			inputStartPos = nil
+			
+			if frame == G2L["Frame_c"] then
+				TweenService:Create(
+					frame,
+					TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+					{Size = UDim2.new(0, ICON_SIZE, 0, ICON_SIZE)}
+				):Play()
+			end
+		end
+	end)
+end
+
+function setupDragging()
+	-- Main icon dragging (moves itself)
+	setupFrameDragging(G2L["Frame_c"], G2L["Frame_c"]) 
+	-- FIXED: Commands window dragging (moves its parent, G2L["Cmds_Frame"])
+	setupFrameDragging(G2L["Cmds_TitleBar"], G2L["Cmds_Frame"]) 
+end
+
+populateCommandsGUI = function()
+	-- Clear existing entries
+	for _, child in ipairs(G2L["Cmds_Scroll"]:GetChildren()) do
+		if child:IsA("Frame") then
+			child:Destroy()
+		end
+	end
+
+	for i, cmd in ipairs(CommandSystem.commands) do
+		local commandText = cmd.Title .. (cmd.Syntax ~= "" and " " .. cmd.Syntax or "")
+		local fullCommand = cmd.Title .. (cmd.Syntax ~= "" and " " .. cmd.Syntax:gsub("[<>]", "") or "")
+
+		local entryFrame = Instance.new("Frame")
+		entryFrame.Name = "CmdEntry_" .. i
+		entryFrame.Size = UDim2.new(1, -10, 0, 40) -- Adjusted width for padding
+		entryFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		entryFrame.BackgroundTransparency = 0
+		entryFrame.BorderSizePixel = 0
+		entryFrame.Parent = G2L["Cmds_Scroll"]
+		
+		local corner = Instance.new("UICorner", entryFrame)
+		corner.CornerRadius = UDim.new(0, 5)
+
+		local titleLabel = Instance.new("TextLabel", entryFrame)
+		titleLabel.Size = UDim2.new(1, -75, 1, 0) -- Space for Copy/Run button
+		titleLabel.Position = UDim2.new(0, 5, 0, 0)
+		titleLabel.Text = commandText
+		titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+		titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		titleLabel.TextSize = 16
+		titleLabel.BackgroundTransparency = 1
+		titleLabel.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+
+		local copyButton = Instance.new("TextButton", entryFrame)
+		copyButton.Size = UDim2.new(0, 70, 0, 30)
+		copyButton.Position = UDim2.new(1, -75, 0.5, -15)
+		copyButton.Text = "Copy/Run"
+		copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		copyButton.TextSize = 14
+		copyButton.BackgroundColor3 = Color3.fromRGB(100, 200, 255)
+		copyButton.BorderSizePixel = 0
+		copyButton.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+		
+		local buttonCorner = Instance.new("UICorner", copyButton)
+		buttonCorner.CornerRadius = UDim.new(0, 5)
+
+		-- Button Logic: Copy and Run
+		copyButton.MouseButton1Click:Connect(function()
+			setclipboard(fullCommand)
+			CommandSystem:ExecuteCommand(fullCommand)
+			NotificationLibrary:SendNotification("Success", string.format("Executed and copied: %s", fullCommand), 3)
+			G2L["Cmds_Frame"].Visible = false -- Close the command list after running
+		end)
+	end
+end
+
+
+G2L["Cmds_CloseButton"].MouseButton1Click:Connect(function()
+	G2L["Cmds_Frame"].Visible = false
+end)
+
+G2L["Frame_c"].MouseEnter:Connect(function()
+	if not Settings.isDragging then
+		TweenService:Create(
+			G2L["Frame_c"],
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{Size = UDim2.new(0, ICON_SIZE + 5, 0, ICON_SIZE + 5)}
+		):Play()
+	end
+end)
+
+G2L["Frame_c"].MouseLeave:Connect(function()
+	if not Settings.isDragging then
+		TweenService:Create(
+			G2L["Frame_c"],
+			TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{Size = UDim2.new(0, ICON_SIZE, 0, ICON_SIZE)}
+		):Play()
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if not Settings.isTyping or gameProcessed then return end
+	
+	if input.KeyCode == Enum.KeyCode.Up then
+		if #Settings.currentMatches > 0 then
+			Settings.selectedCommandIndex = math.max(1, Settings.selectedCommandIndex - 1)
+			updateSelectionHighlight()
+		end
+	elseif input.KeyCode == Enum.KeyCode.Down then
+		if #Settings.currentMatches > 0 then
+			Settings.selectedCommandIndex = math.min(#Settings.currentMatches, Settings.selectedCommandIndex + 1)
+			updateSelectionHighlight()
+		end
+	elseif input.KeyCode == Enum.KeyCode.Tab then
+		if #Settings.currentMatches > 0 then
+			-- Using the command title for text box population
+			local cmdTitle = Settings.currentMatches[Settings.selectedCommandIndex].Title
+			G2L["TextBox_7"].Text = cmdTitle
+			-- If a syntax exists, appending it for user clarity/completion
+			local syntax = Settings.currentMatches[Settings.selectedCommandIndex].Syntax
+			if syntax and syntax ~= "" then
+				G2L["TextBox_7"].Text = G2L["TextBox_7"].Text .. " " .. syntax:gsub("[<>]", "") -- Remove angle brackets for insertion
+			end
+		end
+	end
+end)
+
+G2L["TextBox_7"].Focused:Connect(function()
+	Settings.isTyping = true
+	
+	G2L["UIStroke_CommandFrame"].Thickness = 0.5
+	G2L["UIStroke_CommandFrame"].Transparency = 0
+	
+	-- Vertical movement removed here. UI remains fixed.
+	
+	updateAutocomplete(G2L["TextBox_7"].Text)
+end)
+
+G2L["TextBox_7"].FocusLost:Connect(function(enterPressed)
+	Settings.isTyping = false
+	
+	local textToExecute = G2L["TextBox_7"].Text
+	
+	G2L["TextBox_7"].Text = ""
+	
+	if textToExecute ~= "" and (enterPressed or UserInputService.TouchEnabled) then
+		CommandSystem:ExecuteCommand(textToExecute)
+	end
+	
+	G2L["UIStroke_CommandFrame"].Thickness = 0
+	G2L["UIStroke_CommandFrame"].Transparency = 1
+	
+	-- Start autocomplete frame hide immediately
+	local autoHideTween = TweenService:Create(
+		G2L["AutocompleteFrame"],
+		TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+		{Size = UDim2.new(1, 0, 0, 0)}
+	)
+	autoHideTween:Play()
+	
+	-- Vertical movement removed here. UI remains fixed.
+end)
+
+G2L["TextBox_7"]:GetPropertyChangedSignal("Text"):Connect(function()
+	if G2L["TextBox_7"].Text ~= "" then
+		G2L["UIStroke_CommandFrame"].Thickness = 0.5
+		G2L["UIStroke_CommandFrame"].Transparency = 0
+	else
+		if not Settings.isTyping then
+			G2L["UIStroke_CommandFrame"].Thickness = 0
+			G2L["UIStroke_CommandFrame"].Transparency = 1
+		end
+	end
+	
+	updateAutocomplete(G2L["TextBox_7"].Text)
+end)
+
+function PlayIntro()
+	task.wait(0.5)
+	
+	-- 1. Animate Icon to its fixed, non-moving position
+	local IconAnim = TweenService:Create(
+		G2L["Frame_c"],
+		TweenInfo.new(0.8, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+		{Position = ACTIVE_ICON_POS}
+	)
+	
+	IconAnim:Play()
+	IconAnim.Completed:Wait()
+	
+	-- 2. Position Command Frame correctly relative to the now-fixed icon
+	updateCommandFramePosition()
+	G2L["CommandFrame_2"].Visible = true
+	
+	-- 3. Animate Command Frame width to show it
+	local CommandFrameAnim = TweenService:Create(
+		G2L["CommandFrame_2"],
+		TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+		{Size = UDim2.new(0, FRAME_WIDTH, 0, FRAME_HEIGHT)}
+	)
+	
+	CommandFrameAnim:Play()
+	CommandFrameAnim.Completed:Wait()
+	
+	Settings.isCommandFrameOpen = true
+	setupDragging()
+	populateCommandsGUI()
+	task.wait(2)
+	NotificationLibrary:SendNotification("Success", "DarkAdmin has Loaded.", 5)
+end
+
+-- Utility function for local player property changes
+local function applyLocalPlayerProperty(property, value)
+    local player = Players.LocalPlayer
+    local char = player.Character
+    if char and char:FindFirstChildOfClass("Humanoid") then
+        local humanoid = char:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid[property] = value
+            NotificationLibrary:SendNotification("Success", string.format("Your %s set to %s.", property, value), 3)
+        else
+            NotificationLibrary:SendNotification("Error", "Your Humanoid not found. Try resetting or waiting.", 3)
+        end
+    else
+        NotificationLibrary:SendNotification("Error", "Your Character is not spawned (Humanoid missing).", 3)
+    end
+end
+
+-- Utility function for running external scripts and notifying the user
+local function runExternalScript(name, url)
+    NotificationLibrary:SendNotification("Info", "Loading " .. name .. "...", 3)
+    local success, result = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+
+    if not success then
+        NotificationLibrary:SendNotification("Error", "Failed to load " .. name .. ": " .. tostring(result), 5)
+    else
+        NotificationLibrary:SendNotification("Success", name .. " loaded successfully!", 3)
+    end
+end
+
+--- Local-Only Stat Commands ---
+---
+CommandSystem:AddCmd({
+	Title = "Speed",
+	Alias = {"Walkspeed", "ws"},
+	Syntax = "<Value>",
+	Callback = function(args)
+		if #args < 1 then
+			NotificationLibrary:SendNotification("Error", "Syntax: speed <Value>", 3)
+			return
+		end
+		
+		local speedValue = tonumber(args[1])
+		
+		if not speedValue or speedValue < 1 then
+			NotificationLibrary:SendNotification("Error", "Invalid speed value.", 3)
+			return
+		end
+		
+		applyLocalPlayerProperty("WalkSpeed", speedValue)
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "JumpPower",
+	Alias = {"jp", "jumppower"},
+	Syntax = "<Value>",
+	Callback = function(args)
+		if #args < 1 then
+			NotificationLibrary:SendNotification("Error", "Syntax: jumppower <Value>", 3)
+			return
+		end
+		
+		local jumpPowerValue = tonumber(args[1])
+		
+		if not jumpPowerValue or jumpPowerValue < 1 then
+			NotificationLibrary:SendNotification("Error", "Invalid jump power value.", 3)
+			return
+		end
+		
+		applyLocalPlayerProperty("JumpPower", jumpPowerValue)
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "Health",
+	Alias = {"heal", "health", "hp"},
+	Syntax = "<Value>",
+	Callback = function(args)
+		if #args < 1 then
+			NotificationLibrary:SendNotification("Error", "Syntax: health <Value>", 3)
+			return
+		end
+		
+		local healthValue = tonumber(args[1])
+		
+		if not healthValue or healthValue < 1 then
+			NotificationLibrary:SendNotification("Error", "Invalid health value.", 3)
+			return
+		end
+		
+		local player = Players.LocalPlayer
+		if player and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+			local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+			humanoid.Health = healthValue
+			NotificationLibrary:SendNotification("Success", string.format("Your Health set to %s.", healthValue), 3)
+		else
+			NotificationLibrary:SendNotification("Error", "Your Humanoid is missing.", 3)
+		end
+	end
+})
+---
+
+--- Loadstring Commands ---
+---
+CommandSystem:AddCmd({
+	Title = "GhostHub",
+	Alias = {"ghub", "ghost"},
+	Callback = function()
+		runExternalScript("Ghost Hub", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/ghost%20hub%20truly%20skidded.txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "FpsBooster",
+	Alias = {"fps", "booster"},
+	Callback = function()
+		runExternalScript("FPS Booster", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/FPS%20Booster%20Source%20changed%20Better.txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "NoteGUI",
+	Alias = {"notepad", "note"},
+	Callback = function()
+		runExternalScript("Note GUI", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/Simple%20notepad%20skidded%20(1).txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "R6Invisible",
+	Alias = {"r6inv", "invisr6"},
+	Callback = function()
+		runExternalScript("R6 Invisibility", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/skidded%20invisibility%20(1)%20(1).txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "R15Animations",
+	Alias = {"r15anim", "r15ani"},
+	Callback = function()
+		runExternalScript("R15 Animations GUI", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/R15%20Animations%20even%20old%20ones%20and%20also%20skidded%20and%20fe%20(1)%20(1).txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "OldChat",
+	Alias = {"oldchat"},
+	Callback = function()
+		runExternalScript("Old Chat", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/bring%20back%20Old%20chat.txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "Shiftlock",
+	Alias = {"slock"},
+	Callback = function()
+		runExternalScript("Shiftlock", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/the%20Best%20Shiftlock%20Skidded%20(1)%20(1).txt")
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "AntiDC",
+	Alias = {"antidc", "antiprotect"},
+	Callback = function()
+		runExternalScript("Anti DC Protection", "https://raw.githubusercontent.com/101iii101/file/refs/heads/main/anti%20Discord%20Webbook%20logger%20(1).txt")
+	end
+})
+---
+--- Existing Utility Commands ---
+
+CommandSystem:AddCmd({
+	Title = "Console",
+	Alias = {"Console"},
+	Callback = function()
+		StarterGui:SetCore("DevConsoleVisible", true)
+	end
+})
+CommandSystem:AddCmd({
+	Title = "OldConsole",
+	Alias = {"OConsole"},
+	Callback = function()
+		local _, str = pcall(function()
+		return game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/console.lua", true)
+	end)
+
+	local s, e = loadstring(str)
+	if typeof(s) ~= "function" then
+		return
+	end
+
+	local success, message = pcall(s)
+	if (not success) then
+		if printconsole then
+			printconsole(message)
+		elseif printoutput then
+			printoutput(message)
+		end
+	end
+	wait(1)
+	NotificationLibrary:SendNotification("Error", "Failed to Load. try f9", 3)
+	end
+})
+
+-- NEW COMMANDS COMMAND (Toggle the commands window)
+CommandSystem:AddCmd({
+	Title = "Commands",
+	Alias = {"cmds"},
+	Callback = function()
+		G2L["Cmds_Frame"].Visible = not G2L["Cmds_Frame"].Visible
+		if G2L["Cmds_Frame"].Visible then
+			populateCommandsGUI()
+		end
+	end
+})
+
+CommandSystem:AddCmd({
+	Title = "Help",
+	Alias = {"Info"},
+	Callback = function()
+		NotificationLibrary:SendNotification("Info", "Use 'Commands' or 'cmds' to see the full list of available commands!", 5)
+	end
+})
+CommandSystem:AddCmd({
+	Title = "Discord",
+	Alias = {"Support"},
+	Callback = function()
+		setclipboard("https://discord.gg/DMB3CDrDa9")
+		NotificationLibrary:SendNotification("Success", "Discord link copied to clipboard!", 3)
+	end
+})
+CommandSystem:AddCmd({
+	Title = "DarkDex",
+	Alias = {"Dex", "Explorer"},
+	Callback = function()
+	    NotificationLibrary:SendNotification("Info", "Loading Dex by Moon", 3)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+	end
+})
+CommandSystem:AddCmd({
+	Title = "OldDex",
+	Alias = {"OldExplorer", "ODex"},
+	Callback = function()
+	    NotificationLibrary:SendNotification("Info", "Loading OldModel of Dex", 3)
+		local getobjects = function(a)
+		local Objects = {}
+		if a then
+			local b = InsertService:LoadLocalAsset(a)
+			if b then 
+				table.insert(Objects, b) 
+			end
+		end
+		return Objects
+	end
+
+	local Dex = getobjects("rbxassetid://10055842438")[1]
+	Dex.Parent = PARENT
+
+	function Load(Obj, Url)
+		function GiveOwnGlobals(Func, Script)
+			local Fenv, RealFenv, FenvMt = {}, {
+				script = Script,
+				getupvalue = function(a, b)
+					return nil 
+				end,
+				getreg = function()
+					return {} 
+				end,
+				getprops = getprops or function(inst)
+					if getproperties then
+						local props = getproperties(inst)
+						if props[1] and gethiddenproperty then
+							local results = {}
+							for _,name in pairs(props) do
+								local success, res = pcall(gethiddenproperty, inst, name)
+								if success then
+									results[name] = res
+								end
+							end
+
+							return results
+						end
+
+						return props
+					end
+
+					return {}
+				end
+			}, {}
+			FenvMt.__index = function(a,b)
+				return RealFDenv[b] == nil and getgenv()[b] or RealFenv[b]
+			end
+			FenvMt.__newindex = function(a, b, c)
+				if RealFenv[b] == nil then 
+					getgenv()[b] = c 
+				else 
+					RealFenv[b] = c 
+				end
+			end
+			setmetatable(Fenv, FenvMt)
+			pcall(setfenv, Func, Fenv)
+			return Func
+		end
+
+		function LoadScripts(_, Script)
+			if Script:IsA("LocalScript") then
+				task.spawn(function()
+					GiveOwnGlobals(loadstring(Script.Source,"="..Script:GetFullName()), Script)()
+				end)
+			end
+			table.foreach(Script:GetChildren(), LoadScripts)
+		end
+
+		LoadScripts(nil, Obj)
+	end
+
+	Load(Dex)
+end
+})
+
+CommandSystem:AddCmd({
+	Title = "RemoteSpy",
+	Alias = {"Rspy"},
+	Callback = function()
+	    NotificationLibrary:SendNotification("Info", "Loading Rspy...", 3)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+	end
+})
+
+PlayIntro()
+
+return {
+	GUI = G2L["DarkAdmin_1"],
+	AddCmd = function(data) return CommandSystem:AddCmd(data) end
+}
