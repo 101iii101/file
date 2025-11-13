@@ -1,0 +1,49 @@
+-- Smiler Domination Script by Joshua
+-- Features: Auto-grab, wallhack, grab-speed boost, reduced stun
+
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hum = char:WaitForChild("Humanoid")
+local root = char:WaitForChild("HumanoidRootPart")
+
+-- ✅ Auto-grab nearby players
+spawn(function()
+    while wait(0.2) do
+        for _, target in pairs(game.Players:GetPlayers()) do
+            if target ~= player and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+                local dist = (target.Character.HumanoidRootPart.Position - root.Position).Magnitude
+                if dist < 6 then
+                    game:GetService("ReplicatedStorage").Grab:FireServer(target.Character)
+                end
+            end
+        end
+    end
+end)
+
+-- 🧱 Wallhack: make walls semi-transparent
+for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") and part.Name == "Wall" and part.CanCollide then
+        part.Transparency = 0.5
+    end
+end
+
+-- 🏃‍♂️ Speed boost while grabbing
+hum:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+    if hum.WalkSpeed < 16 then
+        hum.WalkSpeed = 22
+    end
+end)
+
+-- 🛡 Reduced stun duration
+local function reduceStun()
+    if hum:FindFirstChild("Stunned") then
+        hum.Stunned:Destroy()
+    end
+end
+
+hum.ChildAdded:Connect(function(child)
+    if child.Name == "Stunned" then
+        wait(0.1)
+        reduceStun()
+    end
+end)
