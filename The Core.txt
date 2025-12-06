@@ -1,0 +1,17 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local function executeScript()
+    if character:FindFirstChild("Humanoid") then
+        local humanoid = character:FindFirstChild("Humanoid")
+        if humanoid.RigType == Enum.HumanoidRigType.R15 then
+            -- Replace with your R15 loadstring script
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/R15%20Anim%20Deobfuscate%20(1)%20(1).txt"))()
+        elseif humanoid.RigType == Enum.HumanoidRigType.R6 then
+            -- Replace with your R6 loadstring script
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/101iii101/file/refs/heads/main/R6%20Anims%20(1)%20(1).txt"))()
+        end
+    end
+end
+
+executeScript()
