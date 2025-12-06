@@ -1,0 +1,172 @@
+game.Players.LocalPlayer.Character.Animate:Destroy()
+local v1 = game.Players.LocalPlayer
+local v_u_2 = "rbxassetid://233077885"
+local v_u_3 = "rbxassetid://287325678"
+local v_u_4 = "rbxassetid://70439247"
+local v_u_5 = "rbxassetid://68433924"
+local v_u_6 = "rbxassetid://313762630"
+local v_u_7 = "rbxassetid://97171309"
+local v_u_8 = "rbxassetid://136801964"
+local v_u_9 = "rbxassetid://233322916"
+local v_u_10 = "rbxassetid://100356237"
+local v_u_11 = "rbxassetid://42070828"
+local v_u_12 = "rbxassetid://136774723"
+local v_u_13 = "rbxassetid://137463716"
+local v_u_14 = "rbxassetid://743521450"
+local v_u_15 = false
+local v_u_16 = false
+local function v_u_59(p17)
+	-- upvalues: (ref) v_u_15, (ref) v_u_2, (ref) v_u_3, (ref) v_u_4, (ref) v_u_5, (ref) v_u_6, (ref) v_u_7, (ref) v_u_8, (ref) v_u_9, (ref) v_u_10, (ref) v_u_11, (ref) v_u_12, (ref) v_u_13, (ref) v_u_14, (ref) v_u_16
+	if not v_u_15 then
+		v_u_15 = true
+		local v18 = p17:WaitForChild("Humanoid")
+		v18.WalkSpeed = 30
+		local function v21(p19)
+			local v20 = Instance.new("Animation")
+			v20.AnimationId = p19
+			return v20
+		end
+		local v22 = v18:LoadAnimation(v21(v_u_2))
+		local v23 = v18:LoadAnimation(v21(v_u_3))
+		local v24 = v18:LoadAnimation(v21(v_u_4))
+		local v25 = v18:LoadAnimation(v21(v_u_5))
+		local v26 = v18:LoadAnimation(v21(v_u_6))
+		local v27 = v18:LoadAnimation(v21(v_u_7))
+		local v28 = v18:LoadAnimation(v21(v_u_8))
+		local v29 = v18:LoadAnimation(v21(v_u_9))
+		local v30 = v18:LoadAnimation(v21(v_u_10))
+		local v31 = v18:LoadAnimation(v21(v_u_11))
+		local v32 = v18:LoadAnimation(v21(v_u_12))
+		v22.Priority = Enum.AnimationPriority.Action
+		v23.Priority = Enum.AnimationPriority.Action
+		v24.Priority = Enum.AnimationPriority.Action
+		v25.Priority = Enum.AnimationPriority.Action
+		v26.Priority = Enum.AnimationPriority.Idle
+		v27.Priority = Enum.AnimationPriority.Idle
+		v28.Priority = Enum.AnimationPriority.Movement
+		v29.Priority = Enum.AnimationPriority.Movement
+		v30.Priority = Enum.AnimationPriority.Movement
+		v31.Priority = Enum.AnimationPriority.Movement
+		v32.Priority = Enum.AnimationPriority.Movement
+		v26.Looped = true
+		v27.Looped = true
+		local v_u_33 = {
+			v28,
+			v29,
+			v30,
+			v31,
+			v32
+		}
+		local v34, v35, v36 = pairs(v_u_33)
+		while true do
+			local v37
+			v36, v37 = v34(v35, v36)
+			if v36 == nil then
+				break
+			end
+			v37.Looped = true
+			v37:Play()
+			v37.TimePosition = 3
+			v37:AdjustSpeed(0)
+			v37:Stop()
+		end
+		local function v41(p38, p39, p40)
+			if p38 then
+				p38:Stop(p40)
+			end
+			if p39 then
+				p39:Play(p40)
+			end
+		end
+		task.delay(0.8, function()
+			-- upvalues: (ref) v_u_13, (ref) v_u_14
+			local v42 = Instance.new("Sound", workspace)
+			v42.SoundId = v_u_13
+			v42.PlaybackSpeed = 0.3
+			v42:Play()
+			task.delay(3, function()
+				-- upvalues: (ref) v_u_14
+				local v43 = Instance.new("Sound", workspace)
+				v43.SoundId = v_u_14
+				v43:Play()
+			end)
+		end)
+		task.delay(1, function()
+			local v_u_44 = 0.1
+			local v_u_45 = 3
+			local v_u_46 = tick()
+			local v_u_47 = true
+			game:GetService("RunService").RenderStepped:Connect(function()
+				-- upvalues: (ref) v_u_47, (ref) v_u_46, (ref) v_u_45, (ref) v_u_44
+				if v_u_47 and tick() - v_u_46 <= v_u_45 then
+					local v48 = (math.random() - 0.5) * v_u_44
+					local v49 = (math.random() - 0.5) * v_u_44
+					workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame * CFrame.new(v48, v49, 0)
+				end
+			end)
+			task.delay(v_u_45, function()
+				-- upvalues: (ref) v_u_47
+				v_u_47 = false
+			end)
+		end)
+		v18.WalkSpeed = 0
+		v22:Play()
+		task.wait(0.6)
+		v41(v22, nil, 0.5)
+		v23:Play(0.5)
+		v24:Play(0.5)
+		v25:Play(0.5)
+		v25.TimePosition = 0.5
+		v25:AdjustSpeed(0)
+		task.wait(3)
+		v25:Stop(0.6)
+		task.wait(2)
+		v23:Stop(0.6)
+		v24:Stop(0.6)
+		v18.WalkSpeed = 30
+		v41(nil, v26, 0.6)
+		v27:Play(0.6)
+		task.wait(0.1)
+		v26.TimePosition = 1.3
+		v26:AdjustSpeed(0.3)
+		v27.TimePosition = 1.3
+		v27:AdjustSpeed(0)
+		v18.Running:Connect(function(p50)
+			-- upvalues: (ref) v_u_16, (ref) v_u_33
+			if p50 > 0 then
+				v_u_16 = true
+				local v51, v52, v53 = pairs(v_u_33)
+				while true do
+					local v54
+					v53, v54 = v51(v52, v53)
+					if v53 == nil then
+						break
+					end
+					v54:Play(0.6)
+					v54.TimePosition = 3
+					v54:AdjustSpeed(0)
+				end
+			else
+				local v55, v56, v57 = pairs(v_u_33)
+				while true do
+					local v58
+					v57, v58 = v55(v56, v57)
+					if v57 == nil then
+						break
+					end
+					v58:Stop(0.3)
+				end
+				v_u_16 = false
+			end
+		end)
+	end
+end
+if v1.Character then
+	v_u_59(v1.Character)
+end
+v1.CharacterAdded:Connect(function(p60)
+	-- upvalues: (ref) v_u_59
+	p60:WaitForChild("Humanoid")
+	task.wait(1)
+	v_u_59(p60)
+end)

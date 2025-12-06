@@ -1,0 +1,74 @@
+local player = game.Players.LocalPlayer
+
+local attackToolName = "Attack"
+local attackAnimID = "rbxassetid://2954124238"
+local attackAudioID = "rbxassetid://536642316"
+local attackCooldown = 0.8 -- Cooldown set to 1 second
+local splashRadius = 6
+local damageMultiplier = 0.5
+
+local function createTool(name)
+    local tool = Instance.new("Tool")
+    tool.Name = name
+    tool.RequiresHandle = false
+    tool.CanBeDropped = false
+
+    local attackAnimation = Instance.new("Animation")
+    attackAnimation.AnimationId = attackAnimID
+
+    local lastAttackTime = 0
+    tool.Activated:Connect(function()
+        if os.clock() - lastAttackTime < attackCooldown then return end
+        lastAttackTime = os.clock()
+
+        -- Play animation
+        local character = player.Character
+        if not character then return end
+        local humanoid = character:FindFirstChild("Humanoid")
+        if not humanoid then return end
+
+        local attackTrack = humanoid:LoadAnimation(attackAnimation)
+        attackTrack:Play()
+        attackTrack:AdjustSpeed(2.3) -- Animation speed set to 2x
+
+        -- Play attack audio
+        local attackSound = Instance.new("Sound")
+        attackSound.SoundId = attackAudioID
+        attackSound.PlaybackSpeed = 0.8
+        attackSound.Parent = humanoid
+        attackSound:Play()
+        attackSound.Ended:Connect(function()
+            attackSound:Destroy()
+        end)
+
+        -- Splash damage logic
+        local origin = character:FindFirstChild("HumanoidRootPart")
+        if not origin then return end
+
+        for _, npc in pairs(workspace:GetDescendants()) do
+            if npc:IsA("Model") and npc ~= character and npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart") then
+                local npcHumanoid = npc:FindFirstChild("Humanoid")
+                local npcRootPart = npc:FindFirstChild("HumanoidRootPart")
+
+                -- Check if the NPC is NOT a player
+                if not game.Players:GetPlayerFromCharacter(npc) then
+                    local distance = (npcRootPart.Position - origin.Position).Magnitude
+                    if distance <= splashRadius then
+                        npcHumanoid:TakeDamage(npcHumanoid.MaxHealth * damageMultiplier)
+                    end
+                end
+            end
+        end
+    end)
+
+    return tool
+end
+
+local function giveAttackTool()
+    -- Create and give the "Attack" tool
+    local attackTool = createTool(attackToolName)
+    attackTool.Parent = player.Backpack
+end
+
+-- Wait 4 seconds, then give the tool
+task.delay(0, giveAttackTool)

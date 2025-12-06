@@ -1,0 +1,20 @@
+local player = game.Players.LocalPlayer
+local hipHeightAdjusted = false
+
+local function adjustHipHeight(character)
+    if hipHeightAdjusted then return end
+    hipHeightAdjusted = true
+
+    local humanoid = character:WaitForChild("Humanoid")
+    task.delay(0, function()
+        humanoid.HipHeight = 1
+    end)
+end
+
+if player.Character then
+    adjustHipHeight(player.Character)
+end
+
+player.CharacterAdded:Connect(function(character)
+    adjustHipHeight(character)
+end)

@@ -1,0 +1,14 @@
+local function updateCameraOffset()
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        local head = character:FindFirstChild("Head")
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if humanoid and head and hrp then
+            local offset = hrp.CFrame:PointToObjectSpace(head.Position)
+            humanoid.CameraOffset = Vector3.new(0, offset.Y - 1.5, offset.Z)
+        end
+    end
+end
+
+game:GetService("RunService").RenderStepped:Connect(updateCameraOffset)
