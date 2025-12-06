@@ -1,0 +1,3641 @@
+Print("deobfuscated By Aleks")
+
+
+if debug.info(1, "l") == 1 then
+	print("Safe")
+else
+	print("Detected")
+end
+pcall(game.HttpGet, game, setmetatable({}, {
+	["__tostring"] = function()
+		print("Kick Player")
+		return ""
+	end
+}))
+local v_u_1 = loadstring(game:HttpGet("https://pandadevelopment.net/service_api/PandaBetaLib.lua", true))()
+local v_u_2 = "britishhub"
+local v3 = loadstring(game:HttpGet("https://raw.githubusercontent.com/KidichiHB/Panda/main/KeyUI", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local v_u_4 = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+local function v_u_8(p5, p6, p7)
+	-- upvalues: (ref) v_u_4
+	v_u_4:Notify({
+		["Title"] = p5,
+		["Description"] = p6
+	}, {
+		["OutlineColor"] = Color3.fromRGB(80, 80, 80),
+		["Time"] = 5,
+		["Type"] = "image"
+	}, {
+		["Image"] = p7,
+		["ImageColor"] = Color3.fromRGB(255, 255, 255)
+	})
+end
+local v_u_9 = "hi"
+local v10 = v3:new({
+	["name"] = "BH"
+})
+local v_u_12 = v10:EnterKey(function(p11)
+	-- upvalues: (ref) v_u_9
+	v_u_9 = p11
+end)
+v10:GetKeyButton(function()
+	-- upvalues: (ref) v_u_8, (ref) v_u_1, (ref) v_u_2, (ref) v_u_12
+	v_u_8("British Hub", "Please wait a few seconds for link to be generatd", "rbxassetid://5179834402")
+	local v13 = v_u_1
+	setclipboard(v13:GetLink(v_u_2))
+	local v14 = v_u_1
+	print(v14:GetLink(v_u_2))
+	v_u_12:SetText(v_u_1:GetLink(v_u_2))
+	v_u_8("British Hub", "Copied to your clipboard, Paste it on your browser to begin getting the key", "rbxassetid://5179834402")
+end)
+v10:SubmitKeyButton(function()
+	-- upvalues: (ref) v_u_9, (ref) v_u_8, (ref) v_u_1, (ref) v_u_2
+	print("Key: ->" .. v_u_9)
+	v_u_8("British Hub", "Commenicing Validation of Key", "rbxassetid://5179834402")
+	if v_u_1:Validate(v_u_2, v_u_9) then
+		v_u_8("British Hub", "Key Successfully Validated", "rbxassetid://5179834402")
+		repeat
+			task.wait()
+		until game:IsLoaded()
+		local _ = {
+			["SchemeColor"] = Color3.fromRGB(0, 255, 255),
+			["Background"] = Color3.fromRGB(0, 0, 0),
+			["Header"] = Color3.fromRGB(0, 0, 0),
+			["TextColor"] = Color3.fromRGB(255, 255, 255),
+			["ElementColor"] = Color3.fromRGB(20, 20, 20)
+		}
+		local v15 = {
+			["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"))
+		}
+		v15["1"].ResetOnSpawn = false
+		v15["1"].IgnoreGuiInset = true
+		v15["1"].Name = "V-Hub-Notify"
+		v15["1"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		v15["2"] = Instance.new("Folder", v15["1"])
+		v15["2"].Name = "LibraryHolders"
+		v15["3"] = Instance.new("Frame", v15["2"])
+		v15["3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		v15["3"].BackgroundTransparency = 1
+		v15["3"].Size = UDim2.new(0.21830575168132782, 0, 0.8476052284240723, 0)
+		v15["3"].Position = UDim2.new(0.7816516160964966, 0, 0, 0)
+		v15["3"].Name = "NotifyHolder"
+		v15["4"] = Instance.new("UIListLayout", v15["3"])
+		v15["4"].VerticalAlignment = Enum.VerticalAlignment.Bottom
+		v15["4"].Padding = UDim.new(0, 14)
+		v15["4"].SortOrder = Enum.SortOrder.LayoutOrder
+		local v_u_16 = game:GetService("CoreGui"):WaitForChild("V-Hub-Notify").LibraryHolders
+		v_u_8 = function(p17, p_u_18)
+			-- upvalues: (ref) v_u_16
+			local v_u_19 = {
+				["NotificationHolder"] = Instance.new("Frame"),
+				["main"] = Instance.new("Frame"),
+				["Content"] = Instance.new("TextLabel"),
+				["UICorner"] = Instance.new("UICorner"),
+				["line"] = Instance.new("TextLabel"),
+				["window"] = Instance.new("Frame"),
+				["Title"] = Instance.new("TextLabel"),
+				["closebtn"] = Instance.new("TextButton"),
+				["VHubImage"] = Instance.new("ImageLabel"),
+				["UICorner_2"] = Instance.new("UICorner")
+			}
+			local v20 = game:GetService("TweenService"):Create(v_u_19.main, TweenInfo.new(1.5, Enum.EasingStyle.Quint), {
+				["Position"] = UDim2.new(0, 0, -0.00988808367, 0)
+			})
+			local v_u_21 = game:GetService("TweenService"):Create(v_u_19.main, TweenInfo.new(1.5, Enum.EasingStyle.Quint), {
+				["Position"] = UDim2.new(1.01, 0, -0.00988808367, 0)
+			})
+			v_u_19.NotificationHolder.Name = "NotificationHolder"
+			v_u_19.NotificationHolder.Parent = v_u_16.NotifyHolder
+			v_u_19.NotificationHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.NotificationHolder.BackgroundTransparency = 1
+			v_u_19.NotificationHolder.BorderSizePixel = 0
+			v_u_19.NotificationHolder.Position = UDim2.new(0, 0, 0.803545415, 0)
+			v_u_19.NotificationHolder.Size = UDim2.new(1, 0, 0.186000004, 0)
+			v_u_19.main.Name = "main"
+			v_u_19.main.Parent = v_u_19.NotificationHolder
+			v_u_19.main.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+			v_u_19.main.BorderColor3 = Color3.fromRGB(39, 39, 39)
+			v_u_19.main.BorderSizePixel = 0
+			v_u_19.main.Position = UDim2.new(1.01, 0, -0.12036103, 0)
+			v_u_19.main.Size = UDim2.new(0.990816534, 0, 1.09527624, 0)
+			v_u_19.Content.Name = "Content"
+			v_u_19.Content.Parent = v_u_19.main
+			v_u_19.Content.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+			v_u_19.Content.BackgroundTransparency = 1
+			v_u_19.Content.BorderColor3 = Color3.fromRGB(27, 42, 53)
+			v_u_19.Content.BorderSizePixel = 0
+			v_u_19.Content.Position = UDim2.new(0.0169612691, 0, 0.270000011, 0)
+			v_u_19.Content.Size = UDim2.new(0.966183603, 0, 0.677419364, 0)
+			v_u_19.Content.Font = Enum.Font.Gotham
+			v_u_19.Content.Text = tostring(p17)
+			v_u_19.Content.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.Content.TextSize = 11
+			v_u_19.Content.TextWrapped = true
+			v_u_19.Content.TextXAlignment = Enum.TextXAlignment.Left
+			v_u_19.Content.TextYAlignment = Enum.TextYAlignment.Top
+			v_u_19.UICorner.CornerRadius = UDim.new(0, 6)
+			v_u_19.UICorner.Parent = v_u_19.main
+			v_u_19.line.Name = "line"
+			v_u_19.line.Parent = v_u_19.main
+			v_u_19.line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.line.BorderSizePixel = 0
+			v_u_19.line.Position = UDim2.new(1.43051147e-6, 0, 0.219999999, 0)
+			v_u_19.line.Size = UDim2.new(1, 0, 0.0107526882, 0)
+			v_u_19.line.Font = Enum.Font.SourceSans
+			v_u_19.line.Text = ""
+			v_u_19.line.TextColor3 = Color3.fromRGB(0, 0, 0)
+			v_u_19.line.TextSize = 14
+			v_u_19.window.Name = "window"
+			v_u_19.window.Parent = v_u_19.main
+			v_u_19.window.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+			v_u_19.window.BorderColor3 = Color3.fromRGB(27, 42, 53)
+			v_u_19.window.BorderSizePixel = 0
+			v_u_19.window.Position = UDim2.new(-0.000225262484, 0, -0.00828485377, 0)
+			v_u_19.window.Size = UDim2.new(1, 0, 0.225806445, 0)
+			v_u_19.Title.Name = "Title"
+			v_u_19.Title.Parent = v_u_19.window
+			v_u_19.Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.Title.BackgroundTransparency = 1
+			v_u_19.Title.Position = UDim2.new(0.101757258, 0, 2.8109007e-6, 0)
+			v_u_19.Title.Size = UDim2.new(0.579710126, 0, 1, 0)
+			v_u_19.Title.Font = Enum.Font.GothamBold
+			v_u_19.Title.Text = "BritishHub System"
+			v_u_19.Title.TextColor3 = Color3.fromRGB(250, 250, 250)
+			v_u_19.Title.TextSize = 14
+			v_u_19.Title.TextXAlignment = Enum.TextXAlignment.Left
+			v_u_19.closebtn.Name = "closebtn"
+			v_u_19.closebtn.Parent = v_u_19.window
+			v_u_19.closebtn.AnchorPoint = Vector2.new(1, 0.5)
+			v_u_19.closebtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.closebtn.BackgroundTransparency = 1
+			v_u_19.closebtn.Position = UDim2.new(1.00485313, 0, 0.494676381, 0)
+			v_u_19.closebtn.Size = UDim2.new(0.101449274, 0, 1, 0)
+			v_u_19.closebtn.Font = Enum.Font.GothamBold
+			v_u_19.closebtn.Text = "X"
+			v_u_19.closebtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.closebtn.TextSize = 14
+			v_u_19.VHubImage.Name = "VHubImage"
+			v_u_19.VHubImage.Parent = v_u_19.window
+			v_u_19.VHubImage.AnchorPoint = Vector2.new(0, 0.5)
+			v_u_19.VHubImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_19.VHubImage.BackgroundTransparency = 1
+			v_u_19.VHubImage.Position = UDim2.new(0, 0, 0.446678907, 0)
+			v_u_19.VHubImage.Size = UDim2.new(0.0922423825, 0, 0.930581093, 0)
+			v_u_19.VHubImage.Image = "rbxthumb://type=Asset&id=9879986954&w=150&h=150"
+			v_u_19.UICorner_2.CornerRadius = UDim.new(0, 6)
+			v_u_19.UICorner_2.Parent = v_u_19.window
+			v20:Play()
+			task.spawn(function()
+				-- upvalues: (ref) v_u_19, (ref) v_u_21
+				v_u_19.closebtn.MouseButton1Down:Connect(function()
+					-- upvalues: (ref) v_u_21, (ref) v_u_19
+					v_u_21:Play()
+					wait(1)
+					v_u_19.NotificationHolder:Destroy()
+				end)
+			end)
+			task.spawn(function()
+				-- upvalues: (ref) p_u_18, (ref) v_u_21, (ref) v_u_19
+				wait(p_u_18)
+				v_u_21:Play()
+				wait(1)
+				v_u_19.NotificationHolder:Destroy()
+			end)
+		end
+		local v22 = game.Players.LocalPlayer.Name
+		local v_u_23 = game.PlaceId
+		local v24, v25 = pcall(function()
+			-- upvalues: (ref) v_u_23
+			return game:GetService("MarketplaceService"):GetProductInfo(v_u_23)
+		end)
+		local v26 = not v24 and "Unknown Game" or v25.Name
+		local v27 = os.time()
+		local v28 = os.date("%I:%M %p -", v27)
+		local v29 = os.date("%B/%d/%Y", v27)
+		math.randomseed(os.time())
+		local v30 = string.format("%06X", math.random(0, 16777215))
+		local v31 = {
+			["content"] = ""
+		}
+		local v32 = {}
+		local v33 = {
+			["title"] = "**British Hub Execution**",
+			["description"] = "User: " .. v22 .. "\nGame: " .. v26,
+			["type"] = "rich",
+			["color"] = tonumber("0x" .. v30),
+			["footer"] = {
+				["text"] = "V13 | Sent at: " .. v28 .. " " .. v29
+			}
+		}
+		local v34 = {
+			["url"] = "http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=" .. tostring(game:GetService("Players").LocalPlayer.Name)
+		}
+		v33.image = v34
+		__set_list(v32, 1, {v33})
+		v31.embeds = v32
+		v31.timestamp = v27
+		local v35 = {
+			["Url"] = "https://discord.com/api/webhooks/1145683891986907147/GeX8-j3GA-akx2HqoiyV9mGwYR7kQtKpHN-1EUrP-Ikn71Na0ws0NYlWf3ZbeZZT_lQk",
+			["Body"] = game:GetService("HttpService"):JSONEncode(v31),
+			["Method"] = "POST",
+			["Headers"] = {
+				["content-type"] = "application/json"
+			}
+		}
+		request(v35)
+		local v_u_36 = game.PlaceId
+		local v37, v38 = pcall(function()
+			-- upvalues: (ref) v_u_36
+			return game:GetService("MarketplaceService"):GetProductInfo(v_u_36)
+		end)
+		if v37 then
+			local _ = v38.Name
+		end
+		local v39 = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/WhiteCloudHub/BritishHub/main/Library.lua"))():CreateWindow("v15")
+		local v40 = v39:CreateTab("Player Scripts || ")
+		v40:CreateLabel("Player Shit")
+		v40:CreateButton("Inf Jumps", function()
+			local v_u_41 = true
+			game:GetService("UserInputService").JumpRequest:connect(function()
+				-- upvalues: (ref) v_u_41
+				if v_u_41 then
+					game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+				end
+			end)
+		end)
+		v40:CreateButton("Free Gamepass Script", function()
+			if game.CreatorType == Enum.CreatorType.User then
+				game.Players.LocalPlayer.UserId = game.CreatorId
+			end
+			if game.CreatorType == Enum.CreatorType.Group then
+				game.Players.LocalPlayer.UserId = game:GetService("GroupService"):GetGroupInfoAsync(game.CreatorId).Owner.Id
+			end
+		end)
+		v40:CreateButton("Fly", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/RPv4GELs"))()
+		end)
+		v40:CreateButton("Slasher", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Toasty8i/slasher/main/slasher.lua", true))()
+		end)
+		v40:CreateButton("KEYBOARD SCRIPT", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+		end)
+		v40:CreateButton("TP Tool", function()
+			mouse = game.Players.LocalPlayer:GetMouse()
+			tool = Instance.new("Tool")
+			tool.RequiresHandle = false
+			tool.Name = "click tp tool"
+			tool.Activated:connect(function()
+				local v42 = mouse.Hit + Vector3.new(0, 2.5, 0)
+				local v43 = CFrame.new(v42.X, v42.Y, v42.Z)
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v43
+			end)
+			tool.Parent = game.Players.LocalPlayer.Backpack
+		end)
+		v40:CreateButton("Get Inventory Script", function()
+			game.StarterGui:SetCore("SendNotification", {
+				["Title"] = "Successfully executed",
+				["Text"] = "This script is FE in some games mainly in SCP games",
+				["Icon"] = "",
+				["Duration"] = 10
+			})
+			local v44, v45, v46 = pairs(game.Players:GetChildren())
+			while true do
+				local v47
+				v46, v47 = v44(v45, v46)
+				if v46 == nil then
+					break
+				end
+				wait()
+				local v48, v49, v50 = pairs(v47.Backpack:GetChildren())
+				while true do
+					local v51
+					v50, v51 = v48(v49, v50)
+					if v50 == nil then
+						break
+					end
+					v51.Parent = game.Players.LocalPlayer.Backpack
+				end
+			end
+		end)
+		v40:CreateLabel("MISC")
+		v40:CreateBox("Set FOV", function(p52)
+			game.Workspace.CurrentCamera.FieldOfView = p52
+		end)
+		v40:CreateBox("Set J-P", function(p53)
+			game.Players.LocalPlayer.Character.Humanoid.JumpPower = p53
+		end)
+		v40:CreateLabel("Again Player Shit")
+		v40:CreateButton("Reduce Lag", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/Av2rdcUp"))()
+		end)
+		local v_u_54 = nil
+		local v_u_55 = nil
+		local v_u_56 = nil
+		local v57 = game:GetService("RunService")
+		local v_u_58 = game:GetService("LocalPlayer")
+		v57.RenderStepped:Connect(function()
+			-- upvalues: (ref) v_u_58, (ref) v_u_56, (ref) v_u_54, (ref) v_u_55
+			local v59 = v_u_58.Character.PrimaryPart
+			if v_u_56 then
+				if v59.AssemblyLinearVelocity.Magnitude > 250 or v59.AssemblyAngularVelocity.Magnitude > 250 then
+					v59.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+					v59.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+					v59.CFrame = v_u_54
+					local function v_u_60(_, _)
+						-- upvalues: (ref) v_u_55, (ref) v_u_60
+						if v_u_55 then
+							v_u_60("Fling Stopped", "Stopping Fling to not get voided...")
+						end
+					end
+				elseif v59.AssemblyLinearVelocity.Magnitude > 50 or v59.AssemblyAngularVelocity.Magnitude > 50 then
+					v_u_54 = v59.CFrame
+				end
+				local v61, v62, v63 = pairs(game:GetService("Players"):GetPlayers())
+				local function v69(p64)
+					if p64.Character then
+						local v65, v66, v67 = pairs(p64.Character:GetDescendants())
+						while true do
+							local v68
+							v67, v68 = v65(v66, v67)
+							if v67 == nil then
+								break
+							end
+							if v68:IsA("BasePart") then
+								v68.CanCollide = false
+							end
+						end
+					end
+				end
+				while true do
+					local v70
+					v63, v70 = v61(v62, v63)
+					if v63 == nil then
+						break
+					end
+					if v70 ~= v_u_58 then
+						v69(v70)
+					end
+				end
+			end
+		end)
+		v40:CreateToggle("Anti-Fling", function(p71)
+			-- upvalues: (ref) v_u_8, (ref) v_u_56
+			v_u_8("Anti-Fling Enabled", 5)
+			v_u_56 = p71
+		end)
+		v40:CreateToggle("Notify-If u get flinged", function(p72)
+			-- upvalues: (ref) v_u_8, (ref) v_u_55
+			v_u_8("Notify if flinged Enabled", 5)
+			v_u_55 = p72
+		end)
+		v40:CreateButton("Chat Spy", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/TBRu2TW5"))()
+		end)
+		v40:CreateButton("Rejoin", function()
+			game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
+		end)
+		v40:CreateLabel("R15 Animation Changer")
+		v40:CreateButton("Custom Animation", function()
+			while true do
+				wait(1)
+				local v73, v74, v75 = ipairs(game.Players:GetChildren())
+				while true do
+					local v76
+					v75, v76 = v73(v74, v75)
+					if v75 == nil then
+						break
+					end
+					local v77 = game.Players.LocalPlayer.Character.Animate
+					v77.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+					v77.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+					v77.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+					v77.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+					v77.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=1083218792"
+					v77.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=1083439238"
+					v77.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=707829716"
+					game.Players.LocalPlayer.Character.Humanoid.Jump = false
+				end
+			end
+		end)
+		v40:CreateButton("Zombie animation", function()
+			while true do
+				wait(1)
+				local v78, v79, v80 = ipairs(game.Players:GetChildren())
+				while true do
+					local v81
+					v80, v81 = v78(v79, v80)
+					if v80 == nil then
+						break
+					end
+					local v82 = game.Players.LocalPlayer.Character.Animate
+					v82.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=616158929"
+					v82.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=616160636"
+					v82.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+					v82.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+					v82.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616161997"
+					v82.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=616156119"
+					v82.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616157476"
+					game.Players.LocalPlayer.Character.Humanoid.Jump = false
+				end
+			end
+		end)
+		v40:CreateButton("Cartoony Animation", function()
+			while true do
+				wait(1)
+				local v83, v84, v85 = ipairs(game.Players:GetChildren())
+				while true do
+					local v86
+					v85, v86 = v83(v84, v85)
+					if v85 == nil then
+						break
+					end
+					local v87 = game.Players.LocalPlayer.Character.Animate
+					v87.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+					v87.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
+					v87.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=782843345"
+					v87.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=782842708"
+					v87.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=782847020"
+					v87.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=782843869"
+					v87.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=782846423"
+					game.Players.LocalPlayer.Character.Humanoid.Jump = false
+				end
+			end
+		end)
+		v40:CreateLabel("Chat Shit")
+		v40:CreateButton("Language Translator", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/RobloxScripts/main/ChatTranslator.lua"))()
+		end)
+		v40:CreateBox("Bypass Words", function(p88)
+			math.randomseed(tick())
+			local v_u_89 = require(game:GetService("Players").LocalPlayer.PlayerScripts.ChatScript.ChatMain)
+			local function v90()
+				-- upvalues: (ref) v_u_89
+				v_u_89.MessagePosted:fire("dffhdfshfd" .. math.random(100000, 1000000))
+				v_u_89.MessagesChanged:fire(math.random(100000, 1000000))
+			end
+			local v91, v92, v93 = p88:gmatch(".")
+			while true do
+				v93 = v91(v92, v93)
+				if v93 == nil then
+					break
+				end
+				wait(0.5)
+				game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(v93, "All")
+				wait(0.5)
+				v90()
+			end
+		end)
+		local v_u_94 = v39:CreateTab("Sus Animations || ")
+		local v95 = v_u_94
+		v_u_94.CreateLabel(v95, "SEX ANIMATIONS")
+		local v96 = v_u_94
+		v_u_94.CreateButton(v96, "Bang R15", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/manimcool21/bang/main/Protected%20(27).lua"))()
+		end)
+		local v97 = v_u_94
+		v_u_94.CreateButton(v97, "Sussy Hub", function()
+			loadstring(game:HttpGet("https://gist.githubusercontent.com/Nilrogram/8b0c8bd710be142f383c71f79279752c/raw/e4fb01a7de7cd498bb53270d2ad191dfab268a88/FE%2520SussyHub", true))()
+		end)
+		local v98 = v_u_94
+		v_u_94.CreateButton(v98, "no", function()
+			function rmesh(p99)
+				if workspace[game.Players.LocalPlayer.Name][p99].Handle:FindFirstChild("Mesh") or workspace[game.Players.LocalPlayer.Name][p99].Handle:FindFirstChild("SpecialMesh") then
+					old = game.Players.LocalPlayer.Character
+					game.Players.LocalPlayer.Character = workspace[game.Players.LocalPlayer.Name]
+					local v100 = next
+					local v101, v102 = workspace[game.Players.LocalPlayer.Name]:FindFirstChild(p99).Handle:GetDescendants()
+					while true do
+						local v103
+						v102, v103 = v100(v101, v102)
+						if v102 == nil then
+							break
+						end
+						if v103:IsA("Mesh") or v103:IsA("SpecialMesh") then
+							v103:Remove()
+						end
+					end
+					for _ = 1, 2 do
+						game.Players.LocalPlayer.Character = old
+					end
+				end
+			end
+			HumanDied = false
+			local v104 = next
+			local v105, v106 = game:GetService("Players").LocalPlayer.Character:GetDescendants()
+			while true do
+				local v107, v_u_108 = v104(v105, v106)
+				if v107 == nil then
+					break
+				end
+				v106 = v107
+				if v_u_108:IsA("BasePart") then
+					_G.netless = game:GetService("RunService").Heartbeat:connect(function()
+						-- upvalues: (ref) v_u_108
+						v_u_108.AssemblyLinearVelocity = Vector3.new(-30, 0, 0)
+						sethiddenproperty(game.Players.LocalPlayer, "MaximumSimulationRadius", math.huge)
+						sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 999999999)
+					end)
+				end
+			end
+			local v_u_109 = game.Players.LocalPlayer
+			local v_u_110 = v_u_109.Character
+			local v111 = game:GetService("RunService")
+			v_u_110.Archivable = true
+			local v_u_112 = v_u_110:Clone()
+			v_u_112.Name = "Nexo " .. v_u_109.Name .. ""
+			fl = Instance.new("Folder", v_u_110)
+			fl.Name = "Nexo"
+			v_u_112.Animate.Disabled = true
+			v_u_110.HumanoidRootPart:Destroy()
+			v_u_110.Humanoid:ChangeState(16)
+			local v113 = next
+			local v114, v115 = v_u_110.Humanoid:GetPlayingAnimationTracks()
+			local v_u_116 = {}
+			while true do
+				local v117
+				v115, v117 = v113(v114, v115)
+				if v115 == nil then
+					break
+				end
+				v117:Stop()
+			end
+			v_u_110.Animate:Remove()
+			function create(p118, p119, p120, p121)
+				Instance.new("Attachment", p118)
+				Instance.new("AlignPosition", p118)
+				Instance.new("AlignOrientation", p118)
+				Instance.new("Attachment", p119)
+				p118.Attachment.Name = p118.Name
+				p119.Attachment.Name = p118.Name
+				p118.AlignPosition.Attachment0 = p118[p118.Name]
+				p118.AlignOrientation.Attachment0 = p118[p118.Name]
+				p118.AlignPosition.Attachment1 = p119[p118.Name]
+				p118.AlignOrientation.Attachment1 = p119[p118.Name]
+				p119[p118.Name].Position = p120 or Vector3.new()
+				p118[p118.Name].Orientation = p121 or Vector3.new()
+				p118.AlignPosition.MaxForce = 999999999
+				p118.AlignPosition.MaxVelocity = math.huge
+				p118.AlignPosition.ReactionForceEnabled = false
+				p118.AlignPosition.Responsiveness = math.huge
+				p118.AlignOrientation.Responsiveness = math.huge
+				p118.AlignPosition.RigidityEnabled = false
+				p118.AlignOrientation.MaxTorque = 999999999
+			end
+			local v122 = next
+			local v123, v124 = v_u_110:GetDescendants()
+			while true do
+				local v125
+				v124, v125 = v122(v123, v124)
+				if v124 == nil then
+					break
+				end
+				if v125:IsA("Accessory") then
+					v125.Handle:BreakJoints()
+					create(v125.Handle, v_u_112[v125.Name].Handle)
+				end
+			end
+			v_u_110.Torso["Left Shoulder"]:Destroy()
+			v_u_110.Torso["Right Shoulder"]:Destroy()
+			v_u_110.Torso["Left Hip"]:Destroy()
+			v_u_110.Torso["Right Hip"]:Destroy()
+			create(v_u_110.Torso, v_u_112.Torso)
+			create(v_u_110["Left Arm"], v_u_112["Left Arm"])
+			create(v_u_110["Right Arm"], v_u_112["Right Arm"])
+			create(v_u_110["Left Leg"], v_u_112["Left Leg"])
+			create(v_u_110["Right Leg"], v_u_112["Right Leg"])
+			local v126 = next
+			local v127, v128 = v_u_112:GetDescendants()
+			while true do
+				local v129
+				v128, v129 = v126(v127, v128)
+				if v128 == nil then
+					break
+				end
+				if v129:IsA("BasePart") or v129:IsA("Decal") then
+					v129.Transparency = 1
+				end
+			end
+			v_u_112.Parent = fl
+			local v130 = next
+			local v131, v132 = v_u_112:GetDescendants()
+			while true do
+				local v_u_133
+				v132, v_u_133 = v130(v131, v132)
+				if v132 == nil then
+					break
+				end
+				if v_u_133:IsA("BasePart") then
+					table.insert(v_u_116, v111.RenderStepped:Connect(function()
+						-- upvalues: (ref) v_u_133
+						v_u_133.CanCollide = false
+					end))
+				end
+			end
+			local v134 = next
+			local v135, v136 = v_u_110:GetDescendants()
+			while true do
+				local v_u_137
+				v136, v_u_137 = v134(v135, v136)
+				if v136 == nil then
+					break
+				end
+				if v_u_137:IsA("BasePart") then
+					table.insert(v_u_116, v111.RenderStepped:Connect(function()
+						-- upvalues: (ref) v_u_137
+						v_u_137.CanCollide = false
+					end))
+				end
+			end
+			local v138 = next
+			local v139, v140 = v_u_112:GetDescendants()
+			while true do
+				local v_u_141
+				v140, v_u_141 = v138(v139, v140)
+				if v140 == nil then
+					break
+				end
+				if v_u_141:IsA("BasePart") then
+					table.insert(v_u_116, v111.Stepped:Connect(function()
+						-- upvalues: (ref) v_u_141
+						v_u_141.CanCollide = false
+					end))
+				end
+			end
+			local v142 = next
+			local v143, v144 = v_u_110:GetDescendants()
+			while true do
+				local v_u_145
+				v144, v_u_145 = v142(v143, v144)
+				if v144 == nil then
+					break
+				end
+				if v_u_145:IsA("BasePart") then
+					table.insert(v_u_116, v111.Stepped:Connect(function()
+						-- upvalues: (ref) v_u_145
+						v_u_145.CanCollide = false
+					end))
+				end
+			end
+			table.insert(v_u_116, v_u_112.Humanoid.Died:Connect(function()
+				-- upvalues: (ref) v_u_109, (ref) v_u_110, (ref) v_u_112, (ref) v_u_116
+				v_u_109.Character = v_u_110
+				v_u_110:BreakJoints()
+				v_u_112:Destroy()
+				game.Players:Chat("-gr")
+				_G.netless:Disconnect()
+				HumanDied = true
+				local v146, v147, v148 = pairs(v_u_116)
+				while true do
+					local v149
+					v148, v149 = v146(v147, v148)
+					if v148 == nil then
+						break
+					end
+					v149:Disconnect()
+				end
+			end))
+			v_u_109.Character = v_u_112
+			workspace.CurrentCamera.CameraSubject = v_u_112.Humanoid
+			IT = Instance.new
+			CF = CFrame.new
+			VT = Vector3.new
+			RAD = math.rad
+			C3 = Color3.new
+			UD2 = UDim2.new
+			BRICKC = BrickColor.new
+			ANGLES = CFrame.Angles
+			EULER = CFrame.fromEulerAnglesXYZ
+			COS = math.cos
+			ACOS = math.acos
+			SIN = math.sin
+			ASIN = math.asin
+			ABS = math.abs
+			MRANDOM = math.random
+			FLOOR = math.floor
+			speed = 1
+			sine = 1
+			local v_u_150 = game:GetService("RunService")
+			local v_u_151 = game.Players.LocalPlayer.Character
+			function hat(p152, p153, p154, p155, p156)
+				-- upvalues: (ref) v_u_151
+				v_u_151[p152].Handle.AccessoryWeld.Part1 = v_u_151[p153]
+				v_u_151[p152].Handle.AccessoryWeld.C1 = p154 or CFrame.new()
+				v_u_151[p152].Handle.AccessoryWeld.C0 = v_u_151[p152].Handle.AccessoryWeld.C0:Lerp(p155 or CFrame.new(), 1)
+				if p156 == true then
+					rmesh(p152)
+				end
+			end
+			m = game.Players.LocalPlayer:GetMouse()
+			RJ = v_u_151.HumanoidRootPart.RootJoint
+			RS = v_u_151.Torso["Right Shoulder"]
+			LS = v_u_151.Torso["Left Shoulder"]
+			RH = v_u_151.Torso["Right Hip"]
+			LH = v_u_151.Torso["Left Hip"]
+			Root = v_u_151.HumanoidRootPart
+			NECK = v_u_151.Torso.Neck
+			NECK.C0 = CF(0, 1, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			NECK.C1 = CF(0, -0.5, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RJ.C1 = CF(0, -1, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RJ.C0 = CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RS.C1 = CF(0, 0.5, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			LS.C1 = CF(0, 0.5, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RH.C1 = CF(0, 1, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			LH.C1 = CF(0, 1, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RH.C0 = CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			LH.C0 = CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			RS.C0 = CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			LS.C0 = CF(0, 0, 0) * ANGLES(RAD(0), RAD(0), RAD(0))
+			coroutine.wrap(function()
+				-- upvalues: (ref) v_u_151, (ref) v_u_110, (ref) v_u_150
+				while not HumanDied do
+					sine = sine + speed
+					local v157 = Ray.new(v_u_151["Right Leg"].Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -2, 0))
+					local _, _ = workspace:FindPartOnRay(v157, v_u_110)
+					local v158 = Ray.new(v_u_151["Left Leg"].Position + Vector3.new(0, 0.5, 0), Vector3.new(0, -2, 0))
+					local _, _ = workspace:FindPartOnRay(v158, v_u_110)
+					local v159 = (Root.Velocity * Root.CFrame.rightVector).X + (Root.Velocity * Root.CFrame.rightVector).Z
+					local v160 = (Root.Velocity * Root.CFrame.lookVector).X + (Root.Velocity * Root.CFrame.lookVector).Z
+					if v_u_151.Humanoid.WalkSpeed < v160 then
+						v160 = v_u_151.Humanoid.WalkSpeed
+					end
+					if v160 < -v_u_151.Humanoid.WalkSpeed then
+						v160 = -v_u_151.Humanoid.WalkSpeed
+					end
+					if v_u_151.Humanoid.WalkSpeed < v159 then
+						v159 = v_u_151.Humanoid.WalkSpeed
+					end
+					if v159 < -v_u_151.Humanoid.WalkSpeed then
+						v159 = -v_u_151.Humanoid.WalkSpeed
+					end
+					local _ = v160 / v_u_151.Humanoid.WalkSpeed
+					local _ = v159 / v_u_151.Humanoid.WalkSpeed
+					if v_u_151.Humanoid.Jump then
+						NECK.C0 = NECK.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), 1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RJ.C0 = RJ.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RS.C0 = RS.C0:Lerp(CFrame.new(1 + 0 * math.cos(sine / 10), -0.2 + 1 * math.cos(sine / 5), -1 + 0 * math.cos(sine / 1)) * CFrame.Angles(math.rad(30 + 0 * math.cos(sine / 10)), math.rad(-30 + 0 * math.sin(sine / 10)), math.rad(-20 + 0 * math.cos(sine / 10))), 0.2)
+						LS.C0 = LS.C0:Lerp(CFrame.new(-1.5 + 0 * math.cos(sine / 10), 0.5 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RH.C0 = RH.C0:Lerp(CFrame.new(0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						LH.C0 = LH.C0:Lerp(CFrame.new(-0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+					elseif Root.Velocity.y >= -1 or not v_u_151.Humanoid.Jump then
+						if Root.Velocity.Magnitude >= 2 then
+							if Root.Velocity.Magnitude >= 20 then
+								if Root.Velocity.Magnitude > 20 then
+									hat("Pal Hair", "Torso", CFrame.new(0, 0, 0), CFrame.new(0 + 0 * math.cos(sine / 10), 1.5 + 0 * math.cos(sine / 10), 1.5 + 0.2 * math.cos(sine / 1)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.sin(sine / 1))), true)
+									NECK.C0 = NECK.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), 1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+									RJ.C0 = RJ.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+									RS.C0 = RS.C0:Lerp(CFrame.new(1 + 0 * math.cos(sine / 10), -0.2 + 1 * math.cos(sine / 5), -1 + 0 * math.cos(sine / 1)) * CFrame.Angles(math.rad(30 + 0 * math.cos(sine / 10)), math.rad(-30 + 0 * math.sin(sine / 10)), math.rad(-20 + 0 * math.cos(sine / 10))), 0.2)
+									LS.C0 = LS.C0:Lerp(CFrame.new(-1.5 + 0 * math.cos(sine / 10), 0.5 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 50 * math.cos(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+									RH.C0 = RH.C0:Lerp(CFrame.new(0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 60 * math.cos(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+									LH.C0 = LH.C0:Lerp(CFrame.new(-0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 60 * math.sin(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+								end
+							else
+								hat("Pal Hair", "Torso", CFrame.new(0, 0, 0), CFrame.new(0 + 0 * math.cos(sine / 10), 1.5 + 0 * math.cos(sine / 10), 1.5 + 0.2 * math.cos(sine / 1)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.sin(sine / 1))), true)
+								NECK.C0 = NECK.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), 1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+								RJ.C0 = RJ.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+								RS.C0 = RS.C0:Lerp(CFrame.new(1 + 0 * math.cos(sine / 10), -0.2 + 1 * math.cos(sine / 5), -1 + 0 * math.cos(sine / 1)) * CFrame.Angles(math.rad(30 + 0 * math.cos(sine / 10)), math.rad(-30 + 0 * math.sin(sine / 10)), math.rad(-20 + 0 * math.cos(sine / 10))), 0.2)
+								LS.C0 = LS.C0:Lerp(CFrame.new(-1.5 + 0 * math.cos(sine / 10), 0.5 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 50 * math.cos(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+								RH.C0 = RH.C0:Lerp(CFrame.new(0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 60 * math.cos(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+								LH.C0 = LH.C0:Lerp(CFrame.new(-0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 60 * math.sin(sine / 9)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+							end
+						else
+							hat("Pal Hair", "Torso", CFrame.new(0, 0, 0), CFrame.new(0 + 0 * math.cos(sine / 10), 1.5 + 0 * math.cos(sine / 10), 1.5 + 0.2 * math.cos(sine / 1)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.sin(sine / 1))), true)
+							NECK.C0 = NECK.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), 1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+							RJ.C0 = RJ.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+							RS.C0 = RS.C0:Lerp(CFrame.new(1 + 0 * math.cos(sine / 10), -0.2 + 1 * math.cos(sine / 5), -1 + 0 * math.cos(sine / 1)) * CFrame.Angles(math.rad(30 + 0 * math.cos(sine / 10)), math.rad(-30 + 0 * math.sin(sine / 10)), math.rad(-20 + 0 * math.cos(sine / 10))), 0.2)
+							LS.C0 = LS.C0:Lerp(CFrame.new(-1.5 + 0 * math.cos(sine / 10), 0.5 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+							RH.C0 = RH.C0:Lerp(CFrame.new(0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+							LH.C0 = LH.C0:Lerp(CFrame.new(-0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						end
+					else
+						NECK.C0 = NECK.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), 1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RJ.C0 = RJ.C0:Lerp(CFrame.new(0 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RS.C0 = RS.C0:Lerp(CFrame.new(1 + 0 * math.cos(sine / 10), -0.2 + 1 * math.cos(sine / 5), -1 + 0 * math.cos(sine / 1)) * CFrame.Angles(math.rad(30 + 0 * math.cos(sine / 10)), math.rad(-30 + 0 * math.sin(sine / 10)), math.rad(-20 + 0 * math.cos(sine / 10))), 0.2)
+						LS.C0 = LS.C0:Lerp(CFrame.new(-1.5 + 0 * math.cos(sine / 10), 0.5 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						RH.C0 = RH.C0:Lerp(CFrame.new(0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+						LH.C0 = LH.C0:Lerp(CFrame.new(-0.5 + 0 * math.cos(sine / 10), -1 + 0 * math.cos(sine / 10), 0 + 0 * math.cos(sine / 10)) * CFrame.Angles(math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10)), math.rad(0 + 0 * math.cos(sine / 10))), 0.2)
+					end
+					v_u_150.RenderStepped:Wait()
+				end
+			end)()
+		end)
+		local v161 = v39:CreateTab("GUIs ||")
+		v161:CreateButton("HawkHub [Must Use]", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheHanki/Hawk/main/HUB/Loader", true))()
+		end)
+		v161:CreateButton("Shakar Hub", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/USH.P/main/rotected", true))()
+		end)
+		v161:CreateButton("Bido Skin", function()
+			loadstring(game:HttpGet("https://paste.website/p/f4c0bdd2-0340-4009-bf57-5d23d362aa94.txt"))()
+		end)
+		v161:CreateButton("Haxker_6666666", function()
+			loadstring(game:HttpGet("https://paste.website/p/f4c0bdd2-0340-4009-bf57-5d23d362aa94.txt"))()
+		end)
+		v161:CreateButton("Multi Scripter X", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/GamerScripter/Multi-Scripter-X/main/loader"))()
+		end)
+		v161:CreateButton("Syntax Hub", function()
+			shared.colors = {
+				["Icons"] = Color3.fromRGB(0, 255, 149),
+				["Version"] = Color3.fromRGB(0, 255, 149),
+				["Text"] = Color3.fromRGB(255, 255, 255),
+				["Description"] = Color3.fromRGB(125, 125, 125),
+				["TabList"] = Color3.fromRGB(30, 30, 30),
+				["Scripts"] = Color3.fromRGB(30, 30, 30),
+				["Back"] = Color3.fromRGB(25, 25, 25),
+				["Glow"] = Color3.fromRGB(0, 0, 0)
+			}
+			shared.transparency = {
+				["Version"] = 0,
+				["Text"] = 0,
+				["Description"] = 0,
+				["Icons"] = 0,
+				["Back"] = 0,
+				["Glow"] = 0.5,
+				["TabList"] = 0,
+				["Scripts"] = 1
+			}
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Memeboiyot/Syntax-V3-Free/main/Syntax%20v3    ", true))()
+		end)
+		v161:CreateButton("VHub", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/V31nc/2642/Created/VHub"))()
+		end)
+		v161:CreateButton("LX Hub", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Gogogamer61/LXHub-Main/main/LXHub%20Main%20Script", true))()
+		end)
+		v161:CreateButton("Inf Yield", function()
+			local v_u_162 = Instance.new("Frame")
+			local v163 = Instance.new("Frame")
+			local v164 = Instance.new("TextLabel")
+			local v165 = Instance.new("Frame")
+			local v166 = Instance.new("TextLabel")
+			local v167 = Instance.new("ImageButton")
+			screenGui = Instance.new("ScreenGui", game.CoreGui)
+			v_u_162.Name = "Boomer"
+			v_u_162.Parent = screenGui
+			v_u_162.Active = true
+			v_u_162.BackgroundTransparency = 1
+			v_u_162.Position = UDim2.new(0.5, -180, 0, -400)
+			v_u_162.Size = UDim2.new(0, 360, 0, 20)
+			v_u_162.ZIndex = 4
+			v163.Name = "background"
+			v163.Parent = v_u_162
+			v163.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
+			v163.BorderSizePixel = 0
+			v163.Position = UDim2.new(0, 0, 0, 20)
+			v163.Size = UDim2.new(0, 360, 0, 135)
+			v164.Parent = v163
+			v164.BackgroundTransparency = 1
+			v164.Position = UDim2.new(0.017, 0, 0.06, 0)
+			v164.Size = UDim2.new(0, 348, 0, 120)
+			v164.Font = Enum.Font.SourceSans
+			v164.TextSize = 18
+			v164.TextWrapped = true
+			v164.Text = "infinite yield executed"
+			v164.TextColor3 = Color3.new(1, 1, 1)
+			v164.TextXAlignment = Enum.TextXAlignment.Left
+			v164.TextYAlignment = Enum.TextYAlignment.Top
+			v165.Name = "shadow"
+			v165.Parent = v_u_162
+			v165.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+			v165.BorderSizePixel = 0
+			v165.Size = UDim2.new(0, 360, 0, 20)
+			v165.ZIndex = 4
+			v166.Name = "PopupText"
+			v166.Parent = v165
+			v166.BackgroundTransparency = 1
+			v166.Position = UDim2.new(0, 51, 0, 0)
+			v166.Size = UDim2.new(0.76, -16, 0.95, 0)
+			v166.ZIndex = 4
+			v166.Font = Enum.Font.SourceSans
+			v166.TextSize = 14
+			v166.Text = "Server Announcement"
+			v166.TextColor3 = Color3.new(1, 1, 1)
+			v166.TextWrapped = true
+			v167.Name = "Exit"
+			v167.Parent = v165
+			v167.BackgroundTransparency = 1
+			v167.Size = UDim2.new(0, 20, 0, 20)
+			v167.ZIndex = 4
+			v167.Image = "rbxassetid://2132544126"
+			wait(1)
+			local v168 = v_u_162
+			v_u_162.TweenPosition(v168, UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
+			v167.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_162
+				v_u_162:TweenPosition(UDim2.new(0.5, -180, 0, -400), "InOut", "Quart", 0.5, true, nil)
+				wait(0.6)
+				v_u_162:Destroy()
+			end)
+			wait(5)
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", true))()
+		end)
+		v161:CreateButton("T-Titans GUI", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/PrototypeHub/ArceusxHub/main/Teen%20Titans%20Updated", true))()
+		end)
+		v161:CreateButton("Prison Hub [OUTDATED]", function()
+			local v169 = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))().CreateLib("Prison Hub | Red Coat#5495 | OP", "Synapse")
+			local v170 = v169:NewTab("Main"):NewSection("Main Scripts")
+			v170:NewButton("Septex Admin", "Gives you septex admin", function()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife", true))()
+			end)
+			v170:NewButton("Silent AimLock", "AimLock", function()
+				local v_u_171 = game.Players
+				local v_u_172 = v_u_171.LocalPlayer
+				local v_u_173 = v_u_171.GetPlayers
+				local v_u_174 = workspace.CurrentCamera
+				local v_u_175 = v_u_174.WorldToScreenPoint
+				local v_u_176 = game.FindFirstChild
+				local v_u_177 = Vector2.new
+				local v_u_178 = v_u_172:GetMouse()
+				function ClosestChar()
+					-- upvalues: (ref) v_u_173, (ref) v_u_171, (ref) v_u_172, (ref) v_u_176, (ref) v_u_175, (ref) v_u_174, (ref) v_u_177, (ref) v_u_178
+					local v179 = math.huge
+					local v180, v181, v182 = pairs(v_u_173(v_u_171))
+					local v183 = nil
+					while true do
+						local v184
+						v182, v184 = v180(v181, v182)
+						if v182 == nil then
+							break
+						end
+						if v184 ~= v_u_172 and (v184.Team ~= v_u_172.Team and v184.Character) then
+							local v185 = v_u_176(v184.Character, "Torso")
+							if v185 then
+								local v186, v187 = v_u_175(v_u_174, v185.Position)
+								if v187 then
+									local v188 = (v_u_177(v186.X, v186.Y) - v_u_177(v_u_178.X, v_u_178.Y)).Magnitude
+									if v188 < v179 then
+										v183 = v184.Character
+										v179 = v188
+									end
+								end
+							end
+						end
+					end
+					return v183
+				end
+				local v189 = getrawmetatable(game)
+				local v_u_190 = v189.__namecall
+				setreadonly(v189, false)
+				v189.__namecall = newcclosure(function(p191)
+					-- upvalues: (ref) v_u_190
+					local v192 = (getnamecallmethod() == "FindPartOnRay" and (not checkcaller() and tostring(getfenv(0).script) == "GunInterface") and true or false) and ClosestChar()
+					if v192 then
+						return v192.Torso, v192.Torso.Position
+					else
+						return v_u_190(p191, ...)
+					end
+				end)
+				setreadonly(v189, true)
+				local v_u_193 = game:GetService("VirtualUser")
+				game:GetService("Players").LocalPlayer.Idled:connect(function()
+					-- upvalues: (ref) v_u_193
+					v_u_193:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+					wait(1)
+					v_u_193:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+				end)
+				game.StarterGui:SetCore("SendNotification", {
+					["Title"] = "Subscribe To AlexScripterUnfounded",
+					["Text"] = "modified by AlexScripterUnfounded",
+					["Duration"] = 20
+				})
+				wait(1)
+				game.StarterGui:SetCore("SendNotification", {
+					["Title"] = "Yeah Boy",
+					["Text"] = "Enjoy",
+					["Duration"] = 20
+				})
+			end)
+			local v194 = v169:NewTab("Misc"):NewSection("Player")
+			v194:NewButton("Fly", "Makes You Fly", function()
+				loadstring(game:HttpGet("https://pastebin.com/raw/RPv4GELs"))()
+			end)
+			v194:NewDropdown("Gun giver Prison", "Gives guns", { "M9", "M4A1", "Remington 870" }, function(p195)
+				local v196 = game:GetService("Workspace").Prison_ITEMS.giver[p195].ITEMPICKUP
+				game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v196)
+			end)
+			v194:NewDropdown("Gun giver Base", "Gives guns", { "AK-47", "M9", "Remington 870" }, function(p197)
+				local v198 = game:GetService("Workspace").Prison_ITEMS.giver[p197].ITEMPICKUP
+				game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v198)
+			end)
+			v194:NewToggle("Noclip", "Pass through walls man!", function(p199)
+				if p199 then
+					char = game.Players.LocalPlayer.Character
+					local v200 = true
+					while true do
+						if v200 == true then
+							local v201, v202, v203 = pairs(char:children())
+							while true do
+								local v_u_204
+								v203, v_u_204 = v201(v202, v203)
+								if v203 == nil then
+									break
+								end
+								pcall(function()
+									-- upvalues: (ref) v_u_204
+									if v_u_204.className ~= "Part" then
+										if v_u_204.ClassName == "Model" then
+											v_u_204.Head.CanCollide = false
+										end
+									else
+										v_u_204.CanCollide = false
+									end
+								end)
+							end
+						end
+						game:service("RunService").Stepped:wait()
+					end
+				else
+					char = game.Players.LocalPlayer.Character
+					local v205 = true
+					while true do
+						if v205 == true then
+							local v206, v207, v208 = pairs(char:children())
+							while true do
+								local v_u_209
+								v208, v_u_209 = v206(v207, v208)
+								if v208 == nil then
+									break
+								end
+								pcall(function()
+									-- upvalues: (ref) v_u_209
+									if v_u_209.className ~= "Part" then
+										if v_u_209.ClassName == "Model" then
+											v_u_209.Head.CanCollide = true
+										end
+									else
+										v_u_209.CanCollide = true
+									end
+								end)
+							end
+						end
+						game:service("RunService").Stepped:wait()
+					end
+				end
+			end)
+			v194:NewButton("Walkspeed", "Below is the textbox walkspeed", function()
+				game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 33
+			end)
+			v194:NewTextBox("Set Walkspeed", "Rare kavo UI walkspeed setter", function(p210)
+				game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = p210
+			end)
+			v194:NewTextBox("Set FOV", "Max FOV number 120", function(p211)
+				game.Workspace.CurrentCamera.FieldOfView = p211
+			end)
+			v194:NewTextBox("Set Jumppower", "Increases JP", function(p212)
+				game.Players.LocalPlayer.Character.Humanoid.JumpPower = p212
+			end)
+			local v213 = v169:NewTab("Teleport to areas"):NewSection("TP To Areas")
+			v213:NewButton("TP To Sewer", "Teleports you to the sewer", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(916, 79, 2311)
+			end)
+			v213:NewButton("TP To Tower", "Teleports you to yard tower", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(502, 126, 2306)
+			end)
+			v213:NewButton("TP To Cafe inside", "Teleports you inside of the food area", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(877, 100, 2256)
+			end)
+			v213:NewButton("TP To Nexus", "Find it out yourself", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(888, 100, 2388)
+			end)
+			v213:NewButton("TP To Main Gate", "Teleports you in or outside the MG", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(505, 103, 2250)
+			end)
+			v213:NewButton("TP To Armoury", "Teleports you to the armoury", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(789, 100, 2260)
+			end)
+			v213:NewButton("TP To Yard", "Teleports you to yard", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(791, 98, 2498)
+			end)
+		end)
+		v161:CreateButton("Bloodfest GUI", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/MyuKiH2q", true))()
+		end)
+		v161:CreateButton("Breaking Point GUI", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ColdStep2/Breaking-Point-Funny-Squid-Hax/main/Breaking%20Point%20Funny%20Squid%20Hax", true))()
+		end)
+		v161:CreateButton("Swat Simulator", function()
+			local v214 = Instance.new("ScreenGui")
+			local v_u_215 = Instance.new("Frame")
+			local v216 = Instance.new("TextLabel")
+			local v217 = Instance.new("TextButton")
+			local v_u_218 = Instance.new("TextButton")
+			local v_u_219 = Instance.new("TextLabel")
+			local v_u_220 = Instance.new("TextButton")
+			local v_u_221 = Instance.new("TextButton")
+			local v_u_222 = Instance.new("TextButton")
+			local v_u_223 = Instance.new("TextLabel")
+			v214.Parent = game.CoreGui
+			v_u_215.Name = "SWAT Simulator GUI"
+			v_u_215.Parent = v214
+			v_u_215.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+			v_u_215.Position = UDim2.new(0.332116783, 0, 0.269379854, 0)
+			v_u_215.Size = UDim2.new(0, 482, 0, 285)
+			v_u_215.Active = true
+			v_u_215.Draggable = true
+			v216.Name = "SWAT Simulator"
+			v216.Parent = v_u_215
+			v216.BackgroundColor3 = Color3.fromRGB(79, 149, 255)
+			v216.Size = UDim2.new(0, 482, 0, 38)
+			v216.Font = Enum.Font.SourceSans
+			v216.Text = "S.W.A.T Simulator GUI"
+			v216.TextColor3 = Color3.fromRGB(0, 0, 0)
+			v216.TextSize = 30
+			v217.Name = "Free Gamepass"
+			v217.Parent = v_u_215
+			v217.BackgroundColor3 = Color3.fromRGB(255, 226, 78)
+			v217.Position = UDim2.new(0.0228215773, 0, 0.202531651, 0)
+			v217.Size = UDim2.new(0, 226, 0, 50)
+			v217.Font = Enum.Font.SourceSans
+			v217.Text = "Free Gamepass"
+			v217.TextColor3 = Color3.fromRGB(0, 0, 0)
+			v217.TextSize = 14
+			v217.MouseButton1Down:connect(function()
+				-- upvalues: (ref) v_u_218, (ref) v_u_215, (ref) v_u_219, (ref) v_u_220, (ref) v_u_221, (ref) v_u_222, (ref) v_u_223
+				if game.CreatorType == Enum.CreatorType.User then
+					game.Players.LocalPlayer.UserId = game.CreatorId
+				end
+				if game.CreatorType == Enum.CreatorType.Group then
+					game.Players.LocalPlayer.UserId = game:GetService("GroupService"):GetGroupInfoAsync(game.CreatorId).Owner.Id
+				end
+				v_u_218.Name = "Btool"
+				v_u_218.Parent = v_u_215
+				v_u_218.BackgroundColor3 = Color3.fromRGB(255, 130, 41)
+				v_u_218.Position = UDim2.new(0.510373473, 0, 0.202531651, 0)
+				v_u_218.Size = UDim2.new(0, 226, 0, 50)
+				v_u_218.Font = Enum.Font.SourceSans
+				v_u_218.Text = "Btool"
+				v_u_218.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_218.TextSize = 14
+				v_u_218.MouseButton1Down:connect(function()
+					Instance.new("HopperBin", game.Players.LocalPlayer.Backpack).BinType = "Hammer"
+				end)
+				v_u_219.Name = "Free XP"
+				v_u_219.Parent = v_u_215
+				v_u_219.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				v_u_219.Position = UDim2.new(0, 0, 0.449122816, 0)
+				v_u_219.Size = UDim2.new(0, 482, 0, 50)
+				v_u_219.Font = Enum.Font.SourceSans
+				v_u_219.Text = "Infinite XP Menu"
+				v_u_219.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_219.TextSize = 30
+				v_u_220.Name = "Get 500 XP"
+				v_u_220.Parent = v_u_215
+				v_u_220.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v_u_220.Position = UDim2.new(0.0228215773, 0, 0.666666687, 0)
+				v_u_220.Size = UDim2.new(0, 142, 0, 50)
+				v_u_220.Font = Enum.Font.SourceSans
+				v_u_220.Text = "Get 500 XP"
+				v_u_220.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_220.TextSize = 14
+				v_u_220.MouseButton1Down:connect(function()
+					game.ReplicatedStorage.addXP:FireServer(500)
+				end)
+				v_u_221.Name = "Get 1000 XP"
+				v_u_221.Parent = v_u_215
+				v_u_221.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v_u_221.Position = UDim2.new(0.352697104, 0, 0.666666627, 0)
+				v_u_221.Size = UDim2.new(0, 142, 0, 50)
+				v_u_221.Font = Enum.Font.SourceSans
+				v_u_221.Text = "Get 1000 XP"
+				v_u_221.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_221.TextSize = 14
+				v_u_221.MouseButton1Down:connect(function()
+					game.ReplicatedStorage.addXP:FireServer(1000)
+				end)
+				v_u_222.Name = "Get 5000 XP"
+				v_u_222.Parent = v_u_215
+				v_u_222.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				v_u_222.Position = UDim2.new(0.684647322, 0, 0.666666627, 0)
+				v_u_222.Size = UDim2.new(0, 142, 0, 50)
+				v_u_222.Font = Enum.Font.SourceSans
+				v_u_222.Text = "Get 5000 XP"
+				v_u_222.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_222.TextSize = 14
+				v_u_222.MouseButton1Down:connect(function()
+					game.ReplicatedStorage.addXP:FireServer(5000)
+				end)
+				v_u_223.Name = "Made By Me"
+				v_u_223.Parent = v_u_215
+				v_u_223.BackgroundColor3 = Color3.fromRGB(174, 82, 255)
+				v_u_223.Position = UDim2.new(0.0228215773, 0, 0.89122808, 0)
+				v_u_223.Size = UDim2.new(0, 461, 0, 20)
+				v_u_223.Font = Enum.Font.SourceSans
+				v_u_223.Text = "GUI Made By Billy Novaldo Setiawan"
+				v_u_223.TextColor3 = Color3.fromRGB(0, 0, 0)
+				v_u_223.TextSize = 14
+			end)
+		end)
+		v161:CreateButton("Cryptonic Hub", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/martinelcrac/cryptonichub/main/Ragdollengine.lua"))()
+		end)
+		v161:CreateButton("UTG", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Blukez/Scripts/main/UTG%20V3%20RAW"))()
+		end)
+		v161:CreateButton("YEET GUI", function()
+			print("Clicked")
+			local v_u_224 = game:FindService("Players").LocalPlayer
+			local function v_u_244(p225)
+				-- upvalues: (ref) v_u_224
+				local v226 = {}
+				local v227 = p225:lower()
+				if v227 == "all" then
+					local v228, v229, v230 = pairs(game:FindService("Players"):GetPlayers())
+					while true do
+						local v231
+						v230, v231 = v228(v229, v230)
+						if v230 == nil then
+							break
+						end
+						table.insert(v226, v231)
+					end
+				elseif v227 == "others" then
+					local v232, v233, v234 = pairs(game:FindService("Players"):GetPlayers())
+					while true do
+						local v235
+						v234, v235 = v232(v233, v234)
+						if v234 == nil then
+							break
+						end
+						if v235.Name ~= v_u_224.Name then
+							table.insert(v226, v235)
+						end
+					end
+				elseif v227 == "me" then
+					local v236, v237, v238 = pairs(game:FindService("Players"):GetPlayers())
+					while true do
+						local v239
+						v238, v239 = v236(v237, v238)
+						if v238 == nil then
+							break
+						end
+						if v239.Name == v_u_224.Name then
+							table.insert(v226, v239)
+						end
+					end
+				else
+					local v240, v241, v242 = pairs(game:FindService("Players"):GetPlayers())
+					while true do
+						local v243
+						v242, v243 = v240(v241, v242)
+						if v242 == nil then
+							break
+						end
+						if v243.Name:lower():sub(1, #p225) == p225:lower() then
+							table.insert(v226, v243)
+						end
+					end
+				end
+				return v226
+			end
+			local function v_u_247(p245, p246)
+				game:FindService("StarterGui"):SetCore("SendNotification", {
+					["Title"] = "yeet gui",
+					["Text"] = p245,
+					["Icon"] = "rbxassetid://2005276185",
+					["Duration"] = p246 or 3
+				})
+			end
+			local v248 = Instance.new("ScreenGui")
+			local v249 = Instance.new("ImageLabel")
+			local v250 = Instance.new("Frame")
+			local v251 = Instance.new("TextLabel")
+			local v_u_252 = Instance.new("TextBox")
+			local v253 = Instance.new("TextButton")
+			v248.Name = "h"
+			v248.Parent = game:GetService("CoreGui")
+			v248.ResetOnSpawn = false
+			v249.Name = "Main"
+			v249.Parent = v248
+			v249.Active = true
+			v249.Draggable = true
+			v249.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v249.BorderSizePixel = 0
+			v249.Position = UDim2.new(0.174545452, 0, 0.459574461, 0)
+			v249.Size = UDim2.new(0, 454, 0, 218)
+			v249.Image = "rbxassetid://2005276185"
+			v250.Name = "Top"
+			v250.Parent = v249
+			v250.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+			v250.BorderSizePixel = 0
+			v250.Size = UDim2.new(0, 454, 0, 44)
+			v251.Name = "Title"
+			v251.Parent = v250
+			v251.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+			v251.BorderSizePixel = 0
+			v251.Position = UDim2.new(0, 0, 0.295454562, 0)
+			v251.Size = UDim2.new(0, 454, 0, 30)
+			v251.Font = Enum.Font.SourceSans
+			v251.Text = "FE Yeet Gui (trollface edition)"
+			v251.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v251.TextScaled = true
+			v251.TextSize = 14
+			v251.TextWrapped = true
+			v_u_252.Parent = v249
+			v_u_252.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+			v_u_252.BorderSizePixel = 0
+			v_u_252.Position = UDim2.new(0.0704845786, 0, 0.270642221, 0)
+			v_u_252.Size = UDim2.new(0, 388, 0, 62)
+			v_u_252.Font = Enum.Font.SourceSans
+			v_u_252.PlaceholderText = "Who do i destroy(can be shortened)"
+			v_u_252.Text = ""
+			v_u_252.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_252.TextScaled = true
+			v_u_252.TextSize = 14
+			v_u_252.TextWrapped = true
+			v253.Parent = v249
+			v253.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+			v253.BorderSizePixel = 0
+			v253.Position = UDim2.new(0.10352423, 0, 0.596330225, 0)
+			v253.Size = UDim2.new(0, 359, 0, 50)
+			v253.Font = Enum.Font.SourceSans
+			v253.Text = "Cheese em\'"
+			v253.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v253.TextScaled = true
+			v253.TextSize = 14
+			v253.TextWrapped = true
+			v253.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_244, (ref) v_u_252, (ref) v_u_224, (ref) v_u_247
+				local v254 = v_u_244(v_u_252.Text)
+				if v254[1] then
+					local v255 = v254[1]
+					local v256 = Instance.new("BodyThrust", v_u_224.Character.HumanoidRootPart)
+					v256.Force = Vector3.new(9999, 9999, 9999)
+					v256.Name = "YeetForce"
+					repeat
+						v_u_224.Character.HumanoidRootPart.CFrame = v255.Character.HumanoidRootPart.CFrame
+						v256.Location = v255.Character.HumanoidRootPart.Position
+						game:FindService("RunService").Heartbeat:wait()
+					until not v255.Character:FindFirstChild("Head")
+				else
+					v_u_247("Invalid player")
+				end
+			end)
+			notif("Loaded successfully! Created by scuba#0001", 5)
+		end)
+		v161:CreateButton("ProHub V1", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Kindasua/v.1-beta/main/Fixed%20bugs%20v.1%20beta", true))()
+		end)
+		v161:CreateButton("ProHub V2", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Kindasua/v.2/main/Is%20here", true))()
+		end)
+		v161:CreateButton("SlapBattles GUI", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/dizyhvh/slap_battles_gui/main/0.lua"))()
+		end)
+		v161:CreateButton("R T X", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/7rrgE4XL", true))()
+		end)
+		v161:CreateButton("Mega X Hub", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/WholeF00ds/Mega/main/Obfuscated%20Loader", true))()
+		end)
+		v161:CreateButton("BoBo Hub", function()
+			loadstring("local Library = loadstring(game:HttpGet(\"https://pastebin.com/raw/vff1bQ9F\"))()\nlocal Window = Library.CreateLib(\"Bobo Hub\", \"Midnight\")\n\n-- Tabs\n\nlocal Tab = Window:NewTab(\"Misc\")\nlocal Section = Tab:NewSection(\"cool\")\n\n-- Buttons\n\nSection:NewButton(\"Animation Changer\", \"It changes the animation walk\", function()\nloadstring(game:HttpGet(\'https://raw.githubusercontent.com/RubyBoo4life/Scripts/main/animations.vis\'))()\nend)\n\nSection:NewButton(\"Fling YEET GUI\", \"Credit to the Owner\", function()\nloadstring(game:HttpGet(\"https://pastebin.com/raw/saMtiek2\",true))()\nend)\n\nSection:NewButton(\"Speed Tool\", \"This tool makes u faster if you click\", function()\nmouse = game.Players.LocalPlayer:GetMouse()\ntool = Instance.new(\"Tool\")\ntool.RequiresHandle = false\ntool.Name = \"Click To Speed Up\"\ntool.Activated:connect(function()\ngame.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100\nend)\ntool.Parent = game.Players.LocalPlayer.Backpack\nend)\n\nSection:NewButton(\"Fly V3\", \"they added destroy gui\", function()\nloadstring(\"\\108\\111\\97\\100\\115\\116\\114\\105\\110\\103\\40\\103\\97\\109\\101\\58\\72\\116\\116\\112\\71\\101\\116\\40\\34\\104\\116\\116\\112\\115\\58\\47\\47\\114\\97\\119\\46\\103\\105\\116\\104\\117\\98\\117\\115\\101\\114\\99\\111\\110\\116\\101\\110\\116\\46\\99\\111\\109\\47\\79\\122\\56\\48\\48\\56\\47\\102\\103\\51\\47\\109\\97\\105\\110\\47\\103\\117\\105\\34\\41\\41\\40\\41\\10\")()\nend)\n\nSection:NewButton(\"Translator\", \"sussy\", function()\nloadstring(game:HttpGet(\"https://raw.githubusercontent.com/ItsRhylee/name/main/language\"))()\nend)\n \n Section:NewButton(\"Permanent Animation\", \"lol\", function()\n loadstring(game:HttpGet(\"https://raw.githubusercontent.com/ItsRhylee/bruh/main/perm\"))()\n end)\n \n-- Tabs\n\nlocal Tab = Window:NewTab(\"Main\")\nlocal Section = Tab:NewSection(\"He\'s Noob\")\n\n--Buttons\n\nSection:NewButton(\"Infinite Jump\", \"OMG I CAN FLY\", function()\nloadstring(game:HttpGet(\"https://pastebin.com/raw/FiUawyVz\"))();\nend)\n\nSection:NewButton(\"Shiftlock\", \"Free Shiftlock :D\", function()\nloadstring(game:HttpGet(\'https://pastebin.com/raw/WQ9NPeDS\'))();\nend)\n\nSection:NewButton(\"Keyboard\", \"This is the better one\", function()\nloadstring(game:HttpGet(\"https://pastebin.com/raw/kC3dAMvt\"))()\nend)\n\nSection:NewButton(\"AutoClicker\", \"it work some games\", function()\nloadstring(game:HttpGet(\"https://raw.githubusercontent.com/ItsRhylee/ahhah/main/ahhahahahhnrisjeiaosmeisksjsjejsmms\"))()\nend)\n  \n--More Hub (Credit)\n\nlocal Tab = Window:NewTab(\"More Hubs\")\nlocal Section = Tab:NewSection(\"Credits to the owners\")\n\n--Buttons\nSection:NewButton(\"JN HH Gaming Bedwars Hub\", \"Credit to him\", function()\nloadstring(game:HttpGet(\"https://raw.githubusercontent.com/JNHHGaming123/JN-Bedwars-V6/6c8fd023d50e25f893ca34322458be32a0bac4c5/JN%20Bedwars%20V6\"))()\nend)\n \nSection:NewButton(\"VHub\", \"This Hub Is Cool\", function()\n loadstring(game:HttpGet((\'https://raw.githubusercontent.com/itsyaboivincentt5315/script/main/VHub.txt\'),true))()\n end)\n \n Section:NewButton(\"Carl Hub\", \"Credit to him\", function()\n loadstring(game:HttpGet(\'https://raw.githubusercontent.com/carlcoded/carlispro/main/carlhub\'))()\n end)\n \n Section:NewButton(\"Unknown Hub (CLICK THE 3 DOTS)\", \"Key:FinallyV2IsOut\", function()\n loadstring(game:HttpGet(\"https://paste.ee/r/wRN22\",true))()\n end)\n \n Section:NewButton(\"Someone Hub\", \"sheesh credit to him\", function()\n _G.Color = Color3.fromRGB(0,255,0)\nloadstring(game:HttpGet\"https://raw.githubusercontent.com/kickTh/SCRIPT-SOME-X-HUB/main/README.md\")()\nend)\n \n--Bedwars\nlocal Tab = Window:NewTab(\"Bedwars\")\nlocal Section = Tab:NewSection(\"Enjoy!\")\n\nSection:NewButton(\"AntiKnockback\", \"EZ\", function()\nloadstring(game:HttpGet(\'https://pastebin.com/raw/GdKinezj\'))();\nend)\n\n--Player\n\nlocal Tab = Window:NewTab(\"Player\")\nlocal Section = Tab:NewSection(\"Enjoy\")\n\nSection:NewToggle(\"Fov\", \"Changes Fov\", function(state)\n    if state then\n        game.Workspace.CurrentCamera.FieldOfView = 120\n     else\n        game.Workspace.CurrentCamera.FieldOfView = 80\n    end\nend)\n\nSection:NewToogle(\"Speed\", \"im faster than u lol\", function(state)\n   if state then\n       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 70\n    else\n       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 20\n      end\nend)\n")()
+		end)
+		v161:CreateButton("BozoHub", function()
+			if _G.typicalisskid ~= true then
+				_G.typicalisskid = true
+				game:GetService("RunService").Heartbeat:Connect(function()
+					workspace.FallenPartsDestroyHeight = 0 / 0
+					settings().Physics.AllowSleep = false
+					game:GetService("Players").LocalPlayer.ReplicationFocus = workspace
+					settings().Physics.ThrottleAdjustTime = 6 - math.huge
+					sethiddenproperty(game:FindFirstChildOfClass("Players").LocalPlayer, "SimulationRadius", 1000)
+					setsimulationradius(1000, 1000)
+				end)
+			end
+			local v257 = Instance.new("ScreenGui")
+			local v_u_258 = Instance.new("Frame")
+			local v259 = Instance.new("ImageLabel")
+			local v260 = Instance.new("TextLabel")
+			local v261 = Instance.new("Frame")
+			local v262 = Instance.new("UIListLayout")
+			local v263 = Instance.new("TextButton")
+			local v264 = Instance.new("TextButton")
+			local v265 = Instance.new("TextButton")
+			local v266 = Instance.new("TextButton")
+			local v_u_267 = Instance.new("Frame")
+			local v268 = Instance.new("ScrollingFrame")
+			local v269 = Instance.new("ScrollingFrame")
+			local v270 = Instance.new("ScrollingFrame")
+			local v271 = Instance.new("UIListLayout")
+			local v272 = Instance.new("UIPadding")
+			local v273 = Instance.new("TextButton")
+			local v274 = Instance.new("TextButton")
+			local v275 = Instance.new("TextButton")
+			local v276 = Instance.new("ScrollingFrame")
+			local v277 = Instance.new("TextLabel")
+			local v278 = Instance.new("TextLabel")
+			local v279 = Instance.new("TextLabel")
+			local v280 = Instance.new("TextLabel")
+			local v281 = Instance.new("TextLabel")
+			local v282 = Instance.new("TextLabel")
+			local v283 = Instance.new("Frame")
+			local v_u_284 = Instance.new("TextLabel")
+			v257.Name = "UI_1"
+			v257.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+			v257.ResetOnSpawn = false
+			v_u_258.Name = "Main"
+			v_u_258.Parent = v257
+			v_u_258.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v_u_258.BorderSizePixel = 0
+			v_u_258.Position = UDim2.new(0.218978107, 0, 0.175438598, 0)
+			v_u_258.Size = UDim2.new(0, 581, 0, 333)
+			v259.Name = "Glow"
+			v259.Parent = v_u_258
+			v259.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v259.BackgroundTransparency = 1
+			v259.BorderSizePixel = 0
+			v259.Position = UDim2.new(0, -15, 0, -15)
+			v259.Size = UDim2.new(1, 30, 1, 30)
+			v259.ZIndex = 0
+			v259.Image = "rbxassetid://282610381"
+			v259.ImageColor3 = Color3.fromRGB(15, 15, 15)
+			v259.ScaleType = Enum.ScaleType.Slice
+			v259.SliceCenter = Rect.new(20, 20, 280, 280)
+			v260.Name = "Title"
+			v260.Parent = v_u_258
+			v260.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v260.BackgroundTransparency = 1
+			v260.Position = UDim2.new(0.0200573057, 0, 0, 0)
+			v260.Size = UDim2.new(0, 136, 0, 40)
+			v260.Font = Enum.Font.GothamBold
+			v260.Text = "BOZO HUB"
+			v260.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v260.TextSize = 20
+			v260.TextWrapped = true
+			v261.Name = "TabButtons"
+			v261.Parent = v_u_258
+			v261.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v261.BackgroundTransparency = 1
+			v261.Position = UDim2.new(0, 0, 0.120120123, 0)
+			v261.Size = UDim2.new(0, 117, 0, 293)
+			v262.Name = "List"
+			v262.Parent = v261
+			v262.SortOrder = Enum.SortOrder.LayoutOrder
+			v262.Padding = UDim.new(0, 5)
+			v263.Name = "Home"
+			v263.Parent = v261
+			v263.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v263.BackgroundTransparency = 1
+			v263.Size = UDim2.new(0, 117, 0, 29)
+			v263.Font = Enum.Font.GothamSemibold
+			v263.Text = "Main"
+			v263.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v263.TextSize = 14
+			v264.Name = "Tab"
+			v264.Parent = v261
+			v264.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v264.BackgroundTransparency = 1
+			v264.Size = UDim2.new(0, 117, 0, 29)
+			v264.Font = Enum.Font.GothamSemibold
+			v264.Text = "Scripts"
+			v264.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v264.TextSize = 14
+			v_u_267.Name = "Tabs"
+			v_u_267.Parent = v_u_258
+			v_u_267.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+			v_u_267.BorderSizePixel = 0
+			v_u_267.Position = UDim2.new(0.20137693, 0, 0.120120123, 0)
+			v_u_267.Size = UDim2.new(0, 464, 0, 293)
+			v265.Name = "HatScriptButton"
+			v265.Parent = v261
+			v265.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v265.BackgroundTransparency = 1
+			v265.Size = UDim2.new(0, 117, 0, 29)
+			v265.Font = Enum.Font.GothamSemibold
+			v265.Text = "FE"
+			v265.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v265.TextSize = 14
+			v266.Name = "ReanimButton"
+			v266.Parent = v261
+			v266.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v266.BackgroundTransparency = 1
+			v266.Size = UDim2.new(0, 117, 0, 29)
+			v266.Font = Enum.Font.GothamSemibold
+			v266.Text = "Animations"
+			v266.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v266.TextSize = 14
+			v263.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_267
+				local v285 = next
+				local v286, v287 = v_u_267:GetChildren()
+				while true do
+					local v288
+					v287, v288 = v285(v286, v287)
+					if v287 == nil then
+						break
+					end
+					if v288.Name ~= "Home" then
+						if v288.Name ~= "Home" then
+							v288.Visible = false
+						end
+					else
+						v288.Visible = true
+					end
+				end
+			end)
+			v264.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_267
+				local v289 = next
+				local v290, v291 = v_u_267:GetChildren()
+				while true do
+					local v292
+					v291, v292 = v289(v290, v291)
+					if v291 == nil then
+						break
+					end
+					if v292.Name ~= "FreeScripts" then
+						if v292.Name ~= "FreeScripts" then
+							v292.Visible = false
+						end
+					else
+						v292.Visible = true
+					end
+				end
+			end)
+			v265.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_267
+				local v293 = next
+				local v294, v295 = v_u_267:GetChildren()
+				while true do
+					local v296
+					v295, v296 = v293(v294, v295)
+					if v295 == nil then
+						break
+					end
+					if v296.Name ~= "HatScripts" then
+						if v296.Name ~= "HatScripts" then
+							v296.Visible = false
+						end
+					else
+						v296.Visible = true
+					end
+				end
+			end)
+			v266.MouseButton1Click:Connect(function()
+				-- upvalues: (ref) v_u_267
+				local v297 = next
+				local v298, v299 = v_u_267:GetChildren()
+				while true do
+					local v300
+					v299, v300 = v297(v298, v299)
+					if v299 == nil then
+						break
+					end
+					if v300.Name ~= "Reanimations" then
+						if v300.Name ~= "Reanimations" then
+							v300.Visible = false
+						end
+					else
+						v300.Visible = true
+					end
+				end
+			end)
+			v268.Name = "FreeScripts"
+			v268.Parent = v_u_267
+			v268.Active = true
+			v268.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v268.BackgroundTransparency = 1
+			v268.BorderSizePixel = 0
+			v268.Size = UDim2.new(0, 464, 0, 293)
+			v268.BottomImage = ""
+			v268.CanvasSize = UDim2.new(0, 0, 5, 0)
+			v268.ScrollBarThickness = 3
+			v268.Visible = false
+			v268.TopImage = ""
+			v269.Name = "HatScripts"
+			v269.Parent = v_u_267
+			v269.Active = true
+			v269.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v269.BackgroundTransparency = 1
+			v269.BorderSizePixel = 0
+			v269.Size = UDim2.new(0, 464, 0, 293)
+			v269.BottomImage = ""
+			v269.CanvasSize = UDim2.new(0, 0, 5, 0)
+			v269.ScrollBarThickness = 3
+			v269.Visible = false
+			v269.TopImage = ""
+			v269.Name = "HatScripts"
+			v269.Parent = v_u_267
+			v269.Active = true
+			v269.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v269.BackgroundTransparency = 1
+			v269.BorderSizePixel = 0
+			v269.Size = UDim2.new(0, 464, 0, 293)
+			v269.BottomImage = ""
+			v269.CanvasSize = UDim2.new(0, 0, 5, 0)
+			v269.ScrollBarThickness = 3
+			v269.Visible = false
+			v269.TopImage = ""
+			v270.Name = "Reanimations"
+			v270.Parent = v_u_267
+			v270.Active = true
+			v270.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v270.BackgroundTransparency = 1
+			v270.BorderSizePixel = 0
+			v270.Size = UDim2.new(0, 464, 0, 293)
+			v270.BottomImage = ""
+			v270.CanvasSize = UDim2.new(0, 0, 5, 0)
+			v270.ScrollBarThickness = 3
+			v270.Visible = false
+			v270.TopImage = ""
+			v271.Name = "List2"
+			v271.Parent = v268
+			v271.SortOrder = Enum.SortOrder.LayoutOrder
+			v271.Padding = UDim.new(0, 5)
+			v272.Name = "Pad"
+			v272.Parent = v268
+			v272.PaddingBottom = UDim.new(0, 5)
+			v272.PaddingLeft = UDim.new(0, 5)
+			v272.PaddingRight = UDim.new(0, 5)
+			v272.PaddingTop = UDim.new(0, 5)
+			function AddPadding(p301)
+				local v302 = Instance.new("UIListLayout")
+				local v303 = Instance.new("UIPadding")
+				v302.Name = "List2"
+				v302.Parent = p301
+				v302.SortOrder = Enum.SortOrder.LayoutOrder
+				v302.Padding = UDim.new(0, 5)
+				v303.Name = "Pad"
+				v303.Parent = p301
+				v303.PaddingBottom = UDim.new(0, 5)
+				v303.PaddingLeft = UDim.new(0, 5)
+				v303.PaddingRight = UDim.new(0, 5)
+				v303.PaddingTop = UDim.new(0, 5)
+			end
+			AddPadding(v270)
+			AddPadding(v269)
+			v273.Name = "KrystalDance"
+			v273.Parent = v268
+			v273.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v273.BorderSizePixel = 0
+			v273.Position = UDim2.new(0.0107758623, 0, 0.0170648471, 0)
+			v273.Size = UDim2.new(0, 451, 0, 34)
+			v273.AutoButtonColor = false
+			v273.Font = Enum.Font.Gotham
+			v273.Text = "Krystal Dance"
+			v273.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v273.TextSize = 14
+			v274.Name = "GaleFighter"
+			v274.Parent = v268
+			v274.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v274.BorderSizePixel = 0
+			v274.Position = UDim2.new(0.0107758623, 0, 0.0170648471, 0)
+			v274.Size = UDim2.new(0, 451, 0, 34)
+			v274.AutoButtonColor = false
+			v274.Font = Enum.Font.Gotham
+			v274.Text = "Gale Fighter"
+			v274.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v274.TextSize = 14
+			v275.Name = "Simple"
+			v275.Parent = v270
+			v275.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v275.BorderSizePixel = 0
+			v275.Position = UDim2.new(0, 0, 0, 0)
+			v275.Size = UDim2.new(0, 451, 0, 34)
+			v275.AutoButtonColor = false
+			v275.Font = Enum.Font.Gotham
+			v275.Text = "Simple"
+			v275.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v275.TextSize = 14
+			function AddButton(p304, p305, p306)
+				local v_u_307 = p306 or function() end
+				local v308 = Instance.new("TextButton")
+				v308.Name = p304
+				v308.Parent = p305
+				v308.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+				v308.BorderSizePixel = 0
+				v308.Position = UDim2.new(0, 0, 0, 0)
+				v308.Size = UDim2.new(0, 451, 0, 34)
+				v308.AutoButtonColor = false
+				v308.Font = Enum.Font.Gotham
+				v308.Text = p304
+				v308.TextColor3 = Color3.fromRGB(255, 255, 255)
+				v308.TextSize = 14
+				v308.MouseButton1Click:Connect(function()
+					-- upvalues: (ref) v_u_307
+					pcall(v_u_307)
+				end)
+			end
+			v276.Name = "Home"
+			v276.Parent = v_u_267
+			v276.Active = true
+			v276.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v276.BackgroundTransparency = 1
+			v276.BorderSizePixel = 0
+			v276.Size = UDim2.new(0, 464, 0, 293)
+			v276.Visible = true
+			v276.BottomImage = ""
+			v276.CanvasSize = UDim2.new(0, 0, 5, 0)
+			v276.ScrollBarThickness = 0
+			v276.ScrollingEnabled = false
+			v276.TopImage = ""
+			v277.Name = "welcomemessage"
+			v277.Parent = v276
+			v277.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v277.BackgroundTransparency = 1
+			v277.Position = UDim2.new(0.284482747, 0, 0.0156996585, 0)
+			v277.Size = UDim2.new(0, 200, 0, 50)
+			v277.Font = Enum.Font.GothamBlack
+			v277.Text = "WELCOME TO BOZO HUB"
+			v277.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v277.TextSize = 24
+			v278.Parent = v276
+			v278.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v278.BackgroundTransparency = 1
+			v278.Position = UDim2.new(0.284482747, 0, 0.0430034138, 0)
+			v278.Size = UDim2.new(0, 200, 0, 50)
+			v278.Font = Enum.Font.Gotham
+			v278.Text = "Bozo Hub"
+			v278.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v278.TextSize = 14
+			v279.Parent = v276
+			v279.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v279.BackgroundTransparency = 1
+			v279.Position = UDim2.new(0.284482747, 0, 0.0689419806, 0)
+			v279.Size = UDim2.new(0, 200, 0, 50)
+			v279.Font = Enum.Font.Gotham
+			v279.Text = "info"
+			v279.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v279.TextSize = 14
+			v280.Parent = v276
+			v280.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v280.BackgroundTransparency = 1
+			v280.Position = UDim2.new(0.284482747, 0, 0.0976109207, 0)
+			v280.Size = UDim2.new(0, 200, 0, 20)
+			v280.Font = Enum.Font.Gotham
+			v280.Text = "BozoHub on top"
+			v280.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v280.TextSize = 20
+			v281.Parent = v276
+			v281.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v281.BackgroundTransparency = 1
+			v281.Position = UDim2.new(0.284482747, 0, 0.119453922, 0)
+			v281.Size = UDim2.new(0, 200, 0, 20)
+			v281.Font = Enum.Font.Gotham
+			v281.Text = "Rxl#0001"
+			v281.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v281.TextSize = 20
+			v282.Parent = v276
+			v282.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v282.BackgroundTransparency = 1
+			v282.Position = UDim2.new(0.284482747, 0, 0.1447099, 0)
+			v282.Size = UDim2.new(0, 200, 0, 20)
+			v282.Font = Enum.Font.Gotham
+			v282.Text = "DtbVoided is a skid"
+			v282.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v282.TextSize = 20
+			v283.Name = "Line"
+			v283.Parent = v_u_258
+			v283.BackgroundColor3 = Color3.fromRGB(85, 255, 127)
+			v283.BorderSizePixel = 0
+			v283.Position = UDim2.new(0, 0, 0.114114121, 0)
+			v283.Size = UDim2.new(0, 581, 0, 2)
+			v_u_284.Name = "memes"
+			v_u_284.Parent = v_u_258
+			v_u_284.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_284.BackgroundTransparency = 1
+			v_u_284.Position = UDim2.new(0.330464691, 0, 0.0210210215, 0)
+			v_u_284.Size = UDim2.new(0, 197, 0, 25)
+			v_u_284.Font = Enum.Font.SourceSansItalic
+			v_u_284.Text = "Enjoy Using Bozo Hub"
+			v_u_284.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v_u_284.TextSize = 20
+			local function v318()
+				-- upvalues: (ref) v_u_258
+				local v309 = Instance.new("LocalScript", v_u_258)
+				local v_u_310 = game:GetService("UserInputService")
+				function dragify(p_u_311)
+					-- upvalues: (ref) v_u_310
+					dragToggle = nil
+					dragInput = nil
+					dragStart = nil
+					function updateInput(p312)
+						-- upvalues: (ref) p_u_311
+						local v313 = p312.Position - dragStart
+						local v314 = UDim2.new(startPos.X.Scale, startPos.X.Offset + v313.X, startPos.Y.Scale, startPos.Y.Offset + v313.Y)
+						game:GetService("TweenService"):Create(p_u_311, TweenInfo.new(0.25), {
+							["Position"] = v314
+						}):Play()
+					end
+					p_u_311.InputBegan:Connect(function(p_u_315)
+						-- upvalues: (ref) v_u_310, (ref) p_u_311
+						if (p_u_315.UserInputType == Enum.UserInputType.MouseButton1 or p_u_315.UserInputType == Enum.UserInputType.Touch) and v_u_310:GetFocusedTextBox() == nil then
+							dragToggle = true
+							dragStart = p_u_315.Position
+							startPos = p_u_311.Position
+							p_u_315.Changed:Connect(function()
+								-- upvalues: (ref) p_u_315
+								if p_u_315.UserInputState == Enum.UserInputState.End then
+									dragToggle = false
+								end
+							end)
+						end
+					end)
+					p_u_311.InputChanged:Connect(function(p316)
+						if p316.UserInputType == Enum.UserInputType.MouseMovement or p316.UserInputType == Enum.UserInputType.Touch then
+							dragInput = p316
+						end
+					end)
+					game:GetService("UserInputService").InputChanged:Connect(function(p317)
+						if p317 == dragInput and dragToggle then
+							updateInput(p317)
+						end
+					end)
+				end
+				dragify(v309.Parent)
+			end
+			coroutine.wrap(v318)()
+			local function v320()
+				-- upvalues: (ref) v_u_284
+				local v319 = Instance.new("LocalScript", v_u_284)
+				while true do
+					v319.Parent.Text = "Dtb Imagine calling Me A Skid"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "dtbVoided is shit"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "Bozo Hub Release"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "Bozo Hub"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "BOZO HUB ON TOP"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "Bozo Hub on top"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+					v319.Parent.Text = "enjoy using Bozo Hub"
+					wait(5)
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 1
+					}):Play()
+					wait(1)
+					v319.Parent.Text = "Rxl#0001"
+					game:GetService("TweenService"):Create(v319.Parent, TweenInfo.new(1), {
+						["TextTransparency"] = 0
+					}):Play()
+				end
+			end
+			coroutine.wrap(v320)()
+			function simple_()
+				loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/mgamingpro/TypicalHub/main/simple"))()
+			end
+			function Check()
+				if not _G.scriptran then
+				end
+			end
+			v273.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/krystal.lua"))()
+			end)
+			v274.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/gale.lua"))()
+			end)
+			local v321 = Instance.new("TextButton")
+			v321.Name = "Foxy"
+			v321.Parent = v268
+			v321.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v321.BorderSizePixel = 0
+			v321.Position = UDim2.new(0, 0, 0, 0)
+			v321.Size = UDim2.new(0, 451, 0, 34)
+			v321.AutoButtonColor = false
+			v321.Font = Enum.Font.Gotham
+			v321.Text = "Foxy"
+			v321.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v321.TextSize = 14
+			v321.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/foxy.lua"))()
+			end)
+			local v322 = Instance.new("TextButton")
+			v322.Name = "Killbot"
+			v322.Parent = v268
+			v322.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v322.BorderSizePixel = 0
+			v322.Position = UDim2.new(0, 0, 0, 0)
+			v322.Size = UDim2.new(0, 451, 0, 34)
+			v322.AutoButtonColor = false
+			v322.Font = Enum.Font.Gotham
+			v322.Text = "Killbot"
+			v322.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v322.TextSize = 14
+			v322.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/killbot.lua"))()
+			end)
+			v275.MouseButton1Click:Connect(function()
+				simple_()
+			end)
+			local v323 = Instance.new("TextButton")
+			v323.Name = "JEVIL"
+			v323.Parent = v269
+			v323.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v323.BorderSizePixel = 0
+			v323.Position = UDim2.new(0, 0, 0, 0)
+			v323.Size = UDim2.new(0, 451, 0, 34)
+			v323.AutoButtonColor = false
+			v323.Font = Enum.Font.Gotham
+			v323.Text = "JEVIL"
+			v323.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v323.TextSize = 14
+			v323.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/JEVIL.lua"))()
+			end)
+			local v324 = Instance.new("TextButton")
+			v324.Name = "Nebula"
+			v324.Parent = v269
+			v324.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v324.BorderSizePixel = 0
+			v324.Position = UDim2.new(0, 0, 0, 0)
+			v324.Size = UDim2.new(0, 451, 0, 34)
+			v324.AutoButtonColor = false
+			v324.Font = Enum.Font.Gotham
+			v324.Text = "Nebula"
+			v324.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v324.TextSize = 14
+			v324.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/nebula.lua"))()
+			end)
+			local v325 = Instance.new("TextButton")
+			v325.Name = "neptunian"
+			v325.Parent = v269
+			v325.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v325.BorderSizePixel = 0
+			v325.Position = UDim2.new(0, 0, 0, 0)
+			v325.Size = UDim2.new(0, 451, 0, 34)
+			v325.AutoButtonColor = false
+			v325.Font = Enum.Font.Gotham
+			v325.Text = "Neptunian V"
+			v325.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v325.TextSize = 14
+			v325.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/neptunian.lua"))()
+			end)
+			local v326 = Instance.new("TextButton")
+			v326.Name = "Universal"
+			v326.Parent = v269
+			v326.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v326.BorderSizePixel = 0
+			v326.Position = UDim2.new(0, 0, 0, 0)
+			v326.Size = UDim2.new(0, 451, 0, 34)
+			v326.AutoButtonColor = false
+			v326.Font = Enum.Font.Gotham
+			v326.Text = "Universal"
+			v326.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v326.TextSize = 14
+			v326.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/universal.lua"))()
+			end)
+			local v327 = Instance.new("TextButton")
+			v327.Name = "achromaticv2"
+			v327.Parent = v269
+			v327.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v327.BorderSizePixel = 0
+			v327.Position = UDim2.new(0, 0, 0, 0)
+			v327.Size = UDim2.new(0, 451, 0, 34)
+			v327.AutoButtonColor = false
+			v327.Font = Enum.Font.Gotham
+			v327.Text = "Achromatic V2"
+			v327.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v327.TextSize = 14
+			v327.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/achromaticv2.lua"))()
+			end)
+			local v328 = Instance.new("TextButton")
+			v328.Name = "wao"
+			v328.Parent = v268
+			v328.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v328.BorderSizePixel = 0
+			v328.Position = UDim2.new(0, 0, 0, 0)
+			v328.Size = UDim2.new(0, 451, 0, 34)
+			v328.AutoButtonColor = false
+			v328.Font = Enum.Font.Gotham
+			v328.Text = "WHAT ANOTHER ONE"
+			v328.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v328.TextSize = 14
+			v328.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/typicalhub/main/wao.lua"))()
+			end)
+			local v329 = Instance.new("TextButton")
+			v329.Name = "bot"
+			v329.Parent = v270
+			v329.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v329.BorderSizePixel = 0
+			v329.Position = UDim2.new(0, 0, 0, 0)
+			v329.Size = UDim2.new(0, 451, 0, 34)
+			v329.AutoButtonColor = false
+			v329.Font = Enum.Font.Gotham
+			v329.Text = "Free Bot"
+			v329.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v329.TextSize = 14
+			v329.MouseButton1Click:Connect(function()
+				local v330 = next
+				local v331, v332 = game:FindFirstChildOfClass("Players").LocalPlayer.Character:GetChildren()
+				local v333 = {}
+				while true do
+					local v334, v335 = v330(v331, v332)
+					if v334 == nil then
+						break
+					end
+					v332 = v334
+					if v335:IsA("Accessory") then
+						if v333[v335.Name] then
+							if v333[v335.Name] == "s" then
+								v333[v335.Name] = {}
+							end
+							table.insert(v333[v335.Name], v335)
+						else
+							v333[v335.Name] = "s"
+						end
+					end
+				end
+				local v336, v337, v338 = pairs(v333)
+				while true do
+					local v339, v340 = v336(v337, v338)
+					if v339 == nil then
+						break
+					end
+					v338 = v339
+					if type(v340) == "table" then
+						local v341, v342, v343 = pairs(v340)
+						local v344 = 1
+						while true do
+							local v345
+							v343, v345 = v341(v342, v343)
+							if v343 == nil then
+								break
+							end
+							v345.Name = v345.Name .. v344
+							v344 = v344 + 1
+						end
+					end
+				end
+				local v_u_346 = 1
+				function attach(p_u_347, p348, p349, p350)
+					-- upvalues: (ref) v_u_346
+					local v351 = Instance.new("AlignPosition", p348)
+					v351.Name = "AliP_" .. v_u_346
+					v351.ApplyAtCenterOfMass = true
+					v351.MaxForce = 5772000
+					v351.MaxVelocity = math.huge / 9e110
+					v351.ReactionForceEnabled = false
+					v351.Responsiveness = math.huge
+					v351.RigidityEnabled = false
+					local v352 = Instance.new("AlignOrientation", p348)
+					v352.Name = "AliO_" .. v_u_346
+					v352.MaxAngularVelocity = math.huge / 9e110
+					v352.MaxTorque = 5772000
+					v352.PrimaryAxisOnly = false
+					v352.ReactionTorqueEnabled = false
+					v352.Responsiveness = math.huge
+					v352.RigidityEnabled = false
+					local v353 = Instance.new("Attachment", p348)
+					v353.Name = "AthP_" .. v_u_346
+					local v354 = Instance.new("Attachment", p_u_347)
+					v354.Name = "AthP_" .. v_u_346
+					local v355 = Instance.new("Attachment", p348)
+					v355.Name = "AthO_" .. v_u_346
+					local v356 = Instance.new("Attachment", p_u_347)
+					v356.Name = "AthO_" .. v_u_346
+					v355.Orientation = p350 or Vector3.new(0, 0, 0)
+					v353.Position = p349 or Vector3.new(0, 0, 0)
+					v351.Attachment1 = v353
+					v351.Attachment0 = v354
+					v352.Attachment1 = v355
+					v352.Attachment0 = v356
+					local v_u_357 = Instance.new("BodyVelocity", p_u_347)
+					game:GetService("RunService").Heartbeat:Connect(function()
+						-- upvalues: (ref) p_u_347, (ref) v_u_357
+						p_u_347.Velocity = Vector3.new(1, -32.435, 1)
+						v_u_357.Velocity = Vector3.new(1, -32.435, 1)
+						v_u_357.P = math.huge
+					end)
+					v_u_346 = v_u_346 + 1
+				end
+				local v_u_358 = game.Players.LocalPlayer.Character
+				v_u_358.Archivable = true
+				local v359 = v_u_358
+				local v_u_360 = v_u_358.Clone(v359)
+				v_u_360.Parent = v_u_358
+				v_u_360.Head.face.Transparency = 1
+				v_u_360.Name = "Dummy"
+				v_u_360.HumanoidRootPart.CFrame = v_u_358.HumanoidRootPart.CFrame
+				v_u_360.HumanoidRootPart.Anchored = false
+				local v_u_366 = game:GetService("RunService").Stepped:connect(function()
+					-- upvalues: (ref) v_u_358
+					local v361 = v_u_358
+					local v362, v363, v364 = pairs(v361:GetDescendants())
+					while true do
+						local v365
+						v364, v365 = v362(v363, v364)
+						if v364 == nil then
+							break
+						end
+						if v365:IsA("BasePart") then
+							v365.CanCollide = false
+						end
+					end
+				end)
+				local v367 = next
+				local v368 = v_u_358
+				local v369, v370 = v_u_358.GetChildren(v368)
+				local v_u_371 = v_u_358
+				while true do
+					local v372
+					v370, v372 = v367(v369, v370)
+					if v370 == nil then
+						break
+					end
+					if v372:IsA("Accessory") and v372:FindFirstChild("Handle") then
+						v372.Handle:BreakJoints()
+						local v373 = v_u_360:FindFirstChild(v372.Name)
+						if v373 then
+							attach(v372.Handle, v373.Handle)
+							v373.Handle.Transparency = 1
+						end
+					end
+				end
+				local v374 = v_u_371["Pal Hair"]
+				v374.Handle:ClearAllChildren()
+				local v375 = v_u_371.Robloxclassicred
+				v375.Handle:ClearAllChildren()
+				local v376 = v_u_371.Hat1
+				v376.Handle:ClearAllChildren()
+				local v377 = v_u_371["Kate Hair"]
+				v377.Handle:ClearAllChildren()
+				local v378 = v_u_371["Pink Hair"]
+				v378.Handle:ClearAllChildren()
+				local v379 = v_u_371.LavanderHair
+				v379.Handle:ClearAllChildren()
+				attach(v374.Handle, v_u_360.Torso, Vector3.new(0.5, 0, 0), Vector3.new(90, 0, 0))
+				attach(v375.Handle, v_u_360.Torso, Vector3.new(-0.5, 0, 0), Vector3.new(90, 0, 0))
+				attach(v376.Handle, v_u_360["Left Arm"], Vector3.new(0, 0, 0), Vector3.new(90, 0, 0))
+				attach(v377.Handle, v_u_360["Right Arm"], Vector3.new(0, 0, 0), Vector3.new(90, 0, 0))
+				attach(v378.Handle, v_u_360["Left Leg"], Vector3.new(0, 0, 0), Vector3.new(90, 0, 0))
+				attach(v379.Handle, v_u_360["Right Leg"], Vector3.new(0, 0, 0), Vector3.new(90, 0, 0))
+				local v380 = next
+				local v381, v382 = v_u_360:GetChildren()
+				while true do
+					local v383
+					v382, v383 = v380(v381, v382)
+					if v382 == nil then
+						break
+					end
+					if v383:IsA("BasePart") then
+						v383.Transparency = 1
+					end
+				end
+				game.Players.LocalPlayer.Character = v_u_360
+				workspace.CurrentCamera.CameraSubject = v_u_360.Humanoid
+				v_u_360.Humanoid.Died:Connect(function()
+					-- upvalues: (ref) v_u_371, (ref) v_u_366, (ref) v_u_360
+					print("Bot Reset")
+					workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+					game.Players.LocalPlayer.CameraMode = "Classic"
+					v_u_371:BreakJoints()
+					v_u_366:Disconnect()
+					v_u_360:Destroy()
+					game.Players.LocalPlayer.Character = v_u_371
+				end)
+			end)
+			local v384 = Instance.new("TextButton")
+			v384.Name = "permadeath"
+			v384.Parent = v270
+			v384.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v384.BorderSizePixel = 0
+			v384.Position = UDim2.new(0, 0, 0, 0)
+			v384.Size = UDim2.new(0, 451, 0, 34)
+			v384.AutoButtonColor = false
+			v384.Font = Enum.Font.Gotham
+			v384.Text = "Death"
+			v384.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v384.TextSize = 14
+			v384.MouseButton1Click:Connect(function()
+				HumanDied = false
+				local _ = game:FindFirstChildOfClass("Players").LocalPlayer.Character.Torso.Position
+				local v385 = next
+				local v386, v387 = game:FindFirstChildOfClass("Players").LocalPlayer.Character:GetChildren()
+				local v388 = {}
+				while true do
+					local v389
+					v387, v389 = v385(v386, v387)
+					if v387 == nil then
+						break
+					end
+					if v389:IsA("Accessory") then
+						if v388[v389.Name] then
+							if v388[v389.Name] == "s" then
+								v388[v389.Name] = {}
+							end
+							table.insert(v388[v389.Name], v389)
+						else
+							v388[v389.Name] = "s"
+						end
+					end
+				end
+				local v390, v391, v392 = pairs(v388)
+				while true do
+					local v393
+					v392, v393 = v390(v391, v392)
+					if v392 == nil then
+						break
+					end
+					if type(v393) == "table" then
+						local v394, v395, v396 = pairs(v393)
+						local v397 = 1
+						while true do
+							local v398
+							v396, v398 = v394(v395, v396)
+							if v396 == nil then
+								break
+							end
+							v398.Name = v398.Name .. v397
+							v397 = v397 + 1
+						end
+					end
+				end
+				local v_u_399 = 1
+				function SCIFIMOVIELOL(p_u_400, p401, p402, p403)
+					-- upvalues: (ref) v_u_399
+					game["Run Service"].Heartbeat:Connect(function()
+						-- upvalues: (ref) p_u_400
+						p_u_400.Velocity = Vector3.new(1, -32.435, 1)
+					end)
+					local v404 = Instance.new("AlignPosition", p401)
+					v404.Name = "AliP_" .. v_u_399
+					v404.ApplyAtCenterOfMass = true
+					v404.MaxForce = 5772000
+					v404.MaxVelocity = math.huge / 9e110
+					v404.ReactionForceEnabled = false
+					v404.Responsiveness = 200
+					v404.RigidityEnabled = false
+					local v405 = Instance.new("AlignOrientation", p401)
+					v405.Name = "AliO_" .. v_u_399
+					v405.MaxAngularVelocity = math.huge / 9e110
+					v405.MaxTorque = 5772000
+					v405.PrimaryAxisOnly = false
+					v405.ReactionTorqueEnabled = false
+					v405.Responsiveness = 200
+					v405.RigidityEnabled = false
+					local v406 = Instance.new("Attachment", p401)
+					v406.Name = "AthP_" .. v_u_399
+					local v407 = Instance.new("Attachment", p_u_400)
+					v407.Name = "AthP_" .. v_u_399
+					local v408 = Instance.new("Attachment", p401)
+					v408.Name = "AthO_" .. v_u_399
+					local v409 = Instance.new("Attachment", p_u_400)
+					v409.Name = "AthO_" .. v_u_399
+					v408.Orientation = p403
+					v406.Position = p402
+					v404.Attachment1 = v406
+					v404.Attachment0 = v407
+					v405.Attachment1 = v408
+					v405.Attachment0 = v409
+					v_u_399 = v_u_399 + 1
+				end
+				game:GetService("Players").LocalPlayer.Character.Archivable = true
+				local v_u_410 = game:GetService("Players").LocalPlayer.Character:Clone()
+				game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 0
+				game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 0
+				game:GetService("Players").LocalPlayer.Character.Humanoid.AutoRotate = false
+				local v411 = Instance.new("Model", workspace)
+				v411.Name = ""
+				Instance.new("Part", v411).Name = "Head"
+				Instance.new("Part", v411).Name = "Torso"
+				Instance.new("Humanoid", v411).Name = "Humanoid"
+				game:GetService("Players").LocalPlayer.Character = v411
+				game:GetService("Players").LocalPlayer.Character.Humanoid.Name = "FalseHumanoid"
+				local v412 = game:GetService("Players").LocalPlayer.Character:FindFirstChild("FalseHumanoid"):Clone()
+				v412.Parent = game:GetService("Players").LocalPlayer.Character
+				v412.Name = "Humanoid"
+				game:GetService("Players").LocalPlayer.Character:FindFirstChild("FalseHumanoid"):Destroy()
+				game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+				game:GetService("Players").LocalPlayer.Character = workspace[game:GetService("Players").LocalPlayer.Name]
+				wait(5.65)
+				game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+				v_u_410.Parent = workspace
+				v_u_410.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 2, 0)
+				wait()
+				v_u_410.Humanoid.BreakJointsOnDeath = false
+				workspace.Camera.CameraSubject = v_u_410.Humanoid
+				v_u_410.Name = "non"
+				v_u_410.Humanoid.DisplayDistanceType = "None"
+				if v_u_410.Head:FindFirstChild("face") then
+					v_u_410.Head:FindFirstChild("face").Transparency = 1
+				end
+				v411:Destroy()
+				local v_u_413 = workspace[game:GetService("Players").LocalPlayer.Name]
+				local v_u_414 = Instance.new("Part", workspace)
+				v_u_414.CanCollide = false
+				v_u_414.Transparency = 1
+				local v_u_415 = nil
+				local function v417()
+					-- upvalues: (ref) v_u_415, (ref) v_u_410, (ref) v_u_414
+					if HumanDied then
+						v_u_415:Disconnect()
+					else
+						local v416 = workspace.Camera.CFrame.lookVector
+						v_u_414.Position = v_u_410.HumanoidRootPart.Position
+						v_u_414.CFrame = CFrame.new(v_u_414.Position, Vector3.new(v416.X * 9999, v416.Y, v416.Z * 9999))
+					end
+				end
+				v_u_415 = game:GetService("RunService").Heartbeat:Connect(v417)
+				local v_u_418 = nil
+				local v_u_419 = false
+				local v_u_420 = false
+				local v_u_421 = false
+				local v_u_422 = false
+				local v_u_423 = false
+				local function v427(p424, p425)
+					-- upvalues: (ref) v_u_418, (ref) v_u_419, (ref) v_u_420, (ref) v_u_421, (ref) v_u_422, (ref) v_u_423
+					if HumanDied then
+						v_u_418:Disconnect()
+					elseif p425 ~= true then
+						local v426 = p424.KeyCode
+						if v426 == Enum.KeyCode.W then
+							v_u_419 = true
+						end
+						if v426 == Enum.KeyCode.A then
+							v_u_420 = true
+						end
+						if v426 == Enum.KeyCode.S then
+							v_u_421 = true
+						end
+						if v426 == Enum.KeyCode.D then
+							v_u_422 = true
+						end
+						if v426 == Enum.KeyCode.Space then
+							v_u_423 = true
+						end
+					end
+				end
+				v_u_418 = game:GetService("UserInputService").InputBegan:Connect(v427)
+				local v_u_428 = nil
+				local function v431(p429)
+					-- upvalues: (ref) v_u_428, (ref) v_u_419, (ref) v_u_420, (ref) v_u_421, (ref) v_u_422, (ref) v_u_423
+					if HumanDied then
+						v_u_428:Disconnect()
+					else
+						local v430 = p429.KeyCode
+						if v430 == Enum.KeyCode.W then
+							v_u_419 = false
+						end
+						if v430 == Enum.KeyCode.A then
+							v_u_420 = false
+						end
+						if v430 == Enum.KeyCode.S then
+							v_u_421 = false
+						end
+						if v430 == Enum.KeyCode.D then
+							v_u_422 = false
+						end
+						if v430 == Enum.KeyCode.Space then
+							v_u_423 = false
+						end
+					end
+				end
+				v_u_428 = game:GetService("UserInputService").InputEnded:Connect(v431)
+				local function v_u_435(p432, p433, p434)
+					-- upvalues: (ref) v_u_414
+					v_u_414.CFrame = v_u_414.CFrame * CFrame.new(-p432, p433, -p434)
+					workspace.non.Humanoid.WalkToPoint = v_u_414.Position
+				end
+				_G.permadeath = true
+				coroutine.wrap(function()
+					-- upvalues: (ref) v_u_419, (ref) v_u_435, (ref) v_u_420, (ref) v_u_421, (ref) v_u_422, (ref) v_u_423, (ref) v_u_410
+					while true do
+						game:GetService("RunService").RenderStepped:Wait()
+						if HumanDied then
+							break
+						end
+						if v_u_419 then
+							v_u_435(0, 0, 10000)
+						end
+						if v_u_420 then
+							v_u_435(10000, 0, 0)
+						end
+						if v_u_421 then
+							v_u_435(0, 0, -10000)
+						end
+						if v_u_422 then
+							v_u_435(-10000, 0, 0)
+						end
+						if v_u_423 then
+							v_u_410.Humanoid.Jump = true
+						end
+						if v_u_419 ~= true and (v_u_420 ~= true and (v_u_421 ~= true and v_u_422 ~= true)) then
+							workspace.non.Humanoid.WalkToPoint = workspace.non.HumanoidRootPart.Position
+						end
+					end
+				end)()
+				local v_u_436 = nil
+				function UnCollide()
+					-- upvalues: (ref) v_u_436, (ref) v_u_410, (ref) v_u_413
+					if HumanDied then
+						v_u_436:Disconnect()
+					else
+						local v437 = next
+						local v438, v439 = v_u_410:GetDescendants()
+						while true do
+							local v440
+							v439, v440 = v437(v438, v439)
+							if v439 == nil then
+								break
+							end
+							if v440:IsA("BasePart") then
+								v440.CanCollide = false
+							end
+						end
+						local v441 = next
+						local v442, v443 = v_u_413:GetDescendants()
+						while true do
+							local v444
+							v443, v444 = v441(v442, v443)
+							if v443 == nil then
+								break
+							end
+							if v444:IsA("BasePart") then
+								v444.CanCollide = false
+							end
+						end
+					end
+				end
+				v_u_436 = game:GetService("RunService").Stepped:Connect(UnCollide)
+				local v_u_445 = Instance.new("BindableEvent")
+				v_u_445.Event:connect(function()
+					-- upvalues: (ref) v_u_445, (ref) v_u_410
+					game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
+					v_u_445:Destroy()
+					v_u_410.Humanoid.Health = 0
+				end)
+				game:GetService("StarterGui"):SetCore("ResetButtonCallback", v_u_445)
+				coroutine.wrap(function()
+					-- upvalues: (ref) v_u_410, (ref) v_u_413, (ref) v_u_445
+					repeat
+						game:GetService("RunService").RenderStepped:wait()
+					until not v_u_410 or (not v_u_410:FindFirstChild("Head") or (not v_u_410:FindFirstChild("Humanoid") or v_u_410:FindFirstChild("Humanoid").Health <= 0))
+					HumanDied = true
+					pcall(function()
+						-- upvalues: (ref) v_u_410, (ref) v_u_413, (ref) v_u_445
+						game.Players.LocalPlayer.Character = v_u_410
+						v_u_410:Destroy()
+						game.Players.LocalPlayer.Character = v_u_413
+						if v_u_445 then
+							game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
+							v_u_445:Destroy()
+						end
+						_G.permadeath = false
+						v_u_413.Humanoid.Health = 0
+					end)
+				end)()
+				SCIFIMOVIELOL(v_u_413.Head, v_u_410.Head, Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				SCIFIMOVIELOL(v_u_413.Torso, v_u_410.Torso, Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				SCIFIMOVIELOL(v_u_413["Left Arm"], v_u_410["Left Arm"], Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				SCIFIMOVIELOL(v_u_413["Right Arm"], v_u_410["Right Arm"], Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				SCIFIMOVIELOL(v_u_413["Left Leg"], v_u_410["Left Leg"], Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				SCIFIMOVIELOL(v_u_413["Right Leg"], v_u_410["Right Leg"], Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+				local v_u_446 = v_u_413.HumanoidRootPart
+				v_u_446.Name = "HumanoidRootPart"
+				v_u_446.Transparency = 0.5
+				v_u_446.Anchored = false
+				if v_u_446:FindFirstChildOfClass("AlignPosition") then
+					v_u_446:FindFirstChildOfClass("AlignPosition"):Destroy()
+				end
+				if v_u_446:FindFirstChildOfClass("AlignOrientation") then
+					v_u_446:FindFirstChildOfClass("AlignOrientation"):Destroy()
+				end
+				Instance.new("BodyForce", v_u_446).Force = Vector3.new(0, 549.36, 0)
+				local v447 = Instance.new("BodyAngularVelocity", v_u_446)
+				v447.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+				v447.P = 1e27
+				v447.AngularVelocity = Vector3.new(10000, 10000, 10000)
+				_G.RanScript = false
+				spawn(function()
+					-- upvalues: (ref) v_u_446, (ref) v_u_410
+					while game:GetService("RunService").Heartbeat:Wait() do
+						if _G.RanScript ~= true then
+							v_u_446.Position = v_u_410.HumanoidRootPart.Position
+						end
+					end
+				end)
+				local v448 = next
+				local v449 = v_u_413
+				local v450, v451 = v_u_413.GetChildren(v449)
+				while true do
+					local v452
+					v451, v452 = v448(v450, v451)
+					if v451 == nil then
+						break
+					end
+					if v452:IsA("Accessory") then
+						local v453, v454, v455 = pairs(v452:GetDescendants())
+						while true do
+							local v456
+							v455, v456 = v453(v454, v455)
+							if v455 == nil then
+								break
+							end
+							if v456:IsA("Attachment") or v456:IsA("Weld") then
+								v456:Destroy()
+							end
+						end
+						v452.Handle.CanCollide = true
+						SCIFIMOVIELOL(v452.Handle, v_u_410[v452.Name].Handle, Vector3.new(0, 0, 0), Vector3.new(0, 0, 0))
+					end
+				end
+				local v457 = next
+				local v458, v459 = v_u_410:GetDescendants()
+				while true do
+					local v460
+					v459, v460 = v457(v458, v459)
+					if v459 == nil then
+						break
+					end
+					if v460:IsA("BasePart") or v460:IsA("Part") then
+						v460.Transparency = 1
+					end
+				end
+			end)
+			local v461 = Instance.new("TextButton")
+			v461.Name = "hotelroom"
+			v461.Parent = v268
+			v461.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v461.BorderSizePixel = 0
+			v461.Position = UDim2.new(0, 0, 0, 0)
+			v461.Size = UDim2.new(0, 451, 0, 34)
+			v461.AutoButtonColor = false
+			v461.Font = Enum.Font.Gotham
+			v461.Text = "Beggin"
+			v461.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v461.TextSize = 14
+			v461.MouseButton1Click:Connect(function()
+				Check()
+				_G.scriptran = true
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/TypicalHub/main/check"))()
+			end)
+			local v462 = Instance.new("TextButton")
+			v462.Name = "R15"
+			v462.Parent = v270
+			v462.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			v462.BorderSizePixel = 0
+			v462.Position = UDim2.new(0, 0, 0, 0)
+			v462.Size = UDim2.new(0, 451, 0, 34)
+			v462.AutoButtonColor = false
+			v462.Font = Enum.Font.Gotham
+			v462.Text = "R15 Animation Player"
+			v462.TextColor3 = Color3.fromRGB(255, 255, 255)
+			v462.TextSize = 14
+			v462.MouseButton1Click:Connect(function()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/mgamingpro/TypicalHub/main/r15"))()
+			end)
+			wait(0.1)
+			game.StarterGui:SetCore("SendNotification", {
+				["Title"] = "SERVER",
+				["Text"] = "Loaded BozoHub..",
+				["Duration"] = 6
+			})
+		end)
+		v161:CreateButton("Natural Disaster Survival", function()
+			local v_u_463 = loadstring(game:HttpGet("https://pastebin.com/raw/xGQveRVz"))()
+			local v464 = v_u_463.CreateLib("Super Natural Simulator | British Hub", "OrangeTheme")
+			local v465 = Instance.new("ScreenGui")
+			local v466 = Instance.new("Frame")
+			local v467 = Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextLabel")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextLabel")
+			Instance.new("TextLabel")
+			Instance.new("Frame")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextButton")
+			Instance.new("Frame")
+			Instance.new("TextButton")
+			Instance.new("TextButton")
+			v465.Name = "PrisonBreakerV1.6"
+			v465.Parent = game.CoreGui
+			v466.Name = "openmain"
+			v466.Parent = v465
+			v466.BackgroundColor3 = Color3.new(1, 1, 1)
+			v466.Position = UDim2.new(0.0104873544, 0, 0.549140036, 0)
+			v466.Size = UDim2.new(0, 100, 0, 26)
+			v467.Name = "open"
+			v467.Parent = v466
+			v467.BackgroundColor3 = Color3.new(1, 0, 0.498039)
+			v467.Position = UDim2.new(0, 0, -0.0299201012, 0)
+			v467.Size = UDim2.new(0, 100, 0, 26)
+			v467.Font = Enum.Font.GothamBlack
+			v467.Text = "Open/Close"
+			v467.TextColor3 = Color3.new(0, 0, 0)
+			v467.TextSize = 18
+			v467.TextWrapped = true
+			v467.MouseButton1Down:connect(function()
+				-- upvalues: (ref) v_u_463
+				v_u_463:ToggleUI()
+			end)
+			local v468 = v464:NewTab("Script"):NewSection("Script")
+			v468:NewToggle("Auto Sell", "No Description", function(p469)
+				if p469 then
+					_G.sell = true
+					while _G.sell do
+						wait(0.1)
+						game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack({
+							{ "SellMuscle" }
+						}))
+					end
+				else
+					_G.sell = false
+					while _G.sell do
+						wait(0.1)
+						game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack({
+							{ "SellMuscle" }
+						}))
+					end
+				end
+			end)
+			v468:NewToggle("Auto Gain", "No Description", function(p470)
+				if p470 then
+					_G.gain = true
+					while _G.gain do
+						wait(0.1)
+						game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack({
+							{ "GainMuscle" }
+						}))
+					end
+				else
+					_G.gain = False
+					while _G.gain do
+						wait(0.5)
+						game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack({
+							{ "GainMuscle" }
+						}))
+					end
+				end
+			end)
+		end)
+		v161:CreateButton("Break In Story", function()
+			local v471 = loadstring(game:HttpGet("https://pastebin.com/raw/xGQveRVz"))().CreateLib("Break In | British Hub", "BloodTheme")
+			local v472 = v471:NewTab("Roles"):NewSection("Roles")
+			v472:NewButton("Bat", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.MakeRole:FireServer("Bat", false, false)
+			end)
+			v472:NewButton("Medic", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.MakeRole:FireServer("MedKit", false, false)
+			end)
+			v472:NewButton("Swat", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("SwatGun", true)
+			end)
+			v472:NewButton("Police", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("Gun", true)
+			end)
+			v472:NewButton("Guest (10 Badges Needed)", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("LinkedSword", false)
+			end)
+			v472:NewButton("Hyper (5 Badges Needed)", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.OutsideRole:FireServer("Lollipop", false)
+			end)
+			local v473 = v471:NewTab("Item")
+			local v474 = v473:NewSection("Weapon")
+			v474:NewButton("Hammer", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.BasementWeapon:FireServer(true, "Hammer")
+			end)
+			v474:NewButton("Sword", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("LinkedSword")
+			end)
+			local v475 = v473:NewSection("Medkit & Cure")
+			v475:NewButton("Cure", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Cure")
+			end)
+			v475:NewButton("Medkit", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("MedKit")
+			end)
+			local v476 = v473:NewSection("Food")
+			v476:NewButton("Chips", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Chips")
+			end)
+			v476:NewButton("Bloxy Cola", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("BloxyCola")
+			end)
+			v476:NewButton("Apple", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Apple")
+			end)
+			v476:NewButton("Pizza", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Pizza2")
+			end)
+			v476:NewButton("Cookie", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Cookie")
+			end)
+			v476:NewButton("Epic Pizza", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("EpicPizza")
+			end)
+			v476:NewButton("Expired Bloxy Cola", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("ExpiredBloxyCola")
+			end)
+			v476:NewButton("Lollipop", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Lollipop")
+			end)
+			local v477 = v473:NewSection("Other Item")
+			v477:NewButton("Teddy", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("TeddyBloxpin")
+			end)
+			v477:NewButton("Plank", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Plank")
+			end)
+			local v478 = v471:NewTab("Teleport"):NewSection("Teleport")
+			v478:NewButton("Basement", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(71, -15, -163)
+			end)
+			v478:NewButton("House", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36, 3, -200)
+			end)
+			v478:NewButton("Attic", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16, 35, -220)
+			end)
+			v478:NewButton("Store", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-422, 3, -121)
+			end)
+			v478:NewButton("Sewer", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(129, 3, -125)
+			end)
+			v478:NewButton("Boss Room", "", function()
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-39, -287, -1480)
+			end)
+			local v479 = v471:NewTab("Other"):NewSection("Other")
+			v479:NewButton("Cat Friend", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.Cattery:FireServer()
+			end)
+			v479:NewButton("Heal Others", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("MedKit")
+				wait(0.3)
+				game.Players.LocalPlayer.Backpack.MedKit.Parent = game.Players.LocalPlayer.Character
+				local v480, v481, v482 = pairs(game:GetService("Players"):GetChildren())
+				while true do
+					local v483
+					v482, v483 = v480(v481, v482)
+					if v482 == nil then
+						break
+					end
+					game:GetService("ReplicatedStorage").RemoteEvents.HealPlayer:FireServer(v483)
+				end
+				game.Players.LocalPlayer.Character.MedKit.Parent = game.Players.LocalPlayer.Backpack
+				wait(1.5)
+				game.Players.LocalPlayer.Backpack.MedKit:Destroy()
+			end)
+			v479:NewButton("Heal Yourself", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Cure")
+				wait(0.3)
+				game.Players.LocalPlayer.Backpack.Cure.Parent = game.Players.LocalPlayer.Character
+				local v484 = game:GetService("Players").Visolarity
+				game:GetService("ReplicatedStorage").RemoteEvents.CurePlayer:FireServer(v484)
+				game.Players.LocalPlayer.Character.Cure.Parent = game.Players.LocalPlayer.Backpack
+				wait(1.5)
+				game.Players.LocalPlayer.Backpack.Cure:Destroy()
+			end)
+			v479:NewButton("Kill Enemies", "Laggy", function()
+				local v485, v486, v487 = pairs(game.Workspace.BadGuys:GetChildren())
+				while true do
+					local v488
+					v487, v488 = v485(v486, v487)
+					if v487 == nil then
+						break
+					end
+					for _ = 1, 50 do
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v488, 10)
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v488, 996)
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v488, 9)
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v488, 8)
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v488, 996)
+					end
+				end
+			end)
+			v479:NewButton("Kill Enemies", "", function()
+				while wait() do
+					local v489, v490, v491 = pairs(game.Workspace.BadGuys:GetChildren())
+					while true do
+						local v492
+						v491, v492 = v489(v490, v491)
+						if v491 == nil then
+							break
+						end
+						game:GetService("ReplicatedStorage").RemoteEvents.HitBadguy:FireServer(v492, 8)
+					end
+				end
+			end)
+			v479:NewButton("Basement Lights", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.BasementMission:FireServer()
+				game:GetService("ReplicatedStorage").RemoteFunctions.GetAmbient:InvokeServer()
+			end)
+			v479:NewButton("Basement Key", "", function()
+				game.ReplicatedStorage.RemoteEvents.GiveTool:FireServer("Key")
+			end)
+			v479:NewButton("Unlock Basement", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.UnlockDoor:FireServer()
+			end)
+			v479:NewButton("Auto Heal", "", function()
+				for _ = 1, 200 do
+					wait(0.0001)
+					game:GetService("ReplicatedStorage").RemoteEvents.Energy:FireServer("Cat")
+				end
+			end)
+			v479:NewButton("Remove Tools", "", function()
+				local v493, v494, v495 = pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren())
+				while true do
+					local v496
+					v495, v496 = v493(v494, v495)
+					if v495 == nil then
+						break
+					end
+					if v496:IsA("Tool") then
+						v496:Destroy()
+					end
+				end
+			end)
+			v479:NewButton("Open Safe", "", function()
+				game.ReplicatedStorage.RemoteEvents.Safe:FireServer(game:GetService("Workspace").CodeNote.SurfaceGui.TextLabel.Text)
+			end)
+			v479:NewButton("Safe Code", "", function()
+				local v497 = game:GetService("StarterGui")
+				local v498 = v497.SetCore
+				local v499 = {
+					["Title"] = "Notification",
+					["Text"] = game:GetService("Workspace").CodeNote.SurfaceGui.TextLabel.Text
+				}
+				v498(v497, "SendNotification", v499)
+			end)
+			v479:NewButton("Search Attic", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.BloxyPack:FireServer(1)
+			end)
+			v479:NewButton("Get Ladder", "", function()
+				game:GetService("ReplicatedStorage").RemoteEvents.Ladder:FireServer(1)
+			end)
+		end)
+		v161:CreateButton("Legends of Speed", function()
+			-- upvalues: (ref) v_u_94
+			local v500 = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))().CreateLib("Legend Of Speed | British Hub", "BloodTheme")
+			local v501 = v500:NewTab("Auto-Farm"):NewSection("Auto-Farm")
+			v501:NewToggle("Auto-Farm Orbs", ".", function(p502)
+				_G.Farm = p502 and true or false
+				wait()
+				while _G.Farm == true do
+					wait()
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+				end
+			end)
+			v501:NewToggle("Auto-Farm Hoops", ".", function(p503)
+				_G.Hoops = p503 and true or false
+				wait()
+				while _G.Hoops == true do
+					wait()
+					local v504 = workspace.Hoops:GetChildren()
+					local v505, v506, v507 = ipairs(v504)
+					while true do
+						local v508
+						v507, v508 = v505(v506, v507)
+						if v507 == nil then
+							break
+						end
+						if v508.Name == "Hoop" then
+							v508.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+						end
+					end
+				end
+			end)
+			v501:NewToggle("Auto-Farm Gems", ".", function(p509)
+				_G.Gems = p509 and true or false
+				wait()
+				while _G.Gems == true do
+					wait()
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+					game.ReplicatedStorage.rEvents.orbEvent:FireServer("collectOrb", "Gem", "City")
+				end
+			end)
+			v501:NewToggle("Auto-Rebirth", "", function(p510)
+				_G.Rebirth = p510 and true or false
+				wait()
+				while _G.Rebirth == true do
+					wait()
+					game.ReplicatedStorage.rEvents.rebirthEvent:FireServer("rebirthRequest")
+				end
+			end)
+			v501:NewToggle("Auto Evolve Pets", "", function(p511)
+				_G.Evolve = p511 and true or false
+				wait()
+				while _G.Evolve == true do
+					wait()
+					game.Replicatedstorage.rEvents.petEvolveEvent:FireServer("evolvePet", "all")
+				end
+			end)
+			v500:NewTab("Teleport")
+			v_u_94:NewSection("Teleports")
+			Tab2SectionSection:NewButton("Snow City", ".", function()
+				game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-858.358, 0.5, 2170.35))
+			end)
+			Tab2SectionSection:NewButton("Magma City", ".", function()
+				game.Players.LocalPlayer.Character:MoveTo(Vector3.new(1707.25, 0.550008, 4331.05))
+			end)
+			Tab2SectionSection:NewButton("Legends Highway", ".", function()
+				game.Players.LocalPlayer.Character:MoveTo(Vector3.new(3594.68, 214.804, 7274.56))
+			end)
+			local v512 = v500:NewTab("Crystal"):NewSection("Auto Hatchs Crystal/Eggs")
+			v512:NewToggle("Blue crystal", ".", function(p513)
+				_G.Blue = p513 and true or false
+				wait()
+				while _G.Blue == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Blue Crystal")
+				end
+			end)
+			v512:NewToggle("Electro Legends Crystal", ".", function(p514)
+				_G.Electro = p514 and true or false
+				wait()
+				while _G.Electro == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Electro Legends Crystal")
+				end
+			end)
+			v512:NewToggle("Inferno Crystal", ".", function(p515)
+				_G.Inferno = p515 and true or false
+				wait()
+				while _G.Inferno == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Inferno Crystal")
+				end
+			end)
+			v512:NewToggle("Lava Crystal", ".", function(p516)
+				_G.Lava = p516 and true or false
+				wait()
+				while _G.Lava == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Lava Crystal")
+				end
+			end)
+			v512:NewToggle("Lightning Crystal", ".", function(p517)
+				_G.Lightning = p517 and true or false
+				wait()
+				while _G.Lightning == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Lightning Crystal")
+				end
+			end)
+			v512:NewToggle("Purple Crystal", ".", function(p518)
+				_G.Purple = p518 and true or false
+				wait()
+				while _G.Purple == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Purple Crystal")
+				end
+			end)
+			v512:NewToggle("Red Crystal", ".", function(p519)
+				_G.Red = p519 and true or false
+				wait()
+				while _G.Red == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Red Crystal")
+				end
+			end)
+			v512:NewToggle("Snow Crystal", ".", function(p520)
+				_G.Snow = p520 and true or false
+				wait()
+				while _G.Snow == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Snow Crystal")
+				end
+			end)
+			v512:NewToggle("Yellow Crystal", ".", function(p521)
+				_G.Yellow = p521 and true or false
+				wait()
+				while _G.Yellow == true do
+					wait()
+					game.ReplicatedStorage.rEvents.openCrystalRemote:InvokeServer("openCrystal", "Yellow Crystal")
+				end
+			end)
+		end)
+		v161:CreateButton("Step Counter", function()
+			local v522 = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))().CreateLib("Step Counter | British Hub", "BloodTheme")
+			local v523 = v522:NewTab("Other"):NewSection("Other")
+			v523:NewToggle("Auto Rebirth", "", function(p524)
+				if p524 then
+					getgenv().autoRb = true
+					while getgenv().autoRb == true do
+						game:GetService("ReplicatedStorage").rebirthrequest:FireServer(unpack({ "rebirthrequest" }))
+						wait(0.1)
+					end
+				else
+					getgenv()
+					autoRb = false
+				end
+			end)
+			v523:NewToggle("Auto Get Piece", "", function(p525)
+				if p525 then
+					getgenv().autoPiece = true
+					while getgenv().autoPiece == true do
+						local v526 = game.Workspace:GetChildren()
+						local v527, v528, v529 = pairs(v526)
+						while true do
+							local v530
+							v529, v530 = v527(v528, v529)
+							if v529 == nil then
+								break
+							end
+							local v531, v532, v533 = pairs(v530:GetChildren())
+							while true do
+								local v534
+								v533, v534 = v531(v532, v533)
+								if v533 == nil then
+									break
+								end
+								table.insert(v526, v534)
+							end
+							if v530:IsA("BasePart") and v530.Name == "5piece" then
+								v530.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+							end
+						end
+						local v535 = game.Workspace:GetChildren()
+						local v536, v537, v538 = pairs(v535)
+						while true do
+							local v539
+							v538, v539 = v536(v537, v538)
+							if v538 == nil then
+								break
+							end
+							local v540, v541, v542 = pairs(v539:GetChildren())
+							while true do
+								local v543
+								v542, v543 = v540(v541, v542)
+								if v542 == nil then
+									break
+								end
+								table.insert(v535, v543)
+							end
+							if v539:IsA("BasePart") and v539.Name == "10piece" then
+								v539.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+							end
+						end
+						local v544 = game.Workspace:GetChildren()
+						local v545, v546, v547 = pairs(v544)
+						while true do
+							local v548
+							v547, v548 = v545(v546, v547)
+							if v547 == nil then
+								break
+							end
+							local v549, v550, v551 = pairs(v548:GetChildren())
+							while true do
+								local v552
+								v551, v552 = v549(v550, v551)
+								if v551 == nil then
+									break
+								end
+								table.insert(v544, v552)
+							end
+							if v548:IsA("BasePart") and v548.Name == "20piece" then
+								v548.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+							end
+						end
+						local v553 = game.Workspace:GetChildren()
+						local v554, v555, v556 = pairs(v553)
+						while true do
+							local v557
+							v556, v557 = v554(v555, v556)
+							if v556 == nil then
+								break
+							end
+							local v558, v559, v560 = pairs(v557:GetChildren())
+							while true do
+								local v561
+								v560, v561 = v558(v559, v560)
+								if v560 == nil then
+									break
+								end
+								table.insert(v553, v561)
+							end
+							if v557:IsA("BasePart") and v557.Name == "50piece" then
+								v557.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+							end
+						end
+						wait(5)
+					end
+				else
+					getgenv().autoPiece = false
+				end
+			end)
+			local v562 = v522:NewTab("Auto Farm"):NewSection("Auto Farm")
+			v562:NewToggle("Auto Step", "", function(p563)
+				if p563 then
+					getgenv().autostep = true
+					while getgenv().autostep == true do
+						game:GetService("ReplicatedStorage").stepclickrequest:FireServer(unpack({ "stepclickrequest" }))
+						wait(0.1)
+					end
+				else
+					getgenv().autostep = false
+				end
+			end)
+			v562:NewToggle("Auto Sell", "", function(p564)
+				if p564 then
+					getgenv().autoSell = true
+					while getgenv().autoSell == true do
+						local v565 = game.Workspace:GetChildren()
+						local v566, v567, v568 = pairs(v565)
+						while true do
+							local v569
+							v568, v569 = v566(v567, v568)
+							if v568 == nil then
+								break
+							end
+							local v570, v571, v572 = pairs(v569:GetChildren())
+							while true do
+								local v573
+								v572, v573 = v570(v571, v572)
+								if v572 == nil then
+									break
+								end
+								table.insert(v565, v573)
+							end
+							if v569:IsA("BasePart") and v569.Name == "SellArea" then
+								v569.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+							end
+						end
+						wait()
+						local v574 = game.Workspace:GetChildren()
+						local v575, v576, v577 = pairs(v574)
+						while true do
+							local v578
+							v577, v578 = v575(v576, v577)
+							if v577 == nil then
+								break
+							end
+							local v579, v580, v581 = pairs(v578:GetChildren())
+							while true do
+								local v582
+								v581, v582 = v579(v580, v581)
+								if v581 == nil then
+									break
+								end
+								table.insert(v574, v582)
+							end
+							if v578:IsA("BasePart") and v578.Name == "SellArea" then
+								v578.CFrame = CFrame.new(-65, 1, 66)
+								wait(10)
+							end
+						end
+					end
+				else
+					getgenv().autoSell = false
+				end
+			end)
+			local v583 = v522:NewTab("Upgrade"):NewSection("Upgradd")
+			v583:NewToggle("Auto Upgrade Step", "", function(p584)
+				if p584 then
+					getgenv().autoUpg = true
+					while getgenv().autoUpg == true do
+						game:GetService("ReplicatedStorage").upgrademysteps:FireServer(unpack({ "upgrademysteps" }))
+						wait(0.1)
+					end
+				else
+					getgenv().autoUpg = false
+				end
+			end)
+			v583:NewToggle("Auto Upgrade Max", "", function(p585)
+				if p585 then
+					getgenv().autoUpgm = true
+					while getgenv().autoUpgm == true do
+						game:GetService("ReplicatedStorage").upgrademymaxsteps:FireServer(unpack({ "upgrademymaxsteps" }))
+						wait(0.1)
+					end
+				else
+					getgenv().autoUpgm = false
+				end
+			end)
+		end)
+		v161:CreateButton("Tower of Hell", function()
+			local v586 = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))().CreateLib("Tower Of Hell | British Hub", "BloodTheme"):NewTab("Other")
+			local v587 = v586:NewSection("Auto Farm")
+			local v_u_588 = game:GetService("TeleportService")
+			local v_u_589 = game:GetService("Players")
+			v587:NewToggle("Auto Farm", "", function(p590)
+				-- upvalues: (ref) v_u_588, (ref) v_u_589
+				if p590 then
+					local v591 = game.Workspace.tower.sections.finish.FinishGlow
+					local v592 = game.Players.LocalPlayer.Character
+					local v593 = v591.CFrame
+					local v594 = v592.HumanoidRootPart.CFrame
+					while p590 do
+						v592.HumanoidRootPart.CFrame = v593
+						wait(1)
+					end
+					v592.HumanoidRootPart.CFrame = v594
+				else
+					v_u_588:TeleportToPlaceInstance(game.PlaceId, game.JobId, v_u_589.LocalPlayer)
+				end
+			end)
+			v586:NewSection("Tools"):NewButton("Get All Tool", "", function()
+				local v595, v596, v597 = pairs(game.Players.LocalPlayer.Backpack:GetDescendants())
+				while true do
+					local v598
+					v597, v598 = v595(v596, v597)
+					if v597 == nil then
+						break
+					end
+					if v598:IsA("Tool") then
+						v598:Destroy()
+					end
+				end
+				wait()
+				local v599, v600, v601 = pairs(game.ReplicatedStorage.Gear:GetDescendants())
+				while true do
+					local v602
+					v601, v602 = v599(v600, v601)
+					if v601 == nil then
+						break
+					end
+					if v602:IsA("Tool") then
+						local v603 = v602:Clone()
+						wait()
+						v603.Parent = game.Players.LocalPlayer.Backpack
+					end
+				end
+			end)
+			v586:NewSection("God Mode"):NewButton("God Mode", "", function()
+				local v604, v605, v606 = pairs(game:GetService("Workspace").tower:GetDescendants())
+				while true do
+					local v607
+					v606, v607 = v604(v605, v606)
+					if v606 == nil then
+						break
+					end
+					if v607:IsA("BoolValue") and v607.Name == "kills" then
+						v607.Parent:Destroy()
+					end
+				end
+			end)
+		end)
+		v161:CreateButton("Naval Warfare", function()
+			local v608 = loadstring(game:HttpGet("https://pastebin.com/raw/HYcfs6KC", true))()
+			v608.options.underlinecolor = "rainbow"
+			local v_u_609 = v608:CreateWindow("Naval Warfare")
+			local v610 = v_u_609
+			v_u_609.Toggle(v610, "Rapid Fire (Hold E)", {
+				["flag"] = "toggle1"
+			})
+			spawn(function()
+				-- upvalues: (ref) v_u_609
+				while wait() do
+					if v_u_609.flags.toggle1 and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+						local v611 = game:GetService("UserInputService")
+						while wait() do
+							if v611:IsKeyDown(Enum.KeyCode.E) then
+								game:GetService("Players").LocalPlayer.Character["M1 Garand"]:Activate()
+							end
+						end
+					end
+				end
+			end)
+			local v612 = v_u_609
+			v_u_609.Toggle(v612, "Infinite Ammo", {
+				["flag"] = "toggle2"
+			})
+			spawn(function()
+				-- upvalues: (ref) v_u_609
+				while wait(3) do
+					if v_u_609.flags.toggle2 and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+						local v_u_613 = getgc or false
+						local v_u_614 = is_synapse_function or issentinelclosure or (is_protosmasher_closure or is_sirhurt_closure or (checkclosure or false))
+						local v_u_615 = debug.getinfo or (getinfo or false)
+						local v616 = debug.setupvalue or setupvalue or (setupval or false)
+						if not (v_u_613 or (v_u_614 or (v_u_615 or v616))) then
+							warn("Your exploit does not support this script")
+							return
+						end
+						v616((function(p617)
+							-- upvalues: (ref) v_u_613, (ref) v_u_614, (ref) v_u_615
+							local v618, v619, v620 = pairs(v_u_613())
+							while true do
+								local v621
+								v620, v621 = v618(v619, v620)
+								if v620 == nil then
+									break
+								end
+								if type(v621) == "function" and (not v_u_614(v621) and v_u_615(v621).name == p617) then
+									return v621
+								end
+							end
+						end)("reload"), 4, math.huge)
+					end
+				end
+			end)
+			local v622 = v_u_609
+			v_u_609.Toggle(v622, "Kill Opposite Team", {
+				["flag"] = "toggle3"
+			})
+			spawn(function()
+				-- upvalues: (ref) v_u_609
+				while wait(0.1) do
+					if v_u_609.flags.toggle3 and game.Players.LocalPlayer.Character:WaitForChild("Humanoid") then
+						local v623, v624, v625 = pairs(game.workspace:GetDescendants())
+						while true do
+							local v626
+							v625, v626 = v623(v624, v625)
+							if v625 == nil then
+								break
+							end
+							if v626.Name == "Humanoid" and v626.Parent.Name.Team ~= game.Players.LocalPlayer.Team then
+								local v627 = { v626.Parent.HumanoidRootPart }
+								game:GetService("ReplicatedStorage").Event:FireServer("shootRifle", "", v627)
+								game:GetService("ReplicatedStorage").Event:FireServer("shootRifle", "hit", { v626 })
+							end
+						end
+					end
+				end
+			end)
+			local v628 = v_u_609
+			v_u_609.Section(v628, "Must have RPG GamePass")
+			local v629 = v_u_609
+			v_u_609.Toggle(v629, "Shoot RPG", {
+				["flag"] = "toggle4"
+			})
+			spawn(function()
+				-- upvalues: (ref) v_u_609
+				while wait() do
+					if v_u_609.flags.toggle4 then
+						local v630 = { game.Players.LocalPlayer:GetMouse().Hit.p }
+						game:GetService("ReplicatedStorage").Event:FireServer("fireRPG", v630)
+					end
+				end
+			end)
+		end)
+		v161:CreateButton("Asteral Hub Chaos", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/AstralHub/main/Loader.lua"))()
+		end)
+		v161:CreateButton("Adopt Me", function()
+			loadstring(game:HttpGet("https://gitfront.io/r/ReQiuYTPL/wFUydaK74uGx/hub/raw/ReQiuYTPLHub.lua", true))()
+		end)
+		v161:CreateButton("Arsenal", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Maikderninja/Maikderninja/main/PWNERHUB.lua", true))()
+		end)
+		v161:CreateButton("Bedwars \239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Bedwars%22"))()
+		end)
+		v161:CreateButton("Bee Swarm simulator", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/Histy"))()
+		end)
+		v161:CreateButton("Bid battles", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/hawtdawgz/ScriptRepository/main/Protected.lua"))()
+		end)
+		v161:CreateButton("Bitcoin miner", function()
+			loadstring(game:HttpGet("https://hypernite.xyz/Scripts/BCMX.lua"))()
+		end)
+		v161:CreateButton("A One Piece Game", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/joi-droid/DBZORBZ/main/GOHANSSJ3"))()
+		end)
+		v161:CreateButton("A bizarre day", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Kingbob727/Poghshshshhshs/main/Poghshshsgdg"))()
+		end)
+		v161:CreateButton("Big Paintball", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/WetCheezit/Releases/main/Big-Paintball/KillAll.lua"))()
+		end)
+		v161:CreateButton("Bloxfruits", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/VEZ2/NEVAHUB/main/2"))()
+		end)
+		v161:CreateButton("Ooga Booga reborn", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/starlolq/lua-scripts/main/devilhubboogaboogasimplecrack.lua", true))()
+		end)
+		v161:CreateButton("Icehub \239\191\189\239\191\189\239\191\189\239\191\189\239\191\189\239\191\189", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMael7/NewIceHub/main/Brookhaven"))()
+		end)
+		v161:CreateButton("Build a boat for treasure", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ThunderZ-HUB/HUB/main/Script"))()
+		end)
+		v161:CreateButton("Chaos", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/KW5vJcMb"))()
+		end)
+		v161:CreateButton("Combat Warriors", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/UltraStuff/scripts2/main/combatwar", true))()
+		end)
+		v161:CreateButton("Demon Soul", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/eKEz5fbU"))()
+		end)
+		v161:CreateButton("Demon Fall", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/LeadMarker/Scripts/main/KronosFall.lua"))()
+		end)
+		v161:CreateButton("Driving empire", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixAde/scripts/main/DrivingEmpireShawnjbragdon\'sUi.lua"))()
+		end)
+		v161:CreateButton("Slap Battles", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/RandomScriptr3/gggggggg/main/lolez.txt", true))()
+		end)
+		v161:CreateButton("Colour or Die", function()
+			loadstring(game:HttpGet("https://scriptblox.com/raw/NEW!-Color-or-Die-OP-Script-10859"))()
+		end)
+		v161:CreateButton("Prison life", function()
+			loadstring(game:HttpGet("https://scriptblox.com/raw/Prison-Life-(Cars-fixed!)-Vynixius-5557"))()
+		end)
+		v161:CreateButton("Kat", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/KAT"))()
+		end)
+		v161:CreateButton("Evade", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/random/main/.x.vr.e.hi/evade.lua"))()
+		end)
+		v161:CreateButton("Murders vs Sheriff", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Bebo-Mods/BeboScripts/main/MurderersVsSheriffs.lua"))()
+		end)
+		v161:CreateButton("My restaurant", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Muhammad6196/Project-WD/main/Mainstring.lua"))()
+		end)
+		v161:CreateButton("Naval Warfare", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/vCkw6SF7", true))()
+		end)
+		v161:CreateButton("Nico Nextbots", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/NicoNextBots", true))()
+		end)
+		v161:CreateButton("Pet sim X", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Rafacasari/roblox-scripts/main/psx.lua"))()
+		end)
+		v161:CreateButton("Pls Donate", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/tzechco"))()
+		end)
+		v161:CreateButton("Ability wars", function()
+			loadstring(game:HttpGet("https://paste.ee/r/ZE5Ze", true))()
+		end)
+		v161:CreateButton("Age Simulator", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/CrowzScripts/AgeSim/main/Age"))()
+		end)
+		v161:CreateButton("Airplane Simulator", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/hJWae5ug"))()
+		end)
+		v161:CreateButton("Airsoft Range", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-esp/main/main.lua"))()
+		end)
+		v161:CreateButton("Anarchy", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Nosssa/NossLock/main/AnarchySilentAim"))()
+		end)
+		v161:CreateButton("Animal Simulator", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/CrowzScripts/AnimalSim/main/CrowOnTop"))()
+		end)
+		v161:CreateButton("Splash MM2", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/voiddscripts/splash/main/script.lua"))()
+		end)
+		v161:CreateButton("Orange X V5", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ImJosh66/Ab2rW/main/ORANGEX%20V5%20RELEASED%20ORANGEX%20ON%20TOP%20.txt"))()
+		end)
+		v161:CreateButton("Fathom Hub", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/Y4AGJALY"))()
+		end)
+		v161:CreateButton("Psy Hub", function()
+			loadstring(game:HttpGet("https://pastebin.com/raw/JwGf73hp"))()
+		end)
+		v161:CreateButton("Gigachad hub V6", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/LolPrivate/Side/main/Moonsec%20V3"))()
+		end)
+		v161:CreateLabel("Executer Uis")
+		v161:CreateButton("Fluxus Ui", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/anyahubs/executer/main/flux.lua"))()
+		end)
+		v161:CreateButton("Krypton Ui", function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/anyahubs/executer/main/Krypton(UI).txt"))()
+		end)
+		local v631 = v39:CreateTab("Join Discord")
+		v631:CreateLabel("Discord Server Link:")
+		v631:CreateButton("Click Me For Link", function()
+			setclipboard("https://discord.gg/RKrF3f4r6c ")
+		end)
+		local v632 = v39:CreateTab("Credits / Settings")
+		v632:CreateLabel("Credits:")
+		v632:CreateLabel("Ui Maker: cosmiccoderr")
+		v632:CreateLabel("PVP Tab Maker: rtaxevastion")
+		v632:CreateLabel("Hub Owner: cameron8102, or redcoat")
+		v632:CreateButton("Click Here for Premium", function()
+			-- upvalues: (ref) v_u_8
+			v_u_8("You\'ve been trolled", 5)
+			wait(100)
+			game:GetService("Players").LocalPlayer:Kick("You\'ve been trolled :troll:")
+		end)
+	else
+		v_u_8("British Hub", "Invalid Key..Please Try again", "rbxassetid://5179834402")
+	end
+end)
+v10:DiscordButton(function()
+	-- upvalues: (ref) v_u_12, (ref) v_u_8
+	setclipboard("https://discord.gg/RKrF3f4r6c")
+	v_u_12:SetText("https://discord.gg/RKrF3f4r6c")
+	v_u_8("Britishhub", "Discord Link set to Clipboard", "rbxassetid://5179834402")
+end)
