@@ -1,0 +1,646 @@
+local v_u_1 = Instance.new("ScreenGui")
+local v_u_2 = Instance.new("Frame")
+local v3 = Instance.new("Frame")
+local v_u_4 = Instance.new("Frame")
+local v5 = Instance.new("TextButton")
+local v_u_6 = Instance.new("TextButton")
+local v7 = Instance.new("TextLabel")
+local v_u_8 = Instance.new("ScrollingFrame")
+Instance.new("UIListLayout")
+local v_u_9 = Instance.new("TextBox")
+local v10 = Instance.new("TextButton")
+local v_u_11 = Instance.new("TextLabel")
+local v12 = Instance.new("TextButton")
+local v13 = Instance.new("TextLabel")
+local v_u_14 = Instance.new("ScrollingFrame")
+local v15 = Instance.new("TextButton")
+local v16 = Instance.new("UICorner")
+local v17 = Instance.new("UICorner")
+local v18 = Instance.new("UICorner")
+local v19 = Instance.new("UICorner")
+local v20 = Instance.new("UICorner")
+Instance.new("TextButton")
+local v21 = Instance.new("UICorner")
+local v22 = Instance.new("UICorner")
+local v23 = Instance.new("UICorner")
+local v24 = Instance.new("UICorner")
+local v25 = Instance.new("TextButton")
+local v26 = Instance.new("UICorner")
+local v27 = Instance.new("Frame")
+local v28 = Instance.new("Frame")
+local v29 = Instance.new("UICorner")
+local v30 = Instance.new("TextButton")
+local v31 = Instance.new("UICorner")
+local v_u_32 = Instance.new("TextLabel")
+local v_u_33 = Instance.new("TextButton")
+local v34 = Instance.new("TextButton")
+local v35 = Instance.new("UICorner")
+local v36 = Instance.new("UICorner")
+Instance.new("UICorner")
+local v37 = Instance.new("UICorner")
+local v38 = Instance.new("Frame")
+local v39 = Instance.new("Frame")
+local v40 = Instance.new("UICorner")
+local v_u_41 = {}
+local v_u_42 = {}
+v_u_1.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+v_u_1.ResetOnSpawn = false
+v_u_2.Parent = v_u_1
+v_u_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+v_u_2.BackgroundTransparency = 0.2
+v_u_2.Size = UDim2.new(0, 426, 0, 258)
+v_u_2.Position = UDim2.new(0.6, -200, 0.8, -300)
+v_u_2.AnchorPoint = Vector2.new(0.5, 0.5)
+v22.Parent = v_u_2
+v22.CornerRadius = UDim.new(0, 10)
+local v43 = game:GetService("UserInputService")
+local v_u_44 = nil
+local v_u_45 = nil
+local v_u_46 = nil
+local v_u_47 = nil
+local function v_u_50(p48)
+	-- upvalues: (ref) v_u_46, (ref) v_u_2, (ref) v_u_47
+	local v49 = p48.Position - v_u_46
+	v_u_2.Position = UDim2.new(v_u_47.X.Scale, v_u_47.X.Offset + v49.X, v_u_47.Y.Scale, v_u_47.Y.Offset + v49.Y)
+end
+v_u_2.InputBegan:Connect(function(p_u_51)
+	-- upvalues: (ref) v_u_44, (ref) v_u_46, (ref) v_u_47, (ref) v_u_2
+	if p_u_51.UserInputType == Enum.UserInputType.MouseButton1 or p_u_51.UserInputType == Enum.UserInputType.Touch then
+		v_u_44 = true
+		v_u_46 = p_u_51.Position
+		v_u_47 = v_u_2.Position
+		p_u_51.Changed:Connect(function()
+			-- upvalues: (ref) p_u_51, (ref) v_u_44
+			if p_u_51.UserInputState == Enum.UserInputState.End then
+				v_u_44 = false
+			end
+		end)
+	end
+end)
+v_u_2.InputChanged:Connect(function(p52)
+	-- upvalues: (ref) v_u_45
+	if p52.UserInputType == Enum.UserInputType.MouseMovement or p52.UserInputType == Enum.UserInputType.Touch then
+		v_u_45 = p52
+	end
+end)
+v43.InputChanged:Connect(function(p53)
+	-- upvalues: (ref) v_u_45, (ref) v_u_44, (ref) v_u_50
+	if p53 == v_u_45 and v_u_44 then
+		v_u_50(p53)
+	end
+end)
+v3.Parent = v_u_2
+v3.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v3.Size = UDim2.new(1, 0, 0, 31)
+v23.Parent = v3
+v23.CornerRadius = UDim.new(0, 10)
+v_u_4.Parent = v_u_2
+v_u_4.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v_u_4.Size = UDim2.new(1, 0, 0, 30)
+v_u_4.Position = UDim2.new(0, 0, 1, -31)
+v21.Parent = v_u_4
+v21.CornerRadius = UDim.new(0, 10)
+v27.Parent = v_u_11
+v27.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v27.Size = UDim2.new(1.5, 0, 0, 30)
+v27.Position = UDim2.new(0, 0, 1, -31)
+v26.Parent = v27
+v26.CornerRadius = UDim.new(0, 10)
+v28.Parent = v_u_11
+v28.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v28.Size = UDim2.new(1.5, 0, 0, 31)
+v28.Position = UDim2.new(0, 0, 0, -30)
+v29.Parent = v28
+v29.CornerRadius = UDim.new(0, 10)
+v38.Parent = v_u_32
+v38.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v38.Size = UDim2.new(1, 0, 0, 30)
+v38.Position = UDim2.new(0, 0, 1, -31)
+v38.BackgroundTransparency = 0.5
+v37.Parent = v38
+v37.CornerRadius = UDim.new(0, 10)
+v39.Parent = v_u_32
+v39.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+v39.Size = UDim2.new(1, 0, 0, 31)
+v39.BackgroundTransparency = 0.5
+v40.Parent = v39
+v40.CornerRadius = UDim.new(0, 10)
+local v_u_54 = Instance.new("TextBox")
+local v55 = Instance.new("UICorner")
+v_u_54.Parent = v_u_4
+v_u_54.Size = UDim2.new(0.4, 0, 1, 0)
+v_u_54.Position = UDim2.new(0.3, 0, 0, 0)
+v_u_54.PlaceholderText = "Enter speed (1 = normal)"
+v_u_54.TextScaled = true
+v_u_54.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+v_u_54.TextColor3 = Color3.fromRGB(255, 255, 255)
+v_u_54.Text = ""
+v55.Parent = v_u_54
+v55.CornerRadius = UDim.new(0, 10)
+v_u_54.FocusLost:Connect(function(p56)
+	-- upvalues: (ref) v_u_54, (ref) v_u_41
+	local v57 = p56 and tonumber(v_u_54.Text)
+	if v57 then
+		local v58, v59, v60 = pairs(v_u_41)
+		while true do
+			local v61
+			v60, v61 = v58(v59, v60)
+			if v60 == nil then
+				break
+			end
+			if v61 and v61:IsPlaying() then
+				v61:AdjustSpeed(v57)
+			end
+		end
+	end
+end)
+v_u_9.Parent = v3
+v_u_9.Size = UDim2.new(0.4, 0, 1, 0)
+v_u_9.Position = UDim2.new(0.6, -60, 0, 0)
+v_u_9.PlaceholderText = "Search animations"
+v_u_9.TextScaled = true
+v_u_9.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+v_u_9.TextColor3 = Color3.fromRGB(255, 255, 255)
+v_u_9.Text = ""
+v17.Parent = v_u_9
+v17.CornerRadius = UDim.new(0, 10)
+local v62 = v_u_9
+v_u_9.GetPropertyChangedSignal(v62, "Text"):Connect(function()
+	-- upvalues: (ref) v_u_9, (ref) v_u_42
+	local v63 = string.lower(v_u_9.Text)
+	local v64, v65, v66 = pairs(v_u_42)
+	while true do
+		local v67
+		v66, v67 = v64(v65, v66)
+		if v66 == nil then
+			break
+		end
+		if string.find(string.lower(v67.Text), v63) then
+			v67.Visible = true
+		else
+			v67.Visible = false
+		end
+	end
+end)
+v10.Parent = v_u_4
+v10.BackgroundTransparency = 0.4
+v10.Size = UDim2.new(0, 50, 0, 30)
+v10.Position = UDim2.new(0, 70, 0, 0)
+v10.Text = "More"
+v10.Font = Enum.Font.Cartoon
+v10.TextScaled = true
+v10.TextColor3 = Color3.fromRGB(0, 0, 0)
+v10.BorderColor3 = Color3.fromRGB(0, 150, 0)
+v10.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v_u_11.Visible = false
+v20.Parent = v10
+v20.CornerRadius = UDim.new(0, 10)
+v10.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_11
+	v_u_11.Visible = not v_u_11.Visible
+end)
+v_u_11.Name = "TabContainer"
+v_u_11.Parent = v_u_2
+v_u_11.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+v_u_11.Position = UDim2.new(0, -100, 0, 30)
+v_u_11.Size = UDim2.new(0, 100, 1, -30)
+v_u_11.BackgroundTransparency = 0.2
+v16.Parent = v_u_11
+v16.CornerRadius = UDim.new(0, 10)
+v7.Parent = v3
+v7.BackgroundTransparency = 1
+v7.Text = "Animatrix"
+v7.Font = Enum.Font.Cartoon
+v7.TextSize = 25
+v7.TextColor3 = Color3.fromRGB(255, 255, 255)
+v7.Size = UDim2.new(0.3, -90, 1, 0)
+v7.Position = UDim2.new(0.4, -75, 0, 0)
+v5.Parent = v3
+v5.BackgroundTransparency = 1
+v5.Text = "X"
+v5.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+v5.Size = UDim2.new(0, 30, 1, 0)
+v5.Position = UDim2.new(1, -30, 0, 0)
+v5.TextScaled = true
+v5.TextColor3 = Color3.fromRGB(255, 0, 0)
+v5.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_1
+	v_u_1:Destroy()
+end)
+v12.Name = "OtherTab"
+v12.Parent = v_u_11
+v12.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v12.Position = UDim2.new(0, 0, 0, 30)
+v12.Size = UDim2.new(1, 0, 0, 30)
+v12.Font = Enum.Font.Cartoon
+v12.Text = "Bundle-Anim"
+v12.TextWrapped = true
+v12.TextColor3 = Color3.new(0, 0, 0)
+v12.TextSize = 20
+v12.BackgroundTransparency = 0.4
+v18.CornerRadius = UDim.new(0, 9)
+v18.Parent = v12
+v15.Name = "MainTab"
+v15.Parent = v_u_11
+v15.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v15.Position = UDim2.new(0, 0, 0, 0)
+v15.Size = UDim2.new(1, 0, 0, 30)
+v15.Font = Enum.Font.Cartoon
+v15.Text = "Main"
+v15.TextWrapped = true
+v15.TextColor3 = Color3.new(0, 0, 0)
+v15.TextSize = 25
+v15.BackgroundTransparency = 0.4
+v19.CornerRadius = UDim.new(0, 9)
+v19.Parent = v15
+v25.Name = "AnimTab"
+v25.Parent = v_u_11
+v25.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v25.Position = UDim2.new(0, 0, 0, 60)
+v25.Size = UDim2.new(1, 0, 0, 30)
+v25.Font = Enum.Font.Cartoon
+v25.Text = "Anim Scripts"
+v25.TextWrapped = true
+v25.TextColor3 = Color3.new(0, 0, 0)
+v25.TextSize = 20
+v25.BackgroundTransparency = 0.4
+v24.CornerRadius = UDim.new(0, 9)
+v24.Parent = v25
+v30.Name = "AnimTab"
+v30.Parent = v_u_11
+v30.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v30.Position = UDim2.new(0, 0, 0, 165)
+v30.Size = UDim2.new(1, 0, 0, 30)
+v30.Font = Enum.Font.Cartoon
+v30.Text = "Museum"
+v30.TextWrapped = true
+v30.TextColor3 = Color3.new(0, 0, 0)
+v30.TextSize = 23
+v30.BackgroundTransparency = 0.4
+v30.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_32
+	v_u_32.Visible = true
+end)
+v31.CornerRadius = UDim.new(0, 9)
+v31.Parent = v30
+v_u_32.Name = "MuseumFrameWarn"
+v_u_32.Parent = v_u_1
+v_u_32.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+v_u_32.Position = UDim2.new(0.38, 10, 0.32, 40)
+v_u_32.Size = UDim2.new(0.14, 100, 0.27, -30)
+v_u_32.Text = "Are You Sure You Want To Join \nMuseum Of Roblox Animations?"
+v_u_32.TextSize = 28
+v_u_32.TextColor3 = Color3.new(255, 255, 255)
+v_u_32.Font = Enum.Font.Cartoon
+v_u_32.Visible = false
+v_u_32.BackgroundTransparency = 0
+v35.CornerRadius = UDim.new(0, 10)
+v35.Parent = v_u_32
+v34.TextScaled = true
+v34.TextWrapped = true
+v34.Font = Enum.Font.Cartoon
+v34.BackgroundTransparency = 0.3
+v34.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v34.Text = "No"
+v34.Size = UDim2.new(0.3, 0, 0, 40)
+v34.Position = UDim2.new(0.6, 0, 0.7, 0)
+v34.Parent = v_u_32
+v36.CornerRadius = UDim.new(0, 10)
+v36.Parent = v34
+v34.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_32
+	v_u_32.Visible = false
+end)
+v_u_33.TextScaled = true
+v_u_33.TextWrapped = true
+v_u_33.Font = Enum.Font.Cartoon
+v_u_33.BackgroundTransparency = 0.3
+v_u_33.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+v_u_33.Text = "Join"
+v_u_33.Size = UDim2.new(0.3, 0, 0, 40)
+v_u_33.Position = UDim2.new(0.1, 0, 0.7, 0)
+v_u_33.Parent = v_u_32
+local v68 = Instance.new("UICorner")
+v68.CornerRadius = UDim.new(0, 10)
+v68.Parent = v_u_33
+local v_u_69 = 17238090666
+v_u_33.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_33, (ref) v_u_69
+	v_u_33.Text = "Joining."
+	wait(0.3)
+	v_u_33.Text = "Joining.."
+	wait(0.3)
+	v_u_33.Text = "Joining..."
+	wait(0.3)
+	if syn and syn.queue_on_teleport then
+		syn.queue_on_teleport("print(\'Teleporting to game ID " .. v_u_69 .. "\')")
+	end
+	game:GetService("TeleportService"):Teleport(v_u_69)
+end)
+v13.Name = "OtherFrame"
+v13.Parent = v_u_2
+v13.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+v13.Position = UDim2.new(0, 10, 0, 40)
+v13.Size = UDim2.new(1, -20, 1, -70)
+v13.BackgroundTransparency = 1
+v13.Text = "Not Finished For R15!"
+v13.Font = Enum.Font.Cartoon
+v13.TextColor3 = Color3.fromRGB(255, 255, 255)
+v13.TextScaled = true
+v_u_14.Name = "ContentFrame"
+v_u_14.Parent = v_u_2
+v_u_14.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+v_u_14.Position = UDim2.new(0, 10, 0, 40)
+v_u_14.Size = UDim2.new(1, -20, 1, -70)
+v_u_14.BackgroundTransparency = 1
+v_u_14.CanvasSize = UDim2.new(0, 0, 1, 0)
+v_u_14.AutomaticCanvasSize = Enum.AutomaticSize.Y
+v_u_14.ScrollBarThickness = 10
+v_u_6.Parent = v3
+v_u_6.BackgroundTransparency = 1
+v_u_6.Text = "v"
+v_u_6.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+v_u_6.Size = UDim2.new(0, 30, 1, 0)
+v_u_6.Position = UDim2.new(1, -60, 0, 0)
+v_u_6.TextScaled = true
+v_u_6.TextColor3 = Color3.fromRGB(0, 0, 255)
+local v_u_70 = false
+v_u_6.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_70, (ref) v_u_8, (ref) v_u_4, (ref) v_u_2, (ref) v_u_6
+	v_u_70 = not v_u_70
+	if v_u_70 then
+		v_u_8.Visible = false
+		v_u_4.Visible = false
+		v_u_2.Size = UDim2.new(0, 426, 0, 31)
+		v_u_6.Text = "^"
+	else
+		v_u_8.Visible = true
+		v_u_4.Visible = true
+		v_u_2.Size = UDim2.new(0, 426, 0, 258)
+		v_u_6.Text = "v"
+	end
+end)
+local v_u_71 = "Main"
+local v_u_72 = false
+local v_u_73 = {
+	{
+		["name"] = "Main",
+		["frame"] = v_u_8
+	},
+	{
+		["name"] = "Bundle-Anim",
+		["frame"] = v13
+	},
+	{
+		["name"] = "Anim-Scripts",
+		["frame"] = v_u_14
+	}
+}
+local function v_u_83(p74)
+	-- upvalues: (ref) v_u_72, (ref) v_u_73, (ref) v_u_71
+	if not v_u_72 then
+		local v75, v76, v77 = pairs(v_u_73)
+		while true do
+			local v78
+			v77, v78 = v75(v76, v77)
+			if v77 == nil then
+				break
+			end
+			v78.frame.Visible = false
+		end
+		local v79, v80, v81 = pairs(v_u_73)
+		while true do
+			local v82
+			v81, v82 = v79(v80, v81)
+			if v81 == nil then
+				break
+			end
+			if v82.name == p74 then
+				v82.frame.Visible = true
+			end
+		end
+		v_u_71 = p74
+	end
+end
+v_u_6.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_72, (ref) v_u_2, (ref) v_u_6, (ref) v_u_83, (ref) v_u_71
+	v_u_72 = not v_u_72
+	if v_u_72 then
+		v_u_2.Size = UDim2.new(0, 300, 0, 30)
+		local v84 = v_u_2
+		local v85, v86, v87 = pairs(v84:GetChildren())
+		while true do
+			local v88
+			v87, v88 = v85(v86, v87)
+			if v87 == nil then
+				break
+			end
+			if v88 ~= TitleBar then
+				v88.Visible = false
+			end
+		end
+		v_u_6.Text = "+"
+	else
+		v_u_2.Size = UDim2.new(0, 300, 0, 200)
+		v_u_83(v_u_71)
+		v_u_6.Text = "-"
+	end
+end)
+v15.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_83
+	v_u_83("Main")
+end)
+v12.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_83
+	v_u_83("Bundle-Anim")
+end)
+v25.MouseButton1Click:Connect(function()
+	-- upvalues: (ref) v_u_83
+	v_u_83("Anim-Scripts")
+end)
+v_u_83("Main")
+v_u_8.Parent = v_u_2
+v_u_8.Size = UDim2.new(1, -20, 1, -70)
+v_u_8.Position = UDim2.new(0, 10, 0, 40)
+v_u_8.BackgroundTransparency = 1
+v_u_8.CanvasSize = UDim2.new(0, 0, 4, 0)
+v_u_8.ScrollBarThickness = 10
+v_u_8.AutomaticCanvasSize = Enum.AutomaticSize.Y
+local v89 = Instance.new("UIGridLayout")
+v89.Parent = v_u_8
+v89.SortOrder = Enum.SortOrder.LayoutOrder
+v89.CellSize = UDim2.new(0, 120, 0, 40)
+v89.CellPadding = UDim2.new(0, 10, 0, 10)
+v89.FillDirectionMaxCells = 3
+local v90 = Instance.new("UIGridLayout")
+v90.Parent = v13
+v90.SortOrder = Enum.SortOrder.LayoutOrder
+v90.CellSize = UDim2.new(0, 120, 0, 40)
+v90.CellPadding = UDim2.new(0, 10, 0, 10)
+v90.FillDirectionMaxCells = 3
+local v91 = Instance.new("UIGridLayout")
+v91.Parent = v_u_14
+v91.SortOrder = Enum.SortOrder.LayoutOrder
+v91.CellSize = UDim2.new(0, 120, 0, 40)
+v91.CellPadding = UDim2.new(0, 10, 0, 10)
+v91.FillDirectionMaxCells = 3
+local v_u_92 = {}
+local function v110(p93, p_u_94)
+	-- upvalues: (ref) v_u_8, (ref) v_u_42, (ref) v_u_92, (ref) v_u_54
+	local v_u_95 = Instance.new("TextButton")
+	local v96 = Instance.new("UICorner")
+	v_u_95.Parent = v_u_8
+	v_u_95.Text = p93
+	v_u_95.Font = Enum.Font.Cartoon
+	v_u_95.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+	v_u_95.TextScaled = true
+	v_u_95.TextColor3 = Color3.fromRGB(0, 0, 0)
+	v_u_95.BackgroundTransparency = 0.2
+	v_u_95.AutoButtonColor = true
+	v_u_95.BorderSizePixel = 0
+	v_u_95.TextWrapped = true
+	v96.Parent = v_u_95
+	v96.CornerRadius = UDim.new(0, 7)
+	table.insert(v_u_42, v_u_95)
+	v_u_95.MouseButton1Click:Connect(function()
+		-- upvalues: (ref) p_u_94, (ref) v_u_92, (ref) v_u_95, (ref) v_u_54
+		local v97 = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+		if v97 then
+			local v98 = type(p_u_94) == "table" and p_u_94 or { p_u_94 }
+			local v99, v100, v101 = ipairs(v98)
+			local v102 = false
+			while true do
+				local v103
+				v101, v103 = v99(v100, v101)
+				if v101 == nil then
+					break
+				end
+				if v_u_92[v103] then
+					v_u_92[v103]:Stop()
+					v_u_92[v103] = nil
+				else
+					local v104 = Instance.new("Animation")
+					v104.AnimationId = "rbxassetid://" .. v103
+					local v105 = v97:LoadAnimation(v104)
+					v105.Looped = true
+					v105:Play()
+					v_u_92[v103] = v105
+					v102 = true
+				end
+			end
+			if v102 then
+				v_u_95.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+			else
+				v_u_95.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+			end
+			local v106, v107, v108 = ipairs(v98)
+			while true do
+				local v109
+				v108, v109 = v106(v107, v108)
+				if v108 == nil then
+					break
+				end
+				if v_u_92[v109] then
+					v_u_92[v109]:AdjustSpeed(tonumber(v_u_54.Text) or 1)
+				end
+			end
+		end
+	end)
+end
+local function v115(p_u_111, p_u_112)
+	-- upvalues: (ref) v_u_14
+	local v_u_113 = Instance.new("TextButton")
+	local v114 = Instance.new("UICorner")
+	v_u_113.Parent = v_u_14
+	v_u_113.Size = UDim2.new(0.9, 0, 0, 50)
+	v_u_113.Position = UDim2.new(0.05, 0, 0, 0)
+	v_u_113.Text = p_u_111
+	v_u_113.Font = Enum.Font.Cartoon
+	v_u_113.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+	v_u_113.TextScaled = true
+	v_u_113.TextColor3 = Color3.fromRGB(0, 0, 0)
+	v_u_113.BackgroundTransparency = 0.2
+	v_u_113.BorderSizePixel = 0
+	v114.Parent = v_u_113
+	v114.CornerRadius = UDim.new(0, 7)
+	v_u_113.MouseButton1Click:Connect(function()
+		-- upvalues: (ref) v_u_113, (ref) p_u_111, (ref) p_u_112
+		v_u_113.Text = "Executing."
+		wait(0.3)
+		v_u_113.Text = "Executing.."
+		wait(0.3)
+		v_u_113.Text = "Executing..."
+		wait(0.3)
+		v_u_113.Text = p_u_111
+		pcall(p_u_112)
+	end)
+end
+v115("R15 Anims By Gio", function()
+	loadstring(game:HttpGet("https://pastefy.app/FN77ZhT4/raw"))()
+end)
+v115("Motion Hub", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/MotionHubBeta/BetaMotion/refs/heads/main/MotionHubBeta"))()
+end)
+v115("Jerk Off By Gio", function()
+	loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+end)
+v115("Dash Anim By Gio", function()
+	loadstring(game:HttpGet("https://pastefy.app/ZhKVgCK3/raw"))()
+end)
+v110("Rifle Reload", "3972131105")
+v110("Rifle Aim Rotate", "3972157449")
+v110("Rifle Aim Slow", "3972164452")
+v110("Soldier Assault Rifle Aim", "4713633512")
+v110("Soldier Assault Rifle Fire", "4713811763")
+v110("zombie_attack", "3489169607")
+v110("zombie_death", "3716468774")
+v110("Playing Piano", "673670434")
+v110("Passenger Seated", "3360695880")
+v110("Driver Seated", "3360694441")
+v110("R15 Sword Lunge", "522638767")
+v110("R15 Sword Slash", "522635514")
+v110("Float Slash", "717879555")
+v110("Arms Out", "582384156")
+v110("Down Slash", "746398327")
+v110("Spinner", "754658275")
+v110("Ban Hammer Slash", "674871189")
+v110("Ghost Zombie", "708553116")
+v110("Pull", "675025795")
+v110("Princess Fire", "582855105")
+v110("Circle Arm", "698251653")
+v110("Bend", "696096087")
+v110("Rotate Slash", "675025570")
+v110("Clap", "754656200")
+v110("Blow", "522621924")
+v110("Whack", "536145995")
+v110("Slash", "536516422")
+v110("Bow Idle", "539471275")
+v110("Left Slash", "582795728")
+v110("OverHead Slash", "582796800")
+v110("Violin Playing", "582905411")
+v110("Falling", "718076987")
+v110("Sit", "807343012")
+v110("animation", "835635145")
+v110("animation2", "835649542")
+v110("Swing", "846744780")
+v110("Jump Attack", "855685476")
+v110("Train Hand", "855743063")
+v110("Spin Arm", "900850443")
+v110("Punching", "1098404428")
+v110("Spear Stab", "1323151362")
+v110("Spin", "2516930867")
+v110("Sleep", "2695918332")
+v110("Slam", "2733837253")
+v110("Quake", "2917204509")
+v110("Stab", "2917193622")
+v110("Trident Slash", "2917200442")
+v110("Summon", "3027289605")
+v110("Stab2", "3027801142")
+v110("Dagger Stab", "3101877315")
+v110("Dagger Lunge", "3101922409")
+v110("Time Stop", "3101948279")
+v110("Piano JUmp", "11453082181")
+v110("Rise Above", "12992262118")
+v110("Dance", "12259828678")
+v110("Kick It Dance", "12259826609")
+v110("Jawny Stomp", "16392075853")
