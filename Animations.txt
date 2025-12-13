@@ -1,0 +1,21 @@
+return function(Title, Text, ButtonText, Button2Text, IconId, HaveIcon, HaveButton1, HaveButton2, Duration, Button1Code, Button2Code)
+local function cb(ButtonClicked)
+	if ButtonClicked == ButtonText then
+	Button1Code()
+		elseif ButtonClicked == Button2Text then
+		Button2Code()
+	end
+end
+local Bind = Instance.new("BindableFunction")
+Bind.OnInvoke = cb
+
+local g = game.StarterGui:SetCore("SendNotification", {
+Title = Title;
+Text = Text;
+Duration = Duration;
+Icon = HaveIcon and "rbxassetid://" .. IconId or nil;
+Button1 = HaveButton1 and ButtonText or nil;
+Button2 = HaveButton2 and Button2Text or nil;
+Callback = Bind
+})
+end
