@@ -1,0 +1,2858 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--==================================================
+-- XERATH HUB V4 - WIND UI (KEYLESS)
+--==================================================
+
+--====================
+-- Load WindUI
+--====================
+local WindUI = loadstring(game:HttpGet(
+    "https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"
+))()
+
+--====================
+-- SET FONT (IMPORTANT)
+--====================
+--WindUI text font
+WindUI:SetFont("rbxasset://fonts/families/FredokaOne.json")
+
+--====================
+-- Main Window
+--====================
+local Window = WindUI:CreateWindow({
+    Folder = "XerathHubV4",
+    Title = "XERATH HUB V4",
+    Author = "Xerath",
+    Icon = "rbxassetid://101166716751888",
+    Theme = "Midnight",
+    Size = UDim2.fromOffset(640, 888),
+    HasOutline = true,
+    OutlineThickness = 4
+})
+
+--====================
+-- OPEN KEYBIND
+--====================
+--Window toggle key
+Window:SetToggleKey(Enum.KeyCode.K) 
+
+--====================
+-- KEYLESS NOTICE
+--====================
+WindUI:Notify({
+    Title = "XERATH HUB NOW KEYLESS",
+    Content = "XERATH HUB NOW KEYLESS BC XERATH OWNER IS NICE",
+    Duration = 6,
+    CanClose = true
+})
+
+Window:EditOpenButton({
+    Title = "Open Xerath Hub V4",
+    Icon = "rbxassetid://101166716751888",
+    Draggable = true
+})
+
+--====================
+-- Tabs
+--====================
+local Tabs = {}
+
+Tabs.About    = Window:Tab({ Title = "About", Icon = "rbxassetid://101166716751888" }) 
+
+Tabs.Loggers  = Window:Tab({ Title = "Xerath Loggers", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Scripts  = Window:Tab({ Title = "Xerath Animation Scripts", Icon = "rbxassetid://101166716751888" })
+
+Tabs.OtherFE  = Window:Tab({ Title = "Other Animation FE", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Script = Window:Tab({ Title = "UNIVERSAL OTHER CREATOR SCRIPTS", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Esp = Window:Tab({ Title = "Esp", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Settings = Window:Tab({ Title = "Settings", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Misc     = Window:Tab({ Title = "Misc Scripts", Icon = "rbxassetid://101166716751888" })
+
+Tabs.Credits  = Window:Tab({ Title = "Credits", Icon = "rbxassetid://101166716751888" })
+
+--==================================================
+-- ABOUT TAB
+--==================================================
+do
+    local About = Tabs.About:Section({ Title = "Xerath Hub V4 (CONTENT UPDATE) ", Box = true })
+
+    About:Image({
+        Image = "rbxassetid://101166716751888",
+        Size = UDim2.fromOffset(140,140)
+    })
+
+    About:Paragraph({
+        Title = "About",
+        Desc = "Xerath lore: This was doomsaken before (forsaken Script hub) now abandoned, because me kinda not like forsaken anymore",
+        TextSize = 20
+    })
+
+    About:Space()
+
+    About:Paragraph({
+        Title = "Welcome to Xerath Hub V4,(CONTENT UPDATE)",
+        Desc = "An Upcoming Universal Script That will have every script!.",
+        TextSize = 16
+    })
+
+    About:Button({
+        Title = "Wanna support Xerath Hub? Join this Discord server (also keep scrolling down)",
+        Image = "rbxassetid://1621878845",
+        Callback = function()
+            if setclipboard then
+                setclipboard("https://discord.gg/qNRupyuHYe")
+                WindUI:Notify({
+                    Title = "Discord Link Copied",
+                    Content = "Invite link copied to your clipboard!",
+                    Duration = 3,
+                    CanClose = false
+                })
+            else
+                warn("Clipboard function not supported by your executor")
+            end
+        end
+    })
+
+    About:Space()
+
+--====================
+-- JERK CONTROLLER (GLOBAL, SAFE)
+--====================
+_G.JerkController = _G.JerkController or {}
+_G.JerkController.Enabled = false
+
+function _G.JerkController.lock()
+    _G.JerkController.Enabled = false
+    if _G.JerkController.Apply then
+        _G.JerkController.Apply(false)
+    end
+end
+
+function _G.JerkController.unlock()
+    _G.JerkController.Enabled = true
+    if _G.JerkController.Apply then
+        _G.JerkController.Apply(true)
+    end
+end
+
+--====================
+-- ABOUT TOGGLE
+--====================
+About:Toggle({
+    Title = "ADULT stuff",
+    Desc = "aware Adult content when on",
+    Default = false,
+    Callback = function(state)
+        if state then
+            _G.JerkController.unlock()
+        else
+            _G.JerkController.lock()
+        end
+    end
+})
+
+end
+
+--==================================================
+-- LOGGERS TAB
+--==================================================
+do
+    local Players = game:GetService("Players")
+    local SoundService = game:GetService("SoundService")
+    local LocalPlayer = Players.LocalPlayer
+
+    --==================================================
+    -- Animation Logger
+    --==================================================
+
+    local AnimSection = Tabs.Loggers:Section({ Title = "Animation Logger", Box = true })
+    local loggedAnims = {}
+    local animUI = {}
+    local currentTrack
+
+    AnimSection:Button({
+        Title = "Stop Playing Current Animation",
+        Callback = function()
+            if currentTrack then
+                currentTrack:Stop()
+                currentTrack = nil
+            end
+        end
+    })
+
+    AnimSection:Button({
+        Title = "Delete Animation Logs",
+        Callback = function()
+            table.clear(loggedAnims)
+            for _,v in ipairs(animUI) do
+                if v.Destroy then v:Destroy() end
+            end
+            table.clear(animUI)
+        end
+    })
+
+    AnimSection:Space()
+
+    --==============================
+    -- Animation Player
+    --==============================
+
+    local player = LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    local currentAnimSpeed = 1
+
+    AnimSection:Slider({
+        Title = "Animation Speed",
+        Desc = "1x to 1000x",
+        Min = 1,
+        Max = 1000,
+        Default = 1,
+        Callback = function(value)
+            currentAnimSpeed = value
+            if currentTrack then
+                currentTrack:AdjustSpeed(currentAnimSpeed)
+            end
+        end
+    })
+
+    AnimSection:Input({
+        Title = "Animation Player",
+        Desc = "Enter Animation ID and press Enter",
+        Placeholder = "507771019",
+        Callback = function(value)
+            local id = tostring(value):match("%d+")
+            if not id then return end
+
+            if currentTrack then
+                currentTrack:Stop()
+                currentTrack:Destroy()
+                currentTrack = nil
+            end
+
+            local anim = Instance.new("Animation")
+            anim.AnimationId = "rbxassetid://" .. id
+
+            local animator = humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", humanoid)
+            local track = animator:LoadAnimation(anim)
+            track.Looped = false
+            track:Play()
+            track:AdjustSpeed(currentAnimSpeed)
+
+            currentTrack = track
+        end
+    })
+
+    AnimSection:Space()
+
+    local function classify(track)
+        local n = (track.Name or ""):lower()
+        if n:find("idle") then return "Idle"
+        elseif n:find("walk") or n:find("run") then return "Walk / Run"
+        elseif n:find("jump") then return "Jump"
+        elseif n:find("fall") then return "Fall"
+        end
+        return "Other"
+    end
+
+    local function logAnim(id, t)
+        if loggedAnims[id] then return end
+        loggedAnims[id] = true
+
+        local p = AnimSection:Paragraph({
+            Title = "Animation Detected",
+            Desc = "Type: "..t.."\nID: "..id,
+            TextSize = 14
+        })
+
+        local copyBtn = AnimSection:Button({
+            Title = "Copy "..id,
+            Callback = function()
+                if setclipboard then setclipboard(id) end
+            end
+        })
+
+        local playBtn = AnimSection:Button({
+            Title = "Play "..id,
+            Callback = function()
+                local hum = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                local animator = hum and hum:FindFirstChildOfClass("Animator")
+                if not animator then return end
+
+                if currentTrack then currentTrack:Stop() end
+
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://"..id
+                currentTrack = animator:LoadAnimation(anim)
+                currentTrack:Play()
+            end
+        })
+
+        table.insert(animUI,p)
+        table.insert(animUI,copyBtn)
+        table.insert(animUI,playBtn)
+    end
+
+    local function hookChar(char)
+        local hum = char:WaitForChild("Humanoid")
+        local animator = hum:WaitForChild("Animator")
+        animator.AnimationPlayed:Connect(function(track)
+            if not track.Animation then return end
+            local id = track.Animation.AnimationId:match("%d+")
+            if id then
+                logAnim(id, classify(track))
+            end
+        end)
+    end
+
+    if LocalPlayer.Character then hookChar(LocalPlayer.Character) end
+    LocalPlayer.CharacterAdded:Connect(hookChar)
+
+    --==================================================
+    -- Sound Logger + Sound Player
+    --==================================================
+
+    local SoundSection = Tabs.Loggers:Section({ Title = "Sound Logger (Auto + Global)", Box = true })
+    local loggedSounds = {}
+    local soundUI = {}
+    local activeSounds = {}
+
+    --==============================
+    -- Sound Adjustments (ON TOP)
+    --==============================
+
+    local currentSound
+    local currentSpeed = 1
+    local currentPitch = 1
+    local currentVolume = 1
+
+    SoundSection:Space()
+
+    SoundSection:Slider({
+        Title = "Sound Speed",
+        Desc = "Playback Speed",
+        Min = 0.1,
+        Max = 100,
+        Default = 1,
+        Callback = function(v)
+            currentSpeed = v
+            if currentSound then
+                currentSound.PlaybackSpeed = v
+            end
+        end
+    })
+
+    SoundSection:Slider({
+        Title = "Sound Pitch",
+        Desc = "Max 67",
+        Min = 0.1,
+        Max = 67,
+        Default = 1,
+        Callback = function(v)
+            currentPitch = v
+            if currentSound then
+                currentSound.Pitch = v
+            end
+        end
+    })
+
+    SoundSection:Slider({
+        Title = "Sound Volume",
+        Desc = "0 - 100",
+        Min = 0,
+        Max = 100,
+        Default = 1,
+        Callback = function(v)
+            currentVolume = v
+            if currentSound then
+                currentSound.Volume = v
+            end
+        end
+    })
+
+    SoundSection:Input({
+        Title = "Sound Player",
+        Desc = "Enter Sound ID and press Enter",
+        Placeholder = "Sound ID",
+        Callback = function(value)
+            local id = tostring(value):match("%d+")
+            if not id then return end
+
+            if currentSound then
+                currentSound:Stop()
+                currentSound:Destroy()
+                currentSound = nil
+            end
+
+            local s = Instance.new("Sound")
+            s.SoundId = "rbxassetid://" .. id
+            s.Looped = false -- ✅ PLAY ONCE
+            s.Volume = currentVolume
+            s.PlaybackSpeed = currentSpeed
+            s.Pitch = currentPitch
+            s.Parent = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+            s:Play()
+
+            currentSound = s
+        end
+    })
+
+    SoundSection:Space()
+
+    --==============================
+    -- Sound Logger
+    --==============================
+
+    local function normalizeSoundId(soundId)
+        return type(soundId) == "string" and soundId:match("%d+")
+    end
+
+    local function logSound(id)
+        if loggedSounds[id] then return end
+        loggedSounds[id] = true
+
+        local p = SoundSection:Paragraph({
+            Title = "Sound Detected",
+            Desc = "ID: "..id,
+            TextSize = 14
+        })
+
+        local playBtn = SoundSection:Button({
+            Title = "Play / Stop "..id,
+            Callback = function()
+                if activeSounds[id] then
+                    activeSounds[id]:Stop()
+                    activeSounds[id]:Destroy()
+                    activeSounds[id] = nil
+                else
+                    local s = Instance.new("Sound")
+                    s.SoundId = "rbxassetid://"..id
+                    s.Volume = 1
+                    s.Parent = SoundService
+                    s:Play()
+                    activeSounds[id] = s
+                end
+            end
+        })
+
+        local copyBtn = SoundSection:Button({
+            Title = "Copy "..id,
+            Callback = function()
+                if setclipboard then setclipboard(id) end
+            end
+        })
+
+        table.insert(soundUI,p)
+        table.insert(soundUI,playBtn)
+        table.insert(soundUI,copyBtn)
+    end
+
+    local function hookSound(sound)
+        if not sound:IsA("Sound") then return end
+        local id = normalizeSoundId(sound.SoundId)
+        if id then logSound(id) end
+        sound:GetPropertyChangedSignal("SoundId"):Connect(function()
+            local nid = normalizeSoundId(sound.SoundId)
+            if nid then logSound(nid) end
+        end)
+    end
+
+    local function fullScan()
+        for _,obj in ipairs(game:GetDescendants()) do
+            if obj:IsA("Sound") then
+                hookSound(obj)
+            end
+        end
+    end
+
+    SoundSection:Button({ Title = "Scan Everything for Sounds", Callback = fullScan })
+
+    SoundSection:Button({
+        Title = "Delete Sound Logs",
+        Callback = function()
+            table.clear(loggedSounds)
+            for _,v in ipairs(soundUI) do
+                if v.Destroy then v:Destroy() end
+            end
+            for _,s in pairs(activeSounds) do
+                s:Stop()
+                s:Destroy()
+            end
+            table.clear(activeSounds)
+            table.clear(soundUI)
+        end
+    })
+
+    game.DescendantAdded:Connect(function(obj)
+        if obj:IsA("Sound") then
+            hookSound(obj)
+        end
+    end)
+
+    fullScan() 
+end 
+
+--==================================================
+-- XERATH ANIMATION SCRIPTS
+--==================================================
+do 
+    local ScriptSection = Tabs.Scripts:Section({ Title = "Xerath Official Reanimations" }) 
+
+    ScriptSection:Button({ Title = "FE (R15) V3 DEVESTO ANIMATIONS", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/B0pLLWnY"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) Creature V2", Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/GVu7PC6I/raw"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) V2 R15 CAT", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/AN8TafL7"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) V2 TALL ARMLESS CREATURE", Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/RuHSo4Jt/raw"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) V1 NYAN CAT", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/WQC6ihY2"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) D.O.D EMOTES (only Squingle for now)", Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/0ANDeVsh/raw"))()
+    end })
+
+    ScriptSection:Button({ Title = "FE (R15) V2 SPIDER", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/bxdp6g0M"))()
+    end })
+
+ScriptSection:Button({ Title = "FE (R15) V4 GOJO (WITH CLIENT INFINITY)", Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/efKvorJy/raw"))()
+    end })
+
+ScriptSection:Button({ Title = "FE V2 ZOMBIE (R15)", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/9EiRRaMx"))()
+    end })
+
+ScriptSection:Button({ Title = "FE V2 ZOMBIE (R6)", Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/9EiRRaMx"))()
+    end })
+end 
+
+--==================================================
+-- OTHER ANIMATION FE
+--==================================================
+do
+    local O = Tabs.OtherFE:Section({ Title = "Other Creator Reanimations" })
+
+    O:Button({ Title="FE R15 Guest 1337", Callback=function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Guest-1337-r15-81542"))()
+    end })
+
+    O:Button({ Title="FE R6 Emotes", Callback=function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/p0e1/1/refs/heads/main/Fe%20R6%20Animation"))()
+    end })
+
+    O:Button({ Title="FE R15 SHADOW THE HEDGEHOG", Callback=function()
+        loadstring(game:HttpGet("https://pastefy.app/0QSkiaHL/raw"))()
+    end })
+
+O:Button({ Title="FE R15 ANIMATRONIC", Callback=function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-R15-Animatronic-Early-Access-83122"))()
+    end })
+
+O:Button({ Title="FE COOLKIDD R15", Callback=function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-C00LKID-R15-83560"))()
+    end })
+end
+
+--==================================================
+-- SCRIPTS 
+--==================================================
+do 
+    local SCRIPT = Tabs.Script:Section({ Title = "UNIVERSAL SCRIPTS" }) 
+
+SCRIPT:Button({ Title = "WIKIPEDIA (BY HECKER)", Callback = function()
+       loadstring(game:HttpGet("https://pastebin.com/raw/4UMAeFvE"))()
+    end }) 
+
+SCRIPT:Button({ Title = "Tool Giver", Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolgiver.lua"))()
+    end }) 
+
+--==================================================
+-- nds section
+--==================================================
+    local NDscript = Tabs.Script:Section({ Title = "NDS (Natural Disaster Survival)" }) 
+
+NDscript:Toggle({
+    Title = "Anti Fall Damage (FOR NDS), btw this might be unstable",
+    Desc = "No fall damage for Natural Disaster Survival",
+    Default = false,
+    Callback = function(state)
+        if not state then return end
+
+        -- ORIGINAL SCRIPT (UNCHANGED)
+        local Lp = game.Players.LocalPlayer
+        local Cam = workspace.CurrentCamera
+        local Pos, Char = Cam.CFrame, Lp.Character
+
+        local Humanoid = Char:FindFirstChildWhichIsA("Humanoid")
+        Humanoid.MaxHealth = math.huge
+        Humanoid.Health = Humanoid.MaxHealth
+        Humanoid.HealthChanged:Connect(function()
+            if Humanoid.Health < 100 then
+                Humanoid.Health = Humanoid.MaxHealth
+            end
+        end)
+
+        local function Optimize(part)
+            part.CanTouch = false
+            part.CanQuery = false
+        end
+
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if obj:IsA("BasePart") then
+                Optimize(obj)
+            end
+        end
+
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+
+        local nHuman = Humanoid:Clone()
+        nHuman.Parent = Char
+        Lp.Character = nil
+        nHuman:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+        nHuman:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        nHuman:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+        nHuman.BreakJointsOnDeath = true
+        Humanoid:Destroy()
+        Lp.Character = Char
+        Cam.CameraSubject = nHuman
+        Cam.CFrame = Pos
+        nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+
+        local Script = Char:FindFirstChild("Animate")
+        if Script then
+            Script.Disabled = true
+            task.wait()
+            Script.Disabled = false
+        end
+
+        nHuman.MaxHealth = math.huge
+        nHuman.Health = nHuman.MaxHealth
+        nHuman.HealthChanged:Connect(function()
+            if nHuman.Health < 100 then
+                nHuman.Health = nHuman.MaxHealth
+            end
+        end)
+
+        workspace.DescendantAdded:Connect(function(nObj)
+            if nObj:IsA("BasePart") then
+                Optimize(nObj)
+            end
+        end)
+    end
+})
+
+--==================================================
+-- Slap battles section
+--==================================================
+    local SBattles = Tabs.Script:Section({ Title = "SLAP BATTLES SCRIPTS" }) 
+
+SBattles:Button({ Title = "Imaginary Glove", Callback = function()
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/KietVN02202/CustomGlove/refs/heads/main/IMAGINARYGLOVE.lua'))()
+    end }) 
+
+SBattles:Button({ Title = "Ultra Instinct Glove", Callback = function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/DonjoScripts/Public-Scripts/refs/heads/Slap-Battles/MUI%5BGloveCustom%5D.lua'))()
+    end }) 
+end
+
+--==================================================
+-- ESP / CHAMS TAB
+--==================================================
+do
+    local ESP = Tabs.Esp:Section({ Title = "ESP / CHAMS" })
+
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local LocalPlayer = Players.LocalPlayer
+
+    --====================
+    -- SETTINGS
+    --====================
+    local EspEnabled = false
+    local EspColor = Color3.fromRGB(0, 0, 139)
+
+    local EspTypesSelected = {
+        Fill = true,
+        Outline = true,
+        Name = true,
+        Tracer = true,
+        Distance = true
+    }
+
+    local TargetAll = false
+    local TargetPlayers = {}
+
+    local Highlights = {}
+    local NameTags = {}
+    local DistanceTags = {}
+    local Tracers = {}
+
+    local APPLY_ALL = "Apply ESP to everyone"
+
+    --====================
+    -- HELPERS
+    --====================
+    local function HasType(t)
+        return EspTypesSelected[t] == true
+    end
+
+    local function IsTarget(plr)
+        if TargetAll then
+            return plr ~= LocalPlayer
+        end
+        return TargetPlayers[plr] == true
+    end
+
+    local function ClearESP(plr)
+        if Highlights[plr] then Highlights[plr]:Destroy() Highlights[plr] = nil end
+        if NameTags[plr] then NameTags[plr]:Destroy() NameTags[plr] = nil end
+        if DistanceTags[plr] then DistanceTags[plr]:Destroy() DistanceTags[plr] = nil end
+        if Tracers[plr] then Tracers[plr]:Remove() Tracers[plr] = nil end
+    end
+
+    --====================
+    -- NAME TAG (20% SMALLER)
+    --====================
+    local function AddName(plr)
+        if NameTags[plr] or not plr.Character then return end
+        local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+
+        local gui = Instance.new("BillboardGui")
+        gui.Size = UDim2.new(0, 65, 0, 40)
+        gui.StudsOffset = Vector3.new(0, 3.2, 0)
+        gui.AlwaysOnTop = true
+        gui.Adornee = hrp
+
+        local label = Instance.new("TextLabel")
+        label.BackgroundTransparency = 1
+        label.Size = UDim2.new(1, 0, 1, 0)
+        label.TextScaled = true
+        label.TextStrokeTransparency = 0
+        label.Font = Enum.Font.FredokaOne
+        label.TextColor3 = EspColor
+        label.Text = plr.Name
+        label.Parent = gui
+
+        gui.Parent = hrp
+        NameTags[plr] = gui
+    end
+
+    --====================
+    -- DISTANCE (BELOW PLAYER, 20% SMALLER)
+    --====================
+    local function AddDistance(plr)
+        if DistanceTags[plr] or not plr.Character then return end
+        local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+
+        local gui = Instance.new("BillboardGui")
+        gui.Size = UDim2.new(0, 60, 0, 40)
+        gui.StudsOffset = Vector3.new(0, -3, 0)
+        gui.AlwaysOnTop = true
+        gui.Adornee = hrp
+
+        local label = Instance.new("TextLabel")
+        label.BackgroundTransparency = 1
+        label.Size = UDim2.new(1, 0, 1, 0)
+        label.TextScaled = true
+        label.TextStrokeTransparency = 0
+        label.Font = Enum.Font.FredokaOne
+        label.TextColor3 = EspColor
+        label.Parent = gui
+
+        RunService.RenderStepped:Connect(function()
+            if not hrp.Parent or not LocalPlayer.Character then return end
+            local myHrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if not myHrp then return end
+            local dist = (myHrp.Position - hrp.Position).Magnitude
+            label.Text = math.floor(dist) .. " studs"
+        end)
+
+        gui.Parent = hrp
+        DistanceTags[plr] = gui
+    end
+
+    --====================
+    -- TRACER (5% THICKER)
+    --====================
+    local function AddTracer(plr)
+        if Tracers[plr] then return end
+
+        local line = Drawing.new("Line")
+        line.Thickness = 2.5
+        line.Color = EspColor
+        line.Visible = true
+
+        RunService.RenderStepped:Connect(function()
+            if not EspEnabled or not IsTarget(plr) then
+                line.Visible = false
+                return
+            end
+
+            local char = plr.Character
+            local myChar = LocalPlayer.Character
+            if not char or not myChar then return end
+
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            local myHrp = myChar:FindFirstChild("HumanoidRootPart")
+            if not hrp or not myHrp then return end
+
+            local p1, v1 = workspace.CurrentCamera:WorldToViewportPoint(myHrp.Position)
+            local p2, v2 = workspace.CurrentCamera:WorldToViewportPoint(hrp.Position)
+
+            if v1 and v2 then
+                line.From = Vector2.new(p1.X, p1.Y)
+                line.To = Vector2.new(p2.X, p2.Y)
+                line.Color = EspColor
+                line.Visible = true
+            else
+                line.Visible = false
+            end
+        end)
+
+        Tracers[plr] = line
+    end
+
+    --====================
+    -- APPLY ESP
+    --====================
+    local function AddESP(plr)
+        if not EspEnabled or not IsTarget(plr) or plr == LocalPlayer then return end
+        if not plr.Character then return end
+
+        ClearESP(plr)
+
+        if HasType("Name") then AddName(plr) end
+        if HasType("Distance") then AddDistance(plr) end
+        if HasType("Tracer") then AddTracer(plr) end
+
+        if HasType("Fill") or HasType("Outline") then
+            local h = Instance.new("Highlight")
+            h.Adornee = plr.Character
+            h.Parent = plr.Character
+            h.FillTransparency = HasType("Fill") and 0.5 or 1
+            h.OutlineTransparency = HasType("Outline") and 0 or 1
+            h.FillColor = EspColor
+            h.OutlineColor = EspColor
+            Highlights[plr] = h
+        end
+    end
+
+    local function RefreshESP()
+        for _, plr in ipairs(Players:GetPlayers()) do
+            ClearESP(plr)
+            AddESP(plr)
+        end
+    end
+
+    --====================
+    -- UI CONTROLS
+    --====================
+    ESP:Toggle({
+        Title = "ESP Toggle",
+        Callback = function(v)
+            EspEnabled = v
+            RefreshESP()
+        end
+    })
+
+ESP:Space()
+
+    ESP:Colorpicker({
+        Title = "ESP Color",
+        Default = EspColor,
+        Callback = function(c)
+            EspColor = c
+            RefreshESP()
+        end
+    }) 
+
+ESP:Space() 
+
+    ESP:Dropdown({
+        Title = "ESP Type",
+        Multi = true,
+        Values = { "Fill", "Outline", "Name", "Tracer", "Distance" },
+        Default = { "Fill", "Outline", "Name", "Tracer", "Distance" },
+        Callback = function(v)
+            for k in EspTypesSelected do
+                EspTypesSelected[k] = table.find(v, k) ~= nil
+            end
+            RefreshESP()
+        end
+    })
+
+    --====================
+    -- TARGET DROPDOWN
+    --====================
+    local TargetValues = { APPLY_ALL }
+
+    local function UpdateTargets()
+        table.clear(TargetValues)
+        table.insert(TargetValues, APPLY_ALL)
+        for _, plr in ipairs(Players:GetPlayers()) do
+            table.insert(TargetValues, plr.Name)
+        end
+    end
+
+    UpdateTargets()
+
+    ESP:Dropdown({
+        Title = "ESP Target",
+        Multi = true,
+        Values = TargetValues,
+        Callback = function(v)
+            TargetAll = table.find(v, APPLY_ALL) ~= nil
+            TargetPlayers = {}
+            for _, name in ipairs(v) do
+                local p = Players:FindFirstChild(name)
+                if p then TargetPlayers[p] = true end
+            end
+            RefreshESP()
+        end
+    })
+
+    --====================
+    -- RESPAWN CLEANUP
+    --====================
+    local function Hook(plr)
+        plr.CharacterAdded:Connect(function()
+            task.wait(0.1)
+            RefreshESP()
+        end)
+    end
+
+    for _, p in ipairs(Players:GetPlayers()) do
+        if p ~= LocalPlayer then Hook(p) end
+    end
+
+    Players.PlayerAdded:Connect(function(p)
+        Hook(p)
+        UpdateTargets()
+    end)
+
+    Players.PlayerRemoving:Connect(function(p)
+        ClearESP(p)
+        UpdateTargets()
+    end)
+
+ESP:Space() 
+
+--==================================================
+-- ESP TRANSPARENCY CONTROLS
+--==================================================
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+--====================
+-- STATE
+--====================
+local WorldEnabled = false
+local PlayersEnabled = false
+
+-- Storage for original values
+local WorldCache = {}
+local PlayerCache = {}
+
+local WorldConnection
+local PlayersConnection
+
+--====================
+-- UTILS
+--====================
+local function isPlayerPart(part)
+    local model = part:FindFirstAncestorOfClass("Model")
+    return model and Players:GetPlayerFromCharacter(model) ~= nil
+end
+
+--====================
+-- WORLD LOGIC
+--====================
+local function fixWorldPart(part)
+    if not WorldEnabled then return end
+    if not part:IsA("BasePart") then return end
+    if isPlayerPart(part) then return end
+
+    if part.Transparency >= 0.5 then
+        if not WorldCache[part] then
+            WorldCache[part] = part.Transparency
+        end
+        part.Transparency = 0
+    end
+end
+
+local function enableWorld()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        fixWorldPart(obj)
+    end
+
+    WorldConnection = RunService.Heartbeat:Connect(function()
+        for part, original in pairs(WorldCache) do
+            if part and part.Parent and part.Transparency ~= 0 then
+                part.Transparency = 0
+            end
+        end
+    end)
+end
+
+local function disableWorld()
+    if WorldConnection then
+        WorldConnection:Disconnect()
+        WorldConnection = nil
+    end
+
+    for part, original in pairs(WorldCache) do
+        if part and part.Parent then
+            part.Transparency = original
+        end
+    end
+
+    table.clear(WorldCache)
+end
+
+--====================
+-- PLAYER LOGIC
+--====================
+local function fixCharacter(character)
+    local plr = Players:GetPlayerFromCharacter(character)
+    if not plr or plr == LocalPlayer then return end
+
+    for _, obj in ipairs(character:GetDescendants()) do
+        if obj:IsA("BasePart") or obj:IsA("Decal") then
+            if obj.Transparency >= 0.5 then
+                if not PlayerCache[obj] then
+                    PlayerCache[obj] = obj.Transparency
+                end
+                obj.Transparency = 0
+            end
+        end
+    end
+end
+
+local function enablePlayers()
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if plr ~= LocalPlayer and plr.Character then
+            fixCharacter(plr.Character)
+        end
+    end
+
+    PlayersConnection = RunService.Heartbeat:Connect(function()
+        for obj, original in pairs(PlayerCache) do
+            if obj and obj.Parent and obj.Transparency ~= 0 then
+                obj.Transparency = 0
+            end
+        end
+    end)
+end
+
+local function disablePlayers()
+    if PlayersConnection then
+        PlayersConnection:Disconnect()
+        PlayersConnection = nil
+    end
+
+    for obj, original in pairs(PlayerCache) do
+        if obj and obj.Parent then
+            obj.Transparency = original
+        end
+    end
+
+    table.clear(PlayerCache)
+end
+
+--====================
+-- PLAYER JOIN HANDLER
+--====================
+Players.PlayerAdded:Connect(function(plr)
+    plr.CharacterAdded:Connect(function(char)
+        task.wait(0.5)
+        if PlayersEnabled then
+            fixCharacter(char)
+        end
+    end)
+end)
+
+--====================
+-- ESP TOGGLES (YOUR EXACT WORDING)
+--====================
+
+ESP:Toggle({
+    Title = "make every part thats Transparent not transparent - client sided",
+    Desc = "every transparent part turns visible",
+    Default = false,
+    Callback = function(state)
+        WorldEnabled = state
+        if state then
+            enableWorld()
+        else
+            disableWorld()
+        end
+    end
+})
+
+ESP:Toggle({
+    Title = "make every invisible player visible",
+    Desc = "this ignores local player",
+    Default = false,
+    Callback = function(state)
+        PlayersEnabled = state
+        if state then
+            enablePlayers()
+        else
+            disablePlayers()
+        end
+    end
+})
+end
+
+--==================================================
+-- SETTINGS TAB
+--==================================================
+do
+    local Settings = Tabs.Settings:Section({ Title = "UI Settings", Box = true })
+
+    --====================
+    -- Theme Changer
+    --====================
+    Settings:Dropdown({
+        Title = "Theme Changer",
+        Values = {
+            "Dark","Light","Rose","Plant","Red","Indigo","Sky","Violet",
+            "Amber","Emerald","Midnight","Crimson","Monokai Pro","Cotton Candy","Rainbow"
+        },
+        Value = "Midnight",
+        Callback = function(v)
+            WindUI:SetTheme(v)
+        end
+    })
+
+Settings:Space() 
+
+--==================================================
+-- Services
+--==================================================
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+--==================================================
+-- Screen Filter GUI
+--==================================================
+
+local FilterGui = Instance.new("ScreenGui")
+FilterGui.Name = "WindUIScreenFilter"
+FilterGui.IgnoreGuiInset = true
+FilterGui.ResetOnSpawn = false
+FilterGui.Enabled = false
+FilterGui.Parent = PlayerGui
+
+local FilterFrame = Instance.new("Frame")
+FilterFrame.Size = UDim2.new(1, 0, 1, 0)
+FilterFrame.Position = UDim2.new(0, 0, 0, 0)
+FilterFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+FilterFrame.BackgroundTransparency = 0.6
+FilterFrame.BorderSizePixel = 0
+FilterFrame.ZIndex = 999999
+FilterFrame.Parent = FilterGui
+
+--==================================================
+-- Wind UI : Settings Section Controls
+--==================================================
+
+ Settings:Toggle({
+    Title = "activate filter",
+    Desc = "screen filter cuz good",
+    Value = false,
+    Callback = function(state)
+        FilterGui.Enabled = state
+    end
+})
+
+Settings:Colorpicker({
+    Title = "filter color is?",
+    Desc = "select a color to chenge filter",
+    Default = Color3.fromRGB(0, 255, 0),
+    Callback = function(color)
+        FilterFrame.BackgroundColor3 = color
+    end
+})
+
+Settings:Slider({
+    Title = "filter strength or intensity",
+    Desc = "so how strong ur eyes are?",
+    Step = 1,
+    Value = {
+        Min = 0,
+        Max = 100,
+        Default = 100,
+    },
+    Callback = function(value)
+        FilterFrame.BackgroundTransparency = math.clamp(value / 100, 0, 1)
+    end
+}) 
+
+Settings:Space() 
+
+    --====================
+    -- Font List
+    --====================
+    local fonts = {
+        "Legacy", "Arial", "ArialBold", "SourceSans", "SourceSansBold", "SourceSansLight", "SourceSansItalic",
+        "Bodoni", "Garamond", "Cartoon", "Code", "Highway", "SciFi", "Arcade", "Fantasy", "Antique",
+        "SourceSansSemibold", "Gotham", "GothamMedium", "GothamBold", "GothamBlack", "AmaticSC", "Bangers",
+        "Creepster", "DenkOne", "Fondamento", "FredokaOne", "GrenzeGotisch", "IndieFlower", "JosefinSans",
+        "Jura", "Kalam", "LuckiestGuy", "Merriweather", "Michroma", "Nunito", "Oswald", "PatrickHand",
+        "PermanentMarker", "Roboto", "RobotoCondensed", "RobotoMono", "Sarpanch", "SpecialElite",
+        "TitilliumWeb", "Ubuntu", "BuilderSans", "BuilderSansMedium", "BuilderSansBold", "BuilderSansExtraBold",
+        "Arimo", "ArimoBold"
+    }
+
+    --====================
+    -- Services
+    --====================
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+
+    -- List of services to apply fonts to (excluding CoreGui)
+    local AllServices = {
+        game:GetService("Workspace"),
+        Players.LocalPlayer:WaitForChild("PlayerGui"),
+        game:GetService("ReplicatedStorage"),
+        game:GetService("Lighting"),
+        game:GetService("StarterGui"),
+        game:GetService("ServerStorage"),
+        game:GetService("StarterPlayer"),
+        game:GetService("Teams")
+    }
+
+    --====================
+    -- State
+    --====================
+    local FontEnabled = false
+    local SelectedFont = "Gotham"
+    local OriginalFonts = {}
+
+    --====================
+    -- Font Functions
+    --====================
+    local function SaveOriginal(obj)
+        if not OriginalFonts[obj] then
+            OriginalFonts[obj] = obj.Font
+        end
+    end
+
+    local function ApplyFont(obj, fontEnum)
+        if obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
+            SaveOriginal(obj)
+            obj.Font = fontEnum
+        end
+    end
+
+    local function ApplyFontRecursively(container, fontEnum)
+        for _, obj in ipairs(container:GetDescendants()) do
+            ApplyFont(obj, fontEnum)
+        end
+    end
+
+    local function ApplyFontGlobally(fontEnum)
+        for _, service in ipairs(AllServices) do
+            ApplyFontRecursively(service, fontEnum)
+        end
+    end
+
+    local function RestoreFonts()
+        for obj, font in pairs(OriginalFonts) do
+            if obj and obj.Parent then
+                obj.Font = font
+            end
+        end
+    end
+
+    --====================
+    -- Hook New Descendants in all services
+    --====================
+    local function ConnectNewDescendants(container)
+        container.DescendantAdded:Connect(function(obj)
+            if FontEnabled then
+                ApplyFont(obj, Enum.Font[SelectedFont])
+            end
+        end)
+    end
+
+    for _, service in ipairs(AllServices) do
+        ConnectNewDescendants(service)
+    end
+
+    --====================
+    -- Font Toggle
+    --====================
+    Settings:Toggle({
+        Title = "font changer (ui)",
+        Desc = "changer every text font to the desired Funt",
+        Default = false,
+        Callback = function(state)
+            FontEnabled = state
+
+            if state then
+                ApplyFontGlobally(Enum.Font[SelectedFont])
+            else
+                RestoreFonts()
+            end
+        end
+    })
+
+    --====================
+    -- Font Dropdown
+    --====================
+    Settings:Dropdown({
+        Title = "choose font",
+        Desc = "select a font",
+        Values = fonts,
+        Value = SelectedFont,
+        Callback = function(v)
+            SelectedFont = v
+            if FontEnabled then
+                ApplyFontGlobally(Enum.Font[v])
+            end
+        end
+    })
+
+Settings:Space()
+
+--==============================
+    -- SERVICES
+    --==============================
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+    --==============================
+    -- STATE
+    --==============================
+    local Enabled = false
+    local SpooferMode = "default"
+    local SpooferType = "everybody's user"
+    local CustomText = ""
+    local DEFAULT_TEXT = "Hidden By Nikola Tesla"
+
+    --==============================
+    -- INPUT (LOCKABLE)
+    --==============================
+    local UsernameInput = Settings:Input({
+        Title = "Custom hide text",
+        Placeholder = "Something else than Hidden By Nikola Tesla",
+        Locked = true,
+        Callback = function(v)
+            CustomText = v
+            if Enabled then
+                processAll()
+            end
+        end
+    })
+
+    --==============================
+    -- LOCK / UNLOCK FUNCTIONS
+    --==============================
+    local function lockInput()
+        UsernameInput:Lock()
+    end
+
+    local function unlockInput()
+        UsernameInput:Unlock()
+    end
+
+    lockInput() -- input starts locked
+
+    --==============================
+    -- HELPER FUNCTIONS
+    --==============================
+    local function getReplacement()
+        if SpooferMode == "custom" and CustomText ~= "" then
+            return CustomText
+        else
+            return DEFAULT_TEXT
+        end
+    end
+
+    local function shouldReplace(text)
+        if SpooferType == "everybody's user" then
+            for _, plr in ipairs(Players:GetPlayers()) do
+                if string.find(text, plr.Name, 1, true) then
+                    return true, plr.Name
+                end
+            end
+        elseif SpooferType == "only your user" then
+            if string.find(text, LocalPlayer.Name, 1, true) then
+                return true, LocalPlayer.Name
+            end
+        end
+        return false
+    end
+
+    local function processTextObject(obj)
+        if not Enabled then return end
+        if not (obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox")) then
+            return
+        end
+
+        local txt = obj.Text
+        if not txt or txt == "" then return end
+
+        local ok, name = shouldReplace(txt)
+        if ok and name then
+            obj.Text = string.gsub(txt, name, getReplacement())
+        end
+    end
+
+    function processAll()
+        for _, obj in ipairs(PlayerGui:GetDescendants()) do
+            processTextObject(obj)
+        end
+    end
+
+    --==============================
+    -- NEW UI HOOK
+    --==============================
+    PlayerGui.DescendantAdded:Connect(function(obj)
+        processTextObject(obj)
+    end)
+
+    --==============================
+    -- TOGGLE
+    --==============================
+    Settings:Toggle({
+        Title = "Hide Username",
+        Default = false,
+        Callback = function(v)
+            Enabled = v
+            if v then
+                processAll()
+            end
+        end
+    })
+
+    --==============================
+    -- DROPDOWN: SPOOFER MODE
+    --==============================
+    Settings:Dropdown({
+        Title = "Hide user mode",
+        Values = {
+            "default",
+            "custom"
+        },
+        Value = SpooferMode,
+        Callback = function(v)
+            SpooferMode = v
+
+            -- unlock input only for custom mode
+            if v == "custom" then
+                unlockInput()
+            else
+                lockInput()
+            end
+
+            if Enabled then
+                processAll()
+            end
+        end
+    })
+
+    --==============================
+    -- DROPDOWN: SPOOFER TYPE
+    --==============================
+    Settings:Dropdown({
+        Title = "Type of mode to hide user",
+        Values = {
+            "everybody's user",
+            "only your user"
+        },
+        Value = SpooferType,
+        Callback = function(v)
+            SpooferType = v
+            if Enabled then
+                processAll()
+            end
+        end
+    })
+end
+
+--==================================================
+-- MISC TAB
+--==================================================
+do 
+    local Miscs = Tabs.Misc:Section({ Title = "Some Useful Scripts" }) 
+
+    Miscs:Button({ Title = "Infinite Yield", Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
+    end })
+
+Miscs:Space() 
+
+    Miscs:Button({ Title = "Dark Dex", Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Dark-dex-47096"))()
+    end })
+
+Miscs:Space() 
+
+    Miscs:Button({ Title = "Dex V3", Callback = function()
+       loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-DEX-v3-64454"))()
+    end })
+
+Miscs:Space() 
+
+
+
+    Miscs:Button({ Title = "QuirkyCMD", Callback = function()
+       
+loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
+    end }) 
+
+Miscs:Space()  
+
+Miscs:Button({ Title = "Sigma Spy (BEST REMOTE SPY)", Callback = function()
+       loadstring(game:HttpGet("https://haxhell.com/raw/universal-script-sigma-spy-or-remote-spy-script-builder-decompiler"))()
+    end })
+
+Miscs:Space()
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local enabled = false
+local connection
+
+local function applySemiGod()
+    local character = LocalPlayer.Character
+    if not character then return end
+
+    local hrp = character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    for _, part in ipairs(workspace:GetPartBoundsInRadius(hrp.Position, 10)) do
+        if part:IsA("BasePart") then
+            part.CanTouch = not enabled
+        end
+    end
+end
+
+local function start()
+    connection = RunService.Heartbeat:Connect(applySemiGod)
+end
+
+local function stop()
+    if connection then
+        connection:Disconnect()
+        connection = nil
+    end
+
+    -- restore touch
+    enabled = false
+    applySemiGod()
+end
+
+-- Reapply on respawn
+LocalPlayer.CharacterAdded:Connect(function()
+    if enabled then
+        task.wait(1)
+        start()
+    end
+end)
+
+Miscs:Toggle({
+    Title = "Semi Godmode",
+    Desc = "Prevents damage from killbricks / damage bricks",
+    Default = false,
+    Callback = function(state)
+        enabled = state
+
+        if state then
+            start()
+        else
+            stop()
+        end
+    end
+})
+
+Miscs:Space() 
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local Camera = workspace.CurrentCamera
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Bodoni font for title and username
+local BodoniFont = Font.new("rbxassetid://12187365364", Enum.FontWeight.Bold)
+
+-- GUI setup
+local gui = Instance.new("ScreenGui")
+gui.Name = "XerathSpectator"
+gui.ResetOnSpawn = false
+gui.Enabled = false -- Controlled by Wind UI toggle
+gui.Parent = PlayerGui
+
+local toggle = Instance.new("ImageButton")
+toggle.Size = UDim2.fromOffset(46, 46)
+toggle.Position = UDim2.new(0.5, -23, 1, -120)
+toggle.Image = "rbxassetid://75869308147635"
+toggle.BackgroundColor3 = Color3.fromRGB(15, 35, 80)
+toggle.Visible = false
+toggle.Parent = gui
+toggle.Active = true
+toggle.Draggable = true
+
+Instance.new("UICorner", toggle).CornerRadius = UDim.new(0,12)
+Instance.new("UIStroke", toggle).Color = Color3.fromRGB(20, 60, 150)
+
+local gradToggle = Instance.new("UIGradient", toggle)
+gradToggle.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(10,25,70)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(40,120,255))
+}
+
+local panel = Instance.new("Frame")
+panel.Size = UDim2.fromOffset(320, 70)
+panel.Position = UDim2.new(0.5, -160, 1, 10)
+panel.BackgroundTransparency = 1
+panel.Visible = false
+panel.Parent = gui
+
+Instance.new("UICorner", panel).CornerRadius = UDim.new(0,12)
+
+local bg = Instance.new("Frame", panel)
+bg.Size = UDim2.fromScale(1,1)
+bg.BackgroundColor3 = Color3.fromRGB(15, 35, 80)
+Instance.new("UICorner", bg).CornerRadius = UDim.new(0,12)
+
+local stroke = Instance.new("UIStroke", bg)
+stroke.Color = Color3.fromRGB(30, 100, 255)
+
+local grad = Instance.new("UIGradient", bg)
+grad.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(10,25,70)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(40,120,255))
+}
+
+-- Title
+local title = Instance.new("TextLabel", panel)
+title.Size = UDim2.new(1,0,0,14)
+title.Position = UDim2.fromOffset(0,2)
+title.BackgroundTransparency = 1
+title.Text = "Xerath Hub - Custom Spectator System"
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(150,180,255)
+title.FontFace = BodoniFont
+
+-- Username + HP
+local nameLabel = Instance.new("TextLabel", panel)
+nameLabel.Size = UDim2.new(1,-120,0,30)
+nameLabel.Position = UDim2.fromOffset(60,26)
+nameLabel.BackgroundTransparency = 1
+nameLabel.TextScaled = true
+nameLabel.TextColor3 = Color3.fromRGB(40,120,255)
+nameLabel.FontFace = BodoniFont
+
+-- Prev / Next buttons
+local prev = Instance.new("TextButton", panel)
+prev.Size = UDim2.fromOffset(44,44)
+prev.Position = UDim2.fromOffset(8,18)
+prev.Text = "<"
+prev.TextScaled = true
+prev.BackgroundColor3 = Color3.fromRGB(15,35,80)
+prev.TextColor3 = Color3.fromRGB(40,120,255)
+Instance.new("UICorner", prev).CornerRadius = UDim.new(0,12)
+
+local next = Instance.new("TextButton", panel)
+next.Size = UDim2.fromOffset(44,44)
+next.Position = UDim2.new(1,-52,0,18)
+next.Text = ">"
+next.TextScaled = true
+next.BackgroundColor3 = Color3.fromRGB(15,35,80)
+next.TextColor3 = Color3.fromRGB(40,120,255)
+Instance.new("UICorner", next).CornerRadius = UDim.new(0,12)
+
+-- Spectator logic
+local spectating = false
+local list = {}
+local index = 1
+local highlightLocal, highlightTarget
+local updateConnection
+local currentPlayer
+
+-- Sort players alphabetically
+local function sortPlayers()
+	list = {}
+	for _,p in ipairs(Players:GetPlayers()) do
+		if p ~= LocalPlayer then
+			table.insert(list,p)
+		end
+	end
+	table.sort(list,function(a,b)
+		return a.Name:lower() < b.Name:lower()
+	end)
+end
+
+-- Clear ESP
+local function clearESP()
+	if highlightLocal then
+		highlightLocal:Destroy()
+		highlightLocal = nil
+	end
+	if highlightTarget then
+		highlightTarget:Destroy()
+		highlightTarget = nil
+	end
+end
+
+-- Apply highlight to local player and target
+local function applyESP(char)
+	clearESP()
+	if LocalPlayer.Character then
+		highlightLocal = Instance.new("Highlight")
+		highlightLocal.Adornee = LocalPlayer.Character
+		highlightLocal.FillColor = Color3.fromRGB(40,120,255)
+		highlightLocal.FillTransparency = 0.5
+		highlightLocal.OutlineColor = Color3.fromRGB(10,30,80)
+		highlightLocal.OutlineTransparency = 0
+		highlightLocal.Parent = LocalPlayer.Character
+	end
+	if char then
+		highlightTarget = Instance.new("Highlight")
+		highlightTarget.Adornee = char
+		highlightTarget.FillColor = Color3.fromRGB(40,120,255)
+		highlightTarget.FillTransparency = 0.5
+		highlightTarget.OutlineColor = Color3.fromRGB(10,30,80)
+		highlightTarget.OutlineTransparency = 0
+		highlightTarget.Parent = char
+	end
+end
+
+-- Update name + HP
+local function updateNameLabel(char)
+	if not char then return end
+	local humanoid = char:FindFirstChild("Humanoid")
+	if humanoid then
+		nameLabel.Text = list[index].Name.." HP: "..math.floor(humanoid.Health).." / "..math.floor(humanoid.MaxHealth)
+	end
+end
+
+-- Switch to next player safely
+local function nextPlayer()
+	if #list == 0 then
+		stopSpectate()
+		return
+	end
+	index = index + 1
+	if index > #list then index = 1 end
+	spectate()
+end
+
+-- Spectate player
+function spectate()
+	if #list == 0 then return end
+	currentPlayer = list[index]
+	local char = currentPlayer.Character
+	if not char then return end
+
+	applyESP(char)
+	Camera.CameraSubject = char:FindFirstChild("Humanoid") or Camera
+	updateNameLabel(char)
+
+	if updateConnection then updateConnection:Disconnect() end
+	updateConnection = RunService.RenderStepped:Connect(function()
+		if not spectating then return end
+		if not currentPlayer or not currentPlayer.Parent then
+			-- Player left, go to next
+			nextPlayer()
+			return
+		end
+
+		local humanoid = currentPlayer.Character and currentPlayer.Character:FindFirstChild("Humanoid")
+		if humanoid then
+			Camera.CameraSubject = humanoid
+			updateNameLabel(currentPlayer.Character)
+			applyESP(currentPlayer.Character)
+		else
+			-- Player died / respawned, reattach camera & highlight
+			if currentPlayer.Character then
+				local newHumanoid = currentPlayer.Character:FindFirstChild("Humanoid")
+				if newHumanoid then
+					Camera.CameraSubject = newHumanoid
+					applyESP(currentPlayer.Character)
+				end
+			end
+		end
+	end)
+end
+
+-- Stop spectating
+function stopSpectate()
+	spectating = false
+	if updateConnection then
+		updateConnection:Disconnect()
+		updateConnection = nil
+	end
+	clearESP()
+	Camera.CameraSubject = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") or Camera
+	TweenService:Create(panel,TweenInfo.new(.25),{Position = UDim2.new(0.5,-160,1,10)}):Play()
+	task.delay(.25,function() panel.Visible=false end)
+end
+
+-- Start spectating
+function startSpectate()
+	sortPlayers()
+	if #list == 0 then return end
+	if index > #list then index = 1 end
+	panel.Visible = true
+	toggle.Visible = true
+	gui.Enabled = true
+	TweenService:Create(panel,TweenInfo.new(.25),{Position = UDim2.new(0.5,-160,1,-90)}):Play()
+	spectating = true
+	spectate()
+end
+
+-- Wind UI Toggle
+Miscs:Toggle({
+    Title = "Custom Spectator UI",
+    Desc = "Really good custom spectator system made by me yk",
+    Default = false,
+    Callback = function(state)
+        if state then
+            gui.Enabled = true
+            toggle.Visible = true
+            panel.Visible = true
+        else
+            gui.Enabled = false
+            toggle.Visible = false
+            panel.Visible = false
+            stopSpectate()
+        end
+    end
+})
+
+-- In-GUI Toggle Button controls actual spectating
+toggle.MouseButton1Click:Connect(function()
+	if spectating then
+		stopSpectate()
+	else
+		startSpectate()
+	end
+end)
+
+-- Prev / Next Buttons
+prev.MouseButton1Click:Connect(function()
+	if not spectating then return end
+	index = index - 1
+	if index < 1 then index = #list end
+	spectate()
+end)
+
+next.MouseButton1Click:Connect(function()
+	if not spectating then return end
+	nextPlayer()
+end)
+
+-- Player leave handler
+Players.PlayerRemoving:Connect(function(p)
+	if spectating and list[index] == p then
+		nextPlayer()
+	end
+	sortPlayers()
+end)
+
+-- Player join handler
+Players.PlayerAdded:Connect(sortPlayers)
+
+-- Local player respawn
+LocalPlayer.CharacterAdded:Connect(function()
+	if spectating then
+		spectate()
+	end
+end)
+
+Miscs:Space() 
+
+--====================
+-- Services
+--====================
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+--====================
+-- State
+--====================
+local ZoomEnabled = false
+local DefaultMaxZoom = player.CameraMaxZoomDistance
+local MaxZoomLimit = 1000
+local CurrentMaxZoom = DefaultMaxZoom
+
+--====================
+-- Mouse Wheel Logic
+--====================
+UserInputService.InputChanged:Connect(function(input, gp)
+    if gp or not ZoomEnabled then return end
+
+    if input.UserInputType == Enum.UserInputType.MouseWheel then
+        local zoom = (camera.CFrame.Position - camera.Focus.Position).Magnitude
+
+        if input.Position.Z < 0 then
+            if zoom >= CurrentMaxZoom * 0.9 and CurrentMaxZoom < MaxZoomLimit then
+                CurrentMaxZoom = math.min(CurrentMaxZoom * 1.5, MaxZoomLimit)
+                player.CameraMaxZoomDistance = CurrentMaxZoom
+            end
+        end
+    end
+end)
+
+--====================
+-- Miscs UI
+--====================
+
+-- Toggle Infinite Zoom
+Miscs:Toggle({
+    Title = "Activate Camera Zoom",
+    Desc = "activate camera zoom powars",
+    Default = false,
+    Callback = function(state)
+        ZoomEnabled = state
+
+        if state then
+            CurrentMaxZoom = MaxZoomLimit
+            player.CameraMaxZoomDistance = CurrentMaxZoom
+        else
+            player.CameraMaxZoomDistance = DefaultMaxZoom
+            CurrentMaxZoom = DefaultMaxZoom
+        end
+    end
+})
+
+-- Max Zoom Input
+Miscs:Input({
+    Title = "Camera Zoom Limit",
+    Desc = "put here ur desure zoom distence",
+    Placeholder = "ex: 67",
+    Default = tostring(MaxZoomLimit),
+    Callback = function(text)
+        local num = tonumber(text)
+        if num and num > 0 then
+            MaxZoomLimit = num
+            if ZoomEnabled then
+                CurrentMaxZoom = MaxZoomLimit
+                player.CameraMaxZoomDistance = CurrentMaxZoom
+            end
+        end
+    end
+}) 
+
+Miscs:Space() 
+
+-- Noclip Toggle
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local player = Players.LocalPlayer
+    local ClipOn = false
+    local NoclipConnection
+
+    local function ApplyNoclip(state)
+        local character = player.Character
+        if not character then return end
+        for _, part in ipairs(character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = not state
+            end
+        end
+    end
+
+    local function SetNoclip(enabled)
+        ClipOn = enabled
+        if NoclipConnection then
+            NoclipConnection:Disconnect()
+            NoclipConnection = nil
+        end
+        if ClipOn then
+            NoclipConnection = RunService.Heartbeat:Connect(function()
+                ApplyNoclip(true)
+            end)
+        else
+            ApplyNoclip(false)
+        end
+    end
+
+    player.CharacterAdded:Connect(function()
+        task.wait(0.2)
+        if ClipOn then
+            SetNoclip(true)
+        end
+    end)
+
+    Miscs:Toggle({
+        Title = "Noclip",
+        Default = false,
+        Callback = function(state)
+            SetNoclip(state)
+        end
+    }) 
+
+--====================
+-- Anti Fling Toggle (FIXED)
+--====================
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local AntiFlingEnabled = false
+local Connections = {}
+
+--====================
+-- Wait for load
+--====================
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
+local function WaitCharacter(plr)
+	if not plr.Character then
+		plr.CharacterAdded:Wait()
+	end
+	plr.Character:WaitForChild("Humanoid")
+	plr.Character:WaitForChild("Head")
+end
+
+WaitCharacter(LocalPlayer)
+
+--====================
+-- Constraint handler
+--====================
+local function CheckInstance(Part)
+	if not AntiFlingEnabled then return end
+	if not Part:IsA("BasePart") then return end
+
+	for _, lpPart in pairs(LocalPlayer.Character:GetDescendants()) do
+		if lpPart:IsA("BasePart") then
+			local NCC = Instance.new("NoCollisionConstraint")
+			NCC.Part0 = Part
+			NCC.Part1 = lpPart
+			NCC.Enabled = true
+			NCC.Parent = Part
+		end
+	end
+end
+
+--====================
+-- Insert logic
+--====================
+local function Insert(Target)
+	if not AntiFlingEnabled then return end
+
+	WaitCharacter(Target)
+
+	-- clear existing
+	for _, v in pairs(Target.Character:GetDescendants()) do
+		if v:IsA("NoCollisionConstraint") then
+			v:Destroy()
+		end
+	end
+
+	-- apply
+	for _, v in pairs(Target.Character:GetDescendants()) do
+		CheckInstance(v)
+	end
+
+	table.insert(Connections,
+		Target.Character.DescendantAdded:Connect(function(v)
+			if AntiFlingEnabled then
+				CheckInstance(v)
+			end
+		end)
+	)
+end
+
+--====================
+-- Enable
+--====================
+local function EnableAntiFling()
+	if AntiFlingEnabled then return end
+	AntiFlingEnabled = true
+
+	for _, plr in pairs(Players:GetPlayers()) do
+		if plr ~= LocalPlayer then
+			Insert(plr)
+		end
+	end
+
+	table.insert(Connections,
+		Players.PlayerAdded:Connect(function(plr)
+			if AntiFlingEnabled then
+				Insert(plr)
+			end
+		end)
+	)
+
+	table.insert(Connections,
+		LocalPlayer.CharacterAdded:Connect(function()
+			if not AntiFlingEnabled then return end
+			task.wait(1)
+			for _, plr in pairs(Players:GetPlayers()) do
+				if plr ~= LocalPlayer then
+					Insert(plr)
+				end
+			end
+		end)
+	)
+end
+
+--====================
+-- Disable (REAL OFF)
+--====================
+local function DisableAntiFling()
+	if not AntiFlingEnabled then return end
+	AntiFlingEnabled = false
+
+	-- disconnect all
+	for _, con in pairs(Connections) do
+		pcall(function()
+			con:Disconnect()
+		end)
+	end
+	table.clear(Connections)
+
+	-- remove ALL constraints
+	for _, plr in pairs(Players:GetPlayers()) do
+		if plr.Character then
+			for _, v in pairs(plr.Character:GetDescendants()) do
+				if v:IsA("NoCollisionConstraint") then
+					v:Destroy()
+				end
+			end
+		end
+	end
+end
+
+--====================
+-- WindUI Toggle
+--====================
+Miscs:Toggle({
+	Title = "Anti Fling Exploit",
+	Desc = "You can Combine This With Noclip Toggle Which Makes It almost impossible to fling you",
+	Default = false,
+	Callback = function(state)
+		if state then
+			EnableAntiFling()
+		else
+			DisableAntiFling()
+		end
+	end
+})
+
+Miscs:Space() 
+
+--====================
+-- Tp Tool
+--==================== 
+
+Miscs:Button({
+    Title = "Give TP Tool",
+    Desc = "equip gear and click on a spot to teleport",
+    Callback = function()
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+
+        -- Prevent duplicate tools
+        if player.Backpack:FindFirstChild("Tp Tool") then
+            return
+        end
+
+        local mouse = player:GetMouse()
+
+        local tool = Instance.new("Tool")
+        tool.RequiresHandle = false
+        tool.Name = "Tp Tool"
+
+        tool.Activated:Connect(function()
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                local pos = mouse.Hit + Vector3.new(0, 2.5, 0)
+                character.HumanoidRootPart.CFrame =
+                    CFrame.new(pos.X, pos.Y, pos.Z)
+            end
+        end)
+
+        tool.Parent = player.Backpack
+    end
+})
+
+Miscs:Space()
+
+local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+    local LocalPlayer = Players.LocalPlayer
+    local hiddenfling = false
+    local flingConnection
+
+    -- anti-detection marker (from original script)
+    if not ReplicatedStorage:FindFirstChild("juisdfj0i32i0eidsuf0iok") then
+        local detection = Instance.new("Decal")
+        detection.Name = "juisdfj0i32i0eidsuf0iok"
+        detection.Parent = ReplicatedStorage
+    end
+
+    Miscs:Toggle({
+        Title = "Touch Fling",
+        Desc = "touch fling no more slider sad",
+        Default = false,
+        Callback = function(state)
+            hiddenfling = state
+
+            if hiddenfling then
+                flingConnection = RunService.Heartbeat:Connect(function()
+                    local char = LocalPlayer.Character
+                    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+
+                    if hrp then
+                        local vel = hrp.Velocity
+                        hrp.Velocity = vel * 10000 + Vector3.new(0, 10000, 0)
+
+                        RunService.RenderStepped:Wait()
+                        hrp.Velocity = vel
+
+                        RunService.Stepped:Wait()
+                        hrp.Velocity = vel + Vector3.new(0, 0.1, 0)
+                    end
+                end)
+            else
+                if flingConnection then
+                    flingConnection:Disconnect()
+                    flingConnection = nil
+                end
+            end
+        end
+    })
+
+Miscs:Space()
+
+--====================
+    -- ANTI AFK (WIND UI)
+    --====================
+
+    local Players = game:GetService("Players")
+    local VirtualUser = game:GetService("VirtualUser")
+
+    local antiAfkEnabled = false
+    local antiAfkConnection
+
+    local function EnableAntiAfk()
+        if antiAfkConnection then return end
+
+        antiAfkConnection = Players.LocalPlayer.Idled:Connect(function()
+            if not antiAfkEnabled then return end
+            VirtualUser:CaptureController()
+            VirtualUser:ClickButton2(Vector2.new())
+        end)
+    end
+
+    local function DisableAntiAfk()
+        if antiAfkConnection then
+            antiAfkConnection:Disconnect()
+            antiAfkConnection = nil
+        end
+    end
+
+    Miscs:Toggle({
+        Title = "Anti AFK",
+        Desc = "Pevents you from being kicked for idling",
+        Default = false,
+        Callback = function(state)
+            antiAfkEnabled = state
+            if state then
+                EnableAntiAfk()
+            else
+                DisableAntiAfk()
+            end
+        end
+    })
+
+Miscs:Space() 
+
+--====================
+-- INVISIBILITY SYSTEM (WindUI version)
+--====================
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Player = Players.LocalPlayer
+
+local IsInvisible = false
+local InvisChair
+local CONFIG = {
+	INVISIBILITY_POSITION = Vector3.new(-25.95, 84, 3537.55),
+}
+
+--====================
+-- Core Functions
+--====================
+
+local function setCharacterTransparency(character: Model, transparency: number)
+	for _, descendant in character:GetDescendants() do
+		if descendant:IsA("BasePart") or descendant:IsA("Decal") then
+			descendant.Transparency = transparency
+		end
+	end
+end
+
+local function toggleInvisibility()
+	if not Player.Character then return end
+
+	IsInvisible = not IsInvisible
+
+	if IsInvisible then
+		local humanoidRootPart = Player.Character:FindFirstChild("HumanoidRootPart")
+		if not humanoidRootPart then return end
+
+		local savedPosition = humanoidRootPart.CFrame
+
+		-- Move to invisibility position
+		Player.Character:MoveTo(CONFIG.INVISIBILITY_POSITION)
+		task.wait(0.15)
+
+		-- Create invisible seat
+		InvisChair = Instance.new("Seat")
+		InvisChair.Name = "invischair"
+		InvisChair.Anchored = false
+		InvisChair.CanCollide = false
+		InvisChair.Transparency = 1
+		InvisChair.Position = CONFIG.INVISIBILITY_POSITION
+		InvisChair.Parent = workspace
+
+		-- Weld seat to character torso
+		local weld = Instance.new("Weld")
+		weld.Part0 = InvisChair
+		weld.Part1 = Player.Character:FindFirstChild("Torso") or Player.Character:FindFirstChild("UpperTorso")
+		weld.Parent = InvisChair
+
+		task.wait()
+		InvisChair.CFrame = savedPosition
+
+		-- Set transparency
+		setCharacterTransparency(Player.Character, 0.5)
+
+	else
+		-- Remove invis chair
+		if InvisChair then
+			InvisChair:Destroy()
+			InvisChair = nil
+		end
+
+		-- Restore character
+		if Player.Character then
+			setCharacterTransparency(Player.Character, 0)
+		end
+	end
+end
+
+--====================
+-- WindUI Integration
+--====================
+
+
+Miscs:Toggle({
+	Title = "Toggle Invisibility UWU",
+	Desc = "Turn invisible on/off",
+	Default = false,
+	Callback = function(state)
+		toggleInvisibility()
+	end
+})
+
+--====================
+-- Respawn Safety
+--====================
+
+Player.CharacterAdded:Connect(function(char)
+	-- Reset invisibility on respawn
+	if IsInvisible then
+		toggleInvisibility()
+	end
+end)
+
+Miscs:Space() 
+
+--====================
+-- Input for Speed
+--====================
+Miscs:Input({
+    Title = "Speed",
+    Desc = "16 -- This is Default Bro Maybe",
+    Width = 200,
+    Callback = function(value)
+        local num = tonumber(value)
+        if num then
+            local player = game.Players.LocalPlayer
+            if player.Character and player.Character:FindFirstChild("Humanoid") then
+                player.Character.Humanoid.WalkSpeed = num
+            end
+        end
+    end
+})
+
+--====================
+-- Input for Jump Power
+--====================
+Miscs:Input({
+    Title = "Jump Power",
+    Desc = "50 -- Default JumpPower",
+    Width = 200,
+    Callback = function(value)
+        local num = tonumber(value)
+        if num then
+            local player = game.Players.LocalPlayer
+            if player.Character and player.Character:FindFirstChild("Humanoid") then
+                player.Character.Humanoid.JumpPower = num
+            end
+        end
+    end
+})
+
+--====================
+-- Input for Gravity
+--====================
+Miscs:Input({
+    Title = "Gravity",
+    Desc = "196.2 -- Default Roblox Gravity",
+    Width = 200,
+    Callback = function(value)
+        local num = tonumber(value)
+        if num then
+            game.Workspace.Gravity = num
+        end
+    end
+})
+
+Miscs:Space() 
+
+--==================================================
+-- Infinite / Multi Jump (WindUI Toggle)
+--==================================================
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local LocalPlayer = Players.LocalPlayer
+
+local InfJump = false
+local JumpConnection
+
+Miscs:Toggle({
+    Title = "inf jump (op)",
+    Desc = "Inf Jump this is vary good",
+    Value = false,
+    Callback = function(state)
+        InfJump = state
+
+        if state then
+            JumpConnection = UserInputService.JumpRequest:Connect(function()
+                if not InfJump then return end
+
+                local Character = LocalPlayer.Character
+                local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+
+                if Humanoid then
+                    Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                end
+            end)
+        else
+            if JumpConnection then
+                JumpConnection:Disconnect()
+                JumpConnection = nil
+            end
+        end
+    end
+})
+
+Miscs:Space() 
+
+Miscs:Button({ Title = "FLY (UI MODE) (BY LINHMC_NEW)", Callback = function()
+        
+-- [[CONFIG]] --
+getgenv().rotationSpeed = 1
+getgenv().noclipfly = false
+getgenv().useV3Method = false
+-- [[LOAD SCRIPT]] --
+loadstring(game:HttpGet("https://raw.githubusercontent.com/linhmcfake/Script/refs/heads/main/FLYGUIV4"))()
+    end })
+
+--==================================================
+-- WIND UI INTEGRATION: INSTANT CAMERA-BASED FLIGHT
+--==================================================
+
+-- SERVICES
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local camera = workspace.CurrentCamera
+local player = Players.LocalPlayer
+
+-- CHARACTER SETUP
+local character, humanoid, rootPart
+local function setupCharacter(char)
+	character = char
+	humanoid = char:WaitForChild("Humanoid")
+	rootPart = char:WaitForChild("HumanoidRootPart")
+end
+setupCharacter(player.Character or player.CharacterAdded:Wait())
+player.CharacterAdded:Connect(setupCharacter)
+
+-- FLIGHT VARIABLES
+local flying = false
+local flySpeed = 120
+local DefaultFlySpeed = 120
+local bodyVelocity, bodyGyro
+
+-- FLIGHT FUNCTIONS
+local function startFlight()
+	if flying then return end
+	flying = true
+	humanoid.PlatformStand = true
+
+	bodyVelocity = Instance.new("BodyVelocity")
+	bodyVelocity.MaxForce = Vector3.new(1e9,1e9,1e9)
+	bodyVelocity.Velocity = Vector3.zero
+	bodyVelocity.Parent = rootPart
+
+	bodyGyro = Instance.new("BodyGyro")
+	bodyGyro.MaxTorque = Vector3.new(1e9,1e9,1e9)
+	bodyGyro.P = 12000
+	bodyGyro.D = 800
+	bodyGyro.Parent = rootPart
+end
+
+local function stopFlight()
+	if not flying then return end
+	flying = false
+	humanoid.PlatformStand = false
+	if bodyVelocity then bodyVelocity:Destroy() end
+	if bodyGyro then bodyGyro:Destroy() end
+end
+
+local function toggleFlight()
+	if flying then
+		stopFlight()
+	else
+		startFlight()
+	end
+end
+
+-- Toggle Flight
+Miscs:Toggle({
+    Title = "Fly",
+    Default = false,
+    Callback = function(value)
+        if value then
+            startFlight()
+        else
+            stopFlight()
+        end
+    end
+})
+
+-- Flight Speed Input (Wind UI style like Gravity)
+Miscs:Input({
+    Title = "Fly Speed",
+    Desc = tostring(DefaultFlySpeed).." -- Default flight speed",
+    Width = 200,
+    Callback = function(value)
+        local num = tonumber(value)
+        if num and num > 0 then
+            flySpeed = num
+        else
+            flySpeed = DefaultFlySpeed
+        end
+    end
+})
+
+-- FLIGHT LOOP (INSTANT CAMERA-BASED MOVEMENT)
+RunService.RenderStepped:Connect(function()
+	if not flying or not humanoid or not rootPart then return end
+
+	-- Face camera instantly
+	bodyGyro.CFrame = camera.CFrame
+
+	local move = Vector3.zero
+	local dir = humanoid.MoveDirection
+
+	if dir.Magnitude > 0 then
+		move += dir.Unit
+	end
+
+	-- Vertical movement logic:
+	local lookY = camera.CFrame.LookVector.Y
+	-- Forward + looking up → fly up
+	if dir.Z > 0 and lookY > 0 then
+		move += Vector3.new(0, lookY, 0)
+	-- Backward + looking down → fly down
+	elseif dir.Z < 0 and lookY < 0 then
+		move += Vector3.new(0, lookY, 0)
+	end
+
+	if move.Magnitude > 0 then
+		move = move.Unit * flySpeed
+	end
+
+	bodyVelocity.Velocity = move
+end)
+
+Miscs:Space()
+
+--====================
+-- FE JERK TOOLS (LOCKED)
+--====================
+local JerkR6 = Miscs:Button({
+    Title = "FE JERK TOOL (R6)",
+    Desc = "Adult content (locked)",
+    Locked = true,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+    end
+})
+
+local JerkR15 = Miscs:Button({
+    Title = "FE JERK TOOL (R15)",
+    Desc = "Adult content (locked)",
+    Locked = true,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+    end
+})
+
+--====================
+-- REGISTER APPLY FUNCTION
+--====================
+_G.JerkController.Apply = function(unlock)
+    if unlock then
+        JerkR6:Unlock()
+        JerkR15:Unlock()
+    else
+        JerkR6:Lock()
+        JerkR15:Lock()
+    end
+end
+
+-- apply current About state immediately
+_G.JerkController.Apply(_G.JerkController.Enabled)
+
+
+--====================
+--Anti Bang 
+--====================
+
+local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+
+    local AntiBangOnce = false
+
+    Miscs:Toggle({
+        Title = "Anti-Bang",
+        Desc = "",
+        Default = false,
+        Callback = function(state)
+            if not state then return end
+            if AntiBangOnce then return end
+            AntiBangOnce = true
+
+            local Character = Player.Character
+            local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
+            if not HRP then
+                AntiBangOnce = false
+                return
+            end
+
+            local OldHeight = workspace.FallenPartsDestroyHeight
+            local LastCFrame = HRP.CFrame
+
+            workspace.FallenPartsDestroyHeight = -1000
+            HRP.CFrame = CFrame.new(0, -500, 0)
+
+            task.delay(0.7, function()
+                HRP.CFrame = LastCFrame
+                workspace.FallenPartsDestroyHeight = OldHeight
+                AntiBangOnce = false
+            end)
+        end
+    })
+
+Miscs:Space() 
+
+local Lighting = game:GetService("Lighting")
+
+local OriginalFog = {
+    Start = Lighting.FogStart,
+    End = Lighting.FogEnd
+}
+
+Miscs:Toggle({
+    Title = "No Fog",
+    Desc = "Anti Lag Toggler / Fps Booster",
+    Callback = function(state)
+        if state then
+            Lighting.FogStart = 1e6
+            Lighting.FogEnd = 1e6
+        else
+            Lighting.FogStart = OriginalFog.Start
+            Lighting.FogEnd = OriginalFog.End
+        end
+    end
+})
+
+local Lighting = game:GetService("Lighting")
+
+local OriginalLight = {
+    Brightness = Lighting.Brightness,
+    ClockTime = Lighting.ClockTime,
+    Ambient = Lighting.Ambient,
+    OutdoorAmbient = Lighting.OutdoorAmbient
+}
+
+Miscs:Toggle({
+    Title = "Full Bright",
+    Desc = "Anti Lag Toggler / Fps Booster",
+    Callback = function(state)
+        if state then
+            Lighting.Brightness = 3
+            Lighting.ClockTime = 14
+            Lighting.Ambient = Color3.new(1,1,1)
+            Lighting.OutdoorAmbient = Color3.new(1,1,1)
+        else
+            Lighting.Brightness = OriginalLight.Brightness
+            Lighting.ClockTime = OriginalLight.ClockTime
+            Lighting.Ambient = OriginalLight.Ambient
+            Lighting.OutdoorAmbient = OriginalLight.OutdoorAmbient
+        end
+    end
+})
+
+Miscs:Button({
+    Title = "Anti Lag / FPS Booster",
+    Desc = "Anti Lag Toggler / Fps Booster",
+    Callback = function()
+
+        local v0 = game:GetService("RunService")
+        local v1 = game:GetService("Lighting")
+        local v2 = workspace.CurrentCamera
+        local v3 = workspace:FindFirstChildOfClass("Terrain")
+
+        local function v4(v32)
+            if (v32:IsA("Part") or v32:IsA("MeshPart") or v32:IsA("BasePart")) then
+                v32.Material = Enum.Material.SmoothPlastic
+                v32.Reflectance = 0
+                v32.CastShadow = false
+
+            elseif (v32:IsA("Decal") or v32:IsA("Texture")) then
+                v32:Destroy()
+
+            elseif (v32:IsA("ParticleEmitter") or v32:IsA("Trail")) then
+                v32.Enabled = false
+
+            elseif (v32:IsA("BlurEffect")
+                or v32:IsA("SunRaysEffect")
+                or v32:IsA("BloomEffect")) then
+                if (v32.Name ~= "MotionBlur") then
+                    v32.Enabled = false
+                end
+            end
+        end
+
+        for _, v in pairs(workspace:GetDescendants()) do
+            v4(v)
+        end
+
+        workspace.DescendantAdded:Connect(function(v35)
+            task.wait()
+            v4(v35)
+        end)
+
+        v1.GlobalShadows = false
+        if v3 then
+            v3.Decoration = false
+        end
+
+        local v6 = v1:FindFirstChild("MotionBlur") or Instance.new("BlurEffect")
+        v6.Name = "MotionBlur"
+        v6.Size = 0
+        v6.Parent = v1
+        v6.Enabled = true
+
+        local v11 = v2.CFrame
+        v0.RenderStepped:Connect(function()
+            local v37 = v2.CFrame
+            local v38 = (v37.LookVector - v11.LookVector).Magnitude
+            v6.Size = math.clamp(v38 * 15, 0, 15)
+            v11 = v37
+        end)
+
+    end
+})
+end
+
+--==================================================
+-- CREDITS TAB
+--==================================================
+do
+    local Cred = Tabs.Credits:Section({ Title = "Credits" })
+
+    Cred:Image({
+        Image = "rbxassetid://112248091912012",
+        Size = UDim2.fromOffset(100,100)
+    })
+
+    Cred:Paragraph({ Title="Semi Dev / Owner", Desc="NIKOLA TESLA!! ", TextSize=18 })
+
+Cred:Paragraph({ Title="Helper - Co Owner", Desc="lokaei_85668", TextSize=16 })
+
+    Cred:Paragraph({ Title="Main Dev / Og Dev", Desc="Aconite", TextSize=16 })
+
+    Cred:Paragraph({ Title="UI Library", Desc="WindUI by Footagesus - best ui lib fr", TextSize=14 })
+end
+
+
+--====================
+-- Open UI
+--====================
+Window:Open()
